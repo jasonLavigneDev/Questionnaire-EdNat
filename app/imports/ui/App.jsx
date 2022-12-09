@@ -1,4 +1,4 @@
 import React from 'react';
-import { InputTest } from './InputTest.jsx';
+import { FormBuilder } from './FormBuilder.jsx';
 
-export const App = () => <InputTest />;
+export const App = () => <FormBuilder />;
