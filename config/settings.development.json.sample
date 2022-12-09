@@ -1,0 +1,8 @@
+{
+  "public": {},
+  "keycloak": {
+    "pubkey": "",
+    "client": "sso"
+  },
+  "private": {}
+}

@@ -9,7 +9,8 @@
     "start": "MONGO_URL=mongodb://localhost:3001/meteor meteor run --exclude-archs 'web.browser.legacy, web.cordova' --settings ../config/settings.development.json --port 3060",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
-    "visualize": "meteor --production --extra-packages bundle-visualizer"
+    "visualize": "meteor --production --extra-packages bundle-visualizer",
+    "lint": "eslint . --ext js,jsx"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
