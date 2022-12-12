@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import MuiInput from './components/input';
-import MuiCheckbox from './components/checkbox';
-import MuiSelector from './components/selector';
-import MuiSelect from './components/select/select';
-import MuiRadioButton from './components/radioButton';
+import { RadioButtonBuilder } from './components/radioButton/radioButtonBuilder';
 import { SelectBuilder } from './components/select/selectBuilder';
 // import { Modal, Box, Typography, Select, MenuItem, Button } from '@mui/material';
 
@@ -40,6 +36,7 @@ export const FormBuilder = () => {
       <button onClick={() => addComponentToForm(componentName)}>CLICK FOR ADD COMPONENT</button>
       <button onClick={() => removeComponentToForm(componentIdToRemove)}>CLICK FOR REMOVE</button>
       <SelectBuilder component={componentInputs} setComponent={setComponentInputs} />
+      <RadioButtonBuilder component={componentInputs} setComponent={setComponentInputs} />
     </div>
   );
 };
