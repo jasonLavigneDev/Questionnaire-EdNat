@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox, FormGroup, FormControlLabel } from '@mui/material';
+import { Checkbox, InputLabel, FormGroup, FormControlLabel } from '@mui/material';
 
 const MuiCheckbox = ({ title, choices, required = false }) => {
   // je sais pas trop quoi en faire
@@ -16,6 +16,7 @@ const MuiCheckbox = ({ title, choices, required = false }) => {
   // Doit retourner le schema ?
   return (
     <div>
+      <InputLabel id="select-title">title</InputLabel>
       <FormGroup>
         {choices.map((choise) => (
           <FormControlLabel control={<Checkbox />} label={`${choise}`} />
