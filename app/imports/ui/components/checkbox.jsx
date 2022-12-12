@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox, FormGroup, FormControlLabel } from '@mui/material';
 
-const MuiCheckbox = ({ title, choises, required = false }) => {
+const MuiCheckbox = ({ title, choices, required = false }) => {
   // je sais pas trop quoi en faire
   const MuiCheckboxSchema = [
     {
       name: 'checkbox',
       label: `${title}`,
-      choises: choises,
+      choices: choices,
       required: required,
     },
   ];
@@ -17,7 +17,7 @@ const MuiCheckbox = ({ title, choises, required = false }) => {
   return (
     <div>
       <FormGroup>
-        {choises.map((choise) => (
+        {choices.map((choise) => (
           <FormControlLabel control={<Checkbox />} label={`${choise}`} />
         ))}
       </FormGroup>
@@ -33,7 +33,7 @@ MuiCheckbox.defaultProps = {
 
 MuiCheckbox.propTypes = {
   title: PropTypes.string.isRequired,
-  choises: PropTypes.arrayOf(PropTypes.string).isRequired,
+  choices: PropTypes.arrayOf(PropTypes.string).isRequired,
   required: PropTypes.bool,
 };
 
@@ -45,7 +45,7 @@ MuiCheckbox.propTypes = {
  *  options: {
  *            label: ''
  *             required: true
- *              choises: []
+ *              choices: []
  * }
  *
  * }
