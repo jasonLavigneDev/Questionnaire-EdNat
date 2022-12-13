@@ -9,10 +9,10 @@ export const NumberInputBuilder = ({ componentList, setComponentList }) => {
 
   const handleSubmit = () => {
     if (title) {
-      const newList = [...componentList];
+      const componentListFinal = [...componentList];
       const newComponent = createComponentObject(title, 'numberInput');
-      newList.push(newComponent);
-      setComponentList(newList);
+      componentListFinal.push(newComponent);
+      setComponentList(componentListFinal);
       setTitle('');
     } else {
       console.error('OSKOUR');
