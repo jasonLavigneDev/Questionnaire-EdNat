@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
-
-import { DateInput } from './DateInput';
+import { createComponentObject } from '../../utils/utils';
 
 export const DateInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
@@ -11,7 +10,7 @@ export const DateInputBuilder = ({ componentList, setComponentList }) => {
   const handleSubmit = () => {
     if (title) {
       const newList = [...componentList];
-      const newComponent = { id: newList.length + 10, name: 'dateInput', component: <DateInput title={title} /> };
+      const newComponent = createComponentObject(title, 'dateInput');
       newList.push(newComponent);
       setComponentList(newList);
       setTitle('');

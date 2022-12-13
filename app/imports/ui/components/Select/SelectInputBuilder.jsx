@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
-
-import { isDuplicate } from '../../utilis/utils';
-import SelectInput from './SelectInput';
+import { createComponentObject, isDuplicate } from '../../utils/utils';
 
 export const SelectInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
@@ -32,11 +30,7 @@ export const SelectInputBuilder = ({ componentList, setComponentList }) => {
   const handleSubmit = () => {
     if (title && options) {
       const newList = [...componentList];
-      const newComponent = {
-        id: newList.length + 10,
-        name: 'selectInput',
-        component: <SelectInput title={title} choices={options} />,
-      };
+      const newComponent = createComponentObject(title, 'selectInput', options);
       newList.push(newComponent);
       setComponentList(newList);
       setTitle('');

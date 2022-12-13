@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
-
-import { isDuplicate } from '../../utilis/utils';
-import RadioInput from './RadioInput';
+import { createComponentObject, isDuplicate } from '../../utils/utils';
 
 export const RadioInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
@@ -32,11 +30,7 @@ export const RadioInputBuilder = ({ componentList, setComponentList }) => {
   const handleSubmit = () => {
     if (title && options) {
       const newList = [...componentList];
-      const newComponent = {
-        id: newList.length + 10,
-        name: 'radioButtonInput',
-        component: <RadioInput title={title} choices={options} />,
-      };
+      const newComponent = createComponentObject(title, 'radioButtonInput', options);
       newList.push(newComponent);
       setComponentList(newList);
       setTitle('');
