@@ -1,12 +1,13 @@
 import React from 'react';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import PropTypes from 'prop-types';
 
-const MuiSelect = ({ title, choices }) => {
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+
+const SelectInput = ({ title, choices }) => {
   return (
     <FormControl fullWidth>
-      <InputLabel id="select-title">title</InputLabel>
-      <Select labelId="select-title" value={title} label={title}>
+      <InputLabel id="selectInput-title">title</InputLabel>
+      <Select labelId="selectInput-title" value={title} label={title}>
         {choices.map((choice) => (
           <MenuItem value={choice}>{choice}</MenuItem>
         ))}
@@ -15,9 +16,9 @@ const MuiSelect = ({ title, choices }) => {
   );
 };
 
-export default MuiSelect;
+export default SelectInput;
 
-MuiSelect.propTypes = {
+SelectInput.propTypes = {
   title: PropTypes.string.isRequired,
   choices: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

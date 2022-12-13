@@ -1,8 +1,8 @@
 import React from 'react';
+
 import { FormLabel, FormControl, FormControlLabel, RadioGroup, Radio } from '@mui/material';
 
-const MuiRadioButton = ({ title, choices }) => {
-  // Doit retourner le schema ?
+const RadioInput = ({ title, choices }) => {
   return (
     <FormControl>
       <FormLabel>{title}</FormLabel>
@@ -15,4 +15,4 @@ const MuiRadioButton = ({ title, choices }) => {
   );
 };
 
-export default MuiRadioButton;
+export default RadioInput;

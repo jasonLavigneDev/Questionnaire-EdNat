@@ -1,61 +1,122 @@
 import React, { useState } from 'react';
-import { RadioButtonBuilder } from './components/radioButton/radioButtonBuilder';
-import { SelectBuilder } from './components/select/selectBuilder';
-import { CheckboxBuilder } from './components/checkbox/checkboxBuilder';
-import { DateInputBuilder } from './components/DateInput/DateInputBuilder';
-import { NumberInputBuilder } from './components/Number/NumberInputBuilder';
-// import { Modal, Box, Typography, Select, MenuItem, Button } from '@mui/material';
 
+import { RadioInputBuilder } from './components/Radio/RadioInputBuilder';
+import { SelectInputBuilder } from './components/Select/SelectInputBuilder';
+import { CheckboxInputBuilder } from './components/Checkbox/CheckboxInputBuilder';
+import { DateInputBuilder } from './components/Date/DateInputBuilder';
+import { NumberInputBuilder } from './components/Number/NumberInputBuilder';
 import { TextInputBuilder } from './components/TextInput/TextInputBuilder';
-import { TextAreaBuilder } from './components/TextArea/TextAreaBuilder';
+import { TextAreaInputBuilder } from './components/TextArea/TextAreaInputBuilder';
 
 export const FormBuilder = () => {
-  const [componentInputs, setComponentInputs] = useState([]);
+  const [listOfComponentChooseByUser, setListOfComponentChooseByUser] = useState([]);
 
-  // const addComponentToForm = (componentName) => {
-  //   const componentObj = components.filter((component) => component.name === componentName);
-  //   const newObj = [...componentInputs];
-  //   newObj.push(componentObj[0]);
-  //   setComponentInputs(newObj);
-  // };
+  const listOfInputBuilder = [
+    {
+      id: 1,
+      name: 'radio',
+      component: (
+        <RadioInputBuilder
+          componentList={listOfComponentChooseByUser}
+          setComponentList={setListOfComponentChooseByUser}
+        />
+      ),
+    },
+    {
+      id: 2,
+      name: 'select',
+      component: (
+        <SelectInputBuilder
+          componentList={listOfComponentChooseByUser}
+          setComponentList={setListOfComponentChooseByUser}
+        />
+      ),
+    },
+    {
+      id: 3,
+      name: 'checkbox',
+      component: (
+        <CheckboxInputBuilder
+          componentList={listOfComponentChooseByUser}
+          setComponentList={setListOfComponentChooseByUser}
+        />
+      ),
+    },
+    {
+      id: 4,
+      name: 'date',
+      component: (
+        <DateInputBuilder
+          componentList={listOfComponentChooseByUser}
+          setComponentList={setListOfComponentChooseByUser}
+        />
+      ),
+    },
+    {
+      id: 5,
+      name: 'number',
+      component: (
+        <NumberInputBuilder
+          componentList={listOfComponentChooseByUser}
+          setComponentList={setListOfComponentChooseByUser}
+        />
+      ),
+    },
+    {
+      id: 6,
+      name: 'text',
+      component: (
+        <TextInputBuilder
+          componentList={listOfComponentChooseByUser}
+          setComponentList={setListOfComponentChooseByUser}
+        />
+      ),
+    },
+    {
+      id: 7,
+      name: 'textarea',
+      component: (
+        <TextAreaInputBuilder
+          componentList={listOfComponentChooseByUser}
+          setComponentList={setListOfComponentChooseByUser}
+        />
+      ),
+    },
+  ];
 
-  // const removeComponentToForm = (componentId) => {
-  //   const newObj = componentInputs.filter((component) => component.name != componentId);
-  //   setComponentInputs(newObj);
-  // };
-
-  // // SIMULATE AN ADD COMPONENT FROM LIST
-  // const componentName = 'component5';
-
-  // // SIMULATE AN COMPONENT NAME ID TO REMOVE
-  // const componentIdToRemove = 'component3';
+  const removeComponentToForm = (componentId) => {
+    const newObj = listOfComponentChooseByUser.filter((componentInput) => componentInput.id != componentId);
+    setListOfComponentChooseByUser(newObj);
+  };
 
   return (
-    <div>
-      {componentInputs.map((componentInput) => (
-        <>
-          {componentInput.component}
-          <br />
-          <br />
-        </>
-      ))}
-      <br />
-      <br />
-      {/* <button onClick={() => addComponentToForm(componentName)}>CLICK FOR ADD COMPONENT</button>
-      <button onClick={() => removeComponentToForm(componentIdToRemove)}>CLICK FOR REMOVE</button> */}
-      <SelectBuilder component={componentInputs} setComponent={setComponentInputs} />
-      <CheckboxBuilder component={componentInputs} setComponent={setComponentInputs} />
-      <DateInputBuilder component={componentInputs} setComponent={setComponentInputs} />
-      <RadioButtonBuilder component={componentInputs} setComponent={setComponentInputs} />
-      <NumberInputBuilder component={componentInputs} setComponent={setComponentInputs} />
-      <br />
-      <br />
-      <TextInputBuilder component={componentInputs} setComponent={setComponentInputs} />
-      <br />
-      <br />
-      <TextAreaBuilder component={componentInputs} setComponent={setComponentInputs} />
-      <br />
-      <br />
+    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+      <div>
+        <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
+        {listOfComponentChooseByUser.map((componentInput) => (
+          <div key={componentInput.id}>
+            <br />
+            <br />
+            <div>{componentInput.component}</div>
+            <button onClick={() => removeComponentToForm(componentInput.id)}>Retirez cet input</button>
+            <br />
+            <br />
+          </div>
+        ))}
+      </div>
+      <div>
+        <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
+        {listOfInputBuilder.map((inputBuilder) => (
+          <div key={inputBuilder.id}>
+            <p style={{ textAlign: 'center' }}>Input de type : {inputBuilder.name}</p>
+            <br />
+            <br />
+            <div>{inputBuilder.component}</div>
+            <br />
+            <br />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
