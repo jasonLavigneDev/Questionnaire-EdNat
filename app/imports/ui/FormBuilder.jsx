@@ -8,6 +8,14 @@ import { NumberInputBuilder } from './components/Number/NumberInputBuilder';
 import { TextInputBuilder } from './components/TextInput/TextInputBuilder';
 import { TextAreaInputBuilder } from './components/TextArea/TextAreaInputBuilder';
 
+import { DateInput } from './components/DateInput/DateInput';
+import NumberInput from './components/Number/NumberInput';
+import MuiRadioButton from './components/radioButton/radioButton';
+import MuiCheckbox from './components/checkbox/checkbox';
+import MuiSelect from './components/select/select';
+import { TextInput } from './components/TextInput/TextInput';
+import { TextArea } from './components/TextArea/TextArea';
+
 export const FormBuilder = () => {
   const [listOfComponentChooseByUser, setListOfComponentChooseByUser] = useState([]);
 
@@ -89,6 +97,49 @@ export const FormBuilder = () => {
     setListOfComponentChooseByUser(newObj);
   };
 
+  const generateComponent = (component) => {
+    switch (component.type) {
+      case 'checkboxInput':
+        return <MuiCheckbox title={component.title} choices={component.choices} />;
+      case 'dateInput':
+        return <DateInput title={component.title} />;
+      case 'selectInput':
+        return <MuiSelect title={component.title} choices={component.choices} />;
+      case 'numberInput':
+        return <NumberInput title={component.title} />;
+      case 'radioButtonInput':
+        return <MuiRadioButton title={component.title} choices={component.choices} />;
+      case 'textInput':
+        return <TextInput title={component.title} />;
+      case 'textArea':
+        return <TextArea title={component.title} />;
+    }
+  };
+
+  const handleSubmit = () => {
+    //{ name: 'selectInput', component: <MuiSelect title={title} choices={options} /> };
+
+    Meteor.call(
+      'forms.createForm',
+      {
+        title: 'Test',
+        desc: 'Test desc',
+        owner: 'test_user',
+        isModel: false,
+        isPublic: false,
+        groups: [],
+        components: componentInputs,
+      },
+      (err) => {
+        if (err) {
+          console.log(err.reason);
+        } else {
+          console.log('success');
+        }
+      },
+    );
+  };
+
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
       <div>
@@ -97,7 +148,7 @@ export const FormBuilder = () => {
           <div key={componentInput.id}>
             <br />
             <br />
-            <div>{componentInput.component}</div>
+            <div>{generateComponent(componentInput)}</div>
             <button onClick={() => removeComponentToForm(componentInput.id)}>Retirez cet input</button>
             <br />
             <br />

@@ -11,7 +11,7 @@ export const DateInputBuilder = ({ componentList, setComponentList }) => {
   const handleSubmit = () => {
     if (title) {
       const newList = [...componentList];
-      const newComponent = { id: newList.length + 10, name: 'dateInput', component: <DateInput title={title} /> };
+      const newComponent = createComponentObject(title, 'dateInput');
       newList.push(newComponent);
       setComponentList(newList);
       setTitle('');

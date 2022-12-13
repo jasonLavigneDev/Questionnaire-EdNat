@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { TextField, Button, Paper } from '@mui/material';
 
 import NumberInput from './NumberInput';
+import { createComponentObject } from '../../utils/utils';
 
 export const NumberInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
@@ -11,7 +12,7 @@ export const NumberInputBuilder = ({ componentList, setComponentList }) => {
   const handleSubmit = () => {
     if (title) {
       const newList = [...componentList];
-      const newComponent = { id: newList.length + 10, name: 'numberInput', component: <NumberInput title={title} /> };
+      const newComponent = createComponentObject(title, 'numberInput');
       newList.push(newComponent);
       setComponentList(newList);
       setTitle('');

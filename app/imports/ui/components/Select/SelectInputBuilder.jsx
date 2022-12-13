@@ -32,11 +32,7 @@ export const SelectInputBuilder = ({ componentList, setComponentList }) => {
   const handleSubmit = () => {
     if (title && options) {
       const newList = [...componentList];
-      const newComponent = {
-        id: newList.length + 10,
-        name: 'selectInput',
-        component: <SelectInput title={title} choices={options} />,
-      };
+      const newComponent = createComponentObject(title, 'selectInput', options);
       newList.push(newComponent);
       setComponentList(newList);
       setTitle('');

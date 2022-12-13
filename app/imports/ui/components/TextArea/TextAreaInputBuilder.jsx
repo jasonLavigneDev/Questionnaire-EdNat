@@ -10,10 +10,10 @@ export const TextAreaInputBuilder = ({ componentList, setComponentList }) => {
 
   const handleSubmit = () => {
     if (title) {
-      const newList = [...componentList];
-      const newComponent = { id: newList.length + 10, name: 'textArea', component: <TextArea title={title} /> };
-      newList.push(newComponent);
-      setComponentList(newList);
+      const componentListFinal = [...componentList];
+      const newComponent = createComponentObject(title, 'textArea');
+      componentListFinal.push(newComponent);
+      setComponentList(componentListFinal);
       setTitle('');
     } else {
       console.error('OSKOUR');

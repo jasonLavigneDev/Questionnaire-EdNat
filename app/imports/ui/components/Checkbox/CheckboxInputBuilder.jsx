@@ -33,11 +33,7 @@ export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
     if (title && options) {
       const newList = [...componentList];
 
-      const newComponent = {
-        id: newList.length + 10,
-        name: 'checkboxInput',
-        component: <CheckboxInput title={title} choices={options} />,
-      };
+      const newComponent = createComponentObject(title, 'checkBoxInput', options);
       newList.push(newComponent);
       setComponentList(newList);
       setTitle('');

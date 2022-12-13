@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 import { TextField, Button, Paper } from '@mui/material';
 
 import { TextInput } from './TextInput';
+import { createComponentObject } from '../../utils/utils';
 
 export const TextInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
 
   const handleSubmit = () => {
     if (title) {
-      const newList = [...componentList];
-      const newComponent = { id: newList.length + 10, name: 'textInput', component: <TextInput title={title} /> };
-      newList.push(newComponent);
-      setComponentList(newList);
+      const componentListFinal = [...componentList];
+      const newComponent = createComponentObject(title, 'textInput');
+      componentListFinal.push(newComponent);
+      setComponentList(componentListFinal);
       setTitle('');
     } else {
       console.error('OSKOUR');
