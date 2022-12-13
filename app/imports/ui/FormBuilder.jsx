@@ -6,7 +6,6 @@ import { DateInputBuilder } from './components/DateInput/DateInputBuilder';
 import { NumberInputBuilder } from './components/Number/NumberInputBuilder';
 // import { Modal, Box, Typography, Select, MenuItem, Button } from '@mui/material';
 
-import { SelectBuilder } from './components/select/selectBuilder';
 import { TextInputBuilder } from './components/TextInput/TextInputBuilder';
 import { TextAreaBuilder } from './components/TextArea/TextAreaBuilder';
 
