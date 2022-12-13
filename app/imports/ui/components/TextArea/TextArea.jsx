@@ -1,0 +1,17 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { InputLabel, TextField } from '@mui/material';
+
+export const TextArea = ({ title }) => {
+  return (
+    <div>
+      <InputLabel id="textArea-title">{title}</InputLabel>
+      <TextField multiline rows={3} />
+      {/** for response */}
+    </div>
+  );
+};
+
+TextArea.propTypes = {
+  title: PropTypes.string.isRequired,
+};
