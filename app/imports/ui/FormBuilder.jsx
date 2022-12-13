@@ -3,6 +3,7 @@ import { RadioButtonBuilder } from './components/radioButton/radioButtonBuilder'
 import { SelectBuilder } from './components/select/selectBuilder';
 import { CheckboxBuilder } from './components/checkbox/checkboxBuilder';
 import { DateInputBuilder } from './components/DateInput/DateInputBuilder';
+import { NumberInputBuilder } from './components/Number/NumberInputBuilder';
 // import { Modal, Box, Typography, Select, MenuItem, Button } from '@mui/material';
 
 export const FormBuilder = () => {
@@ -41,6 +42,7 @@ export const FormBuilder = () => {
       <CheckboxBuilder component={componentInputs} setComponent={setComponentInputs} />
       <DateInputBuilder component={componentInputs} setComponent={setComponentInputs} />
       <RadioButtonBuilder component={componentInputs} setComponent={setComponentInputs} />
+      <NumberInputBuilder component={componentInputs} setComponent={setComponentInputs} />
     </div>
   );
 };
