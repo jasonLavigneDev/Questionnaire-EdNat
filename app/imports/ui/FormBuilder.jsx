@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SelectBuilder } from './components/select/selectBuilder';
 import { CheckboxBuilder } from './components/checkbox/checkboxBuilder';
+import { DateInputBuilder } from './components/DateInput/DateInputBuilder';
 // import { Modal, Box, Typography, Select, MenuItem, Button } from '@mui/material';
 
 export const FormBuilder = () => {
@@ -37,6 +38,7 @@ export const FormBuilder = () => {
       <button onClick={() => removeComponentToForm(componentIdToRemove)}>CLICK FOR REMOVE</button>
       <SelectBuilder component={componentInputs} setComponent={setComponentInputs} />
       <CheckboxBuilder component={componentInputs} setComponent={setComponentInputs} />
+      <DateInputBuilder component={componentInputs} setComponent={setComponentInputs} />
     </div>
   );
 };
