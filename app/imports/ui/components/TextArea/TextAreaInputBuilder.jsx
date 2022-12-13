@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
 
-import { TextInput } from './TextInput';
+import { TextArea } from './TextArea';
 
-export const TextInputBuilder = ({ componentList, setComponentList }) => {
+export const TextAreaInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
 
   const handleSubmit = () => {
     if (title) {
       const newList = [...componentList];
-      const newComponent = { id: newList.length + 10, name: 'textInput', component: <TextInput title={title} /> };
+      const newComponent = { id: newList.length + 10, name: 'textArea', component: <TextArea title={title} /> };
       newList.push(newComponent);
       setComponentList(newList);
       setTitle('');
@@ -36,7 +36,7 @@ export const TextInputBuilder = ({ componentList, setComponentList }) => {
   );
 };
 
-TextInputBuilder.propTypes = {
+TextAreaInputBuilder.propTypes = {
   componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
   setComponentList: PropTypes.func.isRequired,
 };

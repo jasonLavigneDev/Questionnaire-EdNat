@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
 
-import { TextInput } from './TextInput';
+import { DateInput } from './DateInput';
 
-export const TextInputBuilder = ({ componentList, setComponentList }) => {
+export const DateInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
 
   const handleSubmit = () => {
     if (title) {
       const newList = [...componentList];
-      const newComponent = { id: newList.length + 10, name: 'textInput', component: <TextInput title={title} /> };
+      const newComponent = { id: newList.length + 10, name: 'dateInput', component: <DateInput title={title} /> };
       newList.push(newComponent);
       setComponentList(newList);
       setTitle('');
@@ -31,12 +31,12 @@ export const TextInputBuilder = ({ componentList, setComponentList }) => {
         onChange={(e) => setTitle(e.target.value)}
       />
       <br />
-      <Button onClick={() => handleSubmit()}>Ajoutez ce type d'input au formulaire</Button>
+      <Button onClick={() => handleSubmit()}>Ajouter ce type d'input au formulaire</Button>
     </Paper>
   );
 };
 
-TextInputBuilder.propTypes = {
+DateInputBuilder.propTypes = {
   componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
   setComponentList: PropTypes.func.isRequired,
 };
