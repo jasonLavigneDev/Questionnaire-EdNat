@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
-
-import { DateInput } from './DateInput';
+import { createComponentObject } from '../../utils/utils';
 
 export const DateInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');

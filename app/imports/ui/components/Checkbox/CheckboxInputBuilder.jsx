@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
 
-import { isDuplicate } from '../../utilis/utils';
-import CheckboxInput from './CheckboxInput';
+import { createComponentObject, isDuplicate } from '../../utils/utils';
 
 export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');

@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
-
-import { isDuplicate } from '../../utilis/utils';
-import SelectInput from './SelectInput';
+import { createComponentObject, isDuplicate } from '../../utils/utils';
 
 export const SelectInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');

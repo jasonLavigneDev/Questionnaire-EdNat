@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
-
-import { TextArea } from './TextArea';
+import { createComponentObject } from '../../utils/utils';
 
 export const TextAreaInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
-
-import NumberInput from './NumberInput';
 import { createComponentObject } from '../../utils/utils';
 
 export const NumberInputBuilder = ({ componentList, setComponentList }) => {

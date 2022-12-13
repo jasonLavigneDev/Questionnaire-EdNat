@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Button } from '@mui/material';
 import { RadioInputBuilder } from './components/Radio/RadioInputBuilder';
 import { SelectInputBuilder } from './components/Select/SelectInputBuilder';
 import { CheckboxInputBuilder } from './components/Checkbox/CheckboxInputBuilder';
@@ -7,12 +7,11 @@ import { DateInputBuilder } from './components/Date/DateInputBuilder';
 import { NumberInputBuilder } from './components/Number/NumberInputBuilder';
 import { TextInputBuilder } from './components/TextInput/TextInputBuilder';
 import { TextAreaInputBuilder } from './components/TextArea/TextAreaInputBuilder';
-
-import { DateInput } from './components/DateInput/DateInput';
+import CheckBoxInput from './components/Checkbox/CheckboxInput';
+import { DateInput } from './components/Date/DateInput';
+import SelectInput from './components/Select/SelectInput';
 import NumberInput from './components/Number/NumberInput';
-import MuiRadioButton from './components/radioButton/radioButton';
-import MuiCheckbox from './components/checkbox/checkbox';
-import MuiSelect from './components/select/select';
+import RadioInput from './components/Radio/RadioInput';
 import { TextInput } from './components/TextInput/TextInput';
 import { TextArea } from './components/TextArea/TextArea';
 
@@ -100,15 +99,15 @@ export const FormBuilder = () => {
   const generateComponent = (component) => {
     switch (component.type) {
       case 'checkboxInput':
-        return <MuiCheckbox title={component.title} choices={component.choices} />;
+        return <CheckBoxInput title={component.title} choices={component.choices} />;
       case 'dateInput':
         return <DateInput title={component.title} />;
       case 'selectInput':
-        return <MuiSelect title={component.title} choices={component.choices} />;
+        return <SelectInput title={component.title} choices={component.choices} />;
       case 'numberInput':
         return <NumberInput title={component.title} />;
       case 'radioButtonInput':
-        return <MuiRadioButton title={component.title} choices={component.choices} />;
+        return <RadioInput title={component.title} choices={component.choices} />;
       case 'textInput':
         return <TextInput title={component.title} />;
       case 'textArea':
@@ -117,8 +116,6 @@ export const FormBuilder = () => {
   };
 
   const handleSubmit = () => {
-    //{ name: 'selectInput', component: <MuiSelect title={title} choices={options} /> };
-
     Meteor.call(
       'forms.createForm',
       {
@@ -128,7 +125,7 @@ export const FormBuilder = () => {
         isModel: false,
         isPublic: false,
         groups: [],
-        components: componentInputs,
+        components: listOfComponentChooseByUser,
       },
       (err) => {
         if (err) {
@@ -141,33 +138,36 @@ export const FormBuilder = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <div>
-        <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
-        {listOfComponentChooseByUser.map((componentInput) => (
-          <div key={componentInput.id}>
-            <br />
-            <br />
-            <div>{generateComponent(componentInput)}</div>
-            <button onClick={() => removeComponentToForm(componentInput.id)}>Retirez cet input</button>
-            <br />
-            <br />
-          </div>
-        ))}
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        <div>
+          <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
+          {listOfComponentChooseByUser.map((componentInput) => (
+            <div key={componentInput.id}>
+              <br />
+              <br />
+              <div>{generateComponent(componentInput)}</div>
+              <button onClick={() => removeComponentToForm(componentInput.id)}>Retirez cet input</button>
+              <br />
+              <br />
+            </div>
+          ))}
+        </div>
+        <div>
+          <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
+          {listOfInputBuilder.map((inputBuilder) => (
+            <div key={inputBuilder.id}>
+              <p style={{ textAlign: 'center' }}>Input de type : {inputBuilder.name}</p>
+              <br />
+              <br />
+              <div>{inputBuilder.component}</div>
+              <br />
+              <br />
+            </div>
+          ))}
+        </div>
       </div>
-      <div>
-        <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
-        {listOfInputBuilder.map((inputBuilder) => (
-          <div key={inputBuilder.id}>
-            <p style={{ textAlign: 'center' }}>Input de type : {inputBuilder.name}</p>
-            <br />
-            <br />
-            <div>{inputBuilder.component}</div>
-            <br />
-            <br />
-          </div>
-        ))}
-      </div>
+      <Button onClick={() => handleSubmit()}>Enregistrer le formulaire</Button>
     </div>
   );
 };

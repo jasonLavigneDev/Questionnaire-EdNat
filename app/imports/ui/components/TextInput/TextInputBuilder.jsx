@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
-
-import { TextInput } from './TextInput';
 import { createComponentObject } from '../../utils/utils';
 
 export const TextInputBuilder = ({ componentList, setComponentList }) => {
