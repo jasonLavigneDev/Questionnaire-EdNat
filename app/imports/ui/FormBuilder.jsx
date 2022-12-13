@@ -5,6 +5,7 @@ import MuiSelector from './components/selector';
 import MuiSelect from './components/select/select';
 import MuiRadioButton from './components/radioButton';
 import { SelectBuilder } from './components/select/selectBuilder';
+import { DateInputBuilder } from './components/DateInput/DateInputBuilder';
 // import { Modal, Box, Typography, Select, MenuItem, Button } from '@mui/material';
 
 export const FormBuilder = () => {
@@ -40,6 +41,7 @@ export const FormBuilder = () => {
       <button onClick={() => addComponentToForm(componentName)}>CLICK FOR ADD COMPONENT</button>
       <button onClick={() => removeComponentToForm(componentIdToRemove)}>CLICK FOR REMOVE</button>
       <SelectBuilder component={componentInputs} setComponent={setComponentInputs} />
+      <DateInputBuilder component={componentInputs} setComponent={setComponentInputs} />
     </div>
   );
 };
