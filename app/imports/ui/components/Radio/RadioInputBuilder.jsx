@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 import { TextField, Button, Paper } from '@mui/material';
 import { createComponentObject, isDuplicate } from '../../utils/utils';
@@ -29,10 +30,10 @@ export const RadioInputBuilder = ({ componentList, setComponentList }) => {
 
   const handleSubmit = () => {
     if (title && options) {
-      const newList = [...componentList];
+      const componentListFinal = [...componentList];
       const newComponent = createComponentObject(title, 'radioButtonInput', options);
-      newList.push(newComponent);
-      setComponentList(newList);
+      componentListFinal.push(newComponent);
+      setComponentList(componentListFinal);
       setTitle('');
       setValue('');
       setOptions([]);
@@ -62,10 +63,10 @@ export const RadioInputBuilder = ({ componentList, setComponentList }) => {
       />
       <Button onClick={() => addOption(value)}>Ajoutez cette option</Button>
       {options.map((option) => (
-        <>
+        <div key={uuidv4()}>
           <p>{option}</p>
           <Button onClick={() => removeOption(option)}>Supprimez cette option</Button>
-        </>
+        </div>
       ))}
       <br />
       <Button onClick={() => handleSubmit()}>Ajouter ce type d'input au formulaire</Button>

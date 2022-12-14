@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { InputLabel, TextField } from '@mui/material';
 
-const NumberInput = ({ title }) => {
+export const NumberInput = ({ title }) => {
   return (
     <div>
       <InputLabel id="numberInput-title">{title}</InputLabel>
@@ -11,8 +11,6 @@ const NumberInput = ({ title }) => {
     </div>
   );
 };
-
-export default NumberInput;
 
 NumberInput.propTypes = {
   title: PropTypes.string.isRequired,

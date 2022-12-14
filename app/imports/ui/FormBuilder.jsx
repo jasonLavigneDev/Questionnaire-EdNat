@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import { Button } from '@mui/material';
+
 import { RadioInputBuilder } from './components/Radio/RadioInputBuilder';
 import { SelectInputBuilder } from './components/Select/SelectInputBuilder';
 import { CheckboxInputBuilder } from './components/Checkbox/CheckboxInputBuilder';
@@ -7,11 +9,12 @@ import { DateInputBuilder } from './components/Date/DateInputBuilder';
 import { NumberInputBuilder } from './components/Number/NumberInputBuilder';
 import { TextInputBuilder } from './components/TextInput/TextInputBuilder';
 import { TextAreaInputBuilder } from './components/TextArea/TextAreaInputBuilder';
-import CheckBoxInput from './components/Checkbox/CheckboxInput';
+
+import { RadioInput } from './components/Radio/RadioInput';
+import { SelectInput } from './components/Select/SelectInput';
+import { CheckBoxInput } from './components/Checkbox/CheckboxInput';
 import { DateInput } from './components/Date/DateInput';
-import SelectInput from './components/Select/SelectInput';
-import NumberInput from './components/Number/NumberInput';
-import RadioInput from './components/Radio/RadioInput';
+import { NumberInput } from './components/Number/NumberInput';
 import { TextInput } from './components/TextInput/TextInput';
 import { TextArea } from './components/TextArea/TextArea';
 

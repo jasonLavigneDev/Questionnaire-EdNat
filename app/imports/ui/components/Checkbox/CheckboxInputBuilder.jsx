@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 import { TextField, Button, Paper } from '@mui/material';
 
@@ -30,11 +31,12 @@ export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
 
   const handleSubmit = () => {
     if (title && options) {
-      const newList = [...componentList];
+      const componentListFinal = [...componentList];
 
-      const newComponent = createComponentObject(title, 'checkBoxInput', options);
-      newList.push(newComponent);
-      setComponentList(newList);
+      const newComponent = createComponentObject(title, 'checkboxInput', options);
+
+      componentListFinal.push(newComponent);
+      setComponentList(componentListFinal);
       setTitle('');
       setValue('');
       setOptions([]);
@@ -64,10 +66,10 @@ export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
       />
       <Button onClick={() => addOption(value)}>Ajoutez une option</Button>
       {options.map((option) => (
-        <>
+        <div key={uuidv4()}>
           <p>{option}</p>
           <Button onClick={() => removeOption(option)}>Supprimez une option</Button>
-        </>
+        </div>
       ))}
       <br />
       <Button onClick={() => handleSubmit()}>Ajouter ce type d'input au formulaire</Button>
