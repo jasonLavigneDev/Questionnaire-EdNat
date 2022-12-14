@@ -1,8 +1,10 @@
 import React from 'react';
-import ReactDOM, { createRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { App } from '/imports/ui/App';
+import { FormPrevisualizer } from '/imports/ui/FormPrevisualizer';
+import Forms from '../imports/api/forms/forms';
 
 Meteor.startup(() => {
   const container = document.getElementById('react-target');
@@ -13,8 +15,12 @@ Meteor.startup(() => {
       element: <App tab="home" />,
     },
     {
-      path: 'about',
-      element: <div>About</div>,
+      path: '/previsualizer/:_id',
+      loader: async ({ request, params }) => {
+        const _id = params._id;
+        return { _id };
+      },
+      element: <FormPrevisualizer />,
     },
   ]);
   root.render(

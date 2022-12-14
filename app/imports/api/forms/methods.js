@@ -32,6 +32,8 @@ export const createForm = new ValidatedMethod({
   }).validator(),
 
   run({ title, desc, owner, isModel, isPublic, groups, components }) {
-    return _createForm(title, desc, owner, isModel, isPublic, groups, components);
+    _createForm(title, desc, owner, isModel, isPublic, groups, components);
+    const form = Forms.findOne({ title });
+    return form._id;
   },
 });

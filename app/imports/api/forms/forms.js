@@ -19,6 +19,10 @@ Forms.deny({
 });
 
 export const Component = new SimpleSchema({
+  id: {
+    type: String,
+    label: getLabel('api.forms.labels.component.id'),
+  },
   type: {
     type: String,
     label: getLabel('api.forms.labels.component.type'),

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { TextField, Button } from '@mui/material';
-
+import { Link } from 'react-router-dom';
 import { RadioInputBuilder } from './components/Radio/RadioInputBuilder';
 import { SelectInputBuilder } from './components/Select/SelectInputBuilder';
 import { CheckboxInputBuilder } from './components/Checkbox/CheckboxInputBuilder';
@@ -22,6 +22,7 @@ export const FormBuilder = () => {
   const [listOfComponentChooseByUser, setListOfComponentChooseByUser] = useState([]);
   const [globalTitle, setGlobalTitle] = useState('');
   const [globalDesc, setGlobalDesc] = useState('');
+  const [idForm, setIdForm] = useState('');
 
   const listOfInputBuilder = [
     {
@@ -132,11 +133,12 @@ export const FormBuilder = () => {
         groups: [],
         components: listOfComponentChooseByUser,
       },
-      (err) => {
+      (err, res) => {
         if (err) {
           console.log(err.reason);
         } else {
-          console.log('success');
+          console.log(res);
+          setIdForm(res);
         }
       },
     );
@@ -192,6 +194,9 @@ export const FormBuilder = () => {
         </div>
       </div>
       <Button onClick={() => handleSubmit()}>Enregistrer le formulaire</Button>
+      <br />
+
+      {idForm ? <Link to={`previsualizer/${idForm}`}>Voir le formulaire dernièrement créé</Link> : null}
     </div>
   );
 };

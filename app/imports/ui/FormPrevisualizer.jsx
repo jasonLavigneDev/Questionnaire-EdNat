@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
-import { TextField, Button } from '@mui/material';
-
-import { RadioInputBuilder } from './components/Radio/RadioInputBuilder';
-import { SelectInputBuilder } from './components/Select/SelectInputBuilder';
-import { CheckboxInputBuilder } from './components/Checkbox/CheckboxInputBuilder';
-import { DateInputBuilder } from './components/Date/DateInputBuilder';
-import { NumberInputBuilder } from './components/Number/NumberInputBuilder';
-import { TextInputBuilder } from './components/TextInput/TextInputBuilder';
-import { TextAreaInputBuilder } from './components/TextArea/TextAreaInputBuilder';
-
+import { useTracker } from 'meteor/react-meteor-data';
+import { useLoaderData } from 'react-router-dom';
 import { RadioInput } from './components/Radio/RadioInput';
 import { SelectInput } from './components/Select/SelectInput';
 import { CheckBoxInput } from './components/Checkbox/CheckboxInput';
@@ -17,9 +8,21 @@ import { DateInput } from './components/Date/DateInput';
 import { NumberInput } from './components/Number/NumberInput';
 import { TextInput } from './components/TextInput/TextInput';
 import { TextArea } from './components/TextArea/TextArea';
+import Forms from '../api/forms/forms';
 
-const FormPrevisualizer = ({ form, ready }) => {
-  if (!ready) return null;
+export const FormPrevisualizer = () => {
+  const { _id } = useLoaderData();
+
+  const [ready, setReady] = useState(false);
+
+  const form = useTracker(() => {
+    const subForm = Meteor.subscribe('forms.one', { _id });
+    setReady(subForm.ready());
+    return Forms.findOne({ _id });
+  }, []);
+
+  console.log(ready);
+  if (!ready) return <p>BIG SPINNER</p>;
 
   const generateComponent = (component) => {
     switch (component.type) {
@@ -42,31 +45,23 @@ const FormPrevisualizer = ({ form, ready }) => {
 
   return (
     <div>
-      {form.components.map((componentInput) => (
-        <div key={componentInput.id}>
-          <br />
-          <br />
-          <div>{generateComponent(componentInput)}</div>
-          <button onClick={() => removeComponentToForm(componentInput.id)}>Retirez cet input</button>
-          <br />
-          <br />
+      {form ? (
+        <div>
+          <h3 style={{ textAlign: 'center' }}>{form.title}</h3>
+          <h4 style={{ textAlign: 'center' }}>{form.desc}</h4>
+          {form.components.map((componentInput) => (
+            <div key={componentInput.id}>
+              <br />
+              <br />
+              <div>{generateComponent(componentInput)}</div>
+              <br />
+              <br />
+            </div>
+          ))}
         </div>
-      ))}
+      ) : (
+        <p>ce formulaire n'existe pas</p>
+      )}
     </div>
   );
 };
-
-FormPrevisualizer.propTypes = {
-  form: PropTypes.objectOf(PropTypes.any).isRequired,
-  ready: PropTypes.bool.isRequired,
-};
-
-export default withTracker(({ _id }) => {
-  const subForm = Meteor.subscribe('forms.one', { _id });
-  const form = Forms.findOne(_id) || {};
-  const ready = subForm.ready();
-  return {
-    ready,
-    form,
-  };
-})(FormPrevisualizer);
