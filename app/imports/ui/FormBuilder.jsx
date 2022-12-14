@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 
 import { RadioInputBuilder } from './components/Radio/RadioInputBuilder';
 import { SelectInputBuilder } from './components/Select/SelectInputBuilder';
@@ -20,6 +20,8 @@ import { TextArea } from './components/TextArea/TextArea';
 
 export const FormBuilder = () => {
   const [listOfComponentChooseByUser, setListOfComponentChooseByUser] = useState([]);
+  const [globalTitle, setGlobalTitle] = useState('');
+  const [globalDesc, setGlobalDesc] = useState('');
 
   const listOfInputBuilder = [
     {
@@ -122,8 +124,8 @@ export const FormBuilder = () => {
     Meteor.call(
       'forms.createForm',
       {
-        title: 'Test',
-        desc: 'Test desc',
+        title: globalTitle,
+        desc: globalDesc,
         owner: 'test_user',
         isModel: false,
         isPublic: false,
@@ -145,6 +147,25 @@ export const FormBuilder = () => {
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <div>
           <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <TextField
+              id="global_title"
+              label="Titre"
+              variant="outlined"
+              value={globalTitle}
+              helperText="Entrez votre titre"
+              onChange={(e) => setGlobalTitle(e.target.value)}
+            />
+            <TextField
+              id="global_desc"
+              label="Description"
+              variant="outlined"
+              value={globalDesc}
+              helperText="Entrez votre description"
+              onChange={(e) => setGlobalDesc(e.target.value)}
+            />
+          </div>
+
           {listOfComponentChooseByUser.map((componentInput) => (
             <div key={componentInput.id}>
               <br />
