@@ -3,19 +3,18 @@ import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
 import { TextField, Button, Paper } from '@mui/material';
+import { createComponentObject, isDuplicate } from '../../../utils/utils';
 
-import { createComponentObject, isDuplicate } from '../../utils/utils';
-
-export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
+export const SelectInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
   const [value, setValue] = useState('');
   const [options, setOptions] = useState([]);
 
-  const addOption = (newOption) => {
-    if (newOption) {
+  const addOption = (option) => {
+    if (option) {
       const opt = [...options];
-      if (!isDuplicate(opt, newOption)) {
-        opt.push(newOption);
+      if (!isDuplicate(opt, option)) {
+        opt.push(option);
         setOptions(opt);
         setValue('');
       }
@@ -32,9 +31,7 @@ export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
   const handleSubmit = () => {
     if (title && options) {
       const componentListFinal = [...componentList];
-
-      const newComponent = createComponentObject(title, 'checkboxInput', options);
-
+      const newComponent = createComponentObject(title, 'selectInput', options);
       componentListFinal.push(newComponent);
       setComponentList(componentListFinal);
       setTitle('');
@@ -56,6 +53,7 @@ export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
         onChange={(e) => setTitle(e.target.value)}
       />
       <br />
+
       <TextField
         id="option"
         label="option"
@@ -64,11 +62,11 @@ export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
         helperText="Entrez un choix de reponse"
         onChange={(e) => setValue(e.target.value)}
       />
-      <Button onClick={() => addOption(value)}>Ajoutez une option</Button>
+      <Button onClick={() => addOption(value)}>Ajoutez cette option</Button>
       {options.map((option) => (
         <div key={uuidv4()}>
           <p>{option}</p>
-          <Button onClick={() => removeOption(option)}>Supprimez une option</Button>
+          <Button onClick={() => removeOption(option)}>Supprimez cette option</Button>
         </div>
       ))}
       <br />
@@ -77,7 +75,7 @@ export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
   );
 };
 
-CheckboxInputBuilder.propTypes = {
+SelectInputBuilder.propTypes = {
   componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
   setComponentList: PropTypes.func.isRequired,
 };
