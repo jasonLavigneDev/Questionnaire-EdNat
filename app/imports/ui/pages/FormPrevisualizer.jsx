@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useLoaderData } from 'react-router-dom';
-import { RadioInput } from './components/Radio/RadioInput';
-import { SelectInput } from './components/Select/SelectInput';
-import { CheckBoxInput } from './components/Checkbox/CheckboxInput';
-import { DateInput } from './components/Date/DateInput';
-import { NumberInput } from './components/Number/NumberInput';
-import { TextInput } from './components/TextInput/TextInput';
-import { TextArea } from './components/TextArea/TextArea';
-import Forms from '../api/forms/forms';
+import { RadioInput } from '../components/Radio/RadioInput';
+import { SelectInput } from '../components/Select/SelectInput';
+import { CheckBoxInput } from '../components/Checkbox/CheckboxInput';
+import { DateInput } from '../components/Date/DateInput';
+import { NumberInput } from '../components/Number/NumberInput';
+import { TextInput } from '../components/TextInput/TextInput';
+import { TextArea } from '../components/TextArea/TextArea';
+import Forms from '../../api/forms/forms';
 
 export const FormPrevisualizer = () => {
   const { _id } = useLoaderData();
@@ -64,4 +64,13 @@ export const FormPrevisualizer = () => {
       )}
     </div>
   );
+};
+
+export const previzualizerRoute = {
+  path: '/previsualizer/:_id',
+  loader: async ({ request, params }) => {
+    const _id = params._id;
+    return { _id };
+  },
+  element: <FormPrevisualizer />,
 };
