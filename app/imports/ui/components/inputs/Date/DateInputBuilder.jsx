@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField, Button, Paper } from '@mui/material';
-import { createComponentObject } from '../../utils/utils';
+import { createComponentObject } from '../../../utils/utils';
 
-export const NumberInputBuilder = ({ componentList, setComponentList }) => {
+export const DateInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
 
   const handleSubmit = () => {
     if (title) {
       const componentListFinal = [...componentList];
-      const newComponent = createComponentObject(title, 'numberInput');
+      const newComponent = createComponentObject(title, 'dateInput');
       componentListFinal.push(newComponent);
       setComponentList(componentListFinal);
       setTitle('');
@@ -35,7 +35,7 @@ export const NumberInputBuilder = ({ componentList, setComponentList }) => {
   );
 };
 
-NumberInputBuilder.propTypes = {
+DateInputBuilder.propTypes = {
   componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
   setComponentList: PropTypes.func.isRequired,
 };

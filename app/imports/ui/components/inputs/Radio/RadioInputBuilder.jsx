@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
 import { TextField, Button, Paper } from '@mui/material';
-import { createComponentObject, isDuplicate } from '../../utils/utils';
+import { createComponentObject, isDuplicate } from '../../../utils/utils';
 
 export const RadioInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
