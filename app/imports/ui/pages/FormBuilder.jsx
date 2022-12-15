@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 
 import { TextField, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { RadioInputBuilder } from './components/Radio/RadioInputBuilder';
-import { SelectInputBuilder } from './components/Select/SelectInputBuilder';
-import { CheckboxInputBuilder } from './components/Checkbox/CheckboxInputBuilder';
-import { DateInputBuilder } from './components/Date/DateInputBuilder';
-import { NumberInputBuilder } from './components/Number/NumberInputBuilder';
-import { TextInputBuilder } from './components/TextInput/TextInputBuilder';
-import { TextAreaInputBuilder } from './components/TextArea/TextAreaInputBuilder';
+import { RadioInputBuilder } from '../components/Radio/RadioInputBuilder';
+import { SelectInputBuilder } from '../components/Select/SelectInputBuilder';
+import { CheckboxInputBuilder } from '../components/Checkbox/CheckboxInputBuilder';
+import { DateInputBuilder } from '../components/Date/DateInputBuilder';
+import { NumberInputBuilder } from '../components/Number/NumberInputBuilder';
+import { TextInputBuilder } from '../components/TextInput/TextInputBuilder';
+import { TextAreaInputBuilder } from '../components/TextArea/TextAreaInputBuilder';
 
-import { RadioInput } from './components/Radio/RadioInput';
-import { SelectInput } from './components/Select/SelectInput';
-import { CheckBoxInput } from './components/Checkbox/CheckboxInput';
-import { DateInput } from './components/Date/DateInput';
-import { NumberInput } from './components/Number/NumberInput';
-import { TextInput } from './components/TextInput/TextInput';
-import { TextArea } from './components/TextArea/TextArea';
+import { RadioInput } from '../components/Radio/RadioInput';
+import { SelectInput } from '../components/Select/SelectInput';
+import { CheckBoxInput } from '../components/Checkbox/CheckboxInput';
+import { DateInput } from '../components/Date/DateInput';
+import { NumberInput } from '../components/Number/NumberInput';
+import { TextInput } from '../components/TextInput/TextInput';
+import { TextArea } from '../components/TextArea/TextArea';
 
 export const FormBuilder = () => {
   const [listOfComponentChooseByUser, setListOfComponentChooseByUser] = useState([]);
@@ -199,4 +199,9 @@ export const FormBuilder = () => {
       {idForm ? <Link to={`previsualizer/${idForm}`}>Voir le formulaire dernièrement créé</Link> : null}
     </div>
   );
+};
+
+export const homeRoute = {
+  path: '/',
+  element: <FormBuilder />,
 };
