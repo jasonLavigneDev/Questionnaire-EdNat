@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { i18n } from 'meteor/universe:i18n';
 
 import { TextField, Button, Paper } from '@mui/material';
 import { createComponentObject } from '../../../utils/utils';
+import { MsgError } from '../../system/MsgError';
 
 export const NumberInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = () => {
     if (title) {
@@ -15,7 +18,7 @@ export const NumberInputBuilder = ({ componentList, setComponentList }) => {
       setComponentList(componentListFinal);
       setTitle('');
     } else {
-      console.error('OSKOUR');
+      setMessage(i18n.__('builders.errors.noTitle'));
     }
   };
 
@@ -31,6 +34,7 @@ export const NumberInputBuilder = ({ componentList, setComponentList }) => {
       />
       <br />
       <Button onClick={() => handleSubmit()}>Ajouter ce type d'input au formulaire</Button>
+      {message.length && <MsgError message={message} setMessage={setMessage} />}
     </Paper>
   );
 };

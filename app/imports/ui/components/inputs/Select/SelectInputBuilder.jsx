@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { i18n } from 'meteor/universe:i18n';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
-import { TextField, Button, Paper } from '@mui/material';
+import { TextField, Button, Paper, Container } from '@mui/material';
 import { createComponentObject, isDuplicate } from '../../../utils/utils';
+import { MsgError } from '../../system/MsgError';
 
 export const SelectInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
   const [value, setValue] = useState('');
   const [options, setOptions] = useState([]);
+  const [message, setMessage] = useState('');
 
   const addOption = (option) => {
     if (option) {
@@ -19,7 +22,7 @@ export const SelectInputBuilder = ({ componentList, setComponentList }) => {
         setValue('');
       }
     } else {
-      console.error('empty option');
+      setMessage(i18n.__('builders.errors.noOptions'));
     }
   };
 
@@ -29,7 +32,7 @@ export const SelectInputBuilder = ({ componentList, setComponentList }) => {
   };
 
   const handleSubmit = () => {
-    if (title && options) {
+    if (title && options.length) {
       const componentListFinal = [...componentList];
       const newComponent = createComponentObject(title, 'selectInput', options);
       componentListFinal.push(newComponent);
@@ -38,7 +41,12 @@ export const SelectInputBuilder = ({ componentList, setComponentList }) => {
       setValue('');
       setOptions([]);
     } else {
-      console.error('OSKOUR');
+      if (!title) {
+        setMessage(i18n.__('builders.errors.noTitle'));
+      }
+      if (!options.length) {
+        setMessage(i18n.__('builders.errors.noOptions'));
+      }
     }
   };
 
@@ -71,6 +79,7 @@ export const SelectInputBuilder = ({ componentList, setComponentList }) => {
       ))}
       <br />
       <Button onClick={() => handleSubmit()}>Ajouter ce type d'input au formulaire</Button>
+      {message.length && <MsgError message={message} setMessage={setMessage} />}
     </Paper>
   );
 };
