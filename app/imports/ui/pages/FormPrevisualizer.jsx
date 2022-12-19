@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 import Forms from '../../api/forms/forms';
 import Visualizer from '../components/form/Visualizer';
@@ -27,6 +27,7 @@ export const FormPrevisualizer = () => {
           <h3 style={{ textAlign: 'center' }}>{form.title}</h3>
           <h4 style={{ textAlign: 'center' }}>{form.desc}</h4>
           <Visualizer form={component} />
+          <Link to={`/`}>retour</Link>
         </div>
       ) : (
         <p>ce formulaire n'existe pas</p>

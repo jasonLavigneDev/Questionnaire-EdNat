@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-import { Button } from '@mui/material';
+import { Button, Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import Visualizer from '../components/form/Visualizer';
 import InputChoice from '../components/form/InputChoice';
 import FormDescription from '../components/form/FormDescription';
+import Header from '../components/header/Header';
 
 export const FormBuilder = () => {
   const [listOfComponentChooseByUser, setListOfComponentChooseByUser] = useState([]);
@@ -37,22 +38,25 @@ export const FormBuilder = () => {
   };
 
   return (
-    <div>
-      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-        <div>
-          <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
-          <FormDescription title={globalTitle} setTitle={setGlobalTitle} desc={globalDesc} setDesc={setGlobalDesc} />
-          <Visualizer form={listOfComponentChooseByUser} setForm={setListOfComponentChooseByUser} edit={true} />
+    <>
+      <Header />
+      <Paper sx={{ marginTop: '6vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-around', height: '90vh' }}>
+          <div>
+            <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
+            <FormDescription title={globalTitle} setTitle={setGlobalTitle} desc={globalDesc} setDesc={setGlobalDesc} />
+            <Visualizer form={listOfComponentChooseByUser} setForm={setListOfComponentChooseByUser} edit={true} />
+          </div>
+          <div>
+            <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
+            <InputChoice list={listOfComponentChooseByUser} setList={setListOfComponentChooseByUser} />
+          </div>
         </div>
-        <div>
-          <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
-          <InputChoice list={listOfComponentChooseByUser} setList={setListOfComponentChooseByUser} />
-        </div>
-      </div>
-      <Button onClick={() => handleSubmit()}>Enregistrer le formulaire</Button>
-      <br />
-      {idForm ? <Link to={`previsualizer/${idForm}`}>Voir le formulaire dernièrement créé</Link> : null}
-    </div>
+        <Button onClick={() => handleSubmit()}>Enregistrer le formulaire</Button>
+        <br />
+        {idForm ? <Link to={`previsualizer/${idForm}`}>Voir le formulaire dernièrement créé</Link> : null}
+      </Paper>
+    </>
   );
 };
 
