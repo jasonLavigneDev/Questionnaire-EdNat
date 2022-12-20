@@ -7,6 +7,7 @@ import { TextField, Button, Paper } from '@mui/material';
 
 import { createComponentObject, isDuplicate } from '../../../utils/utils';
 import { MsgError } from '../../system/MsgError';
+import AddSubmitButton from '../../selector';
 
 export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
@@ -80,8 +81,8 @@ export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
         </div>
       ))}
       <br />
-      <Button onClick={() => handleSubmit()}>Ajouter ce type d'input au formulaire</Button>
-      {message.length && <MsgError message={message} setMessage={setMessage} />}
+      <AddSubmitButton handleClick={handleSubmit} />
+      {message.length !== 0 ? <MsgError message={message} setMessage={setMessage} /> : null}
     </Paper>
   );
 };

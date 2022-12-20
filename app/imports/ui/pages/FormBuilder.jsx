@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Button, Paper } from '@mui/material';
+
 import { Link } from 'react-router-dom';
 
 import Visualizer from '../components/form/Visualizer';
@@ -41,16 +42,13 @@ export const FormBuilder = () => {
     <>
       <Header />
       <Paper sx={{ marginTop: '6vh' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-around', height: '90vh' }}>
-          <div>
-            <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
-            <FormDescription title={globalTitle} setTitle={setGlobalTitle} desc={globalDesc} setDesc={setGlobalDesc} />
-            <Visualizer form={listOfComponentChooseByUser} setForm={setListOfComponentChooseByUser} edit={true} />
-          </div>
-          <div>
-            <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
-            <InputChoice list={listOfComponentChooseByUser} setList={setListOfComponentChooseByUser} />
-          </div>
+        <div style={{ display: 'flex', height: '90vh', flexDirection: 'column' }}>
+          <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
+          <FormDescription title={globalTitle} setTitle={setGlobalTitle} desc={globalDesc} setDesc={setGlobalDesc} />
+          <Visualizer form={listOfComponentChooseByUser} setForm={setListOfComponentChooseByUser} edit={true} />
+
+          <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
+          <InputChoice list={listOfComponentChooseByUser} setList={setListOfComponentChooseByUser} />
         </div>
         <Button onClick={() => handleSubmit()}>Enregistrer le formulaire</Button>
         <br />
