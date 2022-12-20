@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/underscore';
@@ -35,5 +36,11 @@ export const createForm = new ValidatedMethod({
     _createForm(title, desc, owner, isModel, isPublic, groups, components);
     const form = Forms.findOne({ title });
     return form._id;
+  },
+});
+
+Meteor.methods({
+  'forms.getOne': async (id) => {
+    return await Forms.findOneAsync({ _id: id });
   },
 });

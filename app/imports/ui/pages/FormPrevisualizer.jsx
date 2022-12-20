@@ -1,24 +1,10 @@
-import React, { useState } from 'react';
-import { useTracker } from 'meteor/react-meteor-data';
+import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-
-import Forms from '../../api/forms/forms';
 import Visualizer from '../components/form/Visualizer';
 
 export const FormPrevisualizer = () => {
-  const { _id } = useLoaderData();
-
-  const [ready, setReady] = useState(false);
-
-  const form = useTracker(() => {
-    const subForm = Meteor.subscribe('forms.one', { _id });
-    setReady(subForm.ready());
-    return Forms.findOne({ _id });
-  }, []);
-
+  const form = useLoaderData();
   const component = form?.components;
-
-  if (!ready) return <p>BIG SPINNER</p>;
 
   return (
     <div>
@@ -37,10 +23,9 @@ export const FormPrevisualizer = () => {
 };
 
 export const previzualizerRoute = {
-  path: '/previsualizer/:_id',
+  path: '/previsualizer/:id',
   loader: async ({ request, params }) => {
-    const _id = params._id;
-    return { _id };
+    return await Meteor.callAsync('forms.getOne', params.id);
   },
   element: <FormPrevisualizer />,
 };
