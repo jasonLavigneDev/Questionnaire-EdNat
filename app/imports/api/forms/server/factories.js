@@ -3,9 +3,7 @@ import { Factory } from 'meteor/dburles:factory';
 
 import Forms from '../forms';
 
-faker.setLocale('fr');
-
-const genFormComponent = () => ({
+export const genFormComponent = () => ({
   id: faker.datatype.uuid(),
   type: faker.helpers.arrayElement(['radio', 'select', 'checkbox', 'date', 'number', 'text', 'textarea']),
   title: faker.lorem.words(),
