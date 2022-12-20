@@ -20,20 +20,23 @@ describe('forms', function () {
     beforeEach(function () {
       Forms.remove({});
     });
-    describe('createForm', function () {
-      it('does create a form', function () {
-        const newform = {
-          title: 'yo',
-          desc: faker.lorem.sentence(),
-          isModel: faker.datatype.boolean(),
-          isPublic: faker.datatype.boolean(),
-          owner: faker.name.middleName(),
-          components: [...new Array(faker.datatype.number({ min: 1, max: 10 }))].map(() => genFormComponent()),
-        };
-        createForm._execute({}, newform);
-        const form = Forms.findOne({ title: 'yo' });
-        assert.typeOf(form, 'object');
-      });
+    it('does create a form', function () {
+      const newform = {
+        title: 'yo',
+        desc: faker.lorem.sentence(),
+        isModel: faker.datatype.boolean(),
+        isPublic: faker.datatype.boolean(),
+        owner: faker.name.middleName(),
+        components: [...new Array(faker.datatype.number({ min: 1, max: 10 }))].map(() => genFormComponent()),
+      };
+      createForm._execute({}, newform);
+      const form = Forms.findOne({ title: 'yo' });
+      assert.typeOf(form, 'object');
+    });
+    it('does get a form', async function () {
+      const newformId = Factory.create('form')._id;
+      const form = await Meteor.callAsync('forms.getOne', newformId);
+      assert.typeOf(form, 'object');
     });
   });
 });
