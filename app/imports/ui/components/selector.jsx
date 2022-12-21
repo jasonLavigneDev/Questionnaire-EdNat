@@ -1,6 +1,7 @@
 import React from 'react';
 import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import PropTypes from 'prop-types';
 
 const AddSubmitButton = ({ handleClick }) => {
   return (
@@ -13,3 +14,7 @@ const AddSubmitButton = ({ handleClick }) => {
 };
 
 export default AddSubmitButton;
+
+AddSubmitButton.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+};
