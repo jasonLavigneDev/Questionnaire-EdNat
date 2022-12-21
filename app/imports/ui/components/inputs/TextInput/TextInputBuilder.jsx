@@ -5,6 +5,7 @@ import { i18n } from 'meteor/universe:i18n';
 import { TextField, Button, Paper } from '@mui/material';
 import { createComponentObject } from '../../../utils/utils';
 import { MsgError } from '../../system/MsgError';
+import AddSubmitButton from '../../selector';
 
 export const TextInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
@@ -33,8 +34,8 @@ export const TextInputBuilder = ({ componentList, setComponentList }) => {
         onChange={(e) => setTitle(e.target.value)}
       />
       <br />
-      <Button onClick={() => handleSubmit()}>Ajoutez ce type d'input au formulaire</Button>
-      {message.length && <MsgError message={message} setMessage={setMessage} />}
+      <AddSubmitButton handleClick={handleSubmit} />
+      {message.length !== 0 ? <MsgError message={message} setMessage={setMessage} /> : null}
     </Paper>
   );
 };
