@@ -16,5 +16,5 @@ Factory.define('form', Forms, {
   isModel: faker.datatype.boolean(),
   isPublic: faker.datatype.boolean(),
   owner: faker.name.middleName(),
-  components: [...new Array(faker.datatype.number({ min: 1, max: 10 }))].map(() => genFormComponent()),
+  components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
 });
