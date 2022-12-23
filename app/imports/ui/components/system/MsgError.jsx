@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Snackbar, Alert } from '@mui/material';
+import PropTypes from 'prop-types';
 
 export const MsgError = ({ message, setMessage }) => {
   const [open, setOpen] = useState(true);
-  console.log(message);
 
   if (message.length === 0) {
     setOpen(false);
@@ -21,4 +21,9 @@ export const MsgError = ({ message, setMessage }) => {
       <Alert severity="error">{message}</Alert>
     </Snackbar>
   );
+};
+
+MsgError.PropTypes = {
+  message: PropTypes.string.isRequired,
+  setMessage: PropTypes.func.isRequired,
 };
