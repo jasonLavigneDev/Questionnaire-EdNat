@@ -23,7 +23,7 @@ export const FormPrevisualizer = () => {
 };
 
 export const previzualizerRoute = {
-  path: '/previsualizer/:id',
+  path: 'previsualizer/:id',
   loader: async ({ request, params }) => {
     return await Meteor.callAsync('forms.getOne', params.id);
   },
