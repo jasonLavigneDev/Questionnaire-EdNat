@@ -13,18 +13,18 @@
     "lint": "eslint . --ext js,jsx"
   },
   "dependencies": {
-    "@babel/core": "^7.20.5",
-    "@babel/runtime": "^7.17.9",
+    "@babel/core": "^7.20.12",
+    "@babel/runtime": "^7.20.7",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.11.0",
+    "@mui/material": "^5.11.3",
     "chai": "^4.3.7",
     "meteor-node-stubs": "^1.2.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.5.0",
+    "react-router-dom": "^6.6.1",
     "simpl-schema": "^3.4.0",
     "uuid": "^9.0.0"
   },
