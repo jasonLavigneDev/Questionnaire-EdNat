@@ -33,8 +33,3 @@ export const Login = () => {
     </>
   );
 };
-
-export const loginRoute = {
-  path: '/login',
-  element: <Login />,
-};
