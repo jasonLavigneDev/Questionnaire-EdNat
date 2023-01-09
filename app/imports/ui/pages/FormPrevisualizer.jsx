@@ -13,7 +13,6 @@ export const FormPrevisualizer = () => {
           <h3 style={{ textAlign: 'center' }}>{form.title}</h3>
           <h4 style={{ textAlign: 'center' }}>{form.desc}</h4>
           <Visualizer form={component} />
-          <Link to={`/`}>retour</Link>
         </div>
       ) : (
         <p>ce formulaire n'existe pas</p>
@@ -22,10 +21,6 @@ export const FormPrevisualizer = () => {
   );
 };
 
-export const previzualizerRoute = {
-  path: 'previsualizer/:id',
-  loader: async ({ request, params }) => {
-    return await Meteor.callAsync('forms.getOne', params.id);
-  },
-  element: <FormPrevisualizer />,
+export const loader = async ({ request, params }) => {
+  return await Meteor.callAsync('forms.getOne', params.id);
 };

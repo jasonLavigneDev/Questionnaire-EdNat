@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Button } from '@mui/material';
 
@@ -8,17 +8,22 @@ import Visualizer from '../components/form/Visualizer';
 import InputChoice from '../components/form/InputChoice';
 import FormDescription from '../components/form/FormDescription';
 import { Login } from './Login';
+import { FormContext } from '../contexts/FormContext';
 
 export const FormBuilder = () => {
-  const [listOfComponentChooseByUser, setListOfComponentChooseByUser] = useState([]);
+  const { form, setForm } = useContext(FormContext);
+
+  const [listOfComponentChooseByUser, setListOfComponentChooseByUser] = useState(form.components || []);
   const [idForm, setIdForm] = useState('');
+
+  console.log(form);
 
   const handleSubmit = () => {
     Meteor.call(
       'forms.createForm',
       {
-        title: globalTitle,
-        desc: globalDesc,
+        title: form.name,
+        desc: form.description,
         owner: 'test_user',
         isModel: false,
         isPublic: false,
@@ -36,33 +41,18 @@ export const FormBuilder = () => {
     );
   };
 
-  const userConnected = '';
-
-  if (!userConnected) return <Login />;
-
   return (
-    <div>
-      {<button onClick={() => onLogout()}>Logout</button>}
+    <>
+      <div style={{ display: 'flex', height: '90vh', flexDirection: 'column' }}>
+        <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
+        <Visualizer form={listOfComponentChooseByUser} setForm={setListOfComponentChooseByUser} edit={true} />
 
-      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-        <div>
-          <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
-          <FormDescription title={globalTitle} setTitle={setGlobalTitle} desc={globalDesc} setDesc={setGlobalDesc} />
-          <Visualizer form={listOfComponentChooseByUser} setForm={setListOfComponentChooseByUser} edit={true} />
-        </div>
-        <div>
-          <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
-          <InputChoice list={listOfComponentChooseByUser} setList={setListOfComponentChooseByUser} />
-        </div>
+        <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
+        <InputChoice list={listOfComponentChooseByUser} setList={setListOfComponentChooseByUser} />
       </div>
       <Button onClick={() => handleSubmit()}>Enregistrer le formulaire</Button>
       <br />
-      {idForm ? <Link to={`previsualizer/${idForm}`}>Voir le formulaire dernièrement créé</Link> : null}
-    </div>
+      {idForm ? <Link to={`/previsualizer/${idForm}`}>Voir le formulaire dernièrement créé</Link> : null}
+    </>
   );
-};
-
-export const homeRoute = {
-  path: '/',
-  element: <FormBuilder />,
 };

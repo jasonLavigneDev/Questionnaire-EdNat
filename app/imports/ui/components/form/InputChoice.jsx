@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FormControl, Select, InputLabel, MenuItem, IconButton } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { FormControl, Select, InputLabel, MenuItem } from '@mui/material';
 
 import { RadioInputBuilder } from '../inputs/Radio/RadioInputBuilder';
 import { SelectInputBuilder } from '../inputs/Select/SelectInputBuilder';
