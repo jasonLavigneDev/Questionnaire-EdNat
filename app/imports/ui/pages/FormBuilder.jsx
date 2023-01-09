@@ -16,10 +16,8 @@ export const FormBuilder = () => {
   const [listOfComponentChooseByUser, setListOfComponentChooseByUser] = useState(form.components || []);
   const [idForm, setIdForm] = useState('');
 
-  console.log(form);
-
-  const handleSubmit = () => {
-    Meteor.call(
+  const handleSubmit = async () => {
+    await Meteor.callAsync(
       'forms.createForm',
       {
         title: form.name,

@@ -15,7 +15,6 @@ export const Login = () => {
 
   const keycloakLogout = () => {
     const { keycloakUrl, keycloakRealm } = Meteor.settings.public;
-    // const keycloakUrlTested = testMeteorSettingsUrl(keycloakUrl);
     const keycloakUrlTested = keycloakUrl;
     const keycloakLogoutUrl = `${keycloakUrlTested}/realms/${keycloakRealm}/protocol/openid-connect/logout`;
     const redirectUri = `${Meteor.absoluteUrl()}/logout`;
