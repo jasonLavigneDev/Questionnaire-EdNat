@@ -1,4 +1,9 @@
 import React from 'react';
-import { FormBuilder } from './FormBuilder.jsx';
+import DynamicStore from './contexts/context.js';
+import { NotLoggedIn } from './NotLoggedIn.js';
 
-export const App = () => <FormBuilder />;
+export const App = () => (
+  // <DynamicStore>
+  <NotLoggedIn />
+  // </DynamicStore>
+);

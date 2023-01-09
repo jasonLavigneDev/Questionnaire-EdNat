@@ -7,29 +7,35 @@
   "author": "EOLE <team@eole.education> - DINUM",
   "scripts": {
     "start": "MONGO_URL=mongodb://localhost:3001/meteor meteor run --exclude-archs 'web.browser.legacy, web.cordova' --settings ../config/settings.development.json --port 3060",
-    "test": "meteor test --once --driver-package meteortesting:mocha",
+    "test": "meteor test --once --exclude-archs 'web.browser.legacy, web.cordova' --driver-package meteortesting:mocha --allow-superuser",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer",
     "lint": "eslint . --ext js,jsx"
   },
   "dependencies": {
-    "@babel/core": "^7.20.5",
-    "@babel/runtime": "^7.17.9",
+    "@babel/core": "^7.20.12",
+    "@babel/runtime": "^7.20.7",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.10.16",
-    "@mui/material": "^5.10.17",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.3",
+    "chai": "^4.3.7",
+    "@material-ui/core": "^4.12.4",
     "meteor-node-stubs": "^1.2.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "simpl-schema": "^3.4.0"
+    "react-router-dom": "^6.6.1",
+    "simpl-schema": "^3.4.0",
+    "uuid": "^9.0.0"
   },
   "meteor": {
     "mainModule": {
       "client": "client/main.jsx",
       "server": "server/main.js"
-    },
-    "testModule": "tests/main.js"
+    }
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0"
   }
 }

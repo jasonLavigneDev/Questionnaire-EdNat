@@ -1,6 +1,5 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
-import { Tracker } from 'meteor/tracker';
 import { getLabel } from '../utils';
 
 const Forms = new Mongo.Collection('forms');
@@ -18,7 +17,11 @@ Forms.deny({
   },
 });
 
-const Component = new SimpleSchema({
+export const Component = new SimpleSchema({
+  id: {
+    type: String,
+    label: getLabel('api.forms.labels.component.id'),
+  },
   type: {
     type: String,
     label: getLabel('api.forms.labels.component.type'),
@@ -68,13 +71,14 @@ Forms.schema = new SimpleSchema(
       type: String,
       label: getLabel('api.forms.labels.owner'),
     },
-    public: {
+    isPublic: {
       type: Boolean,
       label: getLabel('api.forms.labels.public'),
     },
     groups: {
       type: Array,
       label: getLabel('api.forms.labels.groups'),
+      optional: true,
       defaultValue: [],
     },
     'groups.$': { type: String },
@@ -93,7 +97,8 @@ Forms.publicFields = {
   title: 1,
   desc: 1,
   owner: 1,
-  public: 1,
+  isPublic: 1,
+  isModel: 1,
   createdAt: 1,
   groups: 1,
   components: 1,
