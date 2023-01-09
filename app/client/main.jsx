@@ -10,12 +10,24 @@ import { formIntroRoute } from '../imports/ui/pages/FormIntro';
 import { MainLayout } from '../imports/ui/layouts/MainLayout';
 
 import '../imports/startup/i18n/fr.i18n.json';
+import { loginRoute } from '/imports/ui/pages/Login';
+import { logoutRoute } from '/imports/ui/pages/Logout';
+import { notLoggedInRoute } from '/imports/ui/pages/NotLoggedIn';
 
 Meteor.startup(() => {
   i18n.setLocale(getLang());
   const container = document.getElementById('react-target');
   const root = createRoot(container);
-  const routes = [formIntroRoute, formBuilderRoute, previzualizerRoute];
+  const routes = [
+    formIntroRoute,
+    formBuilderRoute,
+    previzualizerRoute,
+    homeRoute,
+    previzualizerRoute,
+    loginRoute,
+    logoutRoute,
+    notLoggedInRoute,
+  ];
   const router = createBrowserRouter([
     {
       path: '/',
