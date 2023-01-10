@@ -39,9 +39,7 @@ export default function Visualizer({ form, setForm, edit = false }) {
   const swapPositionWithPreviousComponent = (inputPos) => {
     if (hasComponentBefore(inputPos)) {
       const newObj = [...form];
-      const temp = newObj[inputPos - 1];
-      newObj[inputPos - 1] = newObj[inputPos];
-      newObj[inputPos] = temp;
+      [newObj[inputPos - 1], newObj[inputPos]] = [newObj[inputPos], newObj[inputPos - 1]];
       setForm(newObj);
     } else {
       console.log("Il n'y a pas de question avant celle ci, impossible de swap");
@@ -51,9 +49,7 @@ export default function Visualizer({ form, setForm, edit = false }) {
   const swapPositionWithNextComponent = (inputPos) => {
     if (hasComponentAfter(inputPos, form)) {
       const newObj = [...form];
-      const temp = newObj[inputPos + 1];
-      newObj[inputPos + 1] = newObj[inputPos];
-      newObj[inputPos] = temp;
+      [newObj[inputPos + 1], newObj[inputPos]] = [newObj[inputPos], newObj[inputPos + 1]];
       setForm(newObj);
     } else {
       console.log("Il n'y a pas de question apres celle ci, impossible de swap");
