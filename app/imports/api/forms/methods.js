@@ -32,10 +32,10 @@ export const createForm = new ValidatedMethod({
     'components.$': { type: Component },
   }).validator(),
 
-  run({ title, desc, owner, isModel, isPublic, groups, components }) {
+  async run({ title, desc, owner, isModel, isPublic, groups, components }) {
     _createForm(title, desc, owner, isModel, isPublic, groups, components);
     const form = Forms.findOne({ title });
-    return form._id;
+    return await form._id;
   },
 });
 
