@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
 
 import { useTracker } from 'meteor/react-meteor-data';
+import { UserContext } from '../contexts/UserContext';
 
 export const Login = () => {
+  const { user, setUser } = useContext(UserContext);
+
   const userConnected = useTracker(() => {
+    setUser(Meteor.user());
     return Meteor.user();
   });
 
@@ -11,7 +15,7 @@ export const Login = () => {
     keycloakLogout();
   };
 
-  console.log('userConnected', userConnected);
+  console.log(user);
 
   const keycloakLogout = () => {
     const { keycloakUrl, keycloakRealm } = Meteor.settings.public;

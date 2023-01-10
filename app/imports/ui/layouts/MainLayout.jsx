@@ -10,9 +10,7 @@ export const MainLayout = ({ children }) => (
     <Header />
     <main>
       <Paper sx={{ marginTop: '6vh' }}>
-        <div style={{ padding: '5vh' }}>
-          <BreadcrumbMui />
-        </div>
+        <div style={{ padding: '5vh' }}></div>
         <Outlet />
         {children}
       </Paper>
