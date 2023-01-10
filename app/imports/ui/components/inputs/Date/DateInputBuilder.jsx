@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { i18n } from 'meteor/universe:i18n';
 
 import { TextField, Button, Paper } from '@mui/material';
-import { createComponentObject } from '../../../utils/utils';
+import { createComponentObject } from '../../../utils/Utils';
 import { MsgError } from '../../system/MsgError';
-import AddSubmitButton from '../../selector';
+import AddSubmitButton from '../../Selector';
 import { FormContext } from '../../../contexts/FormContext';
 
 export const DateInputBuilder = ({ componentList, setComponentList }) => {

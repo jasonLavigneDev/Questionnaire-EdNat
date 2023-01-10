@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import FormProvider, { FormContext } from '../contexts/FormContext';
+import FormProvider from '../contexts/FormContext';
 
 import { MainLayout } from '../layouts/MainLayout';
 

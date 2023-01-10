@@ -3,7 +3,7 @@ import { Paper } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
 import Header from '../components/header/Header';
-import { BreadcrumbMui } from '../components/system/breadcrums';
+import { BreadcrumbMui } from '../components/system/Breadcrums';
 
 export const MainLayout = ({ children }) => (
   <>
