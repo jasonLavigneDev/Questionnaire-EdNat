@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
-import { TextField, Button, Paper, Container } from '@mui/material';
+import { TextField, Button, Paper } from '@mui/material';
 import { createComponentObject, isDuplicate } from '../../../utils/utils';
 import { MsgError } from '../../system/MsgError';
 import AddSubmitButton from '../../selector';
+import { FormContext } from '../../../contexts/FormContext';
 
 export const SelectInputBuilder = ({ componentList, setComponentList }) => {
   const [title, setTitle] = useState('');
   const [value, setValue] = useState('');
   const [options, setOptions] = useState([]);
   const [message, setMessage] = useState('');
+  const { form, setForm } = useContext(FormContext);
 
   const addOption = (option) => {
     if (option) {
@@ -37,6 +39,7 @@ export const SelectInputBuilder = ({ componentList, setComponentList }) => {
       const componentListFinal = [...componentList];
       const newComponent = createComponentObject(title, 'selectInput', options);
       componentListFinal.push(newComponent);
+      setForm({ ...form, components: componentListFinal });
       setComponentList(componentListFinal);
       setTitle('');
       setValue('');
