@@ -8,7 +8,7 @@ import { NumberInput } from '../inputs/Number/NumberInput';
 import { TextInput } from '../inputs/TextInput/TextInput';
 import { TextArea } from '../inputs/TextArea/TextArea';
 
-export default function Visualizer({ form, setForm, edit = false }) {
+export const Visualizer = ({ form, setForm, edit = false }) => {
   const generateComponent = (component) => {
     switch (component.type) {
       case 'checkboxInput':
@@ -82,4 +82,4 @@ export default function Visualizer({ form, setForm, edit = false }) {
       ))}
     </div>
   );
-}
+};

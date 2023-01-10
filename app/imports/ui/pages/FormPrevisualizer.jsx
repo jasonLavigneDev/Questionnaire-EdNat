@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
-import Visualizer from '../components/form/Visualizer';
+import { useLoaderData } from 'react-router-dom';
+
+import { Visualizer } from '../components/form/Visualizer';
 
 export const FormPrevisualizer = () => {
   const form = useLoaderData();
-  const component = form?.components;
 
   return (
     <div>
@@ -12,7 +12,7 @@ export const FormPrevisualizer = () => {
         <div>
           <h3 style={{ textAlign: 'center' }}>{form.title}</h3>
           <h4 style={{ textAlign: 'center' }}>{form.desc}</h4>
-          <Visualizer form={component} />
+          <Visualizer form={form.components} />
         </div>
       ) : (
         <p>ce formulaire n'existe pas</p>
@@ -21,6 +21,6 @@ export const FormPrevisualizer = () => {
   );
 };
 
-export const loader = async ({ request, params }) => {
+export const loader = async ({ params }) => {
   return await Meteor.callAsync('forms.getOne', params.id);
 };

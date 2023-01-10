@@ -1,14 +1,14 @@
 import React, { createContext, useState } from 'react';
 
 const initialState = {
-  name: '',
+  title: '',
   description: '',
   components: [],
 };
 
 export const FormContext = createContext(initialState);
 
-export default function FormProvider({ children }) {
+export const FormProvider = ({ children }) => {
   const [form, setForm] = useState(initialState);
 
   return (
@@ -21,4 +21,4 @@ export default function FormProvider({ children }) {
       {children}
     </FormContext.Provider>
   );
-}
+};

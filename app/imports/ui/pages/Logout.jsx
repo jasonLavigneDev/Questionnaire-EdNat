@@ -12,8 +12,3 @@ export const Logout = () => {
 
   return null;
 };
-
-export const logoutRoute = {
-  path: '/logout',
-  element: <Logout />,
-};

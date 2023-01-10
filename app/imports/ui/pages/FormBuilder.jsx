@@ -1,4 +1,9 @@
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { Visualizer } from '../components/form/Visualizer';
+import { InputChoice } from '../components/form/InputChoice';
+import { FormContext } from '../contexts/FormContext';
 
 import { Button } from '@mui/material';
 
@@ -19,27 +24,25 @@ export const FormBuilder = () => {
   const [idForm, setIdForm] = useState('');
 
   const handleSubmit = async () => {
-    await Meteor.callAsync(
-      'forms.createForm',
-      {
-        title: form.name,
-        desc: form.description,
-        owner: 'test_user',
-        isModel: false,
-        isPublic: false,
-        groups: [],
-        components: listOfComponentChooseByUser,
-      },
-      (err, res) => {
-        if (err) {
-          console.log(err.reason);
-        } else {
-          console.log(res);
-          setIdForm(res);
-        }
-      },
-    );
+    const result = await Meteor.callAsync('forms.createForm', {
+      title: form.title,
+      desc: form.description,
+      owner: 'test_user',
+      isModel: false,
+      isPublic: false,
+      groups: [],
+      components: listOfComponentChooseByUser,
+    });
+    console.log(result);
+    if (result) {
+      setIdForm(result);
+    }
+    console.log(result);
   };
+
+  const userConnected = '';
+
+  // if (!userConnected) return <Login />;
 
   return (
     <>
