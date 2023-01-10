@@ -4,9 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { i18n } from 'meteor/universe:i18n';
 
 import { TextField, Button, Paper } from '@mui/material';
-import { createComponentObject, isDuplicate } from '../../../utils/utils';
+import { createComponentObject, isDuplicate } from '../../../utils/Utils';
 import { MsgError } from '../../system/MsgError';
-import AddSubmitButton from '../../selector';
+import AddSubmitButton from '../../Selector';
 import { FormContext } from '../../../contexts/FormContext';
 
 export const RadioInputBuilder = ({ componentList, setComponentList }) => {
