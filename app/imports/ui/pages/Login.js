@@ -1,21 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { useTracker } from 'meteor/react-meteor-data';
 import { UserContext } from '../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
-  const { user, setUser } = useContext(UserContext);
+  const [state, dispatch] = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const userConnected = useTracker(() => {
-    setUser(Meteor.user());
     return Meteor.user();
   });
 
-  const onLogout = () => {
-    keycloakLogout();
+  const insertUserInContext = () => {
+    dispatch({
+      type: 'LOGIN',
+      payload: Boolean(window.localStorage.getItem('Meteor.loginToken')).toString(),
+    });
   };
 
-  console.log(user);
+  useEffect(() => {
+    if (userConnected) {
+      insertUserInContext();
+      navigate('/builder');
+    }
+  }, [userConnected]);
 
   const keycloakLogout = () => {
     const { keycloakUrl, keycloakRealm } = Meteor.settings.public;
@@ -28,11 +38,8 @@ export const Login = () => {
   return (
     <>
       <h1>Page de login</h1>
-      {!userConnected ? (
-        <button onClick={() => Meteor.loginWithKeycloak()}>login with keycloak</button>
-      ) : (
-        <button onClick={() => onLogout()}>Logout</button>
-      )}
+      <h2>User connecté : {state.isConnected}</h2>
+      <button onClick={() => Meteor.loginWithKeycloak()}>login with keycloak</button>
     </>
   );
 };
