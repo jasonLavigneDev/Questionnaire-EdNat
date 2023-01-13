@@ -5,55 +5,55 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { TextField, Button, Paper } from '@mui/material';
 
-import { createComponentObject, isDuplicate } from '../../../utils/Utils';
+import { createComponentObject, isDuplicate } from '../../../utils/utils';
 import { MsgError } from '../../system/MsgError';
-import AddSubmitButton from '../../Selector';
+import { SubmitButton } from '../../system/SubmitButton';
 import { FormContext } from '../../../contexts/FormContext';
 
 export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
-  const [title, setTitle] = useState('');
-  const [value, setValue] = useState('');
-  const [options, setOptions] = useState([]);
-  const [message, setMessage] = useState('');
+  const [questionText, setQuestionText] = useState('');
+  const [answerText, setAnswerText] = useState('');
+  const [answerOptions, setAnswerOptions] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { form, setForm } = useContext(FormContext);
 
   const addOption = (newOption) => {
     if (newOption) {
-      const opt = [...options];
+      const opt = [...answerOptions];
       if (!isDuplicate(opt, newOption)) {
         opt.push(newOption);
-        setOptions(opt);
-        setValue('');
+        setAnswerOptions(opt);
+        setAnswerText('');
       }
     } else {
-      setMessage(i18n.__('builders.errors.noOptions'));
+      setErrorMessage(i18n.__('builders.errors.noOptions'));
     }
   };
 
   const removeOption = (option) => {
-    const opt = options.filter((o) => option !== o);
-    setOptions(opt);
+    const opt = answerOptions.filter((o) => option !== o);
+    setAnswerOptions(opt);
   };
 
   const handleSubmit = () => {
-    if (title && options) {
+    if (questionText && answerOptions) {
       const componentListFinal = [...componentList];
 
-      const newComponent = createComponentObject(title, 'checkboxInput', options);
+      const newComponent = createComponentObject(questionText, 'checkboxInput', answerOptions);
 
       componentListFinal.push(newComponent);
       setForm({ ...form, components: componentListFinal });
       setComponentList(componentListFinal);
-      setTitle('');
-      setValue('');
-      setOptions([]);
+      setQuestionText('');
+      setAnswerText('');
+      setAnswerOptions([]);
     } else {
-      if (!title) {
-        setMessage(i18n.__('builders.errors.noTitle'));
+      if (!questionText) {
+        setErrorMessage(i18n.__('builders.errors.noTitle'));
       }
-      if (!options.length) {
-        setMessage(i18n.__('builders.errors.noOptions'));
+      if (!answerOptions.length) {
+        setErrorMessage(i18n.__('builders.errors.noOptions'));
       }
     }
   };
@@ -61,32 +61,32 @@ export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
   return (
     <Paper>
       <TextField
-        id="title"
+        id="questionText"
         label="titre"
         variant="outlined"
-        value={title}
+        value={questionText}
         helperText="Entrez votre question"
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setQuestionText(e.target.value)}
       />
       <br />
       <TextField
         id="option"
         label="option"
         variant="outlined"
-        value={value}
+        value={answerText}
         helperText="Entrez un choix de reponse"
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setAnswerText(e.target.value)}
       />
-      <Button onClick={() => addOption(value)}>Ajoutez une option</Button>
-      {options.map((option) => (
+      <Button onClick={() => addOption(answerText)}>Ajoutez une option</Button>
+      {answerOptions.map((option) => (
         <div key={uuidv4()}>
           <p>{option}</p>
           <Button onClick={() => removeOption(option)}>Supprimez une option</Button>
         </div>
       ))}
       <br />
-      <AddSubmitButton handleClick={handleSubmit} />
-      {message.length !== 0 ? <MsgError message={message} setMessage={setMessage} /> : null}
+      <SubmitButton handleClick={handleSubmit} />
+      {errorMessage.length !== 0 ? <MsgError error={errorMessage} setError={setErrorMessage} /> : null}
     </Paper>
   );
 };

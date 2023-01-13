@@ -2,8 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Paper } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-import Header from '../components/header/Header';
-import { BreadcrumbMui } from '../components/system/Breadcrums';
+import { Header } from '../components/header/Header';
 import { UserContext } from '../contexts/UserContext';
 
 export const MainLayout = ({ children }) => {

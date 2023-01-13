@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Stepper, Step, StepButton } from '@mui/material';
 
-export const BreadcrumbMui = () => {
+export const Breadcrumb = () => {
   const steps = ['intro', 'builder', 'previsualizer/:id'];
   const [activeStep, setActiveStep] = React.useState(0);
   const navigate = useNavigate();

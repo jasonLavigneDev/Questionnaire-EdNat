@@ -9,7 +9,7 @@ import { NumberInputBuilder } from '../inputs/Number/NumberInputBuilder';
 import { TextInputBuilder } from '../inputs/TextInput/TextInputBuilder';
 import { TextAreaInputBuilder } from '../inputs/TextArea/TextAreaInputBuilder';
 
-export default function InputChoice({ list, setList }) {
+export const InputChoice = ({ list, setList }) => {
   const [component, setComponent] = useState('');
 
   const handleChange = (event) => {
@@ -79,4 +79,4 @@ export default function InputChoice({ list, setList }) {
       )}
     </div>
   );
-}
+};

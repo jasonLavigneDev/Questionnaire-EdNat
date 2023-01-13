@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FormDescription from '../components/form/FormDescription';
+import FormInfos from '../components/form/FormInfos';
 import { FormContext } from '../contexts/FormContext';
 import { UserContext } from '../contexts/UserContext';
 
@@ -22,7 +22,7 @@ export const FormIntro = () => {
 
   return (
     <>
-      <FormDescription title={globalTitle} setTitle={setGlobalTitle} desc={globalDesc} setDesc={setGlobalDesc} />
+      <FormInfos title={globalTitle} setTitle={setGlobalTitle} desc={globalDesc} setDesc={setGlobalDesc} />
       <Button onClick={() => handleSubmit()}>CLIQUE CLIQUE</Button>
     </>
   );
