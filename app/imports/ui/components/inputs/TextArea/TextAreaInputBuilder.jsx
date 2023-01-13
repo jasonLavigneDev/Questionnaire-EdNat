@@ -3,42 +3,42 @@ import PropTypes from 'prop-types';
 import { i18n } from 'meteor/universe:i18n';
 
 import { TextField, Paper } from '@mui/material';
-import { createComponentObject } from '../../../utils/Utils';
+import { createComponentObject } from '../../../utils/utils';
 import { MsgError } from '../../system/MsgError';
-import AddSubmitButton from '../../Selector';
+import { SubmitButton } from '../../system/SubmitButton';
 import { FormContext } from '../../../contexts/FormContext';
 
 export const TextAreaInputBuilder = ({ componentList, setComponentList }) => {
-  const [title, setTitle] = useState('');
-  const [message, setMessage] = useState('');
+  const [questionText, setQuestionText] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const { form, setForm } = useContext(FormContext);
 
   const handleSubmit = () => {
-    if (title) {
+    if (questionText) {
       const componentListFinal = [...componentList];
-      const newComponent = createComponentObject(title, 'textArea');
+      const newComponent = createComponentObject(questionText, 'textArea');
       componentListFinal.push(newComponent);
       setForm({ ...form, components: componentListFinal });
       setComponentList(componentListFinal);
-      setTitle('');
+      setQuestionText('');
     } else {
-      setMessage(i18n.__('builders.errors.noTitle'));
+      setErrorMessage(i18n.__('builders.errors.noTitle'));
     }
   };
 
   return (
     <Paper>
       <TextField
-        id="title"
+        id="questionText"
         label="titre"
         variant="outlined"
-        value={title}
+        value={questionText}
         helperText="Entrez votre question"
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setQuestionText(e.target.value)}
       />
       <br />
-      <AddSubmitButton handleClick={handleSubmit} />
-      {message.length !== 0 ? <MsgError message={message} setMessage={setMessage} /> : null}
+      <SubmitButton handleClick={handleSubmit} />
+      {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}
     </Paper>
   );
 };

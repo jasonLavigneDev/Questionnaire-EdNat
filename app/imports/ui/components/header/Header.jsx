@@ -13,7 +13,7 @@ const appBarStyle = {
   backgroundColor: '#F9F9FD',
 };
 
-function TopBar() {
+export const Header = () => {
   return (
     <AppBar position="fixed" sx={appBarStyle}>
       <Link to="/">
@@ -21,6 +21,4 @@ function TopBar() {
       </Link>
     </AppBar>
   );
-}
-
-export default TopBar;
+};

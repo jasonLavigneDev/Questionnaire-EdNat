@@ -4,10 +4,8 @@ import { Button } from '@mui/material';
 
 import { Link } from 'react-router-dom';
 
-import Visualizer from '../components/form/Visualizer';
-import InputChoice from '../components/form/InputChoice';
-import FormDescription from '../components/form/FormDescription';
-import { Login } from './Login';
+import { Visualizer } from '../components/form/Visualizer';
+import { InputChoice } from '../components/form/InputChoice';
 import { FormContext } from '../contexts/FormContext';
 import { UserContext } from '../contexts/UserContext';
 
