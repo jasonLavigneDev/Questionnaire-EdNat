@@ -1,10 +1,16 @@
-import React, { createContext, useReducer, useState } from 'react';
-import { UserReducer } from '../reducer/UserReducer';
+import React, { createContext, useState } from 'react';
+import { useTracker } from 'meteor/react-meteor-data';
 
 export const UserContext = createContext();
-const initialState = { isConnected: Boolean(window.localStorage.getItem('Meteor.loginToken')).toString() };
 
 export default function UserProvider({ children }) {
-  const [state, dispatch] = useReducer(UserReducer, initialState);
-  return <UserContext.Provider value={[state, dispatch]}>{children}</UserContext.Provider>;
+  const user = useTracker(() => {
+    return Meteor.user();
+  });
+  const isAuthenticated = !!user;
+
+  console.log('user dans contexte', user);
+  console.log('isAuthenticated dans contexte ', isAuthenticated);
+
+  return <UserContext.Provider value={{ user, isAuthenticated }}>{children}</UserContext.Provider>;
 }
