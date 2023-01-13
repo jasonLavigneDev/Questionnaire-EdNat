@@ -9,9 +9,11 @@ import InputChoice from '../components/form/InputChoice';
 import FormDescription from '../components/form/FormDescription';
 import { Login } from './Login';
 import { FormContext } from '../contexts/FormContext';
+import { UserContext } from '../contexts/UserContext';
 
 export const FormBuilder = () => {
   const { form, setForm } = useContext(FormContext);
+  const { user, isAuthenticated } = useContext(UserContext);
 
   const [listOfComponentChooseByUser, setListOfComponentChooseByUser] = useState(form.components || []);
   const [idForm, setIdForm] = useState('');
@@ -42,6 +44,7 @@ export const FormBuilder = () => {
   return (
     <>
       <div style={{ display: 'flex', height: '90vh', flexDirection: 'column' }}>
+        <h1>User connecté : {isAuthenticated ? 'true' : 'false'}</h1>
         <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
         <Visualizer form={listOfComponentChooseByUser} setForm={setListOfComponentChooseByUser} edit={true} />
 
