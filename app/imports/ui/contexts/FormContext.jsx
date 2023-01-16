@@ -8,8 +8,10 @@ const initialState = {
 
 export const FormContext = createContext(initialState);
 
-export default function FormProvider({ children }) {
+export const FormProvider = ({ children }) => {
   const [form, setForm] = useState(initialState);
+
+  console.log('form dans contexte', form);
 
   return (
     <FormContext.Provider
@@ -21,4 +23,4 @@ export default function FormProvider({ children }) {
       {children}
     </FormContext.Provider>
   );
-}
+};

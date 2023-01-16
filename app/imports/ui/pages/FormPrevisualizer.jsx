@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import Visualizer from '../components/form/Visualizer';
+import { Visualizer } from '../components/form/Visualizer';
 
 export const FormPrevisualizer = () => {
   const form = useLoaderData();
@@ -22,5 +22,8 @@ export const FormPrevisualizer = () => {
 };
 
 export const loader = async ({ request, params }) => {
-  return await Meteor.callAsync('forms.getOne', params.id);
+  const res = await Meteor.callAsync('forms.getOne', params.id);
+  console.log('res', res);
+  return res;
+  // return await Meteor.callAsync('forms.getOne', params.id);
 };

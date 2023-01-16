@@ -8,8 +8,8 @@ import { FormBuilder } from '../pages/FormBuilder';
 
 import { FormIntro } from '../pages/FormIntro';
 import { FormPrevisualizer, loader } from '../pages/FormPrevisualizer';
-import UserProvider from '../contexts/UserContext';
-import FormProvider from '../contexts/FormContext';
+import { UserProvider } from '../contexts/UserContext';
+import { FormProvider } from '../contexts/FormContext';
 import { MainLayout } from './MainLayout';
 
 export const App = () => {

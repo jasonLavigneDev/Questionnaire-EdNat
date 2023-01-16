@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 import { Header } from '../components/header/Header';
 import { UserContext } from '../contexts/UserContext';
+import { Breadcrumb } from '../components/system/Breadcrumb';
 
 export const MainLayout = ({ children }) => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ export const MainLayout = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      navigate('/builder');
+      navigate('/intro');
     } else {
       navigate('/home');
     }
@@ -22,7 +23,9 @@ export const MainLayout = ({ children }) => {
       <Header />
       <main>
         <Paper sx={{ marginTop: '6vh' }}>
-          <div style={{ padding: '5vh' }}></div>
+          <div style={{ padding: '5vh' }}>
+            <Breadcrumb />
+          </div>
           <Outlet />
         </Paper>
       </main>

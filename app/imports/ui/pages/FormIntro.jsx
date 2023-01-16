@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FormInfos from '../components/form/FormInfos';
+import { FormInfos } from '../components/form/FormInfos';
 import { FormContext } from '../contexts/FormContext';
 import { UserContext } from '../contexts/UserContext';
 
@@ -13,8 +13,6 @@ export const FormIntro = () => {
   const [globalTitle, setGlobalTitle] = useState(form.name || '');
   const [globalDesc, setGlobalDesc] = useState(form.description || '');
 
-  console.log(user);
-
   const handleSubmit = () => {
     setForm({ ...form, name: globalTitle, description: globalDesc });
     navigate('/builder');
@@ -22,7 +20,12 @@ export const FormIntro = () => {
 
   return (
     <>
-      <FormInfos title={globalTitle} setTitle={setGlobalTitle} desc={globalDesc} setDesc={setGlobalDesc} />
+      <FormInfos
+        formTitle={globalTitle}
+        setFormTitle={setGlobalTitle}
+        formDescription={globalDesc}
+        setFormDescription={setGlobalDesc}
+      />
       <Button onClick={() => handleSubmit()}>CLIQUE CLIQUE</Button>
     </>
   );
