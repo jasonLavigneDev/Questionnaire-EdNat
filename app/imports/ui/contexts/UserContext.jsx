@@ -3,7 +3,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 
 export const UserContext = createContext();
 
-export default function UserProvider({ children }) {
+export const UserProvider = ({ children }) => {
   const user = useTracker(() => {
     return Meteor.user();
   });
@@ -13,4 +13,4 @@ export default function UserProvider({ children }) {
   console.log('isAuthenticated dans contexte ', isAuthenticated);
 
   return <UserContext.Provider value={{ user, isAuthenticated }}>{children}</UserContext.Provider>;
-}
+};
