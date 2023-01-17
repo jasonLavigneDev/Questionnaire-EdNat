@@ -4,11 +4,13 @@ import { Stepper, Step, StepButton } from '@mui/material';
 
 export const Breadcrumb = () => {
   const steps = ['builder/intro', 'builder/components', 'builder/previsualizer/:id'];
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(-1);
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate(`/` + steps[activeStep]);
+    if (activeStep >= 0) {
+      navigate(`/` + steps[activeStep]);
+    }
   }, [activeStep]);
 
   const handleStep = (step) => () => {
