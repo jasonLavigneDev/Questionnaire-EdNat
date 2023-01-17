@@ -18,7 +18,7 @@ export const App = () => {
     createRoutesFromElements(
       <>
         <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
-          <Route path="home" element={<HomePage />} loader={loaderHomePage} />
+          <Route path="" element={<HomePage />} loader={loaderHomePage} />
           <Route path="login" element={<Login />} />
           <Route path="logout" element={<Logout />} />
           <Route path="builder/components" element={<FormBuilder />} />

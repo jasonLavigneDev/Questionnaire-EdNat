@@ -25,7 +25,7 @@ export const FormPrevisualizer = () => {
     if (!result) {
       console.log('error');
     } else {
-      navigate('/home');
+      navigate('/');
       setForm({});
     }
   };
