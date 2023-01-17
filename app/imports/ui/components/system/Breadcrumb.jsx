@@ -8,9 +8,7 @@ export const Breadcrumb = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (activeStep >= 0) {
-      navigate(`/` + steps[activeStep]);
-    }
+    navigate(`/` + steps[activeStep]);
   }, [activeStep]);
 
   const handleStep = (step) => () => {
