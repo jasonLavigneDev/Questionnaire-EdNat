@@ -8,8 +8,6 @@ export const HomePage = () => {
   const forms = useLoaderData();
   const navigate = useNavigate();
 
-  console.log(forms);
-
   return (
     <>
       <p>Binvenue dans la nouvelle application</p>
@@ -23,7 +21,7 @@ export const HomePage = () => {
         <div>
           {forms.map((form) => (
             <div>
-              <Link to={`/builder/previsualizer/${form._id}`}>{form.title}</Link>
+              <Link to={`/visualizer/${form._id}`}>{form.title}</Link>
               <br />
             </div>
           ))}

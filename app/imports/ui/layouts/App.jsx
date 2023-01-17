@@ -7,10 +7,11 @@ import { HomePage, loaderHomePage } from '../pages/HomePage';
 import { FormBuilder } from '../pages/FormBuilder';
 
 import { FormIntro } from '../pages/FormIntro';
-import { FormPrevisualizer, loaderPrevisualizer } from '../pages/FormPrevisualizer';
+import { FormVisualizer, loaderVisualizer } from '../pages/FormVisualizer';
 import { UserProvider } from '../contexts/UserContext';
 import { FormProvider } from '../contexts/FormContext';
 import { MainLayout } from './MainLayout';
+import { FormPrevisualizer } from '../pages/FromPrevisualizer';
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -22,7 +23,8 @@ export const App = () => {
           <Route path="logout" element={<Logout />} />
           <Route path="builder/components" element={<FormBuilder />} />
           <Route path="builder/intro" element={<FormIntro />} />
-          <Route path="builder/previsualizer/:id" element={<FormPrevisualizer />} loader={loaderPrevisualizer} />
+          <Route path="visualizer/:id" element={<FormVisualizer />} loader={loaderVisualizer} />
+          <Route path="builder/previsualizer" element={<FormPrevisualizer />} />
         </Route>
       </>,
     ),

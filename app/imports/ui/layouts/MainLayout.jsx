@@ -7,17 +7,6 @@ import { UserContext } from '../contexts/UserContext';
 import { Breadcrumb } from '../components/system/Breadcrumb';
 
 export const MainLayout = ({ children }) => {
-  const navigate = useNavigate();
-  const { user } = useContext(UserContext);
-
-  /*useEffect(() => {
-    if (user) {
-      navigate('/builder/intro');
-    } else {
-      navigate('/home');
-    }
-  }, [user]);*/
-
   return (
     <>
       <Header />
