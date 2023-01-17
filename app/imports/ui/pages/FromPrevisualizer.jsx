@@ -18,7 +18,7 @@ export const FormPrevisualizer = () => {
       desc: form.description,
       owner: user._id,
       isModel: false,
-      isPublic: false,
+      isPublic: form.public,
       groups: [],
       components: components,
     });

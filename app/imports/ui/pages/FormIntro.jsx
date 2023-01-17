@@ -10,9 +10,10 @@ export const FormIntro = () => {
 
   const [globalTitle, setGlobalTitle] = useState(form.name || '');
   const [globalDesc, setGlobalDesc] = useState(form.description || '');
+  const [formPublic, setFormPublic] = useState(form.public);
 
   const handleSubmit = () => {
-    setForm({ ...form, name: globalTitle, description: globalDesc });
+    setForm({ ...form, name: globalTitle, description: globalDesc, public: formPublic });
     navigate('/builder/components');
   };
 
@@ -23,6 +24,8 @@ export const FormIntro = () => {
         setFormTitle={setGlobalTitle}
         formDescription={globalDesc}
         setFormDescription={setGlobalDesc}
+        formPublic={formPublic}
+        setFormPublic={setFormPublic}
       />
       <Button onClick={() => handleSubmit()}>CLIQUE CLIQUE</Button>
     </>

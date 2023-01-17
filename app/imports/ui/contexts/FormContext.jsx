@@ -4,6 +4,7 @@ const initialState = {
   name: '',
   description: '',
   components: [],
+  public: false,
 };
 
 export const FormContext = createContext(initialState);

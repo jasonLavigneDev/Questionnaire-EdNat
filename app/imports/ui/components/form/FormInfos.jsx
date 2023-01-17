@@ -1,7 +1,14 @@
-import { TextField } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
 import React from 'react';
 
-export const FormInfos = ({ formTitle, setFormTitle, formDescription, setFormDescription }) => {
+export const FormInfos = ({
+  formTitle,
+  setFormTitle,
+  formDescription,
+  setFormDescription,
+  formPublic,
+  setFormPublic,
+}) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <TextField
@@ -20,6 +27,12 @@ export const FormInfos = ({ formTitle, setFormTitle, formDescription, setFormDes
         helperText="Entrez votre description"
         onChange={(e) => setFormDescription(e.target.value)}
       />
+      <FormGroup>
+        <FormControlLabel
+          control={<Checkbox checked={formPublic} onChange={() => setFormPublic(!formPublic)} name="public" />}
+          label="Formulaire public"
+        />
+      </FormGroup>
     </div>
   );
 };
