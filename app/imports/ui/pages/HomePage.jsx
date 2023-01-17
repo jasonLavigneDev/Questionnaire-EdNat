@@ -14,7 +14,7 @@ export const HomePage = () => {
       {user ? (
         <Button onClick={() => navigate('/logout')}>Logout</Button>
       ) : (
-        <Button onClick={() => navigate('/login')}>Login</Button>
+        <Button onClick={() => Meteor.loginWithKeycloak()}>Login</Button>
       )}
       <div>
         <h2>Liste des formulaires</h2>

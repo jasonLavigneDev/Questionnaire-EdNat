@@ -6,7 +6,7 @@ export const Logout = () => {
 
   useEffect(() => {
     Meteor.logout(() => {
-      navigate('/login');
+      navigate('/');
     });
   }, []);
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import { ErrorPage } from '../pages/ErrorPage';
-import { Login } from '../pages/Login';
 import { Logout } from '../pages/Logout';
 import { HomePage, loaderHomePage } from '../pages/HomePage';
 import { FormBuilder } from '../pages/FormBuilder';
@@ -19,7 +18,6 @@ export const App = () => {
       <>
         <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
           <Route path="" element={<HomePage />} loader={loaderHomePage} />
-          <Route path="login" element={<Login />} />
           <Route path="logout" element={<Logout />} />
           <Route path="builder/components" element={<FormBuilder />} />
           <Route path="builder/intro" element={<FormIntro />} />
