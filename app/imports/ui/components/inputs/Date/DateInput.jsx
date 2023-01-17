@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { InputLabel, TextField } from '@mui/material';
 
-export const DateInput = ({ title }) => {
+export const DateInput = ({ title, answerMode }) => {
   return (
     <div>
       <InputLabel id="dateInput-title">{title}</InputLabel>

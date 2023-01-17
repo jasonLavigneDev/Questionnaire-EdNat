@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { RadioInput } from '../inputs/Radio/RadioInput';
 import { SelectInput } from '../inputs/Select/SelectInput';
@@ -7,24 +7,27 @@ import { DateInput } from '../inputs/Date/DateInput';
 import { NumberInput } from '../inputs/Number/NumberInput';
 import { TextInput } from '../inputs/TextInput/TextInput';
 import { TextArea } from '../inputs/TextArea/TextArea';
+import { AnswerContext } from '../../contexts/AnswerContext';
 
-export const Visualizer = ({ form, setForm, edit = false }) => {
+export const Visualizer = ({ form, setForm, edit = false, answerMode = false, completeForm }) => {
+  const { answerForm } = useContext(AnswerContext);
+
   const generateComponent = (component) => {
     switch (component.type) {
       case 'checkboxInput':
-        return <CheckBoxInput title={component.title} choices={component.choices} />;
+        return <CheckBoxInput title={component.title} choices={component.choices} answerMode={answerMode} />;
       case 'dateInput':
-        return <DateInput title={component.title} />;
+        return <DateInput title={component.title} answerMode={answerMode} />;
       case 'selectInput':
-        return <SelectInput title={component.title} choices={component.choices} />;
+        return <SelectInput title={component.title} choices={component.choices} answerMode={answerMode} />;
       case 'numberInput':
-        return <NumberInput title={component.title} />;
+        return <NumberInput title={component.title} answerMode={answerMode} questionId={component.id} />;
       case 'radioButtonInput':
-        return <RadioInput title={component.title} choices={component.choices} />;
+        return <RadioInput title={component.title} choices={component.choices} answerMode={answerMode} />;
       case 'textInput':
-        return <TextInput title={component.title} />;
+        return <TextInput title={component.title} answerMode={answerMode} questionId={component.id} />;
       case 'textArea':
-        return <TextArea title={component.title} />;
+        return <TextArea title={component.title} answerMode={answerMode} />;
     }
   };
 
@@ -56,6 +59,10 @@ export const Visualizer = ({ form, setForm, edit = false }) => {
     }
   };
 
+  const submitAnswerForm = () => {
+    console.log('le formulaire de reponse a envoyer', answerForm);
+  };
+
   return (
     <div>
       {form.map((componentInput, index) => (
@@ -80,6 +87,12 @@ export const Visualizer = ({ form, setForm, edit = false }) => {
           <br />
         </div>
       ))}
+      {answerMode && (
+        <div>
+          <p>mode reponse </p>
+          <button onClick={submitAnswerForm}>test de soumission</button>
+        </div>
+      )}
     </div>
   );
 };

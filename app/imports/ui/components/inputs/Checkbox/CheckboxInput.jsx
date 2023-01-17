@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Checkbox, InputLabel, FormGroup, FormControlLabel } from '@mui/material';
 
-export const CheckBoxInput = ({ title, choices, required = false }) => {
+export const CheckBoxInput = ({ title, choices, required = false, answerMode }) => {
   return (
     <div>
       <InputLabel id="checkboxInput-title">{title}</InputLabel>

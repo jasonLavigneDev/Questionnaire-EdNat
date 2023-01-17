@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
-export const SelectInput = ({ title, choices }) => {
+export const SelectInput = ({ title, choices, answerMode }) => {
   return (
     <FormControl fullWidth>
       <InputLabel id="selectInput-title">{title}</InputLabel>

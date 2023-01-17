@@ -12,6 +12,7 @@ import { FormProvider } from '../contexts/FormContext';
 import { MainLayout } from './MainLayout';
 import { FormPrevisualizer } from '../pages/FromPrevisualizer';
 import { BuilderLayout } from './BuilderLayout';
+import { AnswerProvider } from '../contexts/AnswerContext';
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -28,6 +29,7 @@ export const App = () => {
 
           <Route path="visualizer/:id" element={<FormVisualizer />} loader={loaderVisualizer} />
         </Route>
+        <Route path="form/:id" element={<FormPrevisualizer />}></Route>
       </>,
     ),
   );
@@ -36,7 +38,9 @@ export const App = () => {
     <React.StrictMode>
       <UserProvider>
         <FormProvider>
-          <RouterProvider router={router} />
+          <AnswerProvider>
+            <RouterProvider router={router} />
+          </AnswerProvider>
         </FormProvider>
       </UserProvider>
     </React.StrictMode>

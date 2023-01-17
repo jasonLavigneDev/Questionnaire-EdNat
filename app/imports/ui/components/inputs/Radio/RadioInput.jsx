@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { FormLabel, FormControl, FormControlLabel, RadioGroup, Radio } from '@mui/material';
 
-export const RadioInput = ({ title, choices }) => {
+export const RadioInput = ({ title, choices, answerMode }) => {
   return (
     <FormControl>
       <FormLabel>{title}</FormLabel>

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { InputLabel, TextField } from '@mui/material';
+import { AnswerContext } from '../../../contexts/AnswerContext';
 
-export const TextInput = ({ title }) => {
+export const TextInput = ({ title, answerMode, questionId }) => {
+  const [answer, setAnswer] = useState('');
+  const { addAnswers } = useContext(AnswerContext);
+
   return (
     <div>
       <InputLabel id="textInput-title">{title}</InputLabel>
-      <TextField required />
-      {/** for response */}
+      <TextField required value={answer} onChange={(e) => setAnswer(e.target.value)} />
+      {answerMode && <button onClick={() => addAnswers(questionId, answer)}>test</button>}
     </div>
   );
 };
