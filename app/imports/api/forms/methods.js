@@ -5,6 +5,7 @@ import { _ } from 'meteor/underscore';
 import { getLabel } from '../utils';
 
 import Forms, { Component } from './forms';
+import { Form } from 'react-router-dom';
 
 function _createForm(title, desc, owner, isModel, isPublic, groups, components) {
   Forms.insert({
@@ -42,5 +43,12 @@ export const createForm = new ValidatedMethod({
 Meteor.methods({
   'forms.getOne': async (id) => {
     return await Forms.findOneAsync({ _id: id });
+  },
+});
+
+Meteor.methods({
+  'forms.getAll': async () => {
+    const res = await Forms.find().mapAsync((x) => x);
+    return res;
   },
 });

@@ -3,11 +3,9 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormInfos } from '../components/form/FormInfos';
 import { FormContext } from '../contexts/FormContext';
-import { UserContext } from '../contexts/UserContext';
 
 export const FormIntro = () => {
   const { form, setForm } = useContext(FormContext);
-  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [globalTitle, setGlobalTitle] = useState(form.name || '');
@@ -15,7 +13,7 @@ export const FormIntro = () => {
 
   const handleSubmit = () => {
     setForm({ ...form, name: globalTitle, description: globalDesc });
-    navigate('/builder');
+    navigate('/builder/components');
   };
 
   return (
