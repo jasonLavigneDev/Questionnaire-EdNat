@@ -7,7 +7,6 @@ import { UserContext } from '../contexts/UserContext';
 
 export const FormIntro = () => {
   const { form, setForm } = useContext(FormContext);
-  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [globalTitle, setGlobalTitle] = useState(form.name || '');

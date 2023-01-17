@@ -3,7 +3,6 @@ import { Paper } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 import { Header } from '../components/header/Header';
-import { UserContext } from '../contexts/UserContext';
 import { Breadcrumb } from '../components/system/Breadcrumb';
 
 export const MainLayout = ({ children }) => {
