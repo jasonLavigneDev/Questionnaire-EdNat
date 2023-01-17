@@ -9,7 +9,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/builder');
+      navigate('/builder/intro');
     }
   }, [isAuthenticated]);
 

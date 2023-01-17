@@ -45,7 +45,7 @@ export const FormBuilder = () => {
       </div>
       <Button onClick={() => handleSubmit()}>Enregistrer le formulaire</Button>
       <br />
-      {idForm ? <Link to={`/previsualizer/${idForm}`}>Voir le formulaire dernièrement créé</Link> : null}
+      {idForm ? <Link to={`/builder/previsualizer/${idForm}`}>Voir le formulaire dernièrement créé</Link> : null}
     </>
   );
 };

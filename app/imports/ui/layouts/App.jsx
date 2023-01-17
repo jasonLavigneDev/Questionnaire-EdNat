@@ -3,11 +3,11 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import { ErrorPage } from '../pages/ErrorPage';
 import { Login } from '../pages/Login';
 import { Logout } from '../pages/Logout';
-import { HomePage } from '../pages/HomePage';
+import { HomePage, loaderHomePage } from '../pages/HomePage';
 import { FormBuilder } from '../pages/FormBuilder';
 
 import { FormIntro } from '../pages/FormIntro';
-import { FormPrevisualizer, loader } from '../pages/FormPrevisualizer';
+import { FormPrevisualizer, loaderPrevisualizer } from '../pages/FormPrevisualizer';
 import { UserProvider } from '../contexts/UserContext';
 import { FormProvider } from '../contexts/FormContext';
 import { MainLayout } from './MainLayout';
@@ -17,12 +17,12 @@ export const App = () => {
     createRoutesFromElements(
       <>
         <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
-          <Route path="home" element={<HomePage />} />
+          <Route path="home" element={<HomePage />} loader={loaderHomePage} />
           <Route path="login" element={<Login />} />
           <Route path="logout" element={<Logout />} />
-          <Route path="builder" element={<FormBuilder />} />
-          <Route path="intro" element={<FormIntro />} />
-          <Route path="previsualizer/:id" element={<FormPrevisualizer />} loader={loader} />
+          <Route path="builder/components" element={<FormBuilder />} />
+          <Route path="builder/intro" element={<FormIntro />} />
+          <Route path="builder/previsualizer/:id" element={<FormPrevisualizer />} loader={loaderPrevisualizer} />
         </Route>
       </>,
     ),

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Stepper, Step, StepButton } from '@mui/material';
 
 export const Breadcrumb = () => {
-  const steps = ['intro', 'builder', 'previsualizer/:id'];
+  const steps = ['builder/intro', 'builder/components', 'builder/previsualizer/:id'];
   const [activeStep, setActiveStep] = useState(0);
   const navigate = useNavigate();
 

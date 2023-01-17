@@ -10,22 +10,20 @@ export const MainLayout = ({ children }) => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (user) {
-      navigate('/intro');
+      navigate('/builder/intro');
     } else {
       navigate('/home');
     }
-  }, [user]);
+  }, [user]);*/
 
   return (
     <>
       <Header />
       <main>
         <Paper sx={{ marginTop: '6vh' }}>
-          <div style={{ padding: '5vh' }}>
-            <Breadcrumb />
-          </div>
+          <div style={{ padding: '5vh' }}></div>
           <Outlet />
         </Paper>
       </main>

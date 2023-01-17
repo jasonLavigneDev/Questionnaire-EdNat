@@ -15,7 +15,7 @@ export const FormIntro = () => {
 
   const handleSubmit = () => {
     setForm({ ...form, name: globalTitle, description: globalDesc });
-    navigate('/builder');
+    navigate('/builder/components');
   };
 
   return (

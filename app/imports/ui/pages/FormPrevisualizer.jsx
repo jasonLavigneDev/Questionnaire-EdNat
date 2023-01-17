@@ -21,7 +21,7 @@ export const FormPrevisualizer = () => {
   );
 };
 
-export const loader = async ({ request, params }) => {
+export const loaderPrevisualizer = async ({ request, params }) => {
   const res = await Meteor.callAsync('forms.getOne', params.id);
   console.log('res', res);
   return res;
