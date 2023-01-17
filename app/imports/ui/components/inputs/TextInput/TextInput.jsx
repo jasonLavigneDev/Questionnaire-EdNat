@@ -12,7 +12,7 @@ export const TextInput = ({ title, answerMode, questionId }) => {
     <div>
       <InputLabel id="textInput-title">{title}</InputLabel>
       <TextField required value={answer} onChange={(e) => setAnswer(e.target.value)} />
-      {answerMode && <button onClick={() => addAnswers(questionId, answer)}>test</button>}
+      {answerMode && <button onClick={() => addAnswers(questionId, answer)}>confirmer cette reponse</button>}
     </div>
   );
 };

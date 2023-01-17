@@ -16,7 +16,7 @@ export const NumberInput = ({ title, answerMode, questionId }) => {
         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
         onChange={(e) => setAnswer(e.target.value)}
       />
-      {answerMode && <button onClick={() => addAnswers(questionId, answer)}>test</button>}
+      {answerMode && <button onClick={() => addAnswers(questionId, answer)}>confirmer cette reponse</button>}
     </div>
   );
 };

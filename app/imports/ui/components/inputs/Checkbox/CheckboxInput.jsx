@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Checkbox, InputLabel, FormGroup, FormControlLabel } from '@mui/material';
+import { AnswerContext } from '../../../contexts/AnswerContext';
 
-export const CheckBoxInput = ({ title, choices, required = false, answerMode }) => {
+export const CheckBoxInput = ({ title, choices, required = false, answerMode, questionId }) => {
+  const [answer, setAnswer] = useState('');
+  const { addAnswers } = useContext(AnswerContext);
+
   return (
     <div>
       <InputLabel id="checkboxInput-title">{title}</InputLabel>
@@ -15,6 +19,7 @@ export const CheckBoxInput = ({ title, choices, required = false, answerMode }) 
           </div>
         ))}
       </FormGroup>
+      {answerMode && <button onClick={() => addAnswers(questionId, answer)}>confirmer cette reponse</button>}
     </div>
   );
 };

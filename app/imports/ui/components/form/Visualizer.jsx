@@ -8,26 +8,49 @@ import { NumberInput } from '../inputs/Number/NumberInput';
 import { TextInput } from '../inputs/TextInput/TextInput';
 import { TextArea } from '../inputs/TextArea/TextArea';
 import { AnswerContext } from '../../contexts/AnswerContext';
+import { UserContext } from '../../contexts/UserContext';
 
 export const Visualizer = ({ form, setForm, edit = false, answerMode = false, completeForm }) => {
-  const { answerForm } = useContext(AnswerContext);
+  const { answerForm, setAnswerForm } = useContext(AnswerContext);
+  const { user } = useContext(UserContext);
 
   const generateComponent = (component) => {
     switch (component.type) {
       case 'checkboxInput':
-        return <CheckBoxInput title={component.title} choices={component.choices} answerMode={answerMode} />;
-      case 'dateInput':
-        return <DateInput title={component.title} answerMode={answerMode} />;
+        return (
+          <CheckBoxInput
+            title={component.title}
+            choices={component.choices}
+            answerMode={answerMode}
+            questionId={component.id}
+          />
+        );
       case 'selectInput':
-        return <SelectInput title={component.title} choices={component.choices} answerMode={answerMode} />;
+        return (
+          <SelectInput
+            title={component.title}
+            choices={component.choices}
+            answerMode={answerMode}
+            questionId={component.id}
+          />
+        );
+      case 'radioButtonInput':
+        return (
+          <RadioInput
+            title={component.title}
+            choices={component.choices}
+            answerMode={answerMode}
+            questionId={component.id}
+          />
+        );
+      case 'dateInput':
+        return <DateInput title={component.title} answerMode={answerMode} questionId={component.id} />;
       case 'numberInput':
         return <NumberInput title={component.title} answerMode={answerMode} questionId={component.id} />;
-      case 'radioButtonInput':
-        return <RadioInput title={component.title} choices={component.choices} answerMode={answerMode} />;
       case 'textInput':
         return <TextInput title={component.title} answerMode={answerMode} questionId={component.id} />;
       case 'textArea':
-        return <TextArea title={component.title} answerMode={answerMode} />;
+        return <TextArea title={component.title} answerMode={answerMode} questionId={component.id} />;
     }
   };
 
@@ -60,7 +83,11 @@ export const Visualizer = ({ form, setForm, edit = false, answerMode = false, co
   };
 
   const submitAnswerForm = () => {
+    const newObj = { ...answerForm };
+    newObj.formId = completeForm._id;
+    newObj.userId = user._id;
     console.log('le formulaire de reponse a envoyer', answerForm);
+    setAnswerForm(newObj);
   };
 
   return (
@@ -90,7 +117,7 @@ export const Visualizer = ({ form, setForm, edit = false, answerMode = false, co
       {answerMode && (
         <div>
           <p>mode reponse </p>
-          <button onClick={submitAnswerForm}>test de soumission</button>
+          <button onClick={submitAnswerForm}>Soumettre ce formulaire complété</button>
         </div>
       )}
     </div>
