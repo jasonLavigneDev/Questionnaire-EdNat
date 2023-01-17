@@ -11,6 +11,7 @@ import { UserProvider } from '../contexts/UserContext';
 import { FormProvider } from '../contexts/FormContext';
 import { MainLayout } from './MainLayout';
 import { FormPrevisualizer } from '../pages/FromPrevisualizer';
+import { BuilderLayout } from './BuilderLayout';
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -19,10 +20,13 @@ export const App = () => {
         <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
           <Route path="" element={<HomePage />} loader={loaderHomePage} />
           <Route path="logout" element={<Logout />} />
-          <Route path="builder/components" element={<FormBuilder />} />
-          <Route path="builder/intro" element={<FormIntro />} />
+          <Route path="builder" element={<BuilderLayout />}>
+            <Route path="intro" element={<FormIntro />} />
+            <Route path="components" element={<FormBuilder />} />
+            <Route path="previsualizer" element={<FormPrevisualizer />} />
+          </Route>
+
           <Route path="visualizer/:id" element={<FormVisualizer />} loader={loaderVisualizer} />
-          <Route path="builder/previsualizer" element={<FormPrevisualizer />} />
         </Route>
       </>,
     ),

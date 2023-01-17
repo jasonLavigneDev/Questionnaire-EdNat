@@ -12,7 +12,10 @@ export const HomePage = () => {
     <>
       <p>Binvenue dans la nouvelle application</p>
       {user ? (
-        <Button onClick={() => navigate('/logout')}>Logout</Button>
+        <div>
+          <Button onClick={() => navigate('/logout')}>Logout</Button>
+          <Button onClick={() => navigate('/builder')}>Builder</Button>
+        </div>
       ) : (
         <Button onClick={() => Meteor.loginWithKeycloak()}>Login</Button>
       )}
