@@ -5,14 +5,16 @@ import { InputLabel, TextField } from '@mui/material';
 import { AnswerContext } from '../../../contexts/AnswerContext';
 
 export const TextArea = ({ title, answerMode, questionId }) => {
-  const [answer, setAnswer] = useState('');
   const { addAnswers } = useContext(AnswerContext);
+
+  const handleChange = (event) => {
+    if (answerMode) addAnswers(questionId, event.target.value);
+  };
 
   return (
     <div>
       <InputLabel id="textAreaInput-title">{title}</InputLabel>
-      <TextField multiline rows={3} value={answer} onChange={(e) => setAnswer(e.target.value)} />
-      {answerMode && <button onClick={() => addAnswers(questionId, answer)}>confirmer cette reponse</button>}
+      <TextField multiline rows={3} onBlur={(e) => handleChange(e)} />
     </div>
   );
 };
