@@ -14,22 +14,12 @@ export const AnswerProvider = ({ children }) => {
   const addAnswers = (questionId, value) => {
     const newObj = { ...answerForm };
     const { answers } = newObj;
-    let toModify = false;
-    let pos = null;
+    const index = answers.findIndex((o) => o.questionId === questionId);
 
-    if (answers.length !== 0) {
-      answers.forEach((answer, index) => {
-        if (answer.questionId === questionId) {
-          toModify = true;
-          pos = index;
-        }
-      });
-    }
-
-    if (toModify) {
-      answers[pos].answer = value;
-    } else {
+    if (index === -1) {
       answers.push({ questionId, answer: value });
+    } else {
+      answers[index].answer = value;
     }
 
     setAnswerForm(newObj);
