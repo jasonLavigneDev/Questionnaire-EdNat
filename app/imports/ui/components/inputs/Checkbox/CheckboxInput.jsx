@@ -6,24 +6,26 @@ import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel } from '@
 import { AnswerContext } from '../../../contexts/AnswerContext';
 
 export const CheckBoxInput = ({ title, choices, required = false, answerMode, questionId }) => {
-  const [checked, setChecked] = useState([]);
+  const [answers, setAnswers] = useState([]);
   const { addAnswers } = useContext(AnswerContext);
 
   const handleChange = (event) => {
-    setChecked({
-      ...checked,
-      [event.target.name, event.target.checked ]
-    });
+    const index = answers.findIndex((o) => o.name === event.target.name);
+
+    if (index === -1) {
+      answers.push({ name: event.target.name, value: event.target.checked });
+    } else {
+      answers[index].value = event.target.checked;
+    }
   };
-  console.log(checked);
 
   const handleBlur = () => {
-    let answer = [];
-    let moncul = Object.entries(checked);
-    let achier = Object.keys(checked).filter((entrie) => entrie !== false);
-    console.log('moncul', moncul);
-    console.log('achier', achier);
-    // if (answerMode) addAnswers(questionId, answer);
+    const tab = answers.filter((obj) => obj.value === true).map((obj) => obj.name);
+    if (answerMode) addAnswers(questionId, tab);
+  };
+
+  const getValue = (choice) => {
+    return answers[answers.findIndex((o) => o.name === choice)]?.value;
   };
 
   return (
@@ -35,7 +37,7 @@ export const CheckBoxInput = ({ title, choices, required = false, answerMode, qu
             <div key={uuidv4()}>
               <FormControlLabel
                 control={
-                  <Checkbox name={`${choice}`} checked={checked[choice]} onChange={(event) => handleChange(event)} />
+                  <Checkbox name={`${choice}`} checked={getValue(choice)} onChange={(event) => handleChange(event)} />
                 }
                 label={`${choice}`}
                 required={required}
