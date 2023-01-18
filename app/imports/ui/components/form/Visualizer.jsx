@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { RadioInput } from '../inputs/Radio/RadioInput';
 import { SelectInput } from '../inputs/Select/SelectInput';
@@ -89,6 +89,14 @@ export const Visualizer = ({ form, setForm, edit = false, answerMode = false, co
     console.log('le formulaire de reponse a envoyer', answerForm);
     setAnswerForm(newObj);
   };
+
+  useEffect(() => {
+    setAnswerForm({
+      userId: '',
+      formId: '',
+      answers: [],
+    });
+  }, []);
 
   return (
     <div>
