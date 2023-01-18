@@ -2,24 +2,48 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Checkbox, InputLabel, FormGroup, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel } from '@mui/material';
 import { AnswerContext } from '../../../contexts/AnswerContext';
 
 export const CheckBoxInput = ({ title, choices, required = false, answerMode, questionId }) => {
-  const [answer, setAnswer] = useState('');
+  const [checked, setChecked] = useState([]);
   const { addAnswers } = useContext(AnswerContext);
+
+  const handleChange = (event) => {
+    setChecked({
+      ...checked,
+      [event.target.name, event.target.checked ]
+    });
+  };
+  console.log(checked);
+
+  const handleBlur = () => {
+    let answer = [];
+    let moncul = Object.entries(checked);
+    let achier = Object.keys(checked).filter((entrie) => entrie !== false);
+    console.log('moncul', moncul);
+    console.log('achier', achier);
+    // if (answerMode) addAnswers(questionId, answer);
+  };
 
   return (
     <div>
-      <InputLabel id="checkboxInput-title">{title}</InputLabel>
-      <FormGroup>
-        {choices.map((choice) => (
-          <div key={uuidv4()}>
-            <FormControlLabel control={<Checkbox />} label={`${choice}`} required={required} />
-          </div>
-        ))}
-      </FormGroup>
-      {answerMode && <button onClick={() => addAnswers(questionId, answer)}>confirmer cette reponse</button>}
+      <FormControl onChange={() => handleBlur()}>
+        <FormLabel>{title}</FormLabel>
+        <FormGroup>
+          {choices.map((choice) => (
+            <div key={uuidv4()}>
+              <FormControlLabel
+                control={
+                  <Checkbox name={`${choice}`} checked={checked[choice]} onChange={(event) => handleChange(event)} />
+                }
+                label={`${choice}`}
+                required={required}
+              />
+            </div>
+          ))}
+        </FormGroup>
+      </FormControl>
     </div>
   );
 };
