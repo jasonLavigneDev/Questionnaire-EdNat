@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { RadioInput } from '../inputs/Radio/RadioInput';
 import { SelectInput } from '../inputs/Select/SelectInput';
@@ -7,24 +7,50 @@ import { DateInput } from '../inputs/Date/DateInput';
 import { NumberInput } from '../inputs/Number/NumberInput';
 import { TextInput } from '../inputs/TextInput/TextInput';
 import { TextArea } from '../inputs/TextArea/TextArea';
+import { AnswerContext } from '../../contexts/AnswerContext';
+import { UserContext } from '../../contexts/UserContext';
 
-export const Visualizer = ({ form, setForm, edit = false }) => {
+export const Visualizer = ({ form, setForm, edit = false, answerMode = false, completeForm }) => {
+  const { answerForm, setAnswerForm } = useContext(AnswerContext);
+  const { user } = useContext(UserContext);
+
   const generateComponent = (component) => {
     switch (component.type) {
       case 'checkboxInput':
-        return <CheckBoxInput title={component.title} choices={component.choices} />;
-      case 'dateInput':
-        return <DateInput title={component.title} />;
+        return (
+          <CheckBoxInput
+            title={component.title}
+            choices={component.choices}
+            answerMode={answerMode}
+            questionId={component.id}
+          />
+        );
       case 'selectInput':
-        return <SelectInput title={component.title} choices={component.choices} />;
-      case 'numberInput':
-        return <NumberInput title={component.title} />;
+        return (
+          <SelectInput
+            title={component.title}
+            choices={component.choices}
+            answerMode={answerMode}
+            questionId={component.id}
+          />
+        );
       case 'radioButtonInput':
-        return <RadioInput title={component.title} choices={component.choices} />;
+        return (
+          <RadioInput
+            title={component.title}
+            choices={component.choices}
+            answerMode={answerMode}
+            questionId={component.id}
+          />
+        );
+      case 'dateInput':
+        return <DateInput title={component.title} answerMode={answerMode} questionId={component.id} />;
+      case 'numberInput':
+        return <NumberInput title={component.title} answerMode={answerMode} questionId={component.id} />;
       case 'textInput':
-        return <TextInput title={component.title} />;
+        return <TextInput title={component.title} answerMode={answerMode} questionId={component.id} />;
       case 'textArea':
-        return <TextArea title={component.title} />;
+        return <TextArea title={component.title} answerMode={answerMode} questionId={component.id} />;
     }
   };
 
@@ -56,6 +82,22 @@ export const Visualizer = ({ form, setForm, edit = false }) => {
     }
   };
 
+  const submitAnswerForm = () => {
+    const newObj = { ...answerForm };
+    newObj.formId = completeForm._id;
+    newObj.userId = user._id;
+    console.log('le formulaire de reponse a envoyer', answerForm);
+    setAnswerForm(newObj);
+  };
+
+  useEffect(() => {
+    setAnswerForm({
+      userId: '',
+      formId: '',
+      answers: [],
+    });
+  }, []);
+
   return (
     <div>
       {form.map((componentInput, index) => (
@@ -80,6 +122,12 @@ export const Visualizer = ({ form, setForm, edit = false }) => {
           <br />
         </div>
       ))}
+      {answerMode && (
+        <div>
+          <p>mode reponse </p>
+          <button onClick={submitAnswerForm}>Soumettre ce formulaire complété</button>
+        </div>
+      )}
     </div>
   );
 };

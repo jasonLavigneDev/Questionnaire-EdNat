@@ -12,7 +12,7 @@ export const FormContext = createContext(initialState);
 export const FormProvider = ({ children }) => {
   const [form, setForm] = useState(initialState);
 
-  console.log('form dans contexte', form);
+  console.log('FORM CONTEXTE', form);
 
   return (
     <FormContext.Provider

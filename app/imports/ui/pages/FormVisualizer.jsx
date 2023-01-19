@@ -12,7 +12,7 @@ export const FormVisualizer = () => {
         <div>
           <h3 style={{ textAlign: 'center' }}>{form.title}</h3>
           <h4 style={{ textAlign: 'center' }}>{form.desc}</h4>
-          <Visualizer form={component} />
+          <Visualizer form={component} answerMode={true} completeForm={form} />
         </div>
       ) : (
         <p>ce formulaire n'existe pas</p>
@@ -23,7 +23,5 @@ export const FormVisualizer = () => {
 
 export const loaderVisualizer = async ({ request, params }) => {
   const res = await Meteor.callAsync('forms.getOne', params.id);
-  console.log('res', res);
   return res;
-  // return await Meteor.callAsync('forms.getOne', params.id);
 };

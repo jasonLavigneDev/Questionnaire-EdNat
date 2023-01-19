@@ -9,8 +9,8 @@ export const UserProvider = ({ children }) => {
   });
   const isAuthenticated = !!user;
 
-  console.log('user dans contexte', user);
-  console.log('isAuthenticated dans contexte ', isAuthenticated);
+  console.log('USER CONTEXT', user);
+  console.log('USER IS AUTHENTICATED ', isAuthenticated);
 
   return <UserContext.Provider value={{ user, isAuthenticated }}>{children}</UserContext.Provider>;
 };
