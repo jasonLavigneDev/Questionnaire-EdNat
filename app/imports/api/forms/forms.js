@@ -41,10 +41,12 @@ export const Component = new SimpleSchema({
 export const Answers = new SimpleSchema({
   userId: {
     type: String,
+    optional: true,
     label: getLabel('api.forms.labels.answers.userId'),
   },
   answers: {
     type: Array,
+    optional: true,
     label: getLabel('api.forms.labels.answers.answer'),
   },
   'answers.$': { type: Object, blackbox: true },
