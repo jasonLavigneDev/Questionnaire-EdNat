@@ -4,8 +4,7 @@ import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/underscore';
 import { getLabel } from '../utils';
 
-import Forms, { Answer, Answers, Component } from './forms';
-import { Form } from 'react-router-dom';
+import Forms, { Component } from './forms';
 
 function _createForm(title, desc, owner, isModel, isPublic, groups, components) {
   Forms.insert({
@@ -40,19 +39,25 @@ export const createForm = new ValidatedMethod({
   },
 });
 
-export const updateAnswers = new ValidatedMethod({
-  name: 'forms.updateAnswers',
-  validate: new SimpleSchema({
-    formId: { type: String, label: getLabel('api.forms.labels.id') },
-    answers: {
-      type: Answers,
-      label: getLabel('api.forms.labels.answers'),
-      optional: true,
-    },
-  }).validator(),
+Meteor.methods({
+  'forms.updateAnswers': async (formId, newAnswer) => {
+    const a = await Forms.findOneAsync({ _id: formId });
+    let newTab = [];
+    if (a) {
+      if (a.formAnswers) {
+        newTab = a.formAnswers;
+        const index = newTab.findIndex((answer) => answer.userId === newAnswer.userId);
+        if (index === -1) {
+          newTab.push(newAnswer);
+        } else {
+          newTab[index] = newAnswer;
+        }
+      } else {
+        newTab.push(newAnswer);
+      }
 
-  async run({ formId, answers }) {
-    return await Forms.updateAsync({ _id: formId }, { $set: { answers } });
+      await Forms.updateAsync({ _id: formId }, { $set: { formAnswers: newTab } });
+    }
   },
 });
 
