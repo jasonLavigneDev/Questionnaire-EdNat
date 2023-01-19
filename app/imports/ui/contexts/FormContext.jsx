@@ -11,11 +11,13 @@ export const FormContext = createContext(initialState);
 
 export const FormProvider = ({ children }) => {
   const [form, setForm] = useState(initialState);
+  const [activeStep, setActiveStep] = useState(0);
 
   console.log('FORM CONTEXTE', form);
 
   const resetFormContext = () => {
     setForm(initialState);
+    setActiveStep(0);
   };
 
   return (
@@ -23,6 +25,8 @@ export const FormProvider = ({ children }) => {
       value={{
         form,
         setForm,
+        activeStep,
+        setActiveStep,
         resetFormContext,
       }}
     >

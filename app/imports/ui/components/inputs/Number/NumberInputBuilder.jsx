@@ -41,8 +41,3 @@ export const NumberInputBuilder = () => {
     </Paper>
   );
 };
-
-NumberInputBuilder.propTypes = {
-  componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
-  setComponentList: PropTypes.func.isRequired,
-};

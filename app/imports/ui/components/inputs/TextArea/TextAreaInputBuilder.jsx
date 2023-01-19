@@ -41,8 +41,3 @@ export const TextAreaInputBuilder = () => {
     </Paper>
   );
 };
-
-TextAreaInputBuilder.propTypes = {
-  componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
-  setComponentList: PropTypes.func.isRequired,
-};

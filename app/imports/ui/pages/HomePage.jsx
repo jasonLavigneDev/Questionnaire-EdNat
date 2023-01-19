@@ -30,7 +30,7 @@ export const HomePage = () => {
         <h2>Liste des formulaires</h2>
         <div>
           {forms.map((form) => (
-            <div>
+            <div key={form._id}>
               <Link to={`/visualizer/${form._id}`}>{form.title}</Link>
               <br />
             </div>
