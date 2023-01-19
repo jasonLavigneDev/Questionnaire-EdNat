@@ -31,7 +31,9 @@ export const HomePage = () => {
         <div>
           {forms.map((form) => (
             <div key={form._id}>
-              <Link to={`/visualizer/${form._id}`}>{form.title}</Link>
+              <p>{form.title}</p>
+              <button onClick={() => navigate(`/visualizer/${form._id}`)}>Repondre a ce formulaire</button>
+              <button onClick={() => navigate(`/answers/${form._id}`)}>Voir les reponses </button>
               <br />
             </div>
           ))}
