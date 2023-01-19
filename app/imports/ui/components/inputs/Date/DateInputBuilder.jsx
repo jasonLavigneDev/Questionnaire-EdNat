@@ -41,8 +41,3 @@ export const DateInputBuilder = () => {
     </Paper>
   );
 };
-
-DateInputBuilder.propTypes = {
-  componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
-  setComponentList: PropTypes.func.isRequired,
-};

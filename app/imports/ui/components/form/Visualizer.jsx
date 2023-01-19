@@ -60,8 +60,8 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
   const hasComponentAfter = (inputPos) => inputPos < form.components.length - 1;
 
   const removeComponentToForm = (componentId) => {
-    const newObj = form.filter((componentInput) => componentInput.id != componentId);
-    setForm(newObj);
+    const newObj = form.components.filter((componentInput) => componentInput.id != componentId);
+    setForm({ ...form, components: newObj });
   };
 
   const swapPositionWithPreviousComponent = (inputPos) => {

@@ -87,8 +87,3 @@ export const RadioInputBuilder = () => {
     </Paper>
   );
 };
-
-RadioInputBuilder.propTypes = {
-  componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
-  setComponentList: PropTypes.func.isRequired,
-};

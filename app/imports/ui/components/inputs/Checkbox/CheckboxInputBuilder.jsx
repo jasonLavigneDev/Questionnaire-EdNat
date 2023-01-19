@@ -89,8 +89,3 @@ export const CheckboxInputBuilder = () => {
     </Paper>
   );
 };
-
-CheckboxInputBuilder.propTypes = {
-  componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
-  setComponentList: PropTypes.func.isRequired,
-};

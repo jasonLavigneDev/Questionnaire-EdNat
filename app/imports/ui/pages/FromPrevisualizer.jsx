@@ -1,12 +1,12 @@
 import { Button } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
 import { FormContext } from '../contexts/FormContext';
 import { UserContext } from '../contexts/UserContext';
 
 export const FormPrevisualizer = () => {
-  const { form, resetFormContext } = useContext(FormContext);
+  const { form, resetFormContext, setActiveStep } = useContext(FormContext);
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -28,6 +28,10 @@ export const FormPrevisualizer = () => {
       resetFormContext();
     }
   };
+
+  useEffect(() => {
+    setActiveStep(2);
+  }, []);
 
   return (
     <div>

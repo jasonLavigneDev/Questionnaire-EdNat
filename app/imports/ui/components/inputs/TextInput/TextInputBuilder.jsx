@@ -41,8 +41,3 @@ export const TextInputBuilder = () => {
     </Paper>
   );
 };
-
-TextInputBuilder.propTypes = {
-  componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
-  setComponentList: PropTypes.func.isRequired,
-};

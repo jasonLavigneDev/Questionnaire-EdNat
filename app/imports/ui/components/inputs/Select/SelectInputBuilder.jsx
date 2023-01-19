@@ -86,8 +86,3 @@ export const SelectInputBuilder = () => {
     </Paper>
   );
 };
-
-SelectInputBuilder.propTypes = {
-  componentList: PropTypes.arrayOf(PropTypes.any).isRequired,
-  setComponentList: PropTypes.func.isRequired,
-};
