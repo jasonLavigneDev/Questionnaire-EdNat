@@ -9,7 +9,7 @@ import { MsgError } from '../../system/MsgError';
 import { SubmitButton } from '../../system/SubmitButton';
 import { FormContext } from '../../../contexts/FormContext';
 
-export const RadioInputBuilder = ({ componentList, setComponentList }) => {
+export const RadioInputBuilder = () => {
   const [questionText, setQuestionText] = useState('');
   const [answerText, setAnswerText] = useState('');
   const [answerOptions, setAnswerOptions] = useState([]);
@@ -37,11 +37,10 @@ export const RadioInputBuilder = ({ componentList, setComponentList }) => {
 
   const handleSubmit = () => {
     if (questionText && answerOptions) {
-      const componentListFinal = [...componentList];
+      const componentListFinal = [...form.components];
       const newComponent = createComponentObject(questionText, 'radioButtonInput', answerOptions);
       componentListFinal.push(newComponent);
       setForm({ ...form, components: componentListFinal });
-      setComponentList(componentListFinal);
       setQuestionText('');
       setAnswerText('');
       setAnswerOptions([]);

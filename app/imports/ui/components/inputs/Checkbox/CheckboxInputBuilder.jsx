@@ -10,7 +10,7 @@ import { MsgError } from '../../system/MsgError';
 import { SubmitButton } from '../../system/SubmitButton';
 import { FormContext } from '../../../contexts/FormContext';
 
-export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
+export const CheckboxInputBuilder = () => {
   const [questionText, setQuestionText] = useState('');
   const [answerText, setAnswerText] = useState('');
   const [answerOptions, setAnswerOptions] = useState([]);
@@ -38,13 +38,12 @@ export const CheckboxInputBuilder = ({ componentList, setComponentList }) => {
 
   const handleSubmit = () => {
     if (questionText && answerOptions) {
-      const componentListFinal = [...componentList];
+      const componentListFinal = [...form.components];
 
       const newComponent = createComponentObject(questionText, 'checkboxInput', answerOptions);
 
       componentListFinal.push(newComponent);
       setForm({ ...form, components: componentListFinal });
-      setComponentList(componentListFinal);
       setQuestionText('');
       setAnswerText('');
       setAnswerOptions([]);

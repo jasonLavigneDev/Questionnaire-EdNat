@@ -1,35 +1,33 @@
 import { Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
+import { FormContext } from '../../contexts/FormContext';
 
-export const FormInfos = ({
-  formTitle,
-  setFormTitle,
-  formDescription,
-  setFormDescription,
-  formPublic,
-  setFormPublic,
-}) => {
+export const FormInfos = () => {
+  const { form, setForm } = useContext(FormContext);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <TextField
-        id="global_title"
+        id="formTitle"
         label="Titre"
         variant="outlined"
-        value={formTitle}
+        value={form.title}
         helperText="Entrez votre titre"
-        onChange={(e) => setFormTitle(e.target.value)}
+        onChange={(e) => setForm({ ...form, title: e.target.value })}
       />
       <TextField
-        id="global_desc"
+        id="formDescription"
         label="Description"
         variant="outlined"
-        value={formDescription}
+        value={form.description}
         helperText="Entrez votre description"
-        onChange={(e) => setFormDescription(e.target.value)}
+        onChange={(e) => setForm({ ...form, description: e.target.value })}
       />
       <FormGroup>
         <FormControlLabel
-          control={<Checkbox checked={formPublic} onChange={() => setFormPublic(!formPublic)} name="public" />}
+          control={
+            <Checkbox checked={form.public} onChange={() => setForm({ ...form, public: !form.public })} name="public" />
+          }
           label="Formulaire public"
         />
       </FormGroup>

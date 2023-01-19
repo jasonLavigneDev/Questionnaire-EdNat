@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
+import { FormContext } from '../contexts/FormContext';
 
 export const FormVisualizer = () => {
-  const form = useLoaderData();
-  const component = form?.components;
+  const formFromBDD = useLoaderData();
+
+  const { form, setForm } = useContext(FormContext);
+
+  useEffect(() => {
+    setForm(formFromBDD);
+  }, []);
 
   return (
     <div>
@@ -12,7 +18,7 @@ export const FormVisualizer = () => {
         <div>
           <h3 style={{ textAlign: 'center' }}>{form.title}</h3>
           <h4 style={{ textAlign: 'center' }}>{form.desc}</h4>
-          <Visualizer form={component} answerMode={true} completeForm={form} />
+          <Visualizer answerMode={true} completeForm={form} />
         </div>
       ) : (
         <p>ce formulaire n'existe pas</p>
@@ -21,7 +27,6 @@ export const FormVisualizer = () => {
   );
 };
 
-export const loaderVisualizer = async ({ request, params }) => {
-  const res = await Meteor.callAsync('forms.getOne', params.id);
-  return res;
+export const loaderVisualizer = async ({ params }) => {
+  return await Meteor.callAsync('forms.getOne', params.id);
 };

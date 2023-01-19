@@ -7,12 +7,14 @@ import { DateInput } from '../inputs/Date/DateInput';
 import { NumberInput } from '../inputs/Number/NumberInput';
 import { TextInput } from '../inputs/TextInput/TextInput';
 import { TextArea } from '../inputs/TextArea/TextArea';
+import { FormContext } from '../../contexts/FormContext';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { UserContext } from '../../contexts/UserContext';
 
-export const Visualizer = ({ form, setForm, edit = false, answerMode = false, completeForm }) => {
-  const { answerForm, setAnswerForm } = useContext(AnswerContext);
+export const Visualizer = ({ completeForm, answerMode = false, edit = false }) => {
+  const { form, setForm } = useContext(FormContext);
   const { user } = useContext(UserContext);
+  const { answerForm, setAnswerForm } = useContext(AnswerContext);
 
   const generateComponent = (component) => {
     switch (component.type) {
@@ -55,7 +57,7 @@ export const Visualizer = ({ form, setForm, edit = false, answerMode = false, co
   };
 
   const hasComponentBefore = (inputPos) => inputPos > 0;
-  const hasComponentAfter = (inputPos, form) => inputPos < form.length - 1;
+  const hasComponentAfter = (inputPos) => inputPos < form.components.length - 1;
 
   const removeComponentToForm = (componentId) => {
     const newObj = form.filter((componentInput) => componentInput.id != componentId);
@@ -64,19 +66,19 @@ export const Visualizer = ({ form, setForm, edit = false, answerMode = false, co
 
   const swapPositionWithPreviousComponent = (inputPos) => {
     if (hasComponentBefore(inputPos)) {
-      const newObj = [...form];
+      const newObj = [...form.components];
       [newObj[inputPos - 1], newObj[inputPos]] = [newObj[inputPos], newObj[inputPos - 1]];
-      setForm(newObj);
+      setForm({ ...form, components: newObj });
     } else {
       console.log("Il n'y a pas de question avant celle ci, impossible de swap");
     }
   };
 
   const swapPositionWithNextComponent = (inputPos) => {
-    if (hasComponentAfter(inputPos, form)) {
-      const newObj = [...form];
+    if (hasComponentAfter(inputPos)) {
+      const newObj = [...form.components];
       [newObj[inputPos + 1], newObj[inputPos]] = [newObj[inputPos], newObj[inputPos + 1]];
-      setForm(newObj);
+      setForm({ ...form, components: newObj });
     } else {
       console.log("Il n'y a pas de question apres celle ci, impossible de swap");
     }
@@ -100,7 +102,7 @@ export const Visualizer = ({ form, setForm, edit = false, answerMode = false, co
 
   return (
     <div>
-      {form.map((componentInput, index) => (
+      {form.components.map((componentInput, index) => (
         <div key={componentInput.id}>
           <br />
           <br />

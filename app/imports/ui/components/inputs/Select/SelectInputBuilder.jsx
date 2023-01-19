@@ -9,7 +9,7 @@ import { MsgError } from '../../system/MsgError';
 import { SubmitButton } from '../../system/SubmitButton';
 import { FormContext } from '../../../contexts/FormContext';
 
-export const SelectInputBuilder = ({ componentList, setComponentList }) => {
+export const SelectInputBuilder = () => {
   const [questionText, setQuestionText] = useState('');
   const [answerText, setAnswerText] = useState('');
   const [answerOptions, setAnswerOptions] = useState([]);
@@ -36,11 +36,10 @@ export const SelectInputBuilder = ({ componentList, setComponentList }) => {
 
   const handleSubmit = () => {
     if (questionText && answerOptions.length) {
-      const componentListFinal = [...componentList];
+      const componentListFinal = [...form.components];
       const newComponent = createComponentObject(questionText, 'selectInput', answerOptions);
       componentListFinal.push(newComponent);
       setForm({ ...form, components: componentListFinal });
-      setComponentList(componentListFinal);
       setQuestionText('');
       setAnswerText('');
       setAnswerOptions([]);
