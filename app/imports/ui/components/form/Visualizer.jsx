@@ -87,7 +87,8 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
   const submitAnswerForm = () => {
     const newObj = { ...answerForm };
     newObj.formId = completeForm._id;
-    newObj.userId = user._id;
+    newObj.userId = user ? user._id : `user${Math.floor(Math.random() * 5) + 1}`;
+    console.log('le formulaire de reponse a envoyer', answerForm);
     setAnswerForm(newObj);
     Meteor.callAsync('forms.updateAnswers', newObj.formId, { userId: newObj.userId, answers: newObj.answers });
   };
