@@ -105,11 +105,11 @@ Forms.schema = new SimpleSchema(
     'components.$': { type: Component },
 
     answers: {
-      type: Answers,
+      type: Array,
       label: getLabel('api.forms.labels.answers'),
       optional: true,
-      defaultValue: {},
     },
+    'answers.$': { type: Answers },
   },
   { clean: { removeEmptyStrings: false } },
 );
