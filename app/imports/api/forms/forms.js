@@ -42,12 +42,12 @@ export const Answers = new SimpleSchema({
   userId: {
     type: String,
     optional: true,
-    label: getLabel('api.forms.labels.answers.userId'),
+    label: getLabel('api.forms.labels.formAnswers.userId'),
   },
   answers: {
     type: Array,
     optional: true,
-    label: getLabel('api.forms.labels.answers.answer'),
+    label: getLabel('api.forms.labels.formAnswers.answer'),
   },
   'answers.$': { type: Object, blackbox: true },
 });
@@ -104,12 +104,12 @@ Forms.schema = new SimpleSchema(
     },
     'components.$': { type: Component },
 
-    answers: {
+    formAnswers: {
       type: Array,
-      label: getLabel('api.forms.labels.answers'),
+      label: getLabel('api.forms.labels.formAnswers'),
       optional: true,
     },
-    'answers.$': { type: Answers },
+    'formAnswers.$': { type: Answers },
   },
   { clean: { removeEmptyStrings: false } },
 );

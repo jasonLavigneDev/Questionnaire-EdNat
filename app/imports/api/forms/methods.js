@@ -44,8 +44,8 @@ Meteor.methods({
     const a = await Forms.findOneAsync({ _id: formId });
     let newTab = [];
     if (a) {
-      if (a.answers) {
-        newTab = a.answers;
+      if (a.formAnswers) {
+        newTab = a.formAnswers;
         const index = newTab.findIndex((answer) => answer.userId === newAnswer.userId);
         if (index === -1) {
           newTab.push(newAnswer);
@@ -56,7 +56,7 @@ Meteor.methods({
         newTab.push(newAnswer);
       }
 
-      await Forms.updateAsync({ _id: formId }, { $set: { answers: newTab } });
+      await Forms.updateAsync({ _id: formId }, { $set: { formAnswers: newTab } });
     }
   },
 });
