@@ -38,6 +38,20 @@ export const Component = new SimpleSchema({
   'choices.$': { type: String },
 });
 
+export const Answers = new SimpleSchema({
+  userId: {
+    type: String,
+    optional: true,
+    label: getLabel('api.forms.labels.answers.userId'),
+  },
+  answers: {
+    type: Array,
+    optional: true,
+    label: getLabel('api.forms.labels.answers.answer'),
+  },
+  'answers.$': { type: Object, blackbox: true },
+});
+
 Forms.schema = new SimpleSchema(
   {
     title: {
@@ -89,6 +103,13 @@ Forms.schema = new SimpleSchema(
       defaultValue: [],
     },
     'components.$': { type: Component },
+
+    answers: {
+      type: Answers,
+      label: getLabel('api.forms.labels.answers'),
+      optional: true,
+      defaultValue: {},
+    },
   },
   { clean: { removeEmptyStrings: false } },
 );
