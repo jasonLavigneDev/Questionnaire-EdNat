@@ -13,7 +13,7 @@ export const RadioInput = ({ title, choices, answerMode, questionId }) => {
 
   return (
     <div>
-      <FormControl onBlur={(e) => handleChange(e)}>
+      <FormControl onChange={(e) => handleChange(e)}>
         <FormLabel>{title}</FormLabel>
         <RadioGroup defaultValue="female" name="radio-buttons-group">
           {choices.map((choice) => (

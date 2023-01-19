@@ -1,16 +1,23 @@
 import { Button } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
+import { FormContext } from '../contexts/FormContext';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
   const forms = useLoaderData();
   const navigate = useNavigate();
 
+  const { resetFormContext } = useContext(FormContext);
+
+  useEffect(() => {
+    resetFormContext();
+  }, []);
+
   return (
     <>
-      <p>Binvenue dans la nouvelle application</p>
+      <p>Bienvenue dans la nouvelle application</p>
       {user ? (
         <div>
           <Button onClick={() => navigate('/logout')}>Logout</Button>
@@ -34,7 +41,7 @@ export const HomePage = () => {
   );
 };
 
-export const loaderHomePage = async ({ request, params }) => {
+export const loaderHomePage = async () => {
   const res = await Meteor.callAsync('forms.getAll');
   return res;
 };

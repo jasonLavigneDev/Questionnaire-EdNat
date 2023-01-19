@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 
 const initialState = {
-  name: '',
+  title: '',
   description: '',
   components: [],
   public: false,
@@ -14,11 +14,16 @@ export const FormProvider = ({ children }) => {
 
   console.log('FORM CONTEXTE', form);
 
+  const resetFormContext = () => {
+    setForm(initialState);
+  };
+
   return (
     <FormContext.Provider
       value={{
         form,
         setForm,
+        resetFormContext,
       }}
     >
       {children}

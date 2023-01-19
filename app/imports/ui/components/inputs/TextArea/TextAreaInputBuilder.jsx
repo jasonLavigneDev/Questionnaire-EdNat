@@ -8,18 +8,17 @@ import { MsgError } from '../../system/MsgError';
 import { SubmitButton } from '../../system/SubmitButton';
 import { FormContext } from '../../../contexts/FormContext';
 
-export const TextAreaInputBuilder = ({ componentList, setComponentList }) => {
+export const TextAreaInputBuilder = () => {
   const [questionText, setQuestionText] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const { form, setForm } = useContext(FormContext);
 
   const handleSubmit = () => {
     if (questionText) {
-      const componentListFinal = [...componentList];
+      const componentListFinal = [...form.components];
       const newComponent = createComponentObject(questionText, 'textArea');
       componentListFinal.push(newComponent);
       setForm({ ...form, components: componentListFinal });
-      setComponentList(componentListFinal);
       setQuestionText('');
     } else {
       setErrorMessage(i18n.__('builders.errors.noTitle'));
