@@ -88,6 +88,11 @@ export const Visualizer = ({ form, setForm, edit = false, answerMode = false, co
     newObj.userId = user._id;
     console.log('le formulaire de reponse a envoyer', answerForm);
     setAnswerForm(newObj);
+
+    Meteor.callAsync('forms.updateAnswers', {
+      formId: newObj.formId,
+      answers: { userId: newObj.userId, answers: newObj.answers },
+    });
   };
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/underscore';
 import { getLabel } from '../utils';
 
-import Forms, { Component } from './forms';
+import Forms, { Answer, Answers, Component } from './forms';
 import { Form } from 'react-router-dom';
 
 function _createForm(title, desc, owner, isModel, isPublic, groups, components) {
@@ -37,6 +37,22 @@ export const createForm = new ValidatedMethod({
     _createForm(title, desc, owner, isModel, isPublic, groups, components);
     const form = Forms.findOne({ title });
     return await form._id;
+  },
+});
+
+export const updateAnswers = new ValidatedMethod({
+  name: 'forms.updateAnswers',
+  validate: new SimpleSchema({
+    formId: { type: String, label: getLabel('api.forms.labels.id') },
+    answers: {
+      type: Answers,
+      label: getLabel('api.forms.labels.answers'),
+      optional: true,
+    },
+  }).validator(),
+
+  async run({ formId, answers }) {
+    return await Forms.updateAsync({ _id: formId }, { $set: { answers } });
   },
 });
 
