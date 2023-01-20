@@ -1,12 +1,24 @@
 import { Button } from '@mui/material';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import { FormContext } from '../contexts/FormContext';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
-  const forms = useLoaderData();
+
+  const [forms, setForms] = useState([]);
+
+  const getForms = async () => {
+    const temp = await Meteor.callAsync('forms.getUserForms', { userId: user._id });
+    setForms(temp);
+  };
+  useEffect(() => {
+    if (user) {
+      getForms();
+    }
+  }, [user]);
+
   const navigate = useNavigate();
 
   const { resetFormContext } = useContext(FormContext);
@@ -27,23 +39,22 @@ export const HomePage = () => {
         <Button onClick={() => Meteor.loginWithKeycloak()}>Login</Button>
       )}
       <div>
-        <h2>Liste des formulaires</h2>
-        <div>
-          {forms.map((form) => (
-            <div key={form._id}>
-              <p>{form.title}</p>
-              <button onClick={() => navigate(`/visualizer/${form._id}`)}>Repondre a ce formulaire</button>
-              <button onClick={() => navigate(`/answers/${form._id}`)}>Voir les reponses </button>
-              <br />
+        {user ? (
+          <div>
+            <h2>Liste des formulaires</h2>
+            <div>
+              {forms.map((form) => (
+                <div key={form._id}>
+                  <p>{form.title}</p>
+                  <button onClick={() => navigate(`/visualizer/${form._id}`)}>Repondre a ce formulaire</button>
+                  <button onClick={() => navigate(`/answers/${form._id}`)}>Voir les reponses </button>
+                  <br />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ) : null}
       </div>
     </>
   );
-};
-
-export const loaderHomePage = async () => {
-  const res = await Meteor.callAsync('forms.getAll');
-  return res;
 };
