@@ -10,7 +10,6 @@ export const MainLayout = ({ children }) => {
       <Header />
       <main>
         <Paper sx={{ marginTop: '6vh' }}>
-          <div style={{ padding: '2vh' }}></div>
           <Outlet />
         </Paper>
       </main>

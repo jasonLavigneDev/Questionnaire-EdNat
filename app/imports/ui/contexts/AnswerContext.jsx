@@ -25,8 +25,6 @@ export const AnswerProvider = ({ children }) => {
     setAnswerForm(newObj);
   };
 
-  console.log('ANSWER CONTEXT', answerForm);
-
   return (
     <AnswerContext.Provider
       value={{

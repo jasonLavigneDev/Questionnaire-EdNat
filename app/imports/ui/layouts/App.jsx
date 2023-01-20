@@ -14,6 +14,7 @@ import { FormPrevisualizer } from '../pages/FromPrevisualizer';
 import { BuilderLayout } from './BuilderLayout';
 import { AnswerProvider } from '../contexts/AnswerContext';
 import { AnswersPage, loaderAnswerPage } from '../pages/AnswersPage';
+import { AuthProvider } from '../contexts/AuthContext';
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -21,14 +22,16 @@ export const App = () => {
       <>
         <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
           <Route path="" element={<HomePage />} />
-          <Route path="visualizer/:id" element={<FormVisualizer />} loader={loaderVisualizer} />
-          <Route path="answers/:id" element={<AnswersPage />} loader={loaderAnswerPage} />
-          <Route path="logout" element={<Logout />} />
-          <Route path="builder" element={<BuilderLayout />}>
-            <Route path="intro" element={<FormIntro />} />
-            <Route path="components" element={<FormBuilder />} />
-            <Route path="previsualizer" element={<FormPrevisualizer />} />
+          <Route element={<AuthProvider />}>
+            <Route path="logout" element={<Logout />} />
+            <Route path="builder" element={<BuilderLayout />}>
+              <Route path="intro" element={<FormIntro />} />
+              <Route path="components" element={<FormBuilder />} />
+              <Route path="previsualizer" element={<FormPrevisualizer />} />
+            </Route>
+            <Route path="answers/:id" element={<AnswersPage />} loader={loaderAnswerPage} />
           </Route>
+          <Route path="visualizer/:id" element={<FormVisualizer />} loader={loaderVisualizer} />
         </Route>
       </>,
     ),
