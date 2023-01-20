@@ -5,6 +5,8 @@ import { _ } from 'meteor/underscore';
 import { getLabel } from '../utils';
 
 import Forms, { Component } from './forms';
+import { useContext } from 'react';
+import { UserContext } from '../../ui/contexts/UserContext';
 
 function _createForm(title, desc, owner, isModel, isPublic, groups, components) {
   Forms.insert({
@@ -70,6 +72,13 @@ Meteor.methods({
 Meteor.methods({
   'forms.getAll': async () => {
     const res = await Forms.find().mapAsync((x) => x);
+    return res;
+  },
+});
+
+Meteor.methods({
+  'forms.getUserForms': async ({ userId }) => {
+    const res = await Forms.find({ owner: userId }).mapAsync((x) => x);
     return res;
   },
 });

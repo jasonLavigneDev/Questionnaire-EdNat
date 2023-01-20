@@ -2,7 +2,7 @@ import React from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import { ErrorPage } from '../pages/ErrorPage';
 import { Logout } from '../pages/Logout';
-import { HomePage, loaderHomePage } from '../pages/HomePage';
+import { HomePage } from '../pages/HomePage';
 import { FormBuilder } from '../pages/FormBuilder';
 
 import { FormIntro } from '../pages/FormIntro';
@@ -20,7 +20,7 @@ export const App = () => {
     createRoutesFromElements(
       <>
         <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
-          <Route path="" element={<HomePage />} loader={loaderHomePage} />
+          <Route path="" element={<HomePage />} />
           <Route path="visualizer/:id" element={<FormVisualizer />} loader={loaderVisualizer} />
           <Route path="answers/:id" element={<AnswersPage />} loader={loaderAnswerPage} />
           <Route path="logout" element={<Logout />} />
