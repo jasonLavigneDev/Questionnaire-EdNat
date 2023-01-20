@@ -25,7 +25,6 @@ export const createForm = new ValidatedMethod({
   validate: new SimpleSchema({
     title: { type: String, label: getLabel('api.forms.labels.title') },
     desc: { type: String, label: getLabel('api.forms.labels.desc') },
-    owner: { type: String, label: getLabel('api.forms.labels.owner') },
     isModel: { type: Boolean, label: getLabel('api.forms.labels.isModel') },
     isPublic: { type: Boolean, label: getLabel('api.forms.labels.public') },
     groups: { type: Array, optional: true, label: getLabel('api.forms.labels.groups') },
@@ -34,10 +33,13 @@ export const createForm = new ValidatedMethod({
     'components.$': { type: Component },
   }).validator(),
 
-  async run({ title, desc, owner, isModel, isPublic, groups, components }) {
-    _createForm(title, desc, owner, isModel, isPublic, groups, components);
-    const form = Forms.findOne({ title });
-    return await form._id;
+  async run({ title, desc, isModel, isPublic, groups, components }) {
+    if (!this.userId) {
+      throw new Meteor.Error('api.forms.createForm.notLoggedIn', "Pas d'utilisateur connecté");
+    }
+    _createForm(title, desc, this.userId, isModel, isPublic, groups, components);
+    const form = await Forms.findOneAsync({ title });
+    return form._id;
   },
 });
 
@@ -76,10 +78,13 @@ Meteor.methods({
   },
 });
 
-Meteor.methods({
-  'forms.getUserForms': async () => {
-    if (Meteor.userId()) {
-      const res = await Forms.find({ owner: Meteor.userId() }).mapAsync((x) => x);
+export const getUserForms = new ValidatedMethod({
+  name: 'forms.getUserForms',
+  validate: null,
+
+  async run() {
+    if (this.userId) {
+      const res = await Forms.find({ owner: this.userId }).mapAsync((x) => x);
       return res;
     } else {
       throw new Meteor.Error('api.forms.getUserForms.notLoggedIn', "Pas d'utilisateur connecté");
