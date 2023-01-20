@@ -23,8 +23,9 @@ export const FormBuilder = () => {
         <Visualizer edit={true} />
         <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
         <InputChoice />
+        <br />
+        <Button onClick={() => navigate('/builder/previsualizer')}>Prévisualiser le résultat</Button>
       </div>
-      <Button onClick={() => navigate('/builder/previsualizer')}>Prévisualiser le résultat</Button>
       <br />
     </>
   );

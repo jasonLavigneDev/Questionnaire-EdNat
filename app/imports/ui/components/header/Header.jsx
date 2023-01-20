@@ -9,13 +9,13 @@ const appBarStyle = {
   alignItems: 'center',
   paddingLeft: '5%',
   paddingRight: '5%',
-  minHeight: 75,
+  height: '8vh',
   backgroundColor: '#F9F9FD',
 };
 
 export const Header = () => {
   return (
-    <AppBar position="fixed" sx={appBarStyle}>
+    <AppBar sx={appBarStyle}>
       <Link to="/">
         <img src={'/images/eole-sans-fond.svg'} alt="Logo" height={60} />
       </Link>
