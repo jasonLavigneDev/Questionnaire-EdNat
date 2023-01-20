@@ -10,8 +10,13 @@ export const HomePage = () => {
   const [forms, setForms] = useState([]);
 
   const getForms = async () => {
-    const temp = await Meteor.callAsync('forms.getUserForms', { userId: user._id });
-    setForms(temp);
+    Meteor.callAsync('forms.getUserForms')
+      .then((res) => {
+        setForms(res);
+      })
+      .catch((err) => {
+        console.log('forms.getUserForms', err.reason);
+      });
   };
   useEffect(() => {
     if (user) {

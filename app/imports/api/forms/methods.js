@@ -77,8 +77,12 @@ Meteor.methods({
 });
 
 Meteor.methods({
-  'forms.getUserForms': async ({ userId }) => {
-    const res = await Forms.find({ owner: userId }).mapAsync((x) => x);
-    return res;
+  'forms.getUserForms': async () => {
+    if (Meteor.userId()) {
+      const res = await Forms.find({ owner: Meteor.userId() }).mapAsync((x) => x);
+      return res;
+    } else {
+      throw new Meteor.Error('api.forms.getUserForms.notLoggedIn', "Pas d'utilisateur connecté");
+    }
   },
 });
