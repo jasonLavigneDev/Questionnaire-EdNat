@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { RadioInput } from '../inputs/Radio/RadioInput';
 import { SelectInput } from '../inputs/Select/SelectInput';
@@ -15,6 +15,8 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
   const { form, setForm } = useContext(FormContext);
   const { user } = useContext(UserContext);
   const { answerForm, setAnswerForm } = useContext(AnswerContext);
+
+  const [publicName, setPublicName] = useState('');
 
   const generateComponent = (component) => {
     switch (component.type) {
@@ -87,7 +89,7 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
   const submitAnswerForm = () => {
     const newObj = { ...answerForm };
     newObj.formId = completeForm._id;
-    newObj.userId = user ? user._id : `user${Math.floor(Math.random() * 5) + 1}`;
+    newObj.userId = user ? user.username : publicName;
     console.log('le formulaire de reponse a envoyer', answerForm);
     setAnswerForm(newObj);
     Meteor.callAsync('forms.updateAnswers', newObj.formId, { userId: newObj.userId, answers: newObj.answers });
@@ -128,7 +130,19 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
       {answerMode && (
         <div>
           <p>mode reponse </p>
-          <button onClick={submitAnswerForm}>Soumettre ce formulaire complété</button>
+          {!user && (
+            <input
+              type="text"
+              name="yourName"
+              id="yourName"
+              value={publicName}
+              placeholder={'entrez votre nom'}
+              onChange={(e) => setPublicName(e.target.value)}
+            />
+          )}
+          <button disabled={!publicName} onClick={submitAnswerForm}>
+            Soumettre ce formulaire complété
+          </button>
         </div>
       )}
     </div>
