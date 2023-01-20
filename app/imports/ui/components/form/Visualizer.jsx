@@ -13,7 +13,8 @@ import { UserContext } from '../../contexts/UserContext';
 
 export const Visualizer = ({ completeForm, answerMode = false, edit = false }) => {
   const { form, setForm } = useContext(FormContext);
-  const { user } = useContext(UserContext);
+  const { user, isAuthenticated } = useContext(UserContext);
+
   const { answerForm, setAnswerForm } = useContext(AnswerContext);
 
   const [publicName, setPublicName] = useState('');
@@ -89,7 +90,11 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
   const submitAnswerForm = () => {
     const newObj = { ...answerForm };
     newObj.formId = completeForm._id;
-    newObj.userId = user ? user.username : publicName;
+
+
+
+    newObj.userId = isAuthenticated ? user.username : publicName;
+
     console.log('le formulaire de reponse a envoyer', answerForm);
     setAnswerForm(newObj);
     Meteor.callAsync('forms.updateAnswers', newObj.formId, { userId: newObj.userId, answers: newObj.answers });
@@ -103,48 +108,57 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
     });
   }, []);
 
-  return (
-    <div>
-      {form.components.map((componentInput, index) => (
-        <div key={componentInput.id}>
-          <br />
-          <br />
-          <div>{generateComponent(componentInput)}</div>
-          {edit && (
-            <div style={{ display: 'flex' }}>
-              <button onClick={() => removeComponentToForm(componentInput.id)}>Retirez cet input</button>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {/* {hasComponentBefore(index) && ( */}
-                <button onClick={() => swapPositionWithPreviousComponent(index)}>haut</button>
-                {/* )} */}
-                {/* {hasComponentAfter(index, form) && ( */}
-                <button onClick={() => swapPositionWithNextComponent(index)}>bas</button>
-                {/* )} */}
+  if (isAuthenticated || form.isPublic) {
+    return (
+      <div>
+        <h3 style={{ textAlign: 'center' }}>{form.title}</h3>
+        <h4 style={{ textAlign: 'center' }}>{form.desc}</h4>
+        {form.components.map((componentInput, index) => (
+          <div key={componentInput.id}>
+            <br />
+            <br />
+            <div>{generateComponent(componentInput)}</div>
+            {edit && (
+              <div style={{ display: 'flex' }}>
+                <button onClick={() => removeComponentToForm(componentInput.id)}>Retirez cet input</button>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  {/* {hasComponentBefore(index) && ( */}
+                  <button onClick={() => swapPositionWithPreviousComponent(index)}>haut</button>
+                  {/* )} */}
+                  {/* {hasComponentAfter(index, form) && ( */}
+                  <button onClick={() => swapPositionWithNextComponent(index)}>bas</button>
+                  {/* )} */}
+                </div>
               </div>
-            </div>
-          )}
-          <br />
-          <br />
-        </div>
-      ))}
-      {answerMode && (
-        <div>
-          <p>mode reponse </p>
-          {!user && (
-            <input
-              type="text"
-              name="yourName"
-              id="yourName"
-              value={publicName}
-              placeholder={'entrez votre nom'}
-              onChange={(e) => setPublicName(e.target.value)}
-            />
-          )}
-          <button disabled={!publicName} onClick={submitAnswerForm}>
-            Soumettre ce formulaire complété
-          </button>
-        </div>
-      )}
-    </div>
-  );
+            )}
+            <br />
+            <br />
+          </div>
+        ))}
+        {answerMode && (
+          <div>
+            <p>mode reponse </p>
+            {!user && (
+              <div>
+                <input
+                  type="text"
+                  name="yourName"
+                  id="yourName"
+                  value={publicName}
+                  placeholder={'entrez votre nom'}
+                  onChange={(e) => setPublicName(e.target.value)}
+                />
+                <button disabled={!publicName} onClick={submitAnswerForm}>
+                  Soumettre ce formulaire complété
+                </button>
+              </div>
+            )}
+            {user && <button onClick={submitAnswerForm}>Soumettre ce formulaire complété</button>}
+          </div>
+        )}
+      </div>
+    );
+  } else {
+    return <button onClick={() => Meteor.loginWithKeycloak()}>connectes toi form non public</button>;
+  }
 };

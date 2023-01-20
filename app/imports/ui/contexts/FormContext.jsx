@@ -13,8 +13,6 @@ export const FormProvider = ({ children }) => {
   const [form, setForm] = useState(initialState);
   const [activeStep, setActiveStep] = useState(0);
 
-  console.log('FORM CONTEXTE', form);
-
   const resetFormContext = () => {
     setForm(initialState);
     setActiveStep(0);

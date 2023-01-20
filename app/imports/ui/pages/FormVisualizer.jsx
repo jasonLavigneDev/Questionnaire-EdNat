@@ -16,8 +16,6 @@ export const FormVisualizer = () => {
     <div>
       {form ? (
         <div>
-          <h3 style={{ textAlign: 'center' }}>{form.title}</h3>
-          <h4 style={{ textAlign: 'center' }}>{form.desc}</h4>
           <Visualizer answerMode={true} completeForm={form} />
         </div>
       ) : (
