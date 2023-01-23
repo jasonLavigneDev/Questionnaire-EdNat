@@ -18,6 +18,7 @@ export const HomePage = () => {
         console.log('forms.getUserForms', err.reason);
       });
   };
+
   useEffect(() => {
     if (user) {
       getForms();
