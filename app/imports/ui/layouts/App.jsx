@@ -15,6 +15,7 @@ import { BuilderLayout } from './BuilderLayout';
 import { AnswerProvider } from '../contexts/AnswerContext';
 import { AnswersPage, loaderAnswerPage } from '../pages/AnswersPage';
 import { AuthProvider } from '../contexts/AuthContext';
+import { loader as FormInfosLoader } from '../components/form/FormInfos';
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -25,8 +26,8 @@ export const App = () => {
           <Route element={<AuthProvider />}>
             <Route path="logout" element={<Logout />} />
             <Route path="builder" element={<BuilderLayout />}>
-              <Route path="intro" element={<FormIntro />} />
-              <Route path="components" element={<FormBuilder />} />
+              <Route path="intro/:id?" element={<FormIntro />} loader={FormInfosLoader} />
+              <Route path="components/:id?" element={<FormBuilder />} />
               <Route path="previsualizer" element={<FormPrevisualizer />} />
             </Route>
             <Route path="answers/:id" element={<AnswersPage />} loader={loaderAnswerPage} />

@@ -11,6 +11,7 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import { FormContext } from '../../contexts/FormContext';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { UserContext } from '../../contexts/UserContext';
@@ -37,7 +38,7 @@ export const FormInfos = () => {
 
   const setGroupReserved = () => {
     if (form.groupReserved) {
-      setForm({ ...form, public: false });
+      setForm({ ...form, isPublic: false });
     }
   };
 
@@ -70,23 +71,37 @@ export const FormInfos = () => {
     setForm({ ...form, groups: groups.filter((groupId) => groupId !== id) });
   };
 
+  const formId = useLoaderData();
+
+  console.log('formId', formId);
+
+  useEffect(() => {
+    if (formId) {
+      setForm(formId);
+    }
+    if (form.groups.length !== 0) {
+      setGroupReserved(true);
+    }
+  }, [formId]);
+
   useEffect(() => {
     getGroups();
     console.log(form);
   }, [form]);
 
   useEffect(() => {
-    if (form.groupReserved) setForm({ ...form, public: false });
+    if (form.groupReserved) setForm({ ...form, isPublic: false });
     else {
       setForm({ ...form, groups: [] });
       setCurrentGroup({});
     }
-
-    if (form.public) {
+    if (form.isPublic) {
       setForm({ ...form, groupReserved: false, groups: [] });
       setCurrentGroup({});
     }
-  }, [form.groupReserved, form.public]);
+  }, [form.groupReserved, form.isPublic]);
+
+  console.log('form depuis id dans intro', form);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -99,27 +114,31 @@ export const FormInfos = () => {
         onChange={(e) => setForm({ ...form, title: e.target.value })}
       />
       <TextField
-        id="formDescription"
-        label="Description"
+        id="formdesc"
+        label="description"
         variant="outlined"
-        value={form.description}
+        value={form.desc}
         helperText="Entrez votre description"
-        onChange={(e) => setForm({ ...form, description: e.target.value })}
+        onChange={(e) => setForm({ ...form, desc: e.target.value })}
       />
       <FormGroup>
         <FormControlLabel
           control={
-            <Checkbox checked={form.public} onChange={() => setForm({ ...form, public: !form.public })} name="public" />
+            <Checkbox
+              checked={form.isPublic}
+              onChange={() => setForm({ ...form, isPublic: !form.isPublic })}
+              name="isPublic"
+            />
           }
           label="Formulaire public"
         />
       </FormGroup>
-      {!form.public ? (
+      {!form.isPublic ? (
         <FormGroup>
           <FormControlLabel
             control={
               <Checkbox
-                checked={form.groupReserved}
+                checked={form.groups.length !== 0}
                 onChange={() =>
                   setForm({
                     ...form,
@@ -174,4 +193,9 @@ export const FormInfos = () => {
       </div>
     </div>
   );
+};
+
+export const loader = async ({ params }) => {
+  if (params.id) return await Meteor.callAsync('forms.getOne', params.id);
+  return null;
 };
