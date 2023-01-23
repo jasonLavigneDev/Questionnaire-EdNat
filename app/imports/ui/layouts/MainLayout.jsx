@@ -9,9 +9,9 @@ export const MainLayout = ({ children }) => {
     <>
       <Header />
       <main>
-        <Paper sx={{ marginTop: '6vh' }}>
+        <div style={{ marginTop: '8vh' }}>
           <Outlet />
-        </Paper>
+        </div>
       </main>
     </>
   );

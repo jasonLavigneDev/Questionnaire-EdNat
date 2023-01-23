@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Divider, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
@@ -34,11 +34,15 @@ export const HomePage = () => {
 
   return (
     <>
-      <p>Bienvenue dans la nouvelle application</p>
+      <h1 style={{ textAlign: 'center' }}>Bienvenue dans la nouvelle application</h1>
       {user ? (
-        <div>
-          <Button onClick={() => navigate('/logout')}>Logout</Button>
-          <Button onClick={() => navigate('/builder')}>Builder</Button>
+        <div style={{ textAlign: 'center' }}>
+          <Button size="large" onClick={() => navigate('/logout')}>
+            Logout
+          </Button>
+          <Button size="large" onClick={() => navigate('/builder')}>
+            Builder
+          </Button>
         </div>
       ) : (
         <Button onClick={() => Meteor.loginWithKeycloak()}>Login</Button>
@@ -49,11 +53,24 @@ export const HomePage = () => {
             <h2>Liste des formulaires</h2>
             <div>
               {forms.map((form) => (
-                <div key={form._id}>
-                  <p>{form.title}</p>
-                  <button onClick={() => navigate(`/visualizer/${form._id}`)}>Repondre a ce formulaire</button>
-                  <button onClick={() => navigate(`/answers/${form._id}`)}>Voir les reponses </button>
-                  <br />
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: '50%',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div key={form._id} style={{ flexDirection: 'column' }}>
+                    <Typography variant="body1">{form.title}</Typography>
+                  </div>
+
+                  <div key={form._id} style={{ flexDirection: 'column' }}>
+                    <Button onClick={() => navigate(`/answers/${form._id}`)}>Voir les reponses </Button>
+                    <Button onClick={() => navigate(`/visualizer/${form._id}`)}>Repondre a ce formulaire</Button>
+                    <Divider />
+                  </div>
                 </div>
               ))}
             </div>

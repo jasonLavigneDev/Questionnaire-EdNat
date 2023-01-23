@@ -1,4 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { IconButton, Button } from '@mui/material';
+
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import { RadioInput } from '../inputs/Radio/RadioInput';
 import { SelectInput } from '../inputs/Select/SelectInput';
@@ -91,8 +96,6 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
     const newObj = { ...answerForm };
     newObj.formId = completeForm._id;
 
-
-
     newObj.userId = isAuthenticated ? user.username : publicName;
 
     console.log('le formulaire de reponse a envoyer', answerForm);
@@ -120,15 +123,21 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
             <div>{generateComponent(componentInput)}</div>
             {edit && (
               <div style={{ display: 'flex' }}>
-                <button onClick={() => removeComponentToForm(componentInput.id)}>Retirez cet input</button>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ flexDirection: 'column' }}>
                   {/* {hasComponentBefore(index) && ( */}
-                  <button onClick={() => swapPositionWithPreviousComponent(index)}>haut</button>
+                  <IconButton onClick={() => swapPositionWithPreviousComponent(index)}>
+                    <ArrowUpwardIcon />
+                  </IconButton>
                   {/* )} */}
                   {/* {hasComponentAfter(index, form) && ( */}
-                  <button onClick={() => swapPositionWithNextComponent(index)}>bas</button>
-                  {/* )} */}
+                  <IconButton onClick={() => swapPositionWithNextComponent(index)}>
+                    <ArrowDownwardIcon />
+                  </IconButton>
                 </div>
+                {/* )} */}
+                <IconButton sx={{ color: 'salmon' }} onClick={() => removeComponentToForm(componentInput.id)}>
+                  <DeleteIcon />
+                </IconButton>
               </div>
             )}
             <br />
