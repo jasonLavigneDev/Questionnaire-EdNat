@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar } from '@mui/material';
+import MainMenu from './MainMenu';
 
 const appBarStyle = {
   display: 'flex',
@@ -19,6 +20,7 @@ export const Header = () => {
       <Link to="/">
         <img src={'/images/eole-sans-fond.svg'} alt="Logo" height={60} />
       </Link>
+      <MainMenu />
     </AppBar>
   );
 };
