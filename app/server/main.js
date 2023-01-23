@@ -3,7 +3,9 @@ import { Accounts } from 'meteor/accounts-base';
 
 import { ServiceConfiguration } from 'meteor/service-configuration';
 import '/imports/api/forms/methods';
+import '/imports/api/users/users';
 import '/imports/api/users/methods';
+import '/imports/api/users/server/publications';
 
 const testMeteorSettingsUrl = (settingsUrl, withSlash = false) => {
   const url = settingsUrl;
