@@ -17,8 +17,13 @@ const appBarStyle = {
 export const Header = () => {
   return (
     <AppBar sx={appBarStyle}>
-      <Link to="/">
-        <img src={'/images/eole-sans-fond.svg'} alt="Logo" height={45} />
+      <Link to="/" style={{ textDecoration: 'none', display: 'flex' }}>
+        <img
+          src="/images/puce_eole.png"
+          alt="eole logo"
+          style={{ height: 30, marginTop: '2.5vh', paddingRight: '1vh' }}
+        />
+        <h1 style={{ fontFamily: 'OdinRounded', color: '#372f84' }}>Questionnaire</h1>
       </Link>
       <MainMenu />
     </AppBar>
