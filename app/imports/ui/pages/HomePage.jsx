@@ -37,16 +37,11 @@ export const HomePage = () => {
       <h1 style={{ textAlign: 'center' }}>Bienvenue dans la nouvelle application</h1>
       {user ? (
         <div style={{ textAlign: 'center' }}>
-          <Button size="large" onClick={() => navigate('/logout')}>
-            Logout
-          </Button>
           <Button size="large" onClick={() => navigate('/builder')}>
             Builder
           </Button>
         </div>
-      ) : (
-        <Button onClick={() => Meteor.loginWithKeycloak()}>Login</Button>
-      )}
+      ) : null}
       <div>
         {user ? (
           <div>
