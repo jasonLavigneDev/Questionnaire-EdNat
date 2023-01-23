@@ -13,7 +13,7 @@ export const AnswersPage = () => {
     });
   });
 
-  formFromBDD.formAnswers.forEach((userAnswer) => {
+  formFromBDD.formAnswers?.forEach((userAnswer) => {
     finalArray.forEach((questionObj) => {
       const questionId = questionObj.questionId;
       let response = userAnswer.answers

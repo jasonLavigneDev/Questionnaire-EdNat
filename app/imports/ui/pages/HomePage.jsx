@@ -54,6 +54,7 @@ export const HomePage = () => {
             <div>
               {forms.map((form) => (
                 <div
+                  key={form._id}
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -62,11 +63,11 @@ export const HomePage = () => {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <div key={form._id} style={{ flexDirection: 'column' }}>
+                  <div style={{ flexDirection: 'column' }}>
                     <Typography variant="body1">{form.title}</Typography>
                   </div>
 
-                  <div key={form._id} style={{ flexDirection: 'column' }}>
+                  <div style={{ flexDirection: 'column' }}>
                     <Button onClick={() => navigate(`/answers/${form._id}`)}>Voir les reponses </Button>
                     <Button onClick={() => navigate(`/visualizer/${form._id}`)}>Repondre a ce formulaire</Button>
                     <Divider />
