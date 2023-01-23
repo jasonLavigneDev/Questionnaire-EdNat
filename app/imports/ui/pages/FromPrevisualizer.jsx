@@ -3,11 +3,9 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
 import { FormContext } from '../contexts/FormContext';
-import { UserContext } from '../contexts/UserContext';
 
 export const FormPrevisualizer = () => {
   const { form, resetFormContext, setActiveStep } = useContext(FormContext);
-  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -15,7 +13,6 @@ export const FormPrevisualizer = () => {
     const result = await Meteor.callAsync('forms.createForm', {
       title: form.title,
       desc: form.description,
-      owner: user._id,
       isModel: false,
       isPublic: form.public,
       groups: [],

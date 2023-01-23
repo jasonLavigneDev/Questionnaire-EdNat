@@ -30,3 +30,4 @@ mdg:validated-method
 dburles:factory
 accounts-base@2.2.6
 eoleteam:accounts-keycloak
+accounts-password
