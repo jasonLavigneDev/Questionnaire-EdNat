@@ -4,10 +4,14 @@ import { useTracker } from 'meteor/react-meteor-data';
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const isLoading = useTracker(() => {
+    userHandle = Meteor.subscribe('userData');
+    return !userHandle.ready();
+  });
   const user = useTracker(() => {
     return Meteor.user();
   });
   const isAuthenticated = !!user;
 
-  return <UserContext.Provider value={{ user, isAuthenticated }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ user, isLoading, isAuthenticated }}>{children}</UserContext.Provider>;
 };
