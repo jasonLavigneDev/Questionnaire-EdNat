@@ -30,7 +30,6 @@ Meteor.users.schema = new SimpleSchema(
     },
     'emails.$.address': {
       type: String,
-      regEx: SimpleSchema.RegEx.Email,
       label: getLabel('api.users.labels.emailAddress'),
     },
     'emails.$.verified': {
@@ -72,7 +71,6 @@ Meteor.users.schema = new SimpleSchema(
     },
     primaryEmail: {
       type: String,
-      regEx: SimpleSchema.RegEx.Email,
       optional: true,
       label: getLabel('api.users.labels.primaryEmail'),
     },
