@@ -1,0 +1,6 @@
+@font-face {
+  font-family: OdinRounded;
+  src: url('/font/Odin-Rounded-Bold.woff2') format('woff2'), url('/font/Odin-Rounded-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
