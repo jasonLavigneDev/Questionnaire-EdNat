@@ -14,18 +14,19 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { FormContext } from '../../contexts/FormContext';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { UserContext } from '../../contexts/UserContext';
 
 export const FormInfos = () => {
   const { form, setForm } = useContext(FormContext);
-  const { user, setUser } = useContext(UserContext);
-  const [userGroups, setUserGroups] = useState([]);
-  const [currentGroup, setCurrentGroup] = useState({});
+  const [groupOfThisUser, setGroupOfThisUser] = useState([]);
+  const [groupSelected, setGroupSelected] = useState({});
+  const [isOnlyForGroup, setIsOnlyForGroup] = useState(false);
+
+  const formFromBDD = useLoaderData();
 
   const getGroups = async () => {
     Meteor.callAsync('groups.getUserGroups')
       .then((res) => {
-        setUserGroups(res);
+        setGroupOfThisUser(res);
       })
       .catch((err) => {
         console.log('groups.getUserGroups', err.reason);
@@ -33,36 +34,30 @@ export const FormInfos = () => {
   };
 
   const filterUserGroups = () => {
-    return userGroups.filter((group) => form.groups.findIndex((groupId) => groupId === group._id) === -1);
-  };
-
-  const setGroupReserved = () => {
-    if (form.groupReserved) {
-      setForm({ ...form, isPublic: false });
-    }
+    return groupOfThisUser.filter((group) => form.groups.findIndex((groupId) => groupId === group._id) === -1);
   };
 
   const getGroup = (value) => {
-    const index = userGroups.findIndex((group) => group.name === value);
+    const index = groupOfThisUser.findIndex((group) => group.name === value);
     if (index === -1) {
       return;
     }
 
-    setCurrentGroup(userGroups[index]);
+    setGroupSelected(groupOfThisUser[index]);
   };
 
   const getGroupName = (id) => {
-    const index = userGroups.findIndex((group) => group._id === id);
+    const index = groupOfThisUser.findIndex((group) => group._id === id);
     if (index !== -1) {
-      return userGroups[index].name;
+      return groupOfThisUser[index].name;
     }
     return 'N/A';
   };
 
   const addGroupToList = () => {
-    if (currentGroup) {
-      setForm({ ...form, groups: [...form.groups, currentGroup._id] });
-      setCurrentGroup({});
+    if (groupSelected) {
+      setForm({ ...form, groups: [...form.groups, groupSelected._id] });
+      setGroupSelected({});
     }
   };
 
@@ -71,37 +66,30 @@ export const FormInfos = () => {
     setForm({ ...form, groups: groups.filter((groupId) => groupId !== id) });
   };
 
-  const formId = useLoaderData();
-
-  console.log('formId', formId);
+  console.log('formFromBDD', formFromBDD);
+  console.log('form context', form);
 
   useEffect(() => {
-    if (formId) {
-      setForm(formId);
+    if (formFromBDD) {
+      setForm(formFromBDD);
     }
-    if (form.groups.length !== 0) {
-      setGroupReserved(true);
-    }
-  }, [formId]);
+  }, [formFromBDD]);
 
   useEffect(() => {
     getGroups();
-    console.log(form);
+    if (form.groups.length > 0) {
+      setIsOnlyForGroup(true);
+    }
   }, [form]);
 
-  useEffect(() => {
-    if (form.groupReserved) setForm({ ...form, isPublic: false });
-    else {
+  const handleChangeGroupChecked = () => {
+    if (isOnlyForGroup === false) {
+      setIsOnlyForGroup(true);
+    } else {
+      setIsOnlyForGroup(false);
       setForm({ ...form, groups: [] });
-      setCurrentGroup({});
     }
-    if (form.isPublic) {
-      setForm({ ...form, groupReserved: false, groups: [] });
-      setCurrentGroup({});
-    }
-  }, [form.groupReserved, form.isPublic]);
-
-  console.log('form depuis id dans intro', form);
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -123,6 +111,7 @@ export const FormInfos = () => {
       />
       <FormGroup>
         <FormControlLabel
+          disabled={isOnlyForGroup}
           control={
             <Checkbox
               checked={form.isPublic}
@@ -133,27 +122,17 @@ export const FormInfos = () => {
           label="Formulaire public"
         />
       </FormGroup>
-      {!form.isPublic ? (
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={form.groups.length !== 0}
-                onChange={() =>
-                  setForm({
-                    ...form,
-                    groupReserved: !form.groupReserved,
-                  })
-                }
-                name="réservé aux groupes"
-              />
-            }
-            label="Réservé aux groupes"
-          />
-        </FormGroup>
-      ) : null}
-      {form.groupReserved ? (
-        userGroups ? (
+      <FormGroup>
+        <FormControlLabel
+          disabled={form.isPublic}
+          control={
+            <Checkbox checked={isOnlyForGroup} onChange={() => handleChangeGroupChecked()} name="réservé aux groupes" />
+          }
+          label="Réservé aux groupes"
+        />
+      </FormGroup>
+      {isOnlyForGroup ? (
+        groupOfThisUser ? (
           <div>
             <br />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -161,7 +140,7 @@ export const FormInfos = () => {
                 <InputLabel id="selectInput-Groups">Choix du groupe</InputLabel>
                 <Select
                   labelId="selectInput-Groups"
-                  value={currentGroup.name}
+                  value={groupSelected.name}
                   onChange={(event) => {
                     getGroup(event.target.value);
                   }}

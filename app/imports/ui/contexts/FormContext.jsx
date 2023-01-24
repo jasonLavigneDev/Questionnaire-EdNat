@@ -5,7 +5,6 @@ const initialState = {
   desc: '',
   components: [],
   groups: [],
-  groupReserved: false,
   isPublic: false,
 };
 
