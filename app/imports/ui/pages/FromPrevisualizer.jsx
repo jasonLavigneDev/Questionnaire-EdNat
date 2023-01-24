@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
+import { Breadcrumb } from '../components/system/Breadcrumb';
 import { FormContext } from '../contexts/FormContext';
 
 export const FormPrevisualizer = () => {
@@ -34,6 +35,7 @@ export const FormPrevisualizer = () => {
     <div>
       {form ? (
         <div>
+          <Breadcrumb />
           <Visualizer />
         </div>
       ) : (

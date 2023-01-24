@@ -5,9 +5,12 @@ import { Breadcrumb } from '../components/system/Breadcrumb';
 
 export const BuilderLayout = () => {
   return (
-    <>
-      <div style={{ padding: '5vh 15vw' }}></div>
+    <div
+      style={{
+        padding: '5vh 10vw',
+      }}
+    >
       <Outlet />
-    </>
+    </div>
   );
 };
