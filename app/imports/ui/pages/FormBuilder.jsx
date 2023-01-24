@@ -7,6 +7,7 @@ import { UserContext } from '../contexts/UserContext';
 import { FormContext } from '../contexts/FormContext';
 import { MsgError } from '../components/system/MsgError';
 import { useState } from 'react';
+import { Breadcrumb } from '../components/system/Breadcrumb';
 
 export const FormBuilder = () => {
   const { form, setActiveStep } = useContext(FormContext);
@@ -30,6 +31,7 @@ export const FormBuilder = () => {
 
   return (
     <>
+      <Breadcrumb />
       <div style={{ display: 'flex', height: '90vh', flexDirection: 'column' }}>
         <Visualizer edit={true} />
         <h3 style={{ textAlign: 'center' }}>Choisissez le type de question / réponse </h3>
