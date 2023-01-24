@@ -37,11 +37,11 @@ export const FormPrevisualizer = () => {
           <Visualizer />
         </div>
       ) : (
-        <p>ce formulaire n'existe pas</p>
+        <p>Ce formulaire n'existe pas</p>
       )}
 
-      <Button onClick={() => navigate('/builder/components')}>Retour</Button>
-      <Button onClick={() => handleSubmit()}>Enregistrer le résultat</Button>
+      <Button onClick={() => navigate('/builder/components')}>Retour sur la création de questions</Button>
+      <Button onClick={() => handleSubmit()}>Enregistrer ce questionnaire</Button>
     </div>
   );
 };

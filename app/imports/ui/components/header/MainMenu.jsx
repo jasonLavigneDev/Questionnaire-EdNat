@@ -43,7 +43,7 @@ const MainMenu = () => {
         </div>
       </Button>
       <Menu anchorEl={open} open={open} onClick={() => setOpen(!open)}>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Se déconnecter</MenuItem>
         <Divider />
         <MenuItem disabled style={{ opacity: 0.3 }}>
           Version {version}
@@ -52,7 +52,7 @@ const MainMenu = () => {
     </div>
   ) : (
     <Button variant="outlined" onClick={() => Meteor.loginWithKeycloak()}>
-      Login
+      Se connecter
     </Button>
   );
 };

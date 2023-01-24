@@ -35,21 +35,16 @@ export const HomePage = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>Questionnaire</h1>
       {user ? (
-        <div style={{ textAlign: 'center' }}>
-          <Button size="large" onClick={() => navigate('/logout')}>
+        <>
+          <div style={{ textAlign: 'center' }}>
+            {/* <Button size="large" onClick={() => navigate('/logout')}>
             Se déconnecter
-          </Button>
-          <Button size="large" onClick={() => navigate('/builder/intro')}>
-            Nouveau questionnaire
-          </Button>
-        </div>
-      ) : (
-        <Button onClick={() => Meteor.loginWithKeycloak()}>Se connecter</Button>
-      )}
-      <div>
-        {user ? (
+          </Button> */}
+            <Button size="large" onClick={() => navigate('/builder/intro')}>
+              Nouveau questionnaire
+            </Button>
+          </div>
           <div>
             <h2>Liste de vos questionnaires</h2>
             <div>
@@ -78,8 +73,11 @@ export const HomePage = () => {
               ))}
             </div>
           </div>
-        ) : null}
-      </div>
+        </>
+      ) : (
+        <p>Veuillez vous connecter</p>
+      )}
+      {/* </div> */}
     </>
   );
 };

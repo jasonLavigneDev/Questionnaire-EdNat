@@ -95,18 +95,18 @@ export const FormInfos = () => {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <TextField
         id="formTitle"
-        label="Titre"
+        label="Entrez le titre du questionnaire"
         variant="outlined"
         value={form.title}
-        helperText="Entrez votre titre"
+        helperText="Le titre est obligatoire"
         onChange={(e) => setForm({ ...form, title: e.target.value })}
       />
       <TextField
-        id="formdesc"
-        label="description"
+        id="formDescription"
+        label="Entrez une description de votre formulaire"
         variant="outlined"
         value={form.desc}
-        helperText="Entrez votre description"
+        helperText="La description est facultative"
         onChange={(e) => setForm({ ...form, desc: e.target.value })}
       />
       <FormGroup>

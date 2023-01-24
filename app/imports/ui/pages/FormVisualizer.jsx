@@ -19,7 +19,7 @@ export const FormVisualizer = () => {
           <Visualizer answerMode={true} completeForm={form} />
         </div>
       ) : (
-        <p>ce formulaire n'existe pas</p>
+        <p>Ce formulaire n'existe pas</p>
       )}
     </div>
   );

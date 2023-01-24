@@ -29,7 +29,7 @@ export const TextAreaInputBuilder = () => {
     <Paper>
       <TextField
         id="questionText"
-        label="titre"
+        label="Entrez le titre de la question"
         variant="outlined"
         value={questionText}
         helperText="Entrez votre question"

@@ -58,7 +58,7 @@ export const RadioInputBuilder = () => {
     <Paper>
       <TextField
         id="questionText"
-        label="titre"
+        label="Entrez le titre de la question"
         variant="outlined"
         value={questionText}
         helperText="Entrez votre question"
@@ -67,22 +67,24 @@ export const RadioInputBuilder = () => {
       <br />
       <TextField
         id="option"
-        label="option"
+        label="Entrez un choix de réponse"
         variant="outlined"
         value={answerText}
         helperText="Entrez un choix de reponse"
         onChange={(e) => setAnswerText(e.target.value)}
       />
-      <Button onClick={() => addOption(answerText)}>Ajoutez cette option</Button>
+      <Button onClick={() => addOption(answerText)}>Ajoutez ce choix de réponse</Button>
       {answerOptions.map((option) => (
-        <div key={uuidv4()}>
+        <div style={{ display: 'flex' }} key={uuidv4()}>
           <p>{option}</p>
-          <Button onClick={() => removeOption(option)}>Supprimez cette option</Button>
+          <Button onClick={() => removeOption(option)}>Supprimez ce choix de réponse</Button>
         </div>
       ))}
       <br />
       {/* <SubmitButton handleClick={handleSubmit} /> */}
-      <Button onClick={handleSubmit}>Validez cette question et ses possibilités de réponses</Button>
+      <Button style={{ textAlign: 'center', width: '100%' }} onClick={handleSubmit}>
+        Validez cette question et ses possibilités de réponses
+      </Button>
       {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}
     </Paper>
   );

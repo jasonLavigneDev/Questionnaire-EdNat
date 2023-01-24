@@ -36,11 +36,11 @@ export const AnswersPage = () => {
           <h3>Question : {question.questionTitle}</h3>
           <div>
             {question.responses.map((response) => (
-              <div>
-                <p>
+              <ul>
+                <li>
                   <b>{response.userName} </b>: {response.response}
-                </p>
-              </div>
+                </li>
+              </ul>
             ))}
           </div>
           <hr />
