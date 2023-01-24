@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormInfos } from '../components/form/FormInfos';
 import { FormContext } from '../contexts/FormContext';
@@ -13,10 +13,14 @@ export const FormIntro = () => {
     navigate(`/builder/components/${form._id}`);
   };
 
+  const isDisabled = !form.title;
+
   return (
     <>
       <FormInfos />
-      <Button onClick={() => handleSubmit()}>Valider ce titre et cette description</Button>
+      <Button disabled={isDisabled} onClick={() => handleSubmit()}>
+        Passer a l etape suivante
+      </Button>
     </>
   );
 };

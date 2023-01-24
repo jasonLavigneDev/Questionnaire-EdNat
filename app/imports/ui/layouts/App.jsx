@@ -10,7 +10,7 @@ import { FormVisualizer, loaderVisualizer } from '../pages/FormVisualizer';
 import { UserProvider } from '../contexts/UserContext';
 import { FormProvider } from '../contexts/FormContext';
 import { MainLayout } from './MainLayout';
-import { FormPrevisualizer } from '../pages/FromPrevisualizer';
+import { FormPrevisualizer } from '../pages/FormPrevisualizer';
 import { BuilderLayout } from './BuilderLayout';
 import { AnswerProvider } from '../contexts/AnswerContext';
 import { AnswersPage, loaderAnswerPage } from '../pages/AnswersPage';

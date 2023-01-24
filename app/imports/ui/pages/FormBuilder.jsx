@@ -5,11 +5,24 @@ import { Visualizer } from '../components/form/Visualizer';
 import { InputChoice } from '../components/form/InputChoice';
 import { UserContext } from '../contexts/UserContext';
 import { FormContext } from '../contexts/FormContext';
+import { MsgError } from '../components/system/MsgError';
+import { useState } from 'react';
 
 export const FormBuilder = () => {
-  const { setActiveStep } = useContext(FormContext);
+  const { form, setActiveStep } = useContext(FormContext);
   const { isAuthenticated } = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+
+  const isDisable = !form.title || form.components.length === 0;
+
+  const handleSubmit = () => {
+    if (isDisable) {
+      setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
+    } else {
+      navigate('/builder/previsualizer');
+    }
+  };
 
   useEffect(() => {
     setActiveStep(1);
@@ -24,8 +37,11 @@ export const FormBuilder = () => {
         <br />
         <div style={{ display: 'flex' }}>
           <Button onClick={() => navigate('/builder/intro')}>Retour </Button>
-          <Button onClick={() => navigate('/builder/previsualizer')}>Voir un apercu du questionnaire </Button>
+          <Button disabled={isDisable} onClick={() => handleSubmit()}>
+            Voir un apercu du questionnaire
+          </Button>
         </div>
+        {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}
       </div>
       <br />
     </>
