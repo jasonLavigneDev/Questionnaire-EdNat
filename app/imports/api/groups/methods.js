@@ -10,7 +10,6 @@ export const getUserGroups = new ValidatedMethod({
 
       if (user) {
         const res = await Groups.find({ _id: { $in: user.favGroups } }).mapAsync((x) => x);
-        console.log(res);
         return res;
       } else {
         throw new Meteor.Error('api.forms.getUserForms.notLoggedIn', "Pas d'utilisateur connecté");

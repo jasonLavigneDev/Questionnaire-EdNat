@@ -27,9 +27,6 @@ export const AnswersPage = () => {
       questionObj.responses.push({ response, userName: userAnswer.userId });
     });
   });
-  console.log('finalArray', finalArray);
-
-  console.log('formFromBDD', formFromBDD);
 
   return (
     <>

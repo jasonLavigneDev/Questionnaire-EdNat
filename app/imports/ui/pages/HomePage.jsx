@@ -38,7 +38,10 @@ export const HomePage = () => {
       <h1 style={{ textAlign: 'center' }}>Bienvenue dans la nouvelle application</h1>
       {user ? (
         <div style={{ textAlign: 'center' }}>
-          <Button size="large" onClick={() => navigate('/builder')}>
+          <Button size="large" onClick={() => navigate('/logout')}>
+            Logout
+          </Button>
+          <Button size="large" onClick={() => navigate('/builder/intro')}>
             Builder
           </Button>
         </div>
@@ -66,6 +69,7 @@ export const HomePage = () => {
                   <div style={{ flexDirection: 'column' }}>
                     <Button onClick={() => navigate(`/answers/${form._id}`)}>Voir les reponses </Button>
                     <Button onClick={() => navigate(`/visualizer/${form._id}`)}>Repondre a ce formulaire</Button>
+                    <Button onClick={() => navigate(`/builder/intro/${form._id}`)}>Editer ce formulaire</Button>
                     <Divider />
                   </div>
                 </div>

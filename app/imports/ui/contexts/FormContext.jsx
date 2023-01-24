@@ -2,11 +2,10 @@ import React, { createContext, useState } from 'react';
 
 const initialState = {
   title: '',
-  description: '',
+  desc: '',
   components: [],
   groups: [],
-  public: false,
-  groupReserved: false,
+  isPublic: false,
 };
 
 export const FormContext = createContext(initialState);

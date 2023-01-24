@@ -12,10 +12,10 @@ export const FormPrevisualizer = () => {
   const handleSubmit = async () => {
     const result = await Meteor.callAsync('forms.createForm', {
       title: form.title,
-      desc: form.description,
+      desc: form.desc,
       isModel: false,
-      isPublic: form.public,
       groups: form.groups,
+      isPublic: form.isPublic,
       components: form.components,
     });
     if (!result) {
@@ -34,8 +34,6 @@ export const FormPrevisualizer = () => {
     <div>
       {form ? (
         <div>
-          <h3 style={{ textAlign: 'center' }}>{form.title}</h3>
-          <h4 style={{ textAlign: 'center' }}>{form.description}</h4>
           <Visualizer />
         </div>
       ) : (
