@@ -16,7 +16,7 @@ export const FormIntro = () => {
   return (
     <>
       <FormInfos />
-      <Button onClick={() => handleSubmit()}>Passer a l etape suivante</Button>
+      <Button onClick={() => handleSubmit()}>Valider ce titre et cette description</Button>
     </>
   );
 };

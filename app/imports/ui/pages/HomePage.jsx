@@ -35,21 +35,18 @@ export const HomePage = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>Bienvenue dans la nouvelle application</h1>
       {user ? (
-        <div style={{ textAlign: 'center' }}>
-          <Button size="large" onClick={() => navigate('/logout')}>
-            Logout
-          </Button>
-          <Button size="large" onClick={() => navigate('/builder/intro')}>
-            Builder
-          </Button>
-        </div>
-      ) : null}
-      <div>
-        {user ? (
+        <>
+          <div style={{ textAlign: 'center' }}>
+            {/* <Button size="large" onClick={() => navigate('/logout')}>
+            Se déconnecter
+          </Button> */}
+            <Button size="large" onClick={() => navigate('/builder/intro')}>
+              Nouveau questionnaire
+            </Button>
+          </div>
           <div>
-            <h2>Liste des formulaires</h2>
+            <h2>Liste de vos questionnaires</h2>
             <div>
               {forms.map((form) => (
                 <div
@@ -76,8 +73,11 @@ export const HomePage = () => {
               ))}
             </div>
           </div>
-        ) : null}
-      </div>
+        </>
+      ) : (
+        <p>Veuillez vous connecter</p>
+      )}
+      {/* </div> */}
     </>
   );
 };

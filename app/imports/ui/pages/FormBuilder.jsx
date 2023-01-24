@@ -18,13 +18,14 @@ export const FormBuilder = () => {
   return (
     <>
       <div style={{ display: 'flex', height: '90vh', flexDirection: 'column' }}>
-        <h1>User connecté : {isAuthenticated ? 'true' : 'false'}</h1>
-        <h3 style={{ textAlign: 'center' }}>Presentation du formulaire créé avec vos inputs</h3>
         <Visualizer edit={true} />
-        <h3 style={{ textAlign: 'center' }}>Choix des inputs</h3>
+        <h3 style={{ textAlign: 'center' }}>Choisissez le type de question / réponse </h3>
         <InputChoice />
         <br />
-        <Button onClick={() => navigate('/builder/previsualizer')}>Prévisualiser le résultat</Button>
+        <div style={{ display: 'flex' }}>
+          <Button onClick={() => navigate('/builder/intro')}>Retour </Button>
+          <Button onClick={() => navigate('/builder/previsualizer')}>Voir un apercu du questionnaire </Button>
+        </div>
       </div>
       <br />
     </>

@@ -114,8 +114,8 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
   if (isAuthenticated || form.isPublic) {
     return (
       <div>
-        <h3 style={{ textAlign: 'center' }}>{form.title}</h3>
-        <h4 style={{ textAlign: 'center' }}>{form.desc}</h4>
+        {/* <h3 style={{ textAlign: 'center' }}>{form.title}</h3> */}
+        {/* <h4 style={{ textAlign: 'center' }}>{form.desc}</h4> */}
         {form.components.map((componentInput, index) => (
           <div key={componentInput.id}>
             <br />
@@ -157,17 +157,17 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
                   placeholder={'entrez votre nom'}
                   onChange={(e) => setPublicName(e.target.value)}
                 />
-                <button disabled={!publicName} onClick={submitAnswerForm}>
+                <Button disabled={!publicName} onClick={submitAnswerForm}>
                   Soumettre ce formulaire complété
-                </button>
+                </Button>
               </div>
             )}
-            {user && <button onClick={submitAnswerForm}>Soumettre ce formulaire complété</button>}
+            {user && <Button onClick={submitAnswerForm}>Soumettre ce formulaire complété</Button>}
           </div>
         )}
       </div>
     );
   } else {
-    return <button onClick={() => Meteor.loginWithKeycloak()}>connectes toi form non public</button>;
+    return <p>Veuillez vous connecter pour répondre a ce questionnaire</p>;
   }
 };
