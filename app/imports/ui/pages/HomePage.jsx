@@ -1,14 +1,11 @@
 import { Button, Divider, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import { FormContext } from '../contexts/FormContext';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
-
-  console.log('user', user);
-
   const [forms, setForms] = useState([]);
 
   const getForms = async () => {
@@ -38,6 +35,12 @@ export const HomePage = () => {
     }
   };
 
+  const hasNotAnswers = (formId) => {
+    const form = forms.find((form) => form._id === formId);
+    if (!form.formAnswers || form.formAnswers.length === 0) return true;
+    return false;
+  };
+
   const navigate = useNavigate();
 
   const { resetFormContext } = useContext(FormContext);
@@ -51,9 +54,6 @@ export const HomePage = () => {
       {user ? (
         <>
           <div style={{ textAlign: 'center' }}>
-            {/* <Button size="large" onClick={() => navigate('/logout')}>
-            Se déconnecter
-          </Button> */}
             <Button size="large" onClick={() => navigate('/builder/intro')}>
               Nouveau questionnaire
             </Button>
@@ -75,14 +75,14 @@ export const HomePage = () => {
                   <div style={{ flexDirection: 'column' }}>
                     <Typography variant="body1">{form.title}</Typography>
                   </div>
-
                   <div style={{ flexDirection: 'column' }}>
-                    <Button onClick={() => navigate(`/answers/${form._id}`)}>Voir les reponses </Button>
+                    <Button disabled={hasNotAnswers(form._id)} onClick={() => navigate(`/answers/${form._id}`)}>
+                      Voir les reponses{' '}
+                    </Button>
                     <Button disabled={hasAlreadyRespond(form._id)} onClick={() => navigate(`/visualizer/${form._id}`)}>
                       Repondre a ce formulaire
                     </Button>
                     <Button onClick={() => navigate(`/builder/intro/${form._id}`)}>Editer ce formulaire</Button>
-
                     <Divider />
                   </div>
                 </div>
@@ -93,7 +93,6 @@ export const HomePage = () => {
       ) : (
         <p>Veuillez vous connecter</p>
       )}
-      {/* </div> */}
     </>
   );
 };
