@@ -6,15 +6,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { TextField, Button, Paper } from '@mui/material';
 import { createComponentObject, isDuplicate, isEmptyObject } from '../../../utils/utils';
 import { MsgError } from '../../system/MsgError';
-import { SubmitButton } from '../../system/SubmitButton';
-import { FormContext } from '../../../contexts/FormContext';
+import { GlobalStateContext } from '../../../contexts/GlobalStateContext';
 
 export const SelectInputBuilder = ({ componentEdit = {} }) => {
   const [questionText, setQuestionText] = useState(componentEdit.title || '');
   const [answerText, setAnswerText] = useState('');
   const [answerOptions, setAnswerOptions] = useState(componentEdit.choices || []);
   const [errorMessage, setErrorMessage] = useState('');
-  const { form, setForm } = useContext(FormContext);
+  const { form, setForm } = useContext(GlobalStateContext);
 
   const addOption = (option) => {
     if (option) {

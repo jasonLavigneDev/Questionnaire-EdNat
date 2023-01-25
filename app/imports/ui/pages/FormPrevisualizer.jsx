@@ -4,15 +4,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
 import { MsgError } from '../components/system/MsgError';
-import { FormContext } from '../contexts/FormContext';
 import { Breadcrumb } from '../components/system/Breadcrumb';
+import { GlobalStateContext } from '../contexts/GlobalStateContext';
 
 export const FormPrevisualizer = () => {
-  const { form, resetFormContext, setActiveStep } = useContext(FormContext);
+  const { form, resetFormContext, setActiveStep } = useContext(GlobalStateContext);
   const [errorMessage, setErrorMessage] = useState('');
-
   const navigate = useNavigate();
-
   const isDisable = !form.title || form.components.length === 0;
 
   const handleSubmit = async () => {

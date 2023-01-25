@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel } from '@mui/material';
-import { AnswerContext } from '../../../contexts/AnswerContext';
+import { GlobalStateContext } from '../../../contexts/GlobalStateContext';
 
 export const CheckBoxInput = ({ title, choices, required = false, answerMode, questionId }) => {
   const [answers, setAnswers] = useState([]);
-  const { addAnswers } = useContext(AnswerContext);
+  const { addAnswers } = useContext(GlobalStateContext);
 
   const handleChange = (event) => {
     const index = answers.findIndex((o) => o.name === event.target.name);

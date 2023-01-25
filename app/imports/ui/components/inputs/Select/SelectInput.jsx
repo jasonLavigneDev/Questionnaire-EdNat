@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { AnswerContext } from '../../../contexts/AnswerContext';
+import { GlobalStateContext } from '../../../contexts/GlobalStateContext';
 
 export const SelectInput = ({ title, choices, answerMode, questionId }) => {
   const [answer, setAnswer] = useState('');
-  const { addAnswers } = useContext(AnswerContext);
+  const { addAnswers } = useContext(GlobalStateContext);
 
   const handleChange = (event) => {
     setAnswer(event.target.value);

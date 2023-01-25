@@ -1,23 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { useState } from 'react';
-import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
-import { MsgError } from '../components/system/MsgError';
-import { FormContext } from '../contexts/FormContext';
-import { UserContext } from '../contexts/UserContext';
+import { GlobalStateContext } from '../contexts/GlobalStateContext';
 
 export const FormVisualizer = () => {
   const formFromBDD = useLoaderData();
-
-  const { form, setForm } = useContext(FormContext);
-  const { user } = useContext(UserContext);
-  const [errorMessage, setErrorMessage] = useState('');
-
+  const { form, setForm, user } = useContext(GlobalStateContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setForm(formFromBDD);
-  }, []);
 
   const hasAlreadyRespond = () => {
     if (!form.formAnswers || form.formAnswers.length === 0) return false;
@@ -28,6 +17,10 @@ export const FormVisualizer = () => {
   const handleRedirect = () => {
     navigate('/');
   };
+
+  useEffect(() => {
+    setForm(formFromBDD);
+  }, []);
 
   return (
     <div>

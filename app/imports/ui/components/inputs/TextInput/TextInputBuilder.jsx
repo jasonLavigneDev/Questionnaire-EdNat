@@ -5,12 +5,12 @@ import { i18n } from 'meteor/universe:i18n';
 import { TextField, Button, Paper } from '@mui/material';
 import { createComponentObject, isEmptyObject } from '../../../utils/utils';
 import { MsgError } from '../../system/MsgError';
-import { FormContext } from '../../../contexts/FormContext';
+import { GlobalStateContext } from '../../../contexts/GlobalStateContext';
 
 export const TextInputBuilder = ({ componentEdit = {} }) => {
   const [questionText, setQuestionText] = useState(componentEdit.title || '');
   const [errorMessage, setErrorMessage] = useState('');
-  const { form, setForm } = useContext(FormContext);
+  const { form, setForm } = useContext(GlobalStateContext);
 
   const handleSubmit = () => {
     if (questionText) {

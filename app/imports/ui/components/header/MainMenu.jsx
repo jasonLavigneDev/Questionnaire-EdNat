@@ -1,19 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Typography, Menu, MenuItem, Avatar, Divider } from '@mui/material';
-import { identicon } from 'minidenticons';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-import { UserContext } from '../../contexts/UserContext';
+import { identicon } from 'minidenticons';
 import PackageJSON from '../../../../package.json';
+import { GlobalStateContext } from '../../contexts/GlobalStateContext';
 
 const MainMenu = () => {
-  const { user, isLoading } = useContext(UserContext);
+  const [open, setOpen] = useState(false);
+  const { user, isLoading } = useContext(GlobalStateContext);
   const navigate = useNavigate();
   const { version } = PackageJSON;
 
-  const [open, setOpen] = useState(false);
   const handleClick = (event) => {
     setOpen(event.currentTarget);
   };
@@ -27,7 +26,7 @@ const MainMenu = () => {
       <Button
         endIcon={<ExpandMoreIcon fontSize="large" />}
         style={{ textTransform: 'none' }}
-        onClick={(event) => handleClick(event)}
+        onClick={() => setOpen(true)}
       >
         <Typography variant="body1" sx={{ marginRight: '1vw' }}>
           {user.username || 'Invité'}
@@ -42,7 +41,13 @@ const MainMenu = () => {
           )}
         </div>
       </Button>
-      <Menu anchorEl={open} open={open} onClick={() => setOpen(!open)}>
+      <Menu
+        anchorEl={open}
+        open={open}
+        onClick={(event) => {
+          handleClick(event);
+        }}
+      >
         <MenuItem onClick={handleLogout}>Se déconnecter</MenuItem>
         <Divider />
         <MenuItem disabled style={{ opacity: 0.3 }}>

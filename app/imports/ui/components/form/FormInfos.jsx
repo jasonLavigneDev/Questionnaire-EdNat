@@ -12,15 +12,14 @@ import {
 } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { FormContext } from '../../contexts/FormContext';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { GlobalStateContext } from '../../contexts/GlobalStateContext';
 
 export const FormInfos = () => {
-  const { form, setForm } = useContext(FormContext);
+  const { form, setForm } = useContext(GlobalStateContext);
   const [groupOfThisUser, setGroupOfThisUser] = useState([]);
   const [groupSelected, setGroupSelected] = useState({});
   const [isOnlyForGroup, setIsOnlyForGroup] = useState(false);
-
   const formFromBDD = useLoaderData();
 
   const getGroups = async () => {
@@ -66,8 +65,14 @@ export const FormInfos = () => {
     setForm({ ...form, groups: groups.filter((groupId) => groupId !== id) });
   };
 
-  console.log('formFromBDD', formFromBDD);
-  console.log('form context', form);
+  const handleChangeGroupChecked = () => {
+    if (isOnlyForGroup === false) {
+      setIsOnlyForGroup(true);
+    } else {
+      setIsOnlyForGroup(false);
+      setForm({ ...form, groups: [] });
+    }
+  };
 
   useEffect(() => {
     if (formFromBDD) {
@@ -81,15 +86,6 @@ export const FormInfos = () => {
       setIsOnlyForGroup(true);
     }
   }, [form]);
-
-  const handleChangeGroupChecked = () => {
-    if (isOnlyForGroup === false) {
-      setIsOnlyForGroup(true);
-    } else {
-      setIsOnlyForGroup(false);
-      setForm({ ...form, groups: [] });
-    }
-  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
