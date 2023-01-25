@@ -1,9 +1,12 @@
+import { Button } from '@mui/material';
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 export const AnswersPage = () => {
   const formFromBDD = useLoaderData();
   const finalArray = [];
+
+  const navigate = useNavigate();
 
   formFromBDD.components.forEach((component) => {
     finalArray.push({
@@ -28,24 +31,38 @@ export const AnswersPage = () => {
     });
   });
 
+  const hasNotAnswers = () => {
+    if (!formFromBDD.formAnswers || formFromBDD.formAnswers.length === 0) return true;
+    return false;
+  };
+
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>Reponses du questionnaire : {formFromBDD.title}</h1>
-      {finalArray.map((question) => (
-        <div>
-          <h3>Question : {question.questionTitle}</h3>
-          <div>
-            {question.responses.map((response) => (
-              <ul>
-                <li>
-                  <b>{response.userName} </b>: {response.response}
-                </li>
-              </ul>
-            ))}
-          </div>
-          <hr />
-        </div>
-      ))}
+      {hasNotAnswers() ? (
+        <>
+          <p>Il n'y a pas de reponses</p>
+          <Button onClick={() => navigate('/')}>Retour </Button>
+        </>
+      ) : (
+        <>
+          <h1 style={{ textAlign: 'center' }}>Reponses du questionnaire : {formFromBDD.title}</h1>
+          {finalArray.map((question) => (
+            <div>
+              <h3>Question : {question.questionTitle}</h3>
+              <div>
+                {question.responses.map((response) => (
+                  <ul>
+                    <li>
+                      <b>{response.userName} </b>: {response.response}
+                    </li>
+                  </ul>
+                ))}
+              </div>
+              <hr />
+            </div>
+          ))}
+        </>
+      )}
     </>
   );
 };
