@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Stepper, Step, StepButton } from '@mui/material';
 import { useEffect } from 'react';
+import { FormContext } from '../../contexts/FormContext';
 
 export const Breadcrumb = () => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
+  const { form } = useContext(FormContext);
 
   useEffect(() => {
     const url = window.location.href;
@@ -25,17 +27,17 @@ export const Breadcrumb = () => {
   return (
     <div style={{ marginBottom: '10vh' }}>
       <Stepper nonLinear activeStep={activeStep}>
-        <Step key="intro" completed={activeStep === 1 || 2}>
+        <Step key="intro" completed={activeStep === 1 || activeStep === 2}>
           <StepButton color="inherit" onClick={() => handleClick('intro')}>
             Introduction
           </StepButton>
         </Step>
-        <Step key="components" completed={activeStep === 2}>
+        <Step key="components" completed={activeStep === 2} disabled={!form.title}>
           <StepButton color="inherit" onClick={() => handleClick('components')}>
             Composant
           </StepButton>
         </Step>
-        <Step key="previsualizer">
+        <Step key="previsualizer" disabled={form.components.length === 0}>
           <StepButton color="inherit" onClick={() => handleClick('previsualizer')}>
             Prévisualisation
           </StepButton>

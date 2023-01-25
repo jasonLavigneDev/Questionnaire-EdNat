@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
 import { MsgError } from '../components/system/MsgError';
 import { FormContext } from '../contexts/FormContext';
+import { Breadcrumb } from '../components/system/Breadcrumb';
 
 export const FormPrevisualizer = () => {
   const { form, resetFormContext, setActiveStep } = useContext(FormContext);
@@ -43,6 +44,7 @@ export const FormPrevisualizer = () => {
     <div>
       {form ? (
         <div>
+          <Breadcrumb />
           <Visualizer />
         </div>
       ) : (
