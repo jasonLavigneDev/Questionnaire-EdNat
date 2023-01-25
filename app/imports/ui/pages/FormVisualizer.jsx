@@ -47,5 +47,5 @@ export const FormVisualizer = () => {
 };
 
 export const loaderVisualizer = async ({ params }) => {
-  return await Meteor.callAsync('forms.getOne', params.id);
+  return (await Meteor.callAsync('forms.getOne', params.id)) || null;
 };
