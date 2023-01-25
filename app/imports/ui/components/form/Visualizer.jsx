@@ -15,10 +15,13 @@ import { TextArea } from '../inputs/TextArea/TextArea';
 import { FormContext } from '../../contexts/FormContext';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { UserContext } from '../../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Visualizer = ({ completeForm, answerMode = false, edit = false }) => {
   const { form, setForm } = useContext(FormContext);
   const { user, isAuthenticated } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const { answerForm, setAnswerForm } = useContext(AnswerContext);
 
@@ -92,15 +95,15 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
     }
   };
 
-  const submitAnswerForm = () => {
+  const submitAnswerForm = async () => {
     const newObj = { ...answerForm };
     newObj.formId = completeForm._id;
 
     newObj.userId = isAuthenticated ? user.username : publicName;
 
-    console.log('le formulaire de reponse a envoyer', answerForm);
     setAnswerForm(newObj);
-    Meteor.callAsync('forms.updateAnswers', newObj.formId, { userId: newObj.userId, answers: newObj.answers });
+    await Meteor.callAsync('forms.updateAnswers', newObj.formId, { userId: newObj.userId, answers: newObj.answers });
+    navigate('/');
   };
 
   useEffect(() => {
@@ -146,7 +149,6 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
         ))}
         {answerMode && (
           <div>
-            <p>mode reponse </p>
             {!user && (
               <div>
                 <input

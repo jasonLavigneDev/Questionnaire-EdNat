@@ -18,116 +18,113 @@ Groups.deny({
   },
 });
 
-Groups.schema = new SimpleSchema(
-  {
-    name: {
-      type: String,
-      min: 1,
-      max: 90,
-      label: getLabel('api.groups.labels.name'),
-    },
-    slug: {
-      type: String,
-      min: 1,
-      label: getLabel('api.groups.labels.slug'),
-    },
-    description: {
-      type: String,
-      optional: true,
-      label: getLabel('api.groups.labels.description'),
-    },
-    content: {
-      type: String,
-      optional: true,
-      label: getLabel('api.groups.labels.content'),
-    },
-    active: { type: Boolean, label: getLabel('api.groups.labels.active') },
-    groupPadID: {
-      type: String,
-      optional: true,
-      label: getLabel('api.groups.labels.groupPadID'),
-    },
-    digest: {
-      type: String,
-      optional: true,
-      label: getLabel('api.groups.labels.digest'),
-    },
-    type: {
-      type: SimpleSchema.Integer,
-      allowedValues: [0, 5, 10, 15], // 0 Ouvert, 5 Modéré, 10 Fermé, 15: Automatique
-      label: getLabel('api.groups.labels.type'),
-    },
-    avatar: {
-      type: String,
-      optional: true,
-      label: getLabel('api.users.labels.avatar'),
-      defaultValue: '',
-    },
-    applications: {
-      type: Array,
-      optional: true,
-    },
-    'applications.$': {
-      type: String,
-      label: getLabel('api.groups.labels.applications'),
-    },
-    owner: {
-      type: String,
-      label: getLabel('api.groups.labels.owner'),
-    },
-    admins: {
-      type: Array,
-      defaultValue: [],
-      label: getLabel('api.groups.labels.admins'),
-    },
-    'admins.$': { type: String },
-    animators: {
-      type: Array,
-      defaultValue: [],
-      label: getLabel('api.groups.labels.animators'),
-    },
-    'animators.$': { type: String },
-    members: {
-      type: Array,
-      defaultValue: [],
-      label: getLabel('api.groups.labels.members'),
-    },
-    'members.$': { type: String },
-    candidates: {
-      type: Array,
-      defaultValue: [],
-      label: getLabel('api.groups.labels.candidates'),
-    },
-    'candidates.$': { type: String },
-    numCandidates: {
-      type: Number,
-      defaultValue: 0,
-      label: getLabel('api.groups.labels.numCandidates'),
-    },
-    plugins: {
-      type: Object,
-      defaultValue: {},
-      optional: true,
-      blackbox: true,
-      label: getLabel('api.groups.labels.plugins'),
-    },
-    articles: {
-      type: Boolean,
-      defaultValue: false,
-      label: getLabel('api.groups.labels.articles'),
-    },
-    meeting: {
-      // server-side only, do not publish
-      type: Object,
-      defaultValue: {},
-      label: getLabel('api.groups.labels.meetingParams'),
-    },
-    'meeting.attendeePW': { type: String, defaultValue: '' },
-    'meeting.moderatorPW': { type: String, defaultValue: '' },
-    'meeting.createTime': { type: String, defaultValue: '' },
+Groups.schema = new SimpleSchema({
+  name: {
+    type: String,
+    min: 1,
+    max: 90,
+    label: getLabel('api.groups.labels.name'),
   },
-  { tracker: Tracker },
-);
+  slug: {
+    type: String,
+    min: 1,
+    label: getLabel('api.groups.labels.slug'),
+  },
+  description: {
+    type: String,
+    optional: true,
+    label: getLabel('api.groups.labels.description'),
+  },
+  content: {
+    type: String,
+    optional: true,
+    label: getLabel('api.groups.labels.content'),
+  },
+  active: { type: Boolean, label: getLabel('api.groups.labels.active') },
+  groupPadID: {
+    type: String,
+    optional: true,
+    label: getLabel('api.groups.labels.groupPadID'),
+  },
+  digest: {
+    type: String,
+    optional: true,
+    label: getLabel('api.groups.labels.digest'),
+  },
+  type: {
+    type: SimpleSchema.Integer,
+    allowedValues: [0, 5, 10, 15], // 0 Ouvert, 5 Modéré, 10 Fermé, 15: Automatique
+    label: getLabel('api.groups.labels.type'),
+  },
+  avatar: {
+    type: String,
+    optional: true,
+    label: getLabel('api.users.labels.avatar'),
+    defaultValue: '',
+  },
+  applications: {
+    type: Array,
+    optional: true,
+  },
+  'applications.$': {
+    type: String,
+    label: getLabel('api.groups.labels.applications'),
+  },
+  owner: {
+    type: String,
+    label: getLabel('api.groups.labels.owner'),
+  },
+  admins: {
+    type: Array,
+    defaultValue: [],
+    label: getLabel('api.groups.labels.admins'),
+  },
+  'admins.$': { type: String },
+  animators: {
+    type: Array,
+    defaultValue: [],
+    label: getLabel('api.groups.labels.animators'),
+  },
+  'animators.$': { type: String },
+  members: {
+    type: Array,
+    defaultValue: [],
+    label: getLabel('api.groups.labels.members'),
+  },
+  'members.$': { type: String },
+  candidates: {
+    type: Array,
+    defaultValue: [],
+    label: getLabel('api.groups.labels.candidates'),
+  },
+  'candidates.$': { type: String },
+  numCandidates: {
+    type: Number,
+    defaultValue: 0,
+    label: getLabel('api.groups.labels.numCandidates'),
+  },
+  plugins: {
+    type: Object,
+    defaultValue: {},
+    optional: true,
+    blackbox: true,
+    label: getLabel('api.groups.labels.plugins'),
+  },
+  articles: {
+    type: Boolean,
+    defaultValue: false,
+    label: getLabel('api.groups.labels.articles'),
+  },
+  meeting: {
+    // server-side only, do not publish
+    type: Object,
+    defaultValue: {},
+    label: getLabel('api.groups.labels.meetingParams'),
+  },
+  'meeting.attendeePW': { type: String, defaultValue: '' },
+  'meeting.moderatorPW': { type: String, defaultValue: '' },
+  'meeting.createTime': { type: String, defaultValue: '' },
+});
 
 Groups.typeLabels = {
   0: 'api.groups.types.open',
