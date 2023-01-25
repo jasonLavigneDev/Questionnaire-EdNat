@@ -20,12 +20,9 @@ export const FormVisualizer = () => {
   }, []);
 
   const hasAlreadyRespond = () => {
-    if (!form.formAnswers || form.formAnswers.length === 0) {
-      return false;
-    } else {
-      const { formAnswers } = form;
-      return !!formAnswers.find((answer) => answer.userId === user.username);
-    }
+    if (!form.formAnswers || form.formAnswers.length === 0) return false;
+    const { formAnswers } = form;
+    return !!formAnswers.find((answer) => answer.userId === user.username);
   };
 
   const handleRedirect = () => {
@@ -35,12 +32,12 @@ export const FormVisualizer = () => {
   return (
     <div>
       {form ? (
-        !hasAlreadyRespond ? (
+        hasAlreadyRespond() ? (
+          handleRedirect()
+        ) : (
           <div>
             <Visualizer answerMode={true} completeForm={form} />
           </div>
-        ) : (
-          handleRedirect()
         )
       ) : (
         <p>Ce formulaire n'existe pas</p>

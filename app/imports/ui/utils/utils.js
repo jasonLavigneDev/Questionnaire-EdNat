@@ -13,3 +13,7 @@ export const createComponentObject = (title, type, choices = []) => {
   };
   return obj;
 };
+
+export const isEmptyObject = (obj) => {
+  return Object.keys(obj).length === 0;
+};

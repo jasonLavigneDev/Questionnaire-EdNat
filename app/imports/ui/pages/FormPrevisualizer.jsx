@@ -36,6 +36,28 @@ export const FormPrevisualizer = () => {
     }
   };
 
+  const handleUpdate = async () => {
+    if (isDisable) {
+      setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
+    } else {
+      const result = await Meteor.callAsync('forms.updateForm', {
+        id: form._id,
+        title: form.title,
+        desc: form.desc,
+        isModel: false,
+        groups: form.groups,
+        isPublic: form.isPublic,
+        components: form.components,
+      });
+      if (!result) {
+        console.log('error');
+      } else {
+        navigate('/');
+        resetFormContext();
+      }
+    }
+  };
+
   useEffect(() => {
     setActiveStep(2);
   }, []);
@@ -52,9 +74,15 @@ export const FormPrevisualizer = () => {
       )}
 
       <Button onClick={() => navigate('/builder/components')}>Retour</Button>
-      <Button disabled={isDisable} onClick={() => handleSubmit()}>
-        Enregistrer le résultat
-      </Button>
+      {form._id ? (
+        <Button disabled={isDisable} onClick={() => handleUpdate()}>
+          Mettre à jour le formulaire
+        </Button>
+      ) : (
+        <Button disabled={isDisable} onClick={() => handleSubmit()}>
+          Enregistrer le résultat
+        </Button>
+      )}
       {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}
     </div>
   );
