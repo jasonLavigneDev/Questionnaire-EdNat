@@ -3,96 +3,93 @@ import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 import { getLabel } from '../utils/functions';
 
-Meteor.users.schema = new SimpleSchema(
-  {
-    username: {
-      type: String,
-      optional: true,
-      label: getLabel('api.users.labels.username'),
-    },
-    firstName: {
-      type: String,
-      optional: true,
-      label: getLabel('api.users.labels.firstName'),
-    },
-    lastName: {
-      type: String,
-      optional: true,
-      label: getLabel('api.users.labels.lastName'),
-    },
-    emails: {
-      type: Array,
-      optional: true,
-      label: getLabel('api.users.labels.emails'),
-    },
-    'emails.$': {
-      type: Object,
-    },
-    'emails.$.address': {
-      type: String,
-      label: getLabel('api.users.labels.emailAddress'),
-    },
-    'emails.$.verified': {
-      type: Boolean,
-      label: getLabel('api.users.labels.emailVerified'),
-    },
-    createdAt: {
-      type: Date,
-      label: getLabel('api.users.labels.createdAt'),
-    },
-    lastLogin: {
-      type: Date,
-      label: getLabel('api.users.labels.lastLogin'),
-      optional: true,
-    },
-    profile: {
-      type: Object,
-      optional: true,
-      blackbox: true,
-      label: getLabel('api.users.labels.profile'),
-    },
-    // Make sure this services field is in your schema if you're using any of the accounts packages
-    services: {
-      type: Object,
-      optional: true,
-      blackbox: true,
-      label: getLabel('api.users.labels.services'),
-    },
-    // In order to avoid an 'Exception in setInterval callback' from Meteor
-    heartbeat: {
-      type: Date,
-      optional: true,
-      label: getLabel('api.users.labels.heartbeat'),
-    },
-    structure: {
-      type: String,
-      optional: true,
-      label: getLabel('api.users.labels.structure'),
-    },
-    primaryEmail: {
-      type: String,
-      optional: true,
-      label: getLabel('api.users.labels.primaryEmail'),
-    },
-    language: {
-      type: String,
-      optional: true,
-      label: getLabel('api.users.labels.language'),
-    },
-    logoutType: {
-      type: String,
-      optional: true,
-      allowedValues: ['ask', 'local', 'global'],
-      label: getLabel('api.users.labels.logoutType'),
-    },
-    avatar: {
-      type: String,
-      optional: true,
-      label: getLabel('api.users.labels.avatar'),
-    },
+Meteor.users.schema = new SimpleSchema({
+  username: {
+    type: String,
+    optional: true,
+    label: getLabel('api.users.labels.username'),
   },
-  { tracker: Tracker },
-);
+  firstName: {
+    type: String,
+    optional: true,
+    label: getLabel('api.users.labels.firstName'),
+  },
+  lastName: {
+    type: String,
+    optional: true,
+    label: getLabel('api.users.labels.lastName'),
+  },
+  emails: {
+    type: Array,
+    optional: true,
+    label: getLabel('api.users.labels.emails'),
+  },
+  'emails.$': {
+    type: Object,
+  },
+  'emails.$.address': {
+    type: String,
+    label: getLabel('api.users.labels.emailAddress'),
+  },
+  'emails.$.verified': {
+    type: Boolean,
+    label: getLabel('api.users.labels.emailVerified'),
+  },
+  createdAt: {
+    type: Date,
+    label: getLabel('api.users.labels.createdAt'),
+  },
+  lastLogin: {
+    type: Date,
+    label: getLabel('api.users.labels.lastLogin'),
+    optional: true,
+  },
+  profile: {
+    type: Object,
+    optional: true,
+    blackbox: true,
+    label: getLabel('api.users.labels.profile'),
+  },
+  // Make sure this services field is in your schema if you're using any of the accounts packages
+  services: {
+    type: Object,
+    optional: true,
+    blackbox: true,
+    label: getLabel('api.users.labels.services'),
+  },
+  // In order to avoid an 'Exception in setInterval callback' from Meteor
+  heartbeat: {
+    type: Date,
+    optional: true,
+    label: getLabel('api.users.labels.heartbeat'),
+  },
+  structure: {
+    type: String,
+    optional: true,
+    label: getLabel('api.users.labels.structure'),
+  },
+  primaryEmail: {
+    type: String,
+    optional: true,
+    label: getLabel('api.users.labels.primaryEmail'),
+  },
+  language: {
+    type: String,
+    optional: true,
+    label: getLabel('api.users.labels.language'),
+  },
+  logoutType: {
+    type: String,
+    optional: true,
+    allowedValues: ['ask', 'local', 'global'],
+    label: getLabel('api.users.labels.logoutType'),
+  },
+  avatar: {
+    type: String,
+    optional: true,
+    label: getLabel('api.users.labels.avatar'),
+  },
+});
 
 Meteor.users.selfFields = {
   username: 1,

@@ -7,6 +7,8 @@ import { FormContext } from '../contexts/FormContext';
 export const HomePage = () => {
   const { user } = useContext(UserContext);
 
+  console.log('user', user);
+
   const [forms, setForms] = useState([]);
 
   const getForms = async () => {
@@ -24,6 +26,17 @@ export const HomePage = () => {
       getForms();
     }
   }, [user]);
+
+  const hasAlreadyRespond = (formId) => {
+    const form = forms.find((form) => form._id === formId);
+
+    if (!form.formAnswers || form.formAnswers.length === 0) {
+      return false;
+    } else {
+      const { formAnswers } = form;
+      return !!formAnswers.find((answer) => answer.userId === user.username);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -65,8 +78,11 @@ export const HomePage = () => {
 
                   <div style={{ flexDirection: 'column' }}>
                     <Button onClick={() => navigate(`/answers/${form._id}`)}>Voir les reponses </Button>
-                    <Button onClick={() => navigate(`/visualizer/${form._id}`)}>Repondre a ce formulaire</Button>
+                    <Button disabled={hasAlreadyRespond(form._id)} onClick={() => navigate(`/visualizer/${form._id}`)}>
+                      Repondre a ce formulaire
+                    </Button>
                     <Button onClick={() => navigate(`/builder/intro/${form._id}`)}>Editer ce formulaire</Button>
+
                     <Divider />
                   </div>
                 </div>
