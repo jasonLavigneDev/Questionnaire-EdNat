@@ -20,6 +20,15 @@ function _createForm(title, desc, owner, isModel, isPublic, groups, components) 
   });
 }
 
+function _updateForm(id, title, desc, owner, isModel, isPublic, groups, components) {
+  Forms.update(
+    { _id: id },
+    {
+      $set: { title, desc, owner, isModel, isPublic, groups, components },
+    },
+  );
+}
+
 export const createForm = new ValidatedMethod({
   name: 'forms.createForm',
   validate: new SimpleSchema({
@@ -39,6 +48,30 @@ export const createForm = new ValidatedMethod({
     }
     _createForm(title, desc, this.userId, isModel, isPublic, groups, components);
     const form = await Forms.findOneAsync({ title });
+    return form._id;
+  },
+});
+
+export const updateForm = new ValidatedMethod({
+  name: 'forms.updateForm',
+  validate: new SimpleSchema({
+    id: { type: String, label: getLabel('api.forms.labels.id') },
+    title: { type: String, label: getLabel('api.forms.labels.title') },
+    desc: { type: String, label: getLabel('api.forms.labels.desc') },
+    isModel: { type: Boolean, label: getLabel('api.forms.labels.isModel') },
+    isPublic: { type: Boolean, label: getLabel('api.forms.labels.public') },
+    groups: { type: Array, optional: true, label: getLabel('api.forms.labels.groups') },
+    'groups.$': { type: String },
+    components: { type: Array, label: getLabel('api.forms.labels.components') },
+    'components.$': { type: Component },
+  }).validator(),
+
+  async run({ id, title, desc, isModel, isPublic, groups, components }) {
+    if (!this.userId) {
+      throw new Meteor.Error('api.forms.createForm.notLoggedIn', "Pas d'utilisateur connecté");
+    }
+    _updateForm(id, title, desc, this.userId, isModel, isPublic, groups, components);
+    const form = await Forms.findOneAsync({ _id: id });
     return form._id;
   },
 });

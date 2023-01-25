@@ -5,15 +5,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { TextField, Button, Paper } from '@mui/material';
 
-import { createComponentObject, isDuplicate } from '../../../utils/utils';
+import { createComponentObject, isDuplicate, isEmptyObject } from '../../../utils/utils';
 import { MsgError } from '../../system/MsgError';
 import { SubmitButton } from '../../system/SubmitButton';
 import { FormContext } from '../../../contexts/FormContext';
 
-export const CheckboxInputBuilder = () => {
-  const [questionText, setQuestionText] = useState('');
+export const CheckboxInputBuilder = ({ componentEdit = {} }) => {
+  const [questionText, setQuestionText] = useState(componentEdit.title || '');
   const [answerText, setAnswerText] = useState('');
-  const [answerOptions, setAnswerOptions] = useState([]);
+  const [answerOptions, setAnswerOptions] = useState(componentEdit.choices || []);
   const [errorMessage, setErrorMessage] = useState('');
 
   const { form, setForm } = useContext(FormContext);
@@ -57,6 +57,29 @@ export const CheckboxInputBuilder = () => {
     }
   };
 
+  const handleUpdate = () => {
+    if (questionText && answerOptions) {
+      const componentListFinal = [...form.components];
+      const index = componentListFinal.findIndex((component) => component.id === componentEdit.id);
+      if (index !== -1) {
+        componentListFinal[index] = createComponentObject(questionText, 'checkboxInput', answerOptions);
+      } else {
+        console.log('error, component does not exist');
+      }
+      setForm({ ...form, components: componentListFinal });
+      setQuestionText('');
+      setAnswerText('');
+      setAnswerOptions([]);
+    } else {
+      if (!questionText) {
+        setErrorMessage(i18n.__('builders.errors.noTitle'));
+      }
+      if (!answerOptions.length) {
+        setErrorMessage(i18n.__('builders.errors.noOptions'));
+      }
+    }
+  };
+
   return (
     <Paper>
       <TextField
@@ -84,7 +107,15 @@ export const CheckboxInputBuilder = () => {
         </div>
       ))}
       <br />
-      <SubmitButton handleClick={handleSubmit} />
+      {isEmptyObject(componentEdit) ? (
+        <Button style={{ textAlign: 'center', width: '100%' }} onClick={handleSubmit}>
+          Validez cette question et ses possibilités de réponses
+        </Button>
+      ) : (
+        <Button style={{ textAlign: 'center', width: '100%' }} onClick={handleUpdate}>
+          Mettre à jour cette question et ses possibilités de réponses
+        </Button>
+      )}
       {errorMessage.length !== 0 ? <MsgError error={errorMessage} setError={setErrorMessage} /> : null}
     </Paper>
   );

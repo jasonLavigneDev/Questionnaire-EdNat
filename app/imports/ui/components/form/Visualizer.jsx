@@ -16,6 +16,14 @@ import { FormContext } from '../../contexts/FormContext';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { UserContext } from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { CheckboxInputBuilder } from '../inputs/Checkbox/CheckboxInputBuilder';
+import { SelectInputBuilder } from '../inputs/Select/SelectInputBuilder';
+import { RadioInputBuilder } from '../inputs/Radio/RadioInputBuilder';
+import { DateInputBuilder } from '../inputs/Date/DateInputBuilder';
+import { NumberInputBuilder } from '../inputs/Number/NumberInputBuilder';
+import { TextInputBuilder } from '../inputs/TextInput/TextInputBuilder';
+import { TextAreaInputBuilder } from '../inputs/TextArea/TextAreaInputBuilder';
+import EditIcon from '@mui/icons-material/Edit';
 
 export const Visualizer = ({ completeForm, answerMode = false, edit = false }) => {
   const { form, setForm } = useContext(FormContext);
@@ -26,6 +34,7 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
   const { answerForm, setAnswerForm } = useContext(AnswerContext);
 
   const [publicName, setPublicName] = useState('');
+  const [builder, setBuilder] = useState({});
 
   const generateComponent = (component) => {
     switch (component.type) {
@@ -64,6 +73,25 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
         return <TextInput title={component.title} answerMode={answerMode} questionId={component.id} />;
       case 'textArea':
         return <TextArea title={component.title} answerMode={answerMode} questionId={component.id} />;
+    }
+  };
+
+  const generateBuilder = (component) => {
+    switch (component.type) {
+      case 'checkboxInput':
+        return <CheckboxInputBuilder componentEdit={component} />;
+      case 'selectInput':
+        return <SelectInputBuilder componentEdit={component} />;
+      case 'radioButtonInput':
+        return <RadioInputBuilder componentEdit={component} />;
+      case 'dateInput':
+        return <DateInputBuilder componentEdit={component} />;
+      case 'numberInput':
+        return <NumberInputBuilder componentEdit={component} />;
+      case 'textInput':
+        return <TextInputBuilder componentEdit={component} />;
+      case 'textArea':
+        return <TextAreaInputBuilder componentEdit={component} />;
     }
   };
 
@@ -106,6 +134,10 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
     navigate('/');
   };
 
+  const editComponent = (component) => {
+    setBuilder(component);
+  };
+
   useEffect(() => {
     setAnswerForm({
       userId: '',
@@ -117,13 +149,14 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
   if (isAuthenticated || form.isPublic) {
     return (
       <div>
-        {/* <h3 style={{ textAlign: 'center' }}>{form.title}</h3> */}
-        {/* <h4 style={{ textAlign: 'center' }}>{form.desc}</h4> */}
+        {<h3 style={{ textAlign: 'center' }}>{form.title}</h3>}
+        {<h4 style={{ textAlign: 'center' }}>{form.desc}</h4>}
         {form.components.map((componentInput, index) => (
           <div key={componentInput.id}>
             <br />
             <br />
             <div>{generateComponent(componentInput)}</div>
+            {builder && builder.id === componentInput.id ? <div>{generateBuilder(builder)}</div> : null}
             {edit && (
               <div style={{ display: 'flex' }}>
                 <div style={{ flexDirection: 'column' }}>
@@ -138,6 +171,9 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
                   </IconButton>
                 </div>
                 {/* )} */}
+                <IconButton sx={{ color: 'salmon' }} onClick={() => editComponent(componentInput)}>
+                  <EditIcon />
+                </IconButton>
                 <IconButton sx={{ color: 'salmon' }} onClick={() => removeComponentToForm(componentInput.id)}>
                   <DeleteIcon />
                 </IconButton>
