@@ -6,6 +6,7 @@ import { Visualizer } from '../components/form/Visualizer';
 import { MsgError } from '../components/system/MsgError';
 import { FormContext } from '../contexts/FormContext';
 import { Breadcrumb } from '../components/system/Breadcrumb';
+import { Footer } from '../components/system/Footer';
 
 export const FormPrevisualizer = () => {
   const { form, resetFormContext, setActiveStep } = useContext(FormContext);
@@ -72,18 +73,12 @@ export const FormPrevisualizer = () => {
       ) : (
         <p>ce formulaire n'existe pas</p>
       )}
-
-      <Button onClick={() => navigate('/builder/components')}>Retour</Button>
-      {form._id ? (
-        <Button disabled={isDisable} onClick={() => handleUpdate()}>
-          Mettre à jour le formulaire
-        </Button>
-      ) : (
-        <Button disabled={isDisable} onClick={() => handleSubmit()}>
-          Enregistrer le résultat
-        </Button>
-      )}
       {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}
+      <Footer
+        handleSubmit={form._id ? handleUpdate : handleSubmit}
+        urlComponentPrec="builder/components"
+        text={form._id ? 'Mettre à jour le formulaire' : 'Enregistrer le résultat'}
+      />
     </div>
   );
 };

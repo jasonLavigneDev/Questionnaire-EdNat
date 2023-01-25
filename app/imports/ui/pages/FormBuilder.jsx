@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
 import { InputChoice } from '../components/form/InputChoice';
@@ -8,6 +7,7 @@ import { FormContext } from '../contexts/FormContext';
 import { MsgError } from '../components/system/MsgError';
 import { useState } from 'react';
 import { Breadcrumb } from '../components/system/Breadcrumb';
+import { Footer } from '../components/system/Footer';
 
 export const FormBuilder = () => {
   const { form, setActiveStep } = useContext(FormContext);
@@ -37,15 +37,10 @@ export const FormBuilder = () => {
         <h3 style={{ textAlign: 'center' }}>Choisissez le type de question / réponse </h3>
         <InputChoice />
         <br />
-        <div style={{ display: 'flex' }}>
-          <Button onClick={() => navigate('/builder/intro')}>Retour </Button>
-          <Button disabled={isDisable} onClick={() => handleSubmit()}>
-            Voir un apercu du questionnaire
-          </Button>
-        </div>
         {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}
       </div>
       <br />
+      <Footer handleSubmit={handleSubmit} urlComponentPrec="builder/intro" text="Voir un apercu du questionnaire" />
     </>
   );
 };
