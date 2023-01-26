@@ -76,6 +76,32 @@ export const updateForm = new ValidatedMethod({
   },
 });
 
+export const deleteForm = new ValidatedMethod({
+  name: 'forms.deleteForm',
+  validate: new SimpleSchema({
+    id: { type: String, label: getLabel('api.forms.labels.id') },
+  }).validator(),
+
+  async run({ id }) {
+    if (!this.userId) {
+      throw new Meteor.Error('api.forms.createForm.notLoggedIn', "Pas d'utilisateur connecté");
+    }
+
+    const form = await Forms.findOneAsync({ _id: id });
+    if (!form) {
+      throw new Meteor.Error('api.forms.deleteForm.notExist', "Le formulaire n'existe pas");
+    }
+    if (form.owner !== this.userId) {
+      throw new Meteor.Error(
+        'api.forms.deleteForm.permissionDenied',
+        "Le formulaire n'appartient pas à l'utilisateur courant",
+      );
+    }
+
+    await Forms.removeAsync({ _id: id });
+  },
+});
+
 Meteor.methods({
   'forms.updateAnswers': async (formId, newAnswer) => {
     const a = await Forms.findOneAsync({ _id: formId });

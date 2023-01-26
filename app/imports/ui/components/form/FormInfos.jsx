@@ -175,6 +175,5 @@ export const FormInfos = () => {
 };
 
 export const loader = async ({ params }) => {
-  if (params.id) return await Meteor.callAsync('forms.getOne', params.id);
-  return null;
+  return (await Meteor.callAsync('forms.getOne', params.id)) || null;
 };

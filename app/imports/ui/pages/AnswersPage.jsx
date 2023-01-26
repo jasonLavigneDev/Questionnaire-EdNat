@@ -68,5 +68,5 @@ export const AnswersPage = () => {
 };
 
 export const loaderAnswerPage = async ({ params }) => {
-  return await Meteor.callAsync('forms.getOne', params.id);
+  return (await Meteor.callAsync('forms.getOne', params.id)) || null;
 };

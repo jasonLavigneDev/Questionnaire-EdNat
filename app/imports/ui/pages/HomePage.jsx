@@ -41,6 +41,11 @@ export const HomePage = () => {
     return false;
   };
 
+  const handleDelete = async (form) => {
+    console.log(form);
+    await Meteor.callAsync('forms.deleteForm', { id: form._id });
+    setForms(forms.filter((f) => f._id !== form._id));
+  };
   const navigate = useNavigate();
 
   const { resetFormContext } = useContext(FormContext);
@@ -83,6 +88,7 @@ export const HomePage = () => {
                       Repondre a ce formulaire
                     </Button>
                     <Button onClick={() => navigate(`/builder/intro/${form._id}`)}>Editer ce formulaire</Button>
+                    <Button onClick={() => handleDelete(form)}>Supprimer ce formulaire</Button>
                     <Divider />
                   </div>
                 </div>
