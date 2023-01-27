@@ -171,10 +171,10 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
                   </IconButton>
                 </div>
                 {/* )} */}
-                <IconButton sx={{ color: 'salmon' }} onClick={() => editComponent(componentInput)}>
+                <IconButton sx={{ color: 'Gold' }} onClick={() => editComponent(componentInput)}>
                   <EditIcon />
                 </IconButton>
-                <IconButton sx={{ color: 'salmon' }} onClick={() => removeComponentToForm(componentInput.id)}>
+                <IconButton sx={{ color: 'Crimson' }} onClick={() => removeComponentToForm(componentInput.id)}>
                   <DeleteIcon />
                 </IconButton>
               </div>

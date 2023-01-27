@@ -14,12 +14,15 @@ const MainMenu = () => {
   const { version } = PackageJSON;
 
   const [open, setOpen] = useState(false);
+  const [anchor, setAnchor] = useState(null);
+
   const handleClick = (event) => {
-    setOpen(event.currentTarget);
+    setAnchor(event.currentTarget);
+    setOpen(!open);
   };
   const handleLogout = () => {
     navigate('/logout');
-    setOpen(false);
+    setOpen(!open);
   };
 
   return user && !isLoading ? (
@@ -42,7 +45,7 @@ const MainMenu = () => {
           )}
         </div>
       </Button>
-      <Menu anchorEl={open} open={open} onClick={() => setOpen(!open)}>
+      <Menu anchorEl={anchor} open={open} onClick={() => setOpen(!open)}>
         <MenuItem onClick={handleLogout}>Se déconnecter</MenuItem>
         <Divider />
         <MenuItem disabled style={{ opacity: 0.3 }}>
