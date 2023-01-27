@@ -1,10 +1,13 @@
 import { Button } from '@mui/material';
 import React from 'react';
+import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
 export const AnswersPage = () => {
   const formFromBDD = useLoaderData();
   const finalArray = [];
+  const statArray = [];
+  const [statMode, setStatMode] = useState(false);
 
   const navigate = useNavigate();
 
@@ -12,6 +15,7 @@ export const AnswersPage = () => {
     finalArray.push({
       questionTitle: component.title,
       questionId: component.id,
+      questionType: component.type,
       responses: [],
     });
   });
@@ -35,9 +39,36 @@ export const AnswersPage = () => {
     });
   });
 
+  const CanHaveStat = (type) => {
+    if (type !== 'textInput' && type !== 'textArea') return true;
+    return false;
+  };
+
+  finalArray.map((question) => {
+    if (CanHaveStat(question.questionType)) {
+      const stat = [];
+      question.responses.map((response) => {
+        const index = stat.findIndex((res) => response.response[0] === res.answer);
+        if (index !== -1) {
+          stat[index].count++;
+        } else {
+          stat.push({ answer: response.response[0], count: 1 });
+        }
+      });
+      statArray.push({ questionTitle: question.questionTitle, questionId: question.questionId, stat: stat });
+    }
+  });
   const hasNotAnswers = () => {
     if (!formFromBDD.formAnswers || formFromBDD.formAnswers.length === 0) return true;
     return false;
+  };
+
+  const getAllCountStat = (stats) => {
+    let cpt = 0;
+    stats.map((stat) => {
+      cpt += stat.count;
+    });
+    return cpt;
   };
 
   return (
@@ -50,24 +81,37 @@ export const AnswersPage = () => {
       ) : (
         <>
           <h1 style={{ textAlign: 'center' }}>Reponses du questionnaire : {formFromBDD.title}</h1>
-          {finalArray.map((question) => (
-            <div>
-              <h3>Question : {question.questionTitle}</h3>
-              <div>
-                {question.responses.map((response) => (
-                  <ul>
-                    <li>
-                      <b>
-                        {response.userName} (répondu le: {response.createdAt}){' '}
-                      </b>
-                      : {response.response}
-                    </li>
-                  </ul>
-                ))}
-              </div>
-              <hr />
-            </div>
-          ))}
+          <Button onClick={() => setStatMode(!statMode)}>
+            {statMode ? 'Voir les réponses par utilisateur' : 'Voir les Statistiques'}
+          </Button>
+          {statMode
+            ? statArray.map((question) => (
+                <div>
+                  <h2>{question.questionTitle}</h2>
+                  {question.stat.map((stat) => (
+                    <ul>
+                      <li>
+                        <b>{stat.answer} </b>: {(stat.count / getAllCountStat(question.stat)) * 100}%
+                      </li>
+                    </ul>
+                  ))}
+                </div>
+              ))
+            : finalArray.map((question) => (
+                <div>
+                  <h2>{question.questionTitle}</h2>
+                  {question.responses.map((response) => (
+                    <ul>
+                      <li>
+                        <b>
+                          {response.userName} (répondu le: {response.createdAt}){' '}
+                        </b>
+                        : {response.response}
+                      </li>
+                    </ul>
+                  ))}
+                </div>
+              ))}
         </>
       )}
     </>
