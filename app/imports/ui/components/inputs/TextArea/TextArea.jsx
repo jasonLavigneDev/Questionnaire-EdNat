@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { InputLabel, TextField } from '@mui/material';
 import { AnswerContext } from '../../../contexts/AnswerContext';
 
-export const TextArea = ({ title, answerMode, questionId }) => {
+export const TextArea = ({ title, answerMode, questionId, answer = {} }) => {
   const { addAnswers } = useContext(AnswerContext);
 
   const handleChange = (event) => {
@@ -14,7 +14,7 @@ export const TextArea = ({ title, answerMode, questionId }) => {
   return (
     <div>
       <InputLabel id="textAreaInput-title">{title}</InputLabel>
-      <TextField multiline rows={3} onBlur={(e) => handleChange(e)} />
+      <TextField multiline defaultValue={answer.answer} rows={3} onBlur={(e) => handleChange(e)} />
     </div>
   );
 };

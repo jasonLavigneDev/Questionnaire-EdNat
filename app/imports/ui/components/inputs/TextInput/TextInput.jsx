@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { InputLabel, TextField } from '@mui/material';
 import { AnswerContext } from '../../../contexts/AnswerContext';
 
-export const TextInput = ({ title, answerMode, questionId }) => {
+export const TextInput = ({ title, answerMode, questionId, answer = {} }) => {
   const { addAnswers } = useContext(AnswerContext);
 
   const handleChange = (event) => {
@@ -14,7 +14,7 @@ export const TextInput = ({ title, answerMode, questionId }) => {
   return (
     <div>
       <InputLabel id="textInput-title">{title}</InputLabel>
-      <TextField required onBlur={(e) => handleChange(e)} />
+      <TextField required defaultValue={answer.answer} onBlur={(e) => handleChange(e)} />
     </div>
   );
 };

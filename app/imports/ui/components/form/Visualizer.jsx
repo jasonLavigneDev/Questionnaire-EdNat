@@ -24,17 +24,24 @@ import { NumberInputBuilder } from '../inputs/Number/NumberInputBuilder';
 import { TextInputBuilder } from '../inputs/TextInput/TextInputBuilder';
 import { TextAreaInputBuilder } from '../inputs/TextArea/TextAreaInputBuilder';
 import EditIcon from '@mui/icons-material/Edit';
+import { hasAlreadyRespond } from '../../utils/utils';
 
 export const Visualizer = ({ completeForm, answerMode = false, edit = false }) => {
   const { form, setForm } = useContext(FormContext);
   const { user, isAuthenticated } = useContext(UserContext);
 
+  const answers = completeForm?.formAnswers?.find((answer) => answer.userId == user.username);
   const navigate = useNavigate();
 
   const { answerForm, setAnswerForm } = useContext(AnswerContext);
 
   const [publicName, setPublicName] = useState('');
   const [builder, setBuilder] = useState({});
+
+  const getAnswer = (id) => {
+    if (answerMode) return answers?.answers.find((answer) => answer.questionId == id);
+    else return {};
+  };
 
   const generateComponent = (component) => {
     switch (component.type) {
@@ -45,6 +52,7 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
             choices={component.choices}
             answerMode={answerMode}
             questionId={component.id}
+            answer={getAnswer(component.id)}
           />
         );
       case 'selectInput':
@@ -54,6 +62,7 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
             choices={component.choices}
             answerMode={answerMode}
             questionId={component.id}
+            answer={getAnswer(component.id)}
           />
         );
       case 'radioButtonInput':
@@ -63,16 +72,45 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
             choices={component.choices}
             answerMode={answerMode}
             questionId={component.id}
+            answer={getAnswer(component.id)}
           />
         );
       case 'dateInput':
-        return <DateInput title={component.title} answerMode={answerMode} questionId={component.id} />;
+        return (
+          <DateInput
+            title={component.title}
+            answerMode={answerMode}
+            questionId={component.id}
+            answer={getAnswer(component.id)}
+          />
+        );
       case 'numberInput':
-        return <NumberInput title={component.title} answerMode={answerMode} questionId={component.id} />;
+        return (
+          <NumberInput
+            title={component.title}
+            answerMode={answerMode}
+            questionId={component.id}
+            answer={getAnswer(component.id)}
+          />
+        );
       case 'textInput':
-        return <TextInput title={component.title} answerMode={answerMode} questionId={component.id} />;
+        return (
+          <TextInput
+            title={component.title}
+            answerMode={answerMode}
+            questionId={component.id}
+            answer={getAnswer(component.id)}
+          />
+        );
       case 'textArea':
-        return <TextArea title={component.title} answerMode={answerMode} questionId={component.id} />;
+        return (
+          <TextArea
+            title={component.title}
+            answerMode={answerMode}
+            questionId={component.id}
+            answer={getAnswer(component.id)}
+          />
+        );
     }
   };
 
@@ -200,7 +238,13 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
                 </Button>
               </div>
             )}
-            {user && <Button onClick={submitAnswerForm}>Soumettre ce formulaire complété</Button>}
+            {user && (
+              <Button onClick={submitAnswerForm}>
+                {hasAlreadyRespond(user, completeForm)
+                  ? 'Mettre à jour les réponses'
+                  : 'Soumettre ce formulaire complété'}
+              </Button>
+            )}
           </div>
         )}
       </div>

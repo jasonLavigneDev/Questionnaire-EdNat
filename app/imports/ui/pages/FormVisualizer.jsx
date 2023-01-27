@@ -19,27 +19,12 @@ export const FormVisualizer = () => {
     setForm(formFromBDD);
   }, []);
 
-  const hasAlreadyRespond = () => {
-    if (!form.formAnswers || form.formAnswers.length === 0) return false;
-    const { formAnswers } = form;
-    if (user) return !!formAnswers.find((answer) => answer.userId === user.username);
-    return false;
-  };
-
-  const handleRedirect = () => {
-    navigate('/');
-  };
-
   return (
     <div>
       {form ? (
-        hasAlreadyRespond() ? (
-          handleRedirect()
-        ) : (
-          <div>
-            <Visualizer answerMode={true} completeForm={form} />
-          </div>
-        )
+        <div>
+          <Visualizer answerMode={true} completeForm={form} />
+        </div>
       ) : (
         <p>Ce formulaire n'existe pas</p>
       )}
