@@ -74,7 +74,7 @@ Forms.schema = new SimpleSchema(
     },
     desc: {
       type: String,
-      min: 1,
+      optional: true,
       max: 256,
       label: getLabel('api.forms.labels.desc'),
     },
