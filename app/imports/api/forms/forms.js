@@ -44,6 +44,18 @@ export const Answers = new SimpleSchema({
     optional: true,
     label: getLabel('api.forms.labels.formAnswers.userId'),
   },
+  createdAt: {
+    type: Date,
+    label: getLabel('api.forms.labels.createdAt'),
+    optional: true,
+    autoValue() {
+      if ((this.isInsert && this.field('draft').value === false) || (!this.isInsert && !this.value)) {
+        return new Date();
+      }
+      return this.value;
+    },
+  },
+
   answers: {
     type: Array,
     optional: true,
