@@ -33,7 +33,7 @@ export const createForm = new ValidatedMethod({
   name: 'forms.createForm',
   validate: new SimpleSchema({
     title: { type: String, label: getLabel('api.forms.labels.title') },
-    desc: { type: String, label: getLabel('api.forms.labels.desc') },
+    desc: { type: String, optional: true, label: getLabel('api.forms.labels.desc') },
     isModel: { type: Boolean, label: getLabel('api.forms.labels.isModel') },
     isPublic: { type: Boolean, label: getLabel('api.forms.labels.public') },
     groups: { type: Array, optional: true, label: getLabel('api.forms.labels.groups') },
