@@ -14,7 +14,7 @@ const MainMenu = () => {
   const { version } = PackageJSON;
 
   const [open, setOpen] = useState(false);
-  const [anchor, setAnchor] = useState({});
+  const [anchor, setAnchor] = useState(null);
 
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
@@ -22,7 +22,7 @@ const MainMenu = () => {
   };
   const handleLogout = () => {
     navigate('/logout');
-    setOpen(false);
+    setOpen(!open);
   };
 
   return user && !isLoading ? (
