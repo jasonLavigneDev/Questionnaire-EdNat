@@ -27,7 +27,11 @@ export const AnswersPage = () => {
         response = response[0].join(' - ');
       }
 
-      questionObj.responses.push({ response, userName: userAnswer.userId });
+      questionObj.responses.push({
+        response,
+        userName: userAnswer.userId,
+        createdAt: userAnswer.createdAt.toLocaleDateString(),
+      });
     });
   });
 
@@ -53,7 +57,10 @@ export const AnswersPage = () => {
                 {question.responses.map((response) => (
                   <ul>
                     <li>
-                      <b>{response.userName} </b>: {response.response}
+                      <b>
+                        {response.userName} (répondu le: {response.createdAt}){' '}
+                      </b>
+                      : {response.response}
                     </li>
                   </ul>
                 ))}
