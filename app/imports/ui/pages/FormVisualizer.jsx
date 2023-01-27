@@ -22,7 +22,8 @@ export const FormVisualizer = () => {
   const hasAlreadyRespond = () => {
     if (!form.formAnswers || form.formAnswers.length === 0) return false;
     const { formAnswers } = form;
-    return !!formAnswers.find((answer) => answer.userId === user.username);
+    if (user) return !!formAnswers.find((answer) => answer.userId === user.username);
+    return false;
   };
 
   const handleRedirect = () => {
