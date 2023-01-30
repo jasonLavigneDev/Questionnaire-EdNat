@@ -5,8 +5,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel } from '@mui/material';
 import { AnswerContext } from '../../../contexts/AnswerContext';
 
-export const CheckBoxInput = ({ title, choices, required = false, answerMode, questionId }) => {
-  const [answers, setAnswers] = useState([]);
+export const CheckBoxInput = ({ title, choices, required = false, answerMode, questionId, answer = {} }) => {
+  const initialTab = [];
+
+  if (answer.answer) {
+    answer.answer.map((resp) => {
+      initialTab.push({ name: resp, value: true });
+    });
+  }
+  const [answers, setAnswers] = useState(initialTab);
   const { addAnswers } = useContext(AnswerContext);
 
   const handleChange = (event) => {

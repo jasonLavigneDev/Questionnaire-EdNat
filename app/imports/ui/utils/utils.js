@@ -17,3 +17,12 @@ export const createComponentObject = (title, type, choices = []) => {
 export const isEmptyObject = (obj) => {
   return Object.keys(obj).length === 0;
 };
+
+export const hasAlreadyRespond = (user, form) => {
+  if (!form.formAnswers || form.formAnswers.length === 0) {
+    return false;
+  } else {
+    const { formAnswers } = form;
+    return !!formAnswers.find((answer) => answer.userId === user.username);
+  }
+};

@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import { FormContext } from '../contexts/FormContext';
+import { hasAlreadyRespond } from '../utils/utils';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
@@ -23,17 +24,6 @@ export const HomePage = () => {
       getForms();
     }
   }, [user]);
-
-  const hasAlreadyRespond = (formId) => {
-    const form = forms.find((form) => form._id === formId);
-
-    if (!form.formAnswers || form.formAnswers.length === 0) {
-      return false;
-    } else {
-      const { formAnswers } = form;
-      return !!formAnswers.find((answer) => answer.userId === user.username);
-    }
-  };
 
   const hasNotAnswers = (formId) => {
     const form = forms.find((form) => form._id === formId);
@@ -84,8 +74,8 @@ export const HomePage = () => {
                     <Button disabled={hasNotAnswers(form._id)} onClick={() => navigate(`/answers/${form._id}`)}>
                       Voir les reponses{' '}
                     </Button>
-                    <Button disabled={hasAlreadyRespond(form._id)} onClick={() => navigate(`/visualizer/${form._id}`)}>
-                      Repondre a ce formulaire
+                    <Button onClick={() => navigate(`/visualizer/${form._id}`)}>
+                      {hasAlreadyRespond(user, form) ? 'Modifier les réponses' : 'Répondre au formulaire'}
                     </Button>
                     <Button onClick={() => navigate(`/builder/intro/${form._id}`)}>Editer ce formulaire</Button>
                     <Button onClick={() => handleDelete(form)}>Supprimer ce formulaire</Button>
