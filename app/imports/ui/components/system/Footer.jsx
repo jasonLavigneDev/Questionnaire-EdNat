@@ -9,8 +9,7 @@ export const Footer = ({ handleSubmit, urlComponentPrec, text }) => {
   const bottomBarStyle = {
     display: 'flex',
     alignItems: 'center',
-    paddingLeft: '2%',
-    paddingRight: '2%',
+    padding: '0 2%',
     height: '6vh',
   };
 
@@ -23,7 +22,7 @@ export const Footer = ({ handleSubmit, urlComponentPrec, text }) => {
 
   return (
     // <Slide direction="up" in={trigger}>
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
+    <div style={{ position: 'fixed', bottom: 30, left: 0, right: 0 }}>
       <BottomNavigation sx={bottomBarStyle} showLabels>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           {urlComponentPrec && (
@@ -40,7 +39,7 @@ export const Footer = ({ handleSubmit, urlComponentPrec, text }) => {
           </Button>
         </div>
       </BottomNavigation>
-    </Paper>
+    </div>
     // </Slide>
   );
 };

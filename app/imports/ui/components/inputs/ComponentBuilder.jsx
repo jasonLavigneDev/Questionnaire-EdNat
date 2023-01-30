@@ -111,7 +111,7 @@ export const ComponentBuilder = ({ componentEdit = {}, type }) => {
       ) : null}
       {isEmptyObject(componentEdit) ? (
         <Button style={{ textAlign: 'center', width: '100%' }} onClick={handleSubmit}>
-          Validez cette question et ses possibilités de réponses
+          Valider
         </Button>
       ) : (
         <Button style={{ textAlign: 'center', width: '100%' }} onClick={handleUpdate}>

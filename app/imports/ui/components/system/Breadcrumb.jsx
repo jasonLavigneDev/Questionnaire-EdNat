@@ -25,24 +25,26 @@ export const Breadcrumb = () => {
   }
 
   return (
-    <div style={{ marginBottom: '10vh' }}>
-      <Stepper nonLinear activeStep={activeStep}>
-        <Step key="intro" completed={activeStep === 1 || activeStep === 2}>
-          <StepButton color="inherit" onClick={() => handleClick('intro')}>
-            Introduction
-          </StepButton>
-        </Step>
-        <Step key="components" completed={activeStep === 2} disabled={!form.title}>
-          <StepButton color="inherit" onClick={() => handleClick('components')}>
-            Composant
-          </StepButton>
-        </Step>
-        <Step key="previsualizer" disabled={form.components.length === 0}>
-          <StepButton color="inherit" onClick={() => handleClick('previsualizer')}>
-            Prévisualisation
-          </StepButton>
-        </Step>
-      </Stepper>
+    <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+      <div style={{ marginBottom: '6vh', width: '60vw' }}>
+        <Stepper alternativeLabel activeStep={activeStep}>
+          <Step key="intro" completed={activeStep === 1 || activeStep === 2}>
+            <StepButton color="inherit" onClick={() => handleClick('intro')}>
+              Introduction
+            </StepButton>
+          </Step>
+          <Step key="components" completed={activeStep === 2} disabled={!form.title}>
+            <StepButton color="inherit" onClick={() => handleClick('components')}>
+              Composant
+            </StepButton>
+          </Step>
+          <Step key="previsualizer" disabled={form.components.length === 0}>
+            <StepButton color="inherit" onClick={() => handleClick('previsualizer')}>
+              Prévisualisation
+            </StepButton>
+          </Step>
+        </Stepper>
+      </div>
     </div>
   );
 };
