@@ -1,6 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
-import { TextField, Button, Paper } from '@mui/material';
+
+import { TextField, Button, Paper, IconButton, Divider } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import { createComponentObject, isDuplicate, isEmptyObject } from '../../utils/utils';
 import { MsgError } from '../system/MsgError';
 import { FormContext } from '../../contexts/FormContext';
@@ -85,37 +89,49 @@ export const ComponentBuilder = ({ componentEdit = {}, type }) => {
         label="Entrez le titre de la question"
         variant="outlined"
         value={questionText}
-        helperText="Entrez votre question"
         onChange={(e) => setQuestionText(e.target.value)}
+        sx={{ width: '90%', marginLeft: 6, marginBottom: 2, marginTop: 2 }}
       />
       {IsMultiAnswersComponent() ? (
-        <div>
+        <>
           <br />
-          <TextField
-            id="option"
-            label="Entrez un choix de réponse"
-            variant="outlined"
-            value={answerText}
-            helperText="Entrez un choix de reponse"
-            onChange={(e) => setAnswerText(e.target.value)}
-          />
-          <Button onClick={() => addOption(answerText)}>Ajoutez ce choix de réponse</Button>
+          <div style={{ display: 'flex' }}>
+            <TextField
+              id="option"
+              label="Entrez un choix de réponse"
+              variant="outlined"
+              value={answerText}
+              onChange={(e) => setAnswerText(e.target.value)}
+              sx={{ width: '85%', marginLeft: 6 }}
+            />
+            <IconButton onClick={() => addOption(answerText)}>
+              <AddIcon fontSize="large" />
+            </IconButton>
+          </div>
           {answerOptions.map((option) => (
-            <div style={{ display: 'flex' }} key={uuidv4()}>
-              <p>{option}</p>
-              <Button onClick={() => removeOption(option)}>Supprimez ce choix de réponse</Button>
-            </div>
+            <>
+              <div
+                style={{ display: 'flex', maxWidth: '42.6vw', marginLeft: '3vw', justifyContent: 'space-between' }}
+                key={uuidv4()}
+              >
+                <p>{option}</p>
+                <IconButton onClick={() => removeOption(option)}>
+                  <DeleteIcon />
+                </IconButton>
+              </div>
+              <Divider variant="middle" />
+            </>
           ))}
           <br />
-        </div>
+        </>
       ) : null}
       {isEmptyObject(componentEdit) ? (
-        <Button style={{ textAlign: 'center', width: '100%' }} onClick={handleSubmit}>
+        <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={handleSubmit}>
           Valider
         </Button>
       ) : (
         <Button style={{ textAlign: 'center', width: '100%' }} onClick={handleUpdate}>
-          Mettre à jour cette question et ses possibilités de réponses
+          Mettre à jour
         </Button>
       )}
       {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}

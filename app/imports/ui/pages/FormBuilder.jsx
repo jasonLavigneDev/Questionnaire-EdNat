@@ -32,7 +32,7 @@ export const FormBuilder = () => {
     <>
       <Breadcrumb />
       <ListVisualizer />
-      <div style={{ display: 'flex', height: '90vh', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         {/* <Visualizer edit={true} /> */}
 
         {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}

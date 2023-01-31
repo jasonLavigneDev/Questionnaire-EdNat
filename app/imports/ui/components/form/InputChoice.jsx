@@ -10,13 +10,6 @@ import ShortTextIcon from '@mui/icons-material/ShortText';
 import NotesIcon from '@mui/icons-material/Notes';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
-import { RadioInputBuilder } from '../inputs/Radio/RadioInputBuilder';
-import { SelectInputBuilder } from '../inputs/Select/SelectInputBuilder';
-import { CheckboxInputBuilder } from '../inputs/Checkbox/CheckboxInputBuilder';
-import { DateInputBuilder } from '../inputs/Date/DateInputBuilder';
-import { NumberInputBuilder } from '../inputs/Number/NumberInputBuilder';
-import { TextInputBuilder } from '../inputs/TextInput/TextInputBuilder';
-import { TextAreaInputBuilder } from '../inputs/TextArea/TextAreaInputBuilder';
 import { FormContext } from '../../contexts/FormContext';
 import { ComponentBuilder } from '../inputs/ComponentBuilder';
 
@@ -30,46 +23,39 @@ export const InputChoice = () => {
 
   const listOfInputBuilder = [
     {
-      id: 1,
+      id: 'radioButtonInput',
       name: 'Bouton radio (choix unique)',
       icon: <RadioButtonCheckedIcon />,
-      component: <RadioInputBuilder />,
     },
     {
-      id: 2,
+      id: 'checkboxInput',
       name: 'Case à cocher (choix multiple)',
       icon: <CheckBoxIcon />,
-      component: <CheckboxInputBuilder />,
     },
     {
-      id: 3,
+      id: 'selectInput',
       name: 'Liste déroulante',
       icon: <KeyboardArrowDownIcon />,
-      component: <SelectInputBuilder />,
     },
     {
-      id: 4,
+      id: 'numberInput',
       name: 'Nombre',
       icon: <MoneyIcon />,
-      component: <NumberInputBuilder />,
     },
     {
-      id: 5,
+      id: 'textInput',
       name: 'Texte court',
       icon: <ShortTextIcon />,
-      component: <TextInputBuilder />,
     },
     {
-      id: 6,
+      id: 'textArea',
       name: 'Texte long',
       icon: <NotesIcon />,
-      component: <TextAreaInputBuilder />,
     },
     {
-      id: 7,
+      id: 'dateInput',
       name: 'Date',
       icon: <CalendarMonthIcon />,
-      component: <DateInputBuilder />,
     },
   ];
 
@@ -86,7 +72,7 @@ export const InputChoice = () => {
           }}
         >
           {listOfInputBuilder.map((inputBuilder) => (
-            <MenuItem key={inputBuilder.id} value={inputBuilder.name}>
+            <MenuItem key={inputBuilder.id} value={inputBuilder.id}>
               <div style={{ display: 'flex', justifyContent: 'start' }}>
                 {inputBuilder.icon}
                 <Divider orientation="vertical" flexItem sx={{ margin: '0 1vw' }} />
