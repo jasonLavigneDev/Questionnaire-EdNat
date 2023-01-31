@@ -3,16 +3,18 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormInfos } from '../components/form/FormInfos';
 import { Breadcrumb } from '../components/system/Breadcrumb';
-import { GlobalStateContext } from '../contexts/GlobalStateContext';
+import { FormContext } from '../contexts/FormContext';
 
 export const FormIntro = () => {
-  const { form } = useContext(GlobalStateContext);
   const navigate = useNavigate();
-  const isDisabled = !form.title;
+
+  const { form } = useContext(FormContext);
 
   const handleSubmit = () => {
     navigate(`/builder/components/${form._id}`);
   };
+
+  const isDisabled = !form.title;
 
   return (
     <>

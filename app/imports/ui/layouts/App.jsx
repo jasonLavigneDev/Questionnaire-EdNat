@@ -7,13 +7,15 @@ import { FormBuilder } from '../pages/FormBuilder';
 
 import { FormIntro } from '../pages/FormIntro';
 import { FormVisualizer, loaderVisualizer } from '../pages/FormVisualizer';
+import { UserProvider } from '../contexts/UserContext';
+import { FormProvider } from '../contexts/FormContext';
 import { MainLayout } from './MainLayout';
 import { FormPrevisualizer } from '../pages/FormPrevisualizer';
 import { BuilderLayout } from './BuilderLayout';
+import { AnswerProvider } from '../contexts/AnswerContext';
 import { AnswersPage, loaderAnswerPage } from '../pages/AnswersPage';
 import { AuthProvider } from '../contexts/AuthContext';
 import { loader as FormInfosLoader } from '../components/form/FormInfos';
-import { GlobalStateProvider } from '../contexts/GlobalStateContext';
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -38,9 +40,13 @@ export const App = () => {
 
   return (
     <React.StrictMode>
-      <GlobalStateProvider>
-        <RouterProvider router={router} />
-      </GlobalStateProvider>
+      <UserProvider>
+        <FormProvider>
+          <AnswerProvider>
+            <RouterProvider router={router} />
+          </AnswerProvider>
+        </FormProvider>
+      </UserProvider>
     </React.StrictMode>
   );
 };

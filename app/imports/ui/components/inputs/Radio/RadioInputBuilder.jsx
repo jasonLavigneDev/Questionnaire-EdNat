@@ -6,7 +6,8 @@ import { i18n } from 'meteor/universe:i18n';
 import { TextField, Button, Paper } from '@mui/material';
 import { createComponentObject, isDuplicate, isEmptyObject } from '../../../utils/utils';
 import { MsgError } from '../../system/MsgError';
-import { GlobalStateContext } from '../../../contexts/GlobalStateContext';
+import { SubmitButton } from '../../system/SubmitButton';
+import { FormContext } from '../../../contexts/FormContext';
 
 export const RadioInputBuilder = ({ componentEdit = {} }) => {
   const [questionText, setQuestionText] = useState(componentEdit.title || '');
@@ -14,7 +15,7 @@ export const RadioInputBuilder = ({ componentEdit = {} }) => {
   const [answerOptions, setAnswerOptions] = useState(componentEdit.choices || []);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { form, setForm } = useContext(GlobalStateContext);
+  const { form, setForm } = useContext(FormContext);
 
   const addOption = (option) => {
     if (option) {

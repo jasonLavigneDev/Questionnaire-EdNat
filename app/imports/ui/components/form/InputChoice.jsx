@@ -7,11 +7,15 @@ import { DateInputBuilder } from '../inputs/Date/DateInputBuilder';
 import { NumberInputBuilder } from '../inputs/Number/NumberInputBuilder';
 import { TextInputBuilder } from '../inputs/TextInput/TextInputBuilder';
 import { TextAreaInputBuilder } from '../inputs/TextArea/TextAreaInputBuilder';
-import { GlobalStateContext } from '../../contexts/GlobalStateContext';
+import { FormContext } from '../../contexts/FormContext';
 
 export const InputChoice = () => {
   const [inputType, setInputType] = useState('');
-  const { form } = useContext(GlobalStateContext);
+  const { form } = useContext(FormContext);
+
+  useEffect(() => {
+    setInputType('');
+  }, [form.components]);
 
   const listOfInputBuilder = [
     {
@@ -50,10 +54,6 @@ export const InputChoice = () => {
       component: <TextAreaInputBuilder />,
     },
   ];
-
-  useEffect(() => {
-    setInputType('');
-  }, [form.components]);
 
   return (
     <div>

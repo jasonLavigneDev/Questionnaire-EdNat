@@ -3,13 +3,15 @@ import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
 import { InputChoice } from '../components/form/InputChoice';
+import { UserContext } from '../contexts/UserContext';
+import { FormContext } from '../contexts/FormContext';
 import { MsgError } from '../components/system/MsgError';
 import { useState } from 'react';
 import { Breadcrumb } from '../components/system/Breadcrumb';
-import { GlobalStateContext } from '../contexts/GlobalStateContext';
 
 export const FormBuilder = () => {
-  const { form, setActiveStep } = useContext(GlobalStateContext);
+  const { form, setActiveStep } = useContext(FormContext);
+  const { isAuthenticated } = useContext(UserContext);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 

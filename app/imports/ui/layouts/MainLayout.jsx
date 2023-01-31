@@ -1,15 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Paper } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
 import { Header } from '../components/header/Header';
-import { GlobalStateContext } from '../contexts/GlobalStateContext';
 
-export const MainLayout = () => {
-  const globalState = useContext(GlobalStateContext);
-
-  console.log('globalState', globalState);
-
+export const MainLayout = ({ children }) => {
   return (
     <>
       <Header />

@@ -12,6 +12,9 @@ import { DateInput } from '../inputs/Date/DateInput';
 import { NumberInput } from '../inputs/Number/NumberInput';
 import { TextInput } from '../inputs/TextInput/TextInput';
 import { TextArea } from '../inputs/TextArea/TextArea';
+import { FormContext } from '../../contexts/FormContext';
+import { AnswerContext } from '../../contexts/AnswerContext';
+import { UserContext } from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { CheckboxInputBuilder } from '../inputs/Checkbox/CheckboxInputBuilder';
 import { SelectInputBuilder } from '../inputs/Select/SelectInputBuilder';
@@ -21,13 +24,17 @@ import { NumberInputBuilder } from '../inputs/Number/NumberInputBuilder';
 import { TextInputBuilder } from '../inputs/TextInput/TextInputBuilder';
 import { TextAreaInputBuilder } from '../inputs/TextArea/TextAreaInputBuilder';
 import EditIcon from '@mui/icons-material/Edit';
-import { GlobalStateContext } from '../../contexts/GlobalStateContext';
 
 export const Visualizer = ({ completeForm, answerMode = false, edit = false }) => {
+  const { form, setForm } = useContext(FormContext);
+  const { user, isAuthenticated } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const { answerForm, setAnswerForm } = useContext(AnswerContext);
+
   const [publicName, setPublicName] = useState('');
   const [builder, setBuilder] = useState({});
-  const { form, setForm, user, isAuthenticated, answerForm, setAnswerForm } = useContext(GlobalStateContext);
-  const navigate = useNavigate();
 
   const generateComponent = (component) => {
     switch (component.type) {

@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+
 import { InputLabel, TextField } from '@mui/material';
-import { GlobalStateContext } from '../../../contexts/GlobalStateContext';
+import { AnswerContext } from '../../../contexts/AnswerContext';
 
 export const NumberInput = ({ title, answerMode, questionId }) => {
-  const { addAnswers } = useContext(GlobalStateContext);
+  const { addAnswers } = useContext(AnswerContext);
 
   const handleChange = (event) => {
     if (answerMode) addAnswers(questionId, event.target.value);

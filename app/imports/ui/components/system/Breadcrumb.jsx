@@ -2,16 +2,12 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Stepper, Step, StepButton } from '@mui/material';
 import { useEffect } from 'react';
-import { GlobalStateContext } from '../../contexts/GlobalStateContext';
+import { FormContext } from '../../contexts/FormContext';
 
 export const Breadcrumb = () => {
-  const [activeStep, setActiveStep] = useState(0);
-  const { form } = useContext(GlobalStateContext);
   const navigate = useNavigate();
-
-  const handleClick = (step) => {
-    navigate(`/builder/${step}`);
-  };
+  const [activeStep, setActiveStep] = useState(0);
+  const { form } = useContext(FormContext);
 
   useEffect(() => {
     const url = window.location.href;
@@ -23,6 +19,10 @@ export const Breadcrumb = () => {
       setActiveStep(2);
     }
   }, []);
+
+  function handleClick(step) {
+    navigate(`/builder/${step}`);
+  }
 
   return (
     <div style={{ marginBottom: '10vh' }}>

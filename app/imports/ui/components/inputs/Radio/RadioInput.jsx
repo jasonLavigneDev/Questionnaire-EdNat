@@ -2,10 +2,10 @@ import React, { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FormLabel, FormControl, FormControlLabel, RadioGroup, Radio } from '@mui/material';
-import { GlobalStateContext } from '../../../contexts/GlobalStateContext';
+import { AnswerContext } from '../../../contexts/AnswerContext';
 
 export const RadioInput = ({ title, choices, answerMode, questionId }) => {
-  const { addAnswers } = useContext(GlobalStateContext);
+  const { addAnswers } = useContext(AnswerContext);
 
   const handleChange = (event) => {
     if (answerMode) addAnswers(questionId, event.target.value);

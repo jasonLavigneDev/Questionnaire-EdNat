@@ -1,39 +1,39 @@
-// import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
-// const initialState = {
-//   userId: '',
-//   formId: '',
-//   answers: [],
-// };
+const initialState = {
+  userId: '',
+  formId: '',
+  answers: [],
+};
 
-// export const AnswerContext = createContext(initialState);
+export const AnswerContext = createContext(initialState);
 
-// export const AnswerProvider = ({ children }) => {
-//   const [answerForm, setAnswerForm] = useState(initialState);
+export const AnswerProvider = ({ children }) => {
+  const [answerForm, setAnswerForm] = useState(initialState);
 
-//   const addAnswers = (questionId, value) => {
-//     const newObj = { ...answerForm };
-//     const { answers } = newObj;
-//     const index = answers.findIndex((o) => o.questionId === questionId);
+  const addAnswers = (questionId, value) => {
+    const newObj = { ...answerForm };
+    const { answers } = newObj;
+    const index = answers.findIndex((o) => o.questionId === questionId);
 
-//     if (index === -1) {
-//       answers.push({ questionId, answer: value });
-//     } else {
-//       answers[index].answer = value;
-//     }
+    if (index === -1) {
+      answers.push({ questionId, answer: value });
+    } else {
+      answers[index].answer = value;
+    }
 
-//     setAnswerForm(newObj);
-//   };
+    setAnswerForm(newObj);
+  };
 
-//   return (
-//     <AnswerContext.Provider
-//       value={{
-//         answerForm,
-//         setAnswerForm,
-//         addAnswers,
-//       }}
-//     >
-//       {children}
-//     </AnswerContext.Provider>
-//   );
-// };
+  return (
+    <AnswerContext.Provider
+      value={{
+        answerForm,
+        setAnswerForm,
+        addAnswers,
+      }}
+    >
+      {children}
+    </AnswerContext.Provider>
+  );
+};
