@@ -5,9 +5,29 @@ import { UserContext } from '../contexts/UserContext';
 import { FormContext } from '../contexts/FormContext';
 import { hasAlreadyRespond } from '../utils/utils';
 
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+
+import { charCountState, textState, toLowerCase, toUpperCase } from '../recoil/testRecoil';
+
 export const HomePage = () => {
   const { user } = useContext(UserContext);
   const [forms, setForms] = useState([]);
+
+  // Jeu de test pour recoil
+  // un atom textState qui prend la valeur de l'input user grace au onChange
+  // une fonction setTextUpper , qui vient du selector toUpperCase, qui récupère la valeur de l'atom textState et qui le transforme en uppercase au clique sur le bouton
+  // une fonction setTextLower , qui vient du selector toLowerCase, qui récupère la valeur de l'atom textState et qui le transforme en uppercase au clique sur le bouton
+  // une fonction count , qui récupère la valeur de l'atome textState , qui calcule le nombre de caractere et le retourne.
+
+  const [text, setText] = useRecoilState(textState);
+  const onChange = (event) => {
+    setText(event.target.value);
+  };
+  const setTextUpper = useSetRecoilState(toUpperCase);
+  const setTextLower = useSetRecoilState(toLowerCase);
+
+  const count = useRecoilValue(charCountState);
+  // Fin du jeu de test pour recoil
 
   const getForms = async () => {
     Meteor.callAsync('forms.getUserForms')
@@ -46,6 +66,13 @@ export const HomePage = () => {
 
   return (
     <>
+      <div id="test-de-recoil-pour-exemple-a-supprimer-ensuite">
+        <input type="text" value={text} onChange={onChange} />
+        <p>{text}</p>
+        <p>{count}</p>
+        <button onClick={() => setTextUpper(text)}>ToUpper</button>
+        <button onClick={() => setTextLower(text)}>toLower</button>
+      </div>
       {user ? (
         <>
           <div style={{ textAlign: 'center' }}>
