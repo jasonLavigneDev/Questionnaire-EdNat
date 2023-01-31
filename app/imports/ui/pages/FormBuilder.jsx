@@ -1,13 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Visualizer } from '../components/form/Visualizer';
-import { InputChoice } from '../components/form/InputChoice';
 import { UserContext } from '../contexts/UserContext';
 import { FormContext } from '../contexts/FormContext';
 import { MsgError } from '../components/system/MsgError';
 import { useState } from 'react';
 import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
+import { ListVisualizer } from '../components/form/ListVisualizer';
 
 export const FormBuilder = () => {
   const { form, setActiveStep } = useContext(FormContext);
@@ -32,15 +31,14 @@ export const FormBuilder = () => {
   return (
     <>
       <Breadcrumb />
-      <div style={{ display: 'flex', height: '90vh', flexDirection: 'column' }}>
-        <Visualizer edit={true} />
-        <h3 style={{ textAlign: 'center' }}>Choisissez le type de question / réponse </h3>
-        <InputChoice />
-        <br />
+      <ListVisualizer />
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {/* <Visualizer edit={true} /> */}
+
         {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}
       </div>
       <br />
-      <Footer handleSubmit={handleSubmit} urlComponentPrec="builder/intro" text="Voir un apercu du questionnaire" />
+      <Footer handleSubmit={handleSubmit} urlComponentPrec="builder/intro" text="Suivant" />
     </>
   );
 };

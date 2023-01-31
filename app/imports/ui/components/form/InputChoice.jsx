@@ -1,5 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { FormControl, Select, InputLabel, MenuItem } from '@mui/material';
+import { FormControl, Select, InputLabel, MenuItem, OutlinedInput, Divider } from '@mui/material';
+
+// Icon for select
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import MoneyIcon from '@mui/icons-material/Money';
+import ShortTextIcon from '@mui/icons-material/ShortText';
+import NotesIcon from '@mui/icons-material/Notes';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
 import { FormContext } from '../../contexts/FormContext';
 import { ComponentBuilder } from '../inputs/ComponentBuilder';
 
@@ -14,48 +24,60 @@ export const InputChoice = () => {
   const listOfInputBuilder = [
     {
       id: 'radioButtonInput',
-      name: 'question avec choix unique de reponse parmis plusieurs propositions',
-    },
-    {
-      id: 'selectInput',
-      name: 'question avec choix unique de reponse parmis plusieurs propositions en liste déroulante ',
+      name: 'Bouton radio (choix unique)',
+      icon: <RadioButtonCheckedIcon />,
     },
     {
       id: 'checkboxInput',
-      name: 'question avec choix multiple ou unique de réponse parmis plusieurs propositions',
+      name: 'Case à cocher (choix multiple)',
+      icon: <CheckBoxIcon />,
     },
     {
-      id: 'dateInput',
-      name: 'question avec choix d une date dans un calendrier',
+      id: 'selectInput',
+      name: 'Liste déroulante',
+      icon: <KeyboardArrowDownIcon />,
     },
     {
       id: 'numberInput',
-      name: 'question avec choix d un nombre',
+      name: 'Nombre',
+      icon: <MoneyIcon />,
     },
     {
       id: 'textInput',
-      name: 'question sans proposition de réponse (zone de texte court)',
+      name: 'Texte court',
+      icon: <ShortTextIcon />,
     },
     {
       id: 'textArea',
-      name: 'question sans proposition de réponse (zone de texte long)',
+      name: 'Texte long',
+      icon: <NotesIcon />,
+    },
+    {
+      id: 'dateInput',
+      name: 'Date',
+      icon: <CalendarMonthIcon />,
     },
   ];
 
   return (
     <div>
       <FormControl fullWidth>
-        <InputLabel id="selectInput-title">type de question </InputLabel>
+        <InputLabel id="selectInput-title">Type de question</InputLabel>
         <Select
           labelId="selectInput-title"
           value={inputType}
+          input={<OutlinedInput label="Type de question" />}
           onChange={(event) => {
             setInputType(event.target.value);
           }}
         >
           {listOfInputBuilder.map((inputBuilder) => (
             <MenuItem key={inputBuilder.id} value={inputBuilder.id}>
-              {inputBuilder.name}
+              <div style={{ display: 'flex', justifyContent: 'start' }}>
+                {inputBuilder.icon}
+                <Divider orientation="vertical" flexItem sx={{ margin: '0 1vw' }} />
+                {inputBuilder.name}
+              </div>
             </MenuItem>
           ))}
         </Select>

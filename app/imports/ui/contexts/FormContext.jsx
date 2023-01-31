@@ -13,6 +13,7 @@ export const FormContext = createContext(initialState);
 export const FormProvider = ({ children }) => {
   const [form, setForm] = useState(initialState);
   const [activeStep, setActiveStep] = useState(0);
+  const [activeBuilder, setActiveBuilder] = useState({});
 
   const resetFormContext = () => {
     setForm(initialState);
@@ -27,6 +28,8 @@ export const FormProvider = ({ children }) => {
         activeStep,
         setActiveStep,
         resetFormContext,
+        activeBuilder,
+        setActiveBuilder,
       }}
     >
       {children}
