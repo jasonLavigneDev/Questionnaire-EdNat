@@ -16,15 +16,9 @@ import { FormContext } from '../../contexts/FormContext';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { UserContext } from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
-import { CheckboxInputBuilder } from '../inputs/Checkbox/CheckboxInputBuilder';
-import { SelectInputBuilder } from '../inputs/Select/SelectInputBuilder';
-import { RadioInputBuilder } from '../inputs/Radio/RadioInputBuilder';
-import { DateInputBuilder } from '../inputs/Date/DateInputBuilder';
-import { NumberInputBuilder } from '../inputs/Number/NumberInputBuilder';
-import { TextInputBuilder } from '../inputs/TextInput/TextInputBuilder';
-import { TextAreaInputBuilder } from '../inputs/TextArea/TextAreaInputBuilder';
 import EditIcon from '@mui/icons-material/Edit';
 import { hasAlreadyRespond } from '../../utils/utils';
+import { ComponentBuilder } from '../inputs/ComponentBuilder';
 
 export const Visualizer = ({ completeForm, answerMode = false, edit = false }) => {
   const { form, setForm } = useContext(FormContext);
@@ -114,25 +108,6 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
     }
   };
 
-  const generateBuilder = (component) => {
-    switch (component.type) {
-      case 'checkboxInput':
-        return <CheckboxInputBuilder componentEdit={component} />;
-      case 'selectInput':
-        return <SelectInputBuilder componentEdit={component} />;
-      case 'radioButtonInput':
-        return <RadioInputBuilder componentEdit={component} />;
-      case 'dateInput':
-        return <DateInputBuilder componentEdit={component} />;
-      case 'numberInput':
-        return <NumberInputBuilder componentEdit={component} />;
-      case 'textInput':
-        return <TextInputBuilder componentEdit={component} />;
-      case 'textArea':
-        return <TextAreaInputBuilder componentEdit={component} />;
-    }
-  };
-
   const hasComponentBefore = (inputPos) => inputPos > 0;
   const hasComponentAfter = (inputPos) => inputPos < form.components.length - 1;
 
@@ -194,7 +169,11 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
             <br />
             <br />
             <div>{generateComponent(componentInput)}</div>
-            {builder && builder.id === componentInput.id ? <div>{generateBuilder(builder)}</div> : null}
+            {builder && builder.id === componentInput.id ? (
+              <div>
+                <ComponentBuilder componentEdit={componentInput} type={componentInput.type} />
+              </div>
+            ) : null}
             {edit && (
               <div style={{ display: 'flex' }}>
                 <div style={{ flexDirection: 'column' }}>

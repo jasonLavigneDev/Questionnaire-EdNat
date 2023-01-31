@@ -1,27 +1,28 @@
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
-import { v4 as uuidv4 } from 'uuid';
 import { i18n } from 'meteor/universe:i18n';
-
 import { TextField, Button, Paper } from '@mui/material';
-import { createComponentObject, isDuplicate, isEmptyObject } from '../../../utils/utils';
-import { MsgError } from '../../system/MsgError';
-import { SubmitButton } from '../../system/SubmitButton';
-import { FormContext } from '../../../contexts/FormContext';
+import { createComponentObject, isDuplicate, isEmptyObject } from '../../utils/utils';
+import { MsgError } from '../system/MsgError';
+import { FormContext } from '../../contexts/FormContext';
+import { v4 as uuidv4 } from 'uuid';
 
-export const RadioInputBuilder = ({ componentEdit = {} }) => {
+export const ComponentBuilder = ({ componentEdit = {}, type }) => {
   const [questionText, setQuestionText] = useState(componentEdit.title || '');
+  const [errorMessage, setErrorMessage] = useState('');
   const [answerText, setAnswerText] = useState('');
   const [answerOptions, setAnswerOptions] = useState(componentEdit.choices || []);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const { form, setForm } = useContext(FormContext);
 
-  const addOption = (option) => {
-    if (option) {
+  const IsMultiAnswersComponent = () => {
+    return type === 'checkboxInput' || type === 'selectInput' || type === 'radioButtonInput';
+  };
+
+  const addOption = (newOption) => {
+    if (newOption) {
       const opt = [...answerOptions];
-      if (!isDuplicate(opt, option)) {
-        opt.push(option);
+      if (!isDuplicate(opt, newOption)) {
+        opt.push(newOption);
         setAnswerOptions(opt);
         setAnswerText('');
       }
@@ -36,30 +37,33 @@ export const RadioInputBuilder = ({ componentEdit = {} }) => {
   };
 
   const handleSubmit = () => {
-    if (questionText && answerOptions) {
+    if (questionText) {
+      if (IsMultiAnswersComponent() && !answerOptions) {
+        setErrorMessage(i18n.__('builders.errors.noOptions'));
+        return;
+      }
       const componentListFinal = [...form.components];
-      const newComponent = createComponentObject(questionText, 'radioButtonInput', answerOptions);
+      const newComponent = createComponentObject(questionText, type, answerOptions);
       componentListFinal.push(newComponent);
       setForm({ ...form, components: componentListFinal });
       setQuestionText('');
       setAnswerText('');
       setAnswerOptions([]);
     } else {
-      if (!questionText) {
-        setErrorMessage(i18n.__('builders.errors.noTitle'));
-      }
-      if (!answerOptions.length) {
-        setErrorMessage(i18n.__('builders.errors.noOptions'));
-      }
+      setErrorMessage(i18n.__('builders.errors.noTitle'));
     }
   };
 
   const handleUpdate = () => {
-    if (questionText && answerOptions) {
+    if (questionText) {
+      if (IsMultiAnswersComponent() && !answerOptions) {
+        setErrorMessage(i18n.__('builders.errors.noOptions'));
+        return;
+      }
       const componentListFinal = [...form.components];
       const index = componentListFinal.findIndex((component) => component.id === componentEdit.id);
       if (index !== -1) {
-        componentListFinal[index] = createComponentObject(questionText, 'radioButtonInput', answerOptions);
+        componentListFinal[index] = createComponentObject(questionText, type, answerOptions);
       } else {
         console.log('error, component does not exist');
       }
@@ -70,9 +74,6 @@ export const RadioInputBuilder = ({ componentEdit = {} }) => {
     } else {
       if (!questionText) {
         setErrorMessage(i18n.__('builders.errors.noTitle'));
-      }
-      if (!answerOptions.length) {
-        setErrorMessage(i18n.__('builders.errors.noOptions'));
       }
     }
   };
@@ -87,24 +88,27 @@ export const RadioInputBuilder = ({ componentEdit = {} }) => {
         helperText="Entrez votre question"
         onChange={(e) => setQuestionText(e.target.value)}
       />
-      <br />
-      <TextField
-        id="option"
-        label="Entrez un choix de réponse"
-        variant="outlined"
-        value={answerText}
-        helperText="Entrez un choix de reponse"
-        onChange={(e) => setAnswerText(e.target.value)}
-      />
-      <Button onClick={() => addOption(answerText)}>Ajoutez ce choix de réponse</Button>
-      {answerOptions.map((option) => (
-        <div style={{ display: 'flex' }} key={uuidv4()}>
-          <p>{option}</p>
-          <Button onClick={() => removeOption(option)}>Supprimez ce choix de réponse</Button>
+      {IsMultiAnswersComponent() ? (
+        <div>
+          <br />
+          <TextField
+            id="option"
+            label="Entrez un choix de réponse"
+            variant="outlined"
+            value={answerText}
+            helperText="Entrez un choix de reponse"
+            onChange={(e) => setAnswerText(e.target.value)}
+          />
+          <Button onClick={() => addOption(answerText)}>Ajoutez ce choix de réponse</Button>
+          {answerOptions.map((option) => (
+            <div style={{ display: 'flex' }} key={uuidv4()}>
+              <p>{option}</p>
+              <Button onClick={() => removeOption(option)}>Supprimez ce choix de réponse</Button>
+            </div>
+          ))}
+          <br />
         </div>
-      ))}
-      <br />
-      {/* <SubmitButton handleClick={handleSubmit} /> */}
+      ) : null}
       {isEmptyObject(componentEdit) ? (
         <Button style={{ textAlign: 'center', width: '100%' }} onClick={handleSubmit}>
           Validez cette question et ses possibilités de réponses

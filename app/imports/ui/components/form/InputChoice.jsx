@@ -1,13 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { FormControl, Select, InputLabel, MenuItem } from '@mui/material';
-import { RadioInputBuilder } from '../inputs/Radio/RadioInputBuilder';
-import { SelectInputBuilder } from '../inputs/Select/SelectInputBuilder';
-import { CheckboxInputBuilder } from '../inputs/Checkbox/CheckboxInputBuilder';
-import { DateInputBuilder } from '../inputs/Date/DateInputBuilder';
-import { NumberInputBuilder } from '../inputs/Number/NumberInputBuilder';
-import { TextInputBuilder } from '../inputs/TextInput/TextInputBuilder';
-import { TextAreaInputBuilder } from '../inputs/TextArea/TextAreaInputBuilder';
 import { FormContext } from '../../contexts/FormContext';
+import { ComponentBuilder } from '../inputs/ComponentBuilder';
 
 export const InputChoice = () => {
   const [inputType, setInputType] = useState('');
@@ -19,39 +13,32 @@ export const InputChoice = () => {
 
   const listOfInputBuilder = [
     {
-      id: 1,
+      id: 'radioButtonInput',
       name: 'question avec choix unique de reponse parmis plusieurs propositions',
-      component: <RadioInputBuilder />,
     },
     {
-      id: 2,
+      id: 'selectInput',
       name: 'question avec choix unique de reponse parmis plusieurs propositions en liste déroulante ',
-      component: <SelectInputBuilder />,
     },
     {
-      id: 3,
+      id: 'checkboxInput',
       name: 'question avec choix multiple ou unique de réponse parmis plusieurs propositions',
-      component: <CheckboxInputBuilder />,
     },
     {
-      id: 4,
+      id: 'dateInput',
       name: 'question avec choix d une date dans un calendrier',
-      component: <DateInputBuilder />,
     },
     {
-      id: 5,
+      id: 'numberInput',
       name: 'question avec choix d un nombre',
-      component: <NumberInputBuilder />,
     },
     {
-      id: 6,
+      id: 'textInput',
       name: 'question sans proposition de réponse (zone de texte court)',
-      component: <TextInputBuilder />,
     },
     {
-      id: 7,
+      id: 'textArea',
       name: 'question sans proposition de réponse (zone de texte long)',
-      component: <TextAreaInputBuilder />,
     },
   ];
 
@@ -67,7 +54,7 @@ export const InputChoice = () => {
           }}
         >
           {listOfInputBuilder.map((inputBuilder) => (
-            <MenuItem key={inputBuilder.id} value={inputBuilder.name}>
+            <MenuItem key={inputBuilder.id} value={inputBuilder.id}>
               {inputBuilder.name}
             </MenuItem>
           ))}
@@ -76,8 +63,9 @@ export const InputChoice = () => {
       {inputType !== '' && (
         <>
           <br />
-          <br />
-          <div>{listOfInputBuilder.find((input) => input.name === inputType).component}</div>
+          <div>
+            <ComponentBuilder type={inputType} />
+          </div>
         </>
       )}
     </div>

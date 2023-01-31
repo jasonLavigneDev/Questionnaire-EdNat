@@ -66,9 +66,6 @@ export const FormInfos = () => {
     setForm({ ...form, groups: groups.filter((groupId) => groupId !== id) });
   };
 
-  console.log('formFromBDD', formFromBDD);
-  console.log('form context', form);
-
   useEffect(() => {
     if (formFromBDD) {
       setForm(formFromBDD);
