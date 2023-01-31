@@ -152,11 +152,7 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
   };
 
   useEffect(() => {
-    setAnswerForm({
-      userId: '',
-      formId: '',
-      answers: [],
-    });
+    if (answers) setAnswerForm(answers);
   }, []);
 
   if (isAuthenticated || form.isPublic) {
