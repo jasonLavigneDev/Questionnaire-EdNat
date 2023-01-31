@@ -16,7 +16,6 @@ import { AnswerProvider } from '../contexts/AnswerContext';
 import { AnswersPage, loaderAnswerPage } from '../pages/AnswersPage';
 import { AuthProvider } from '../contexts/AuthContext';
 import { loader as FormInfosLoader } from '../components/form/FormInfos';
-import { RecoilRoot } from 'recoil';
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -41,15 +40,13 @@ export const App = () => {
 
   return (
     <React.StrictMode>
-      <RecoilRoot>
-        <UserProvider>
-          <FormProvider>
-            <AnswerProvider>
-              <RouterProvider router={router} />
-            </AnswerProvider>
-          </FormProvider>
-        </UserProvider>
-      </RecoilRoot>
+      <UserProvider>
+        <FormProvider>
+          <AnswerProvider>
+            <RouterProvider router={router} />
+          </AnswerProvider>
+        </FormProvider>
+      </UserProvider>
     </React.StrictMode>
   );
 };
