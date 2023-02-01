@@ -40,6 +40,12 @@ export const HomePage = () => {
 
   const { resetFormContext } = useContext(FormContext);
 
+  const copyUrlToClipBoard = (id) => {
+    const url = `http://localhost:3060/visualizer/${id}`;
+    console.log('url copy to ClipBoard', url);
+    return navigator.clipboard.writeText(url);
+  };
+
   useEffect(() => {
     resetFormContext();
   }, []);
@@ -79,6 +85,8 @@ export const HomePage = () => {
                     </Button>
                     <Button onClick={() => navigate(`/builder/intro/${form._id}`)}>Editer ce formulaire</Button>
                     <Button onClick={() => handleDelete(form)}>Supprimer ce formulaire</Button>
+                    <Button onClick={() => copyUrlToClipBoard(form._id)}>Copier l url du formulaire</Button>
+
                     <Divider />
                   </div>
                 </div>
