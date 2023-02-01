@@ -1,9 +1,16 @@
-import { Button, Divider, Typography } from '@mui/material';
+import { Button, Divider, Typography, IconButton } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import { FormContext } from '../contexts/FormContext';
 import { hasAlreadyRespond } from '../utils/utils';
+
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import Edit from '@mui/icons-material/Edit';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DesignServicesIcon from '@mui/icons-material/DesignServices';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
@@ -73,19 +80,43 @@ export const HomePage = () => {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <div style={{ flexDirection: 'column' }}>
+                  <div style={{ flexDirection: 'column', flex: 3 }}>
                     <Typography variant="body1">{form.title}</Typography>
                   </div>
-                  <div style={{ flexDirection: 'column' }}>
-                    <Button disabled={hasNotAnswers(form._id)} onClick={() => navigate(`/answers/${form._id}`)}>
-                      Voir les reponses{' '}
-                    </Button>
-                    <Button onClick={() => navigate(`/visualizer/${form._id}`)}>
-                      {hasAlreadyRespond(user, form) ? 'Modifier les réponses' : 'Répondre au formulaire'}
-                    </Button>
-                    <Button onClick={() => navigate(`/builder/intro/${form._id}`)}>Editer ce formulaire</Button>
-                    <Button onClick={() => handleDelete(form)}>Supprimer ce formulaire</Button>
-                    <Button onClick={() => copyUrlToClipBoard(form._id)}>Copier l url du formulaire</Button>
+                  <div style={{ flexDirection: 'column', flex: 1 }}>
+                    <IconButton
+                      title="Répondre"
+                      sx={{ color: 'lightGreen' }}
+                      disabled={hasNotAnswers(form._id)}
+                      onClick={() => navigate(`/answers/${form._id}`)}
+                    >
+                      <ListAltIcon />
+                    </IconButton>
+                    <IconButton
+                      title="Editez vos réponses"
+                      sx={{ color: 'gold' }}
+                      onClick={() => navigate(`/visualizer/${form._id}`)}
+                    >
+                      {/* {hasAlreadyRespond(user, form) ? 'Modifier les réponses' : 'Répondre au formulaire'} */}
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton title="Copier l'URL" onClick={() => copyUrlToClipBoard(form._id)}>
+                      <ContentCopyIcon />
+                    </IconButton>
+                    <IconButton
+                      title="Editer le formulaire"
+                      sx={{ color: 'lightBlue' }}
+                      onClick={() => navigate(`/builder/intro/${form._id}`)}
+                    >
+                      <DesignServicesIcon />
+                    </IconButton>
+                    <IconButton
+                      title="Supprimer le formulaire"
+                      sx={{ color: 'salmon' }}
+                      onClick={() => handleDelete(form)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
 
                     <Divider />
                   </div>
