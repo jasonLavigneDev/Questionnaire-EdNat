@@ -119,5 +119,5 @@ export const AnswersPage = () => {
 };
 
 export const loaderAnswerPage = async ({ params }) => {
-  return (await Meteor.callAsync('forms.getOne', params.id)) || null;
+  return (await Meteor.callAsync('forms.getOneFromUser', params.id)) || null;
 };
