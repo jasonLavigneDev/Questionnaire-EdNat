@@ -1,33 +1,34 @@
-# Definition des specs de la page FORMINTRO pour gerer les états
+# Définition des specs de la page FORMINTRO pour gérer les états
 
 ## Affichage de cette page
 
-**Conditions Genereales d'affichage de la page :**
+**Conditions Générales d'affichage de la page :**
 
-1. si User connecté on affiche la page
-2. sinon on demande a se connecter
+Si User connecté on affiche la page, sinon on demande à se connecter.
 
 **Affichage**
 
-1. input de type text pour le titre du formulaire ( requis ou non )
-2. input de type text pour la description du formulaire ( optionnel )
-3. checkbox public
-   **Conditions :** 1. Si coché , checkbox groupe disabled 2. Si coché , les groupes add sont remis a 0
+- Input de type text pour le _titre du formulaire_ (requis)
+- Input de type text pour la _description du formulaire_ (optionnel)
+- Checkbox _public_ : si coché => checkbox _groupe_ inactivé et les groupes ajoutés sont remis à 0
+- Checkbox _groupe_ :
+  - si coché => checkbox _public_ inactivé
+  - si coché et pas de groupes dispo => affichage texte _PAS DE GROUPE_
+  - si coché et groupes dispo => affichage select avec liste des groupes dispo + affichage boutton _Ajouter_
+  - Clic sur _Ajouter_ => affichage du groupe en dessous et suppression du groupe du select
+  * si checkbox _groupe_ décoché => remise à 0 des groupes ajoutés
+- Select des groupes dispo (affichage conditionnel)
+- Card des groupes ajoutés avec bouton de suppression (affichage conditionnel)
 
-4. checkbox groupe
-   **Conditions :** 1. Si coché , checkbox public disabled 2. Si coché et pas de groupes , affichage texte PAS DE GROUPE 3. Si coché et groupes dispo, affichage select avec liste des groupes dispo et affichage boutton ADD 1. Au click sur ADD , affichage du groupe en dessous du select 2. Au click sur ADD , retirer ce groupe du select 3. Si checkbox groupe décoché ou disabled , remis a 0 des groupes ADD
-5. select des groupes dispo
-
-6. bouton suivant
-   **Conditions :** 1. Si champ manquant disabled 2. Sinon => /builder/components/id
+- Bouton _suivant_ : si champ manquant requis => inactif, => `/builder/components/id`
 
 ### Question sur cette page
 
 ### Besoin de cette page
 
-Savoir si user est connecte ou non
-Savoir si user a des groupes
-Savoir si des champs required sont presents et rempli
+- Savoir si un user est connecte ou non
+- Savoir si le user connecté a des groupes
+- Savoir si des champs required sont présents et remplis
 
 ### State de cette page
 

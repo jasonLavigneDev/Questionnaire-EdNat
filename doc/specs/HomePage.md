@@ -1,4 +1,4 @@
-# Definition des specs de la HOMEPAGE pour gérer les états
+# Définition des specs de la HOMEPAGE pour gérer les états
 
 ## Affichage de cette page
 
