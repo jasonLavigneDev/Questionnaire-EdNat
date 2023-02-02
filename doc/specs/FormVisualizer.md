@@ -1,34 +1,31 @@
-# Definition des specs de la page FORMVIZUALIZER ( page permettant de repondre au formulaire ) pour gerer les états
+# Définition des specs de la page FORMVISUALIZER (page permettant de répondre au formulaire) pour gérer les états
 
 ## Affichage de cette page
 
-**Conditions Genereales d'affichage de la page :**
+**Conditions Générales d'affichage de la page :**
 
-1. si Form public on affiche la page
-2. sinon si user connecte on affiche la page
-3. sinon on demande a se connecter
-4. si form a défini qu'on peut modifier les reponses
-5. affichage si on a deja repondu
-6. sinon MESSAGE VOUS AVEZ DEJA REPONDU
+- Si Form public ou user connecté => on affiche la page
+- Sinon on demande à se connecter ou bien un email
+- Si on peut modifier les reponses => affichage des réponses déjà fournies
+- Sinon MESSAGE VOUS AVEZ DEJA REPONDU
 
 **Affichage**
 
-1. le formulaire qui contient chaque question reponse
-2. bouton submit qui enregistre les reponses en bdd => Message MERCI DAVOIR REPONDU
-   **Conditions**
-3. Si user connecte bouton ok
-4. sinon 1. affichage input text pour saisie du nom public 2. bouton submit disabled tant que nom public non renseigné
+- Formulaire qui contient chaque questions/réponses
+- Bouton _submit_ qui enregistre les réponses en bdd => Message _MERCI DAVOIR REPONDU_
+- Si formulaire public : input text pour saisie du nom public et bouton _submit_ disabled tant que nom public non
+  renseigné
 
 ### Question sur cette page
 
+- Peut-on modifier les réponses déjà données ?
+- Si oui est-ce une option du formulaire ?
+
 ### Besoin de cette page
 
-si user est connecte
-si form public
-si user public a donné son nom
-si user a déja repondu
-si form autorise de modifier les reponses
-le formulaire complet
+- user connecté
+- nom du user si form public
+- form complet avec réponses et options
 
 ### State de cette page
 
