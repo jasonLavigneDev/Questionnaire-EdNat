@@ -164,7 +164,7 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
           <div key={componentInput.id}>
             <br />
             <br />
-            <div>{generateComponent(componentInput)}</div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>{generateComponent(componentInput)}</div>
             {builder && builder.id === componentInput.id ? (
               <div>
                 <ComponentBuilder componentEdit={componentInput} type={componentInput.type} />

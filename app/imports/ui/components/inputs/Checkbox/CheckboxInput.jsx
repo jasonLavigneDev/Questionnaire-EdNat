@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel, Paper } from '@mui/material';
 import { AnswerContext } from '../../../contexts/AnswerContext';
 
 export const CheckBoxInput = ({ title, choices, required = false, answerMode, questionId, answer = {} }) => {
@@ -36,7 +36,7 @@ export const CheckBoxInput = ({ title, choices, required = false, answerMode, qu
   };
 
   return (
-    <div>
+    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
       <FormControl onChange={() => handleBlur()}>
         <FormLabel>{title}</FormLabel>
         <FormGroup>
@@ -53,7 +53,7 @@ export const CheckBoxInput = ({ title, choices, required = false, answerMode, qu
           ))}
         </FormGroup>
       </FormControl>
-    </div>
+    </Paper>
   );
 };
 
