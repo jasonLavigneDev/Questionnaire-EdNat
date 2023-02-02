@@ -1,45 +1,41 @@
-# Definition des specs de la page FORMBUILDER pour gerer les états
+# Définition des specs de la page FORMBUILDER pour gérer les états
 
 ## Affichage de cette page
 
-**Conditions Genereales d'affichage de la page :**
+**Conditions Générales d'affichage de la page :**
 
-1. si User connecté on affiche la page
-2. sinon on demande a se connecter
+Si User connecté on affiche la page, sinon on demande à se connecter.
 
 **Affichage**
 
-1. Select des differents type d input dispo
-2. Au click sur un type d'input
-   **Conditions** 1. Si input simple 1. input type texte pour le titre de la question 2. sinon 1. input type text pour le titre de la question 2. input de type texte pour une reponse a proposer
-3. bouton +
-   **Conditions** 1. si des champs required non remplit bouton disabled ( titre ) 2. sinon bouton ok
-4. Au click sur le bouton +
-   1. affichage de la reponse proposer en dessous
-   2. garde en memoire le titre
-   3. reset de l input de reponse
-5. bouton valider
-   1. si des champs required non remplit bouton disabled ( titre )
-   2. sinon bouton ok
-6. affichage a droite de la question avec pour chaque
-   1. bouton up qui permet de passer cette question au dessus de la precendte
-   2. bouton down qui permet de passer cette question en dessous de la suivante
-   3. bouton edit
-      1. ouvre le builder correspondant a gauche avec en memoire le titre et les reponses déja enregistré
-   4. bouton delete qui supprime cette question/Reponse
-7. bouton retour => /builder/intro
-   1. garde en memoire tout le travail déja fais
-8. bouton suivant => /builder/previzzualizer
+- Select des differents type d'input dispo
+- Au click sur un type d'input :
+  - input type texte pour le titre de la question
+  - input de type texte pour une reponse à proposer (selon le type)
+  - bouton + (inactif si champs requis manquants), clic le bouton =>
+    - affichage de la réponse proposée en dessous
+    - garde en mémoire le titre
+    - reset de l'input de réponse
+- Bouton _valider_ (inactif si champs requis manquants) => action ??
+- Affichage à droite de la question avec pour chacune :
+
+  - bouton _up_ => passer cette question au dessus de la précédente
+  - bouton _down_ => passer cette question en dessous de la suivante
+  - bouton _edit_ => ouvre le builder correspondant à gauche avec en mémoire le titre et les réponses déja enregistrées
+  - bouton _delete_ => supprime cette question
+
+- Bouton _retour_ => `/builder/intro` (garde en mémoire tout le travail déja fait)
+- Bouton _suivant_ => `/builder/previzzualizer`
 
 ### Question sur cette page
 
 ### Besoin de cette page
 
-User connecte ou non
-type d input choisi
-champs required ou pas
-au clique sur edit connaitre quel builder est associé et les infos déja presentes
-au clique sur retour garder en memoire toutes les infos
+- User connecté ou non
+- Type d'input choisis
+- Champs required ou pas
+- Au clic sur _edit_ : connaitre quel builder est associé et les infos déja presentes
+- Au clic sur _retour_ : garder en mémoire toutes les infos
 
 ### State de cette page
 
