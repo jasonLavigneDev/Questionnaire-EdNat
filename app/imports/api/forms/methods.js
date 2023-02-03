@@ -70,8 +70,17 @@ export const updateForm = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.notLoggedIn', "Pas d'utilisateur connecté");
     }
-    _updateForm(id, title, desc, this.userId, isModel, isPublic, groups, components);
+
     const form = await Forms.findOneAsync({ _id: id });
+    if (this.userId !== form.owner) {
+      throw new Meteor.Error(
+        'api.forms.deleteForm.permissionDenied',
+        "Le formulaire n'appartient pas à l'utilisateur courant",
+      );
+    }
+
+    _updateForm(id, title, desc, this.userId, isModel, isPublic, groups, components);
+
     return form._id;
   },
 });
@@ -127,6 +136,30 @@ Meteor.methods({
 Meteor.methods({
   'forms.getOne': async (id) => {
     return await Forms.findOneAsync({ _id: id });
+  },
+});
+
+export const getOneFormFromuser = new ValidatedMethod({
+  name: 'forms.getOneFromUser',
+  validate: null,
+
+  async run(id) {
+    if (!id) {
+      return null;
+    }
+    if (!this.userId) {
+      throw new Meteor.Error('api.forms.createForm.notLoggedIn', "Pas d'utilisateur connecté");
+    }
+
+    const form = await Forms.findOneAsync({ _id: id });
+    if (form.owner !== this.userId) {
+      throw new Meteor.Error(
+        'api.forms.deleteForm.permissionDenied',
+        "Le formulaire n'appartient pas à l'utilisateur courant",
+      );
+    }
+
+    return form;
   },
 });
 
