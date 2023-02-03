@@ -77,7 +77,7 @@ export const FormPrevisualizer = () => {
       )}
       {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
       <Footer
-        navigateToNextStep={currentForm._id ? updateForm : sendFormToBDD}
+        nextStep={currentForm._id ? updateForm : sendFormToBDD}
         urlOfPrevStep="builder/components"
         text={currentForm._id ? 'Mettre à jour le formulaire' : 'Enregistrer le résultat'}
       />

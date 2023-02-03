@@ -12,7 +12,7 @@ import { InputChoice } from './InputChoice';
 import { ComponentBuilder } from '../inputs/ComponentBuilder';
 
 export const ListVisualizer = () => {
-  const { currentForm, setCurrentForm, activeBuilder, setActiveBuilder } = useContext(FormContext);
+  const { currentForm, setCurrentForm } = useContext(FormContext);
   const [componentToEdit, setComponentToEdit] = useState({});
   const [editMode, setEditMode] = useState(false);
 
