@@ -2,7 +2,7 @@ import { Divider, IconButton } from '@mui/material';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormContext } from '../contexts/FormContext';
-import { copyUrlToClipBoard, hasAlreadyRespond, hasNotAnswers } from '../utils/utils';
+import { copyUrlToClipBoard, hasNotAnswers } from '../utils/utils';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -19,7 +19,7 @@ export const FormActionButton = ({ currentForm }) => {
       <IconButton
         title="Répondre"
         sx={{ color: 'lightGreen' }}
-        disabled={hasNotAnswers(currentForm._id)}
+        disabled={hasNotAnswers(currentForm)}
         onClick={() => navigate(`/answers/${currentForm._id}`)}
       >
         <ListAltIcon />
