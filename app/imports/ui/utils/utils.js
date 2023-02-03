@@ -19,6 +19,7 @@ export const isEmptyComponent = (component) => {
 };
 
 export const hasNotAnswers = (form) => {
+  console.log('form', form.formAnswers);
   if (!form.formAnswers || form.formAnswers.length === 0) return true; // formAnswers peut etre initialisé a tableau vide pour retirer la 1ere condition !?
   return false;
 };
