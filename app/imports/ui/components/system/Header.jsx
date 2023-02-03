@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Slide, useScrollTrigger } from '@mui/material';
-import MainMenu from './MainMenu';
+import { HeaderMenu } from './HeaderMenu';
 
 const appBarStyle = {
   display: 'flex',
@@ -28,7 +28,7 @@ export const Header = () => {
           />
           <h1 style={{ fontFamily: 'OdinRounded', color: '#372f84' }}>Questionnaire</h1>
         </Link>
-        <MainMenu />
+        <HeaderMenu />
       </AppBar>
     </Slide>
   );

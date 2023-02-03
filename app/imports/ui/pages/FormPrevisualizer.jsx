@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,24 +8,26 @@ import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
 
 export const FormPrevisualizer = () => {
-  const { form, resetFormContext, setActiveStep } = useContext(FormContext);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const { currentForm, resetFormContext, setActiveStep } = useContext(FormContext);
 
   const navigate = useNavigate();
 
-  const isDisable = !form.title || form.components.length === 0;
+  const isDisable = !currentForm.title || currentForm.components.length === 0;
 
-  const handleSubmit = async () => {
+  const sendFormToBDD = async () => {
     if (isDisable) {
       setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
     } else {
+      // possible de try catch ?
       const result = await Meteor.callAsync('forms.createForm', {
-        title: form.title,
-        desc: form.desc,
+        title: currentForm.title,
+        desc: currentForm.desc,
         isModel: false,
-        groups: form.groups,
-        isPublic: form.isPublic,
-        components: form.components,
+        groups: currentForm.groups,
+        isPublic: currentForm.isPublic,
+        components: currentForm.components,
       });
       if (!result) {
         console.log('error');
@@ -37,18 +38,19 @@ export const FormPrevisualizer = () => {
     }
   };
 
-  const handleUpdate = async () => {
+  const updateForm = async () => {
     if (isDisable) {
       setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
     } else {
+      //try catch ?
       const result = await Meteor.callAsync('forms.updateForm', {
-        id: form._id,
-        title: form.title,
-        desc: form.desc,
+        id: currentForm._id,
+        title: currentForm.title,
+        desc: currentForm.desc,
         isModel: false,
-        groups: form.groups,
-        isPublic: form.isPublic,
-        components: form.components,
+        groups: currentForm.groups,
+        isPublic: currentForm.isPublic,
+        components: currentForm.components,
       });
       if (!result) {
         console.log('error');
@@ -65,7 +67,7 @@ export const FormPrevisualizer = () => {
 
   return (
     <div>
-      {form ? (
+      {currentForm ? (
         <div>
           <Breadcrumb />
           <Visualizer />
@@ -73,11 +75,11 @@ export const FormPrevisualizer = () => {
       ) : (
         <p>ce formulaire n'existe pas</p>
       )}
-      {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}
+      {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
       <Footer
-        handleSubmit={form._id ? handleUpdate : handleSubmit}
-        urlComponentPrec="builder/components"
-        text={form._id ? 'Mettre à jour le formulaire' : 'Enregistrer le résultat'}
+        navigateToNextStep={currentForm._id ? updateForm : sendFormToBDD}
+        urlOfPrevStep="builder/components"
+        text={currentForm._id ? 'Mettre à jour le formulaire' : 'Enregistrer le résultat'}
       />
     </div>
   );

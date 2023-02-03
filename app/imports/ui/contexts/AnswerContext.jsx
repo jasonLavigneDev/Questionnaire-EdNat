@@ -12,9 +12,9 @@ export const AnswerProvider = ({ children }) => {
   const [answerForm, setAnswerForm] = useState(initialState);
 
   const addAnswers = (questionId, value) => {
-    const newObj = { ...answerForm };
-    const { answers } = newObj;
-    const index = answers.findIndex((o) => o.questionId === questionId);
+    const answerFormUpdated = { ...answerForm };
+    const { answers } = answerFormUpdated;
+    const index = answers.findIndex((answer) => answer.questionId === questionId);
 
     if (index === -1) {
       answers.push({ questionId, answer: value });
@@ -22,7 +22,7 @@ export const AnswerProvider = ({ children }) => {
       answers[index].answer = value;
     }
 
-    setAnswerForm(newObj);
+    setAnswerForm(answerFormUpdated);
   };
 
   return (

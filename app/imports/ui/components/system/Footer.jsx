@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { BottomNavigation, Paper, useScrollTrigger, Button } from '@mui/material';
+import { BottomNavigation, useScrollTrigger, Button } from '@mui/material';
 
 import { FormContext } from '../../contexts/FormContext';
 
-export const Footer = ({ handleSubmit, urlComponentPrec, text }) => {
+export const Footer = ({ navigateToNextStep, urlOfPrevStep, text }) => {
   const bottomBarStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -13,27 +13,28 @@ export const Footer = ({ handleSubmit, urlComponentPrec, text }) => {
     height: '6vh',
   };
 
-  const trigger = useScrollTrigger();
-  const { form } = useContext(FormContext);
   const navigate = useNavigate();
 
-  const isDisable = !form.title || form.components.length === 0;
-  const isDisabledTitle = !form.title;
+  const { currentForm } = useContext(FormContext);
+  // const trigger = useScrollTrigger();
+
+  const isDisable = !currentForm.title || currentForm.components.length === 0;
+  const isTitleMissing = !currentForm.title;
 
   return (
     // <Slide direction="up" in={trigger}>
     <div style={{ position: 'fixed', bottom: 30, left: 0, right: 0 }}>
       <BottomNavigation sx={bottomBarStyle} showLabels>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {urlComponentPrec && (
-            <Button variant="contained" sx={{ marginRight: '5vw' }} onClick={() => navigate(`/${urlComponentPrec}`)}>
-              Retour{' '}
+          {urlOfPrevStep && (
+            <Button variant="contained" sx={{ marginRight: '5vw' }} onClick={() => navigate(`/${urlOfPrevStep}`)}>
+              Retour
             </Button>
           )}
           <Button
             variant="contained"
-            disabled={urlComponentPrec ? isDisable : isDisabledTitle}
-            onClick={() => handleSubmit()}
+            disabled={urlOfPrevStep ? isDisable : isTitleMissing}
+            onClick={() => navigateToNextStep()}
           >
             {text}
           </Button>

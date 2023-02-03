@@ -3,6 +3,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
+// Cette page est a refactor !
+
 export const AnswersPage = () => {
   const formFromBDD = useLoaderData();
   const finalArray = [];
@@ -85,33 +87,41 @@ export const AnswersPage = () => {
             {statMode ? 'Voir les réponses par utilisateur' : 'Voir les Statistiques'}
           </Button>
           {statMode
-            ? statArray.map((question) => (
-                <div>
-                  <h2>{question.questionTitle}</h2>
-                  {question.stat.map((stat) => (
-                    <ul>
-                      <li>
-                        <b>{stat.answer} </b>: {(stat.count / getAllCountStat(question.stat)) * 100}%
-                      </li>
-                    </ul>
-                  ))}
-                </div>
-              ))
-            : finalArray.map((question) => (
-                <div>
-                  <h2>{question.questionTitle}</h2>
-                  {question.responses.map((response) => (
-                    <ul>
-                      <li>
-                        <b>
-                          {response.userName} (répondu le: {response.createdAt}){' '}
-                        </b>
-                        : {response.response}
-                      </li>
-                    </ul>
-                  ))}
-                </div>
-              ))}
+            ? statArray.map(
+                (
+                  question, // possible de ceer un composant stat
+                ) => (
+                  <div>
+                    <h2>{question.questionTitle}</h2>
+                    {question.stat.map((stat) => (
+                      <ul>
+                        <li>
+                          <b>{stat.answer} </b>: {(stat.count / getAllCountStat(question.stat)) * 100}%
+                        </li>
+                      </ul>
+                    ))}
+                  </div>
+                ),
+              )
+            : finalArray.map(
+                (
+                  question, // possible de creer un composant final
+                ) => (
+                  <div>
+                    <h2>{question.questionTitle}</h2>
+                    {question.responses.map((response) => (
+                      <ul>
+                        <li>
+                          <b>
+                            {response.userName} (répondu le: {response.createdAt}){' '}
+                          </b>
+                          : {response.response}
+                        </li>
+                      </ul>
+                    ))}
+                  </div>
+                ),
+              )}
         </>
       )}
     </>

@@ -15,11 +15,11 @@ import { ComponentBuilder } from '../inputs/ComponentBuilder';
 
 export const InputChoice = () => {
   const [inputType, setInputType] = useState('');
-  const { form } = useContext(FormContext);
+  const { currentForm } = useContext(FormContext);
 
   useEffect(() => {
     setInputType('');
-  }, [form.components]);
+  }, [currentForm.components]);
 
   const listOfInputBuilder = [
     {

@@ -5,18 +5,18 @@ import { TextField, Button, Paper, IconButton, Divider } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { createComponentObject, isDuplicate, isEmptyObject } from '../../utils/utils';
+import { createComponentObject, isDuplicate, isEmptyComponent } from '../../utils/utils';
 import { MsgError } from '../system/MsgError';
 import { FormContext } from '../../contexts/FormContext';
 import { v4 as uuidv4 } from 'uuid';
 
-export const ComponentBuilder = ({ componentEdit = {}, type }) => {
-  const [questionText, setQuestionText] = useState(componentEdit.title || '');
+export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = null }) => {
+  const [questionText, setQuestionText] = useState(componentToEdit.title || '');
   const [errorMessage, setErrorMessage] = useState('');
   const [answerText, setAnswerText] = useState('');
-  const [answerOptions, setAnswerOptions] = useState(componentEdit.choices || []);
+  const [answerOptions, setAnswerOptions] = useState(componentToEdit.choices || []);
 
-  const { form, setForm } = useContext(FormContext);
+  const { currentForm, setCurrentForm } = useContext(FormContext);
 
   const IsMultiAnswersComponent = () => {
     return type === 'checkboxInput' || type === 'selectInput' || type === 'radioButtonInput';
@@ -46,10 +46,10 @@ export const ComponentBuilder = ({ componentEdit = {}, type }) => {
         setErrorMessage(i18n.__('builders.errors.noOptions'));
         return;
       }
-      const componentListFinal = [...form.components];
+      const componentListFinal = [...currentForm.components];
       const newComponent = createComponentObject(questionText, type, answerOptions);
       componentListFinal.push(newComponent);
-      setForm({ ...form, components: componentListFinal });
+      setCurrentForm({ ...currentForm, components: componentListFinal });
       setQuestionText('');
       setAnswerText('');
       setAnswerOptions([]);
@@ -64,17 +64,18 @@ export const ComponentBuilder = ({ componentEdit = {}, type }) => {
         setErrorMessage(i18n.__('builders.errors.noOptions'));
         return;
       }
-      const componentListFinal = [...form.components];
-      const index = componentListFinal.findIndex((component) => component.id === componentEdit.id);
+      const componentListFinal = [...currentForm.components];
+      const index = componentListFinal.findIndex((component) => component.id === componentToEdit.id);
       if (index !== -1) {
         componentListFinal[index] = createComponentObject(questionText, type, answerOptions);
       } else {
         console.log('error, component does not exist');
       }
-      setForm({ ...form, components: componentListFinal });
+      setCurrentForm({ ...currentForm, components: componentListFinal });
       setQuestionText('');
       setAnswerText('');
       setAnswerOptions([]);
+      setEditMode(false);
     } else {
       if (!questionText) {
         setErrorMessage(i18n.__('builders.errors.noTitle'));
@@ -92,7 +93,7 @@ export const ComponentBuilder = ({ componentEdit = {}, type }) => {
         onChange={(e) => setQuestionText(e.target.value)}
         sx={{ width: '90%', marginLeft: 6, marginBottom: 2, marginTop: 2 }}
       />
-      {IsMultiAnswersComponent() ? (
+      {IsMultiAnswersComponent() && (
         <>
           <br />
           <div style={{ display: 'flex' }}>
@@ -124,8 +125,8 @@ export const ComponentBuilder = ({ componentEdit = {}, type }) => {
           ))}
           <br />
         </>
-      ) : null}
-      {isEmptyObject(componentEdit) ? (
+      )}
+      {isEmptyComponent(componentToEdit) ? (
         <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={handleSubmit}>
           Valider
         </Button>
@@ -134,7 +135,7 @@ export const ComponentBuilder = ({ componentEdit = {}, type }) => {
           Mettre à jour
         </Button>
       )}
-      {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}
+      {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
     </Paper>
   );
 };

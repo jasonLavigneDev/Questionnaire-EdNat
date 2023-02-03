@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../contexts/UserContext';
 import { FormContext } from '../contexts/FormContext';
 import { MsgError } from '../components/system/MsgError';
 import { useState } from 'react';
@@ -9,14 +8,15 @@ import { Footer } from '../components/system/Footer';
 import { ListVisualizer } from '../components/form/ListVisualizer';
 
 export const FormBuilder = () => {
-  const { form, setActiveStep } = useContext(FormContext);
-  const { isAuthenticated } = useContext(UserContext);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const { currentForm, setActiveStep } = useContext(FormContext);
+
   const navigate = useNavigate();
 
-  const isDisable = !form.title || form.components.length === 0;
+  const isDisable = !currentForm.title || currentForm.components.length === 0;
 
-  const handleSubmit = () => {
+  const navigateTo = () => {
     if (isDisable) {
       setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
     } else {
@@ -34,11 +34,10 @@ export const FormBuilder = () => {
       <ListVisualizer />
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         {/* <Visualizer edit={true} /> */}
-
-        {errorMessage.length !== 0 ? <MsgError message={errorMessage} setMessage={setErrorMessage} /> : null}
+        {!!errorMessage.length && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
       </div>
       <br />
-      <Footer handleSubmit={handleSubmit} urlComponentPrec="builder/intro" text="Suivant" />
+      <Footer navigateToNextStep={navigateTo} urlOfPrevStep="builder/intro" text="Suivant" />
     </>
   );
 };
