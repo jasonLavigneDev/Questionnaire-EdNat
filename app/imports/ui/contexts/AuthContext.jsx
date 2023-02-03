@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const user = useTracker(() => {
     return Meteor.user();
   });
+
   const isAuthenticated = !!user;
 
   return (
@@ -15,7 +16,7 @@ export const AuthProvider = ({ children }) => {
       {isAuthenticated ? (
         <Outlet />
       ) : (
-        <button onClick={() => Meteor.loginWithKeycloak()}>connectes toi pour voir les reponses</button>
+        <button onClick={() => Meteor.loginWithKeycloak()}>Veuillez vous connecter : AuthProvider</button>
       )}
     </AuthContext.Provider>
   );

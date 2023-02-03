@@ -1,13 +1,12 @@
-import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 
-import { InputLabel, TextField, Paper } from '@mui/material';
-import { AnswerContext } from '../../../contexts/AnswerContext';
+import { InputLabel, Paper, TextField } from '@mui/material';
+import { AnswerContext } from '../../contexts/AnswerContext';
 
 export const NumberInput = ({ title, answerMode, questionId, answer = {} }) => {
   const { addAnswers } = useContext(AnswerContext);
 
-  const handleChange = (event) => {
+  const validateAnswer = (event) => {
     if (answerMode) addAnswers(questionId, event.target.value);
   };
 
@@ -19,12 +18,8 @@ export const NumberInput = ({ title, answerMode, questionId, answer = {} }) => {
         sx={{ width: '60%' }}
         defaultValue={answer.answer}
         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-        onBlur={(e) => handleChange(e)}
+        onBlur={(e) => validateAnswer(e)}
       />
     </Paper>
   );
-};
-
-NumberInput.propTypes = {
-  title: PropTypes.string.isRequired,
 };

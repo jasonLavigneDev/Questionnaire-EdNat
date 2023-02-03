@@ -1,40 +1,46 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { IconButton, Button } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { RadioInput } from '../inputs/Radio/RadioInput';
-import { SelectInput } from '../inputs/Select/SelectInput';
-import { CheckBoxInput } from '../inputs/Checkbox/CheckboxInput';
-import { DateInput } from '../inputs/Date/DateInput';
-import { NumberInput } from '../inputs/Number/NumberInput';
-import { TextInput } from '../inputs/TextInput/TextInput';
-import { TextArea } from '../inputs/TextArea/TextArea';
+import { RadioInput } from '../inputs/RadioInput';
+import { SelectInput } from '../inputs/SelectInput';
+import { CheckBoxInput } from '../inputs/CheckboxInput';
+import { DateInput } from '../inputs/DateInput';
+import { NumberInput } from '../inputs/NumberInput';
+import { TextInput } from '../inputs/TextInput';
+import { TextArea } from '../inputs/TextArea';
 import { FormContext } from '../../contexts/FormContext';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { UserContext } from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
-import EditIcon from '@mui/icons-material/Edit';
 import { hasAlreadyRespond } from '../../utils/utils';
 import { ComponentBuilder } from '../inputs/ComponentBuilder';
 
-export const Visualizer = ({ completeForm, answerMode = false, edit = false }) => {
-  const { form, setForm } = useContext(FormContext);
+export const Visualizer = ({ answerMode = false, edit = false }) => {
+  const [publicName, setPublicName] = useState('');
+  const [componentToEdit, setComponentToEdit] = useState({});
+
+  const { currentForm, setCurrentForm } = useContext(FormContext);
   const { user, isAuthenticated } = useContext(UserContext);
-
-  const answers = completeForm?.formAnswers?.find((answer) => answer.userId == user.username);
-  const navigate = useNavigate();
-
   const { answerForm, setAnswerForm } = useContext(AnswerContext);
 
-  const [publicName, setPublicName] = useState('');
-  const [builder, setBuilder] = useState({});
+  const navigate = useNavigate();
+
+  const currentFormHasAnswers = !!currentForm.formAnswers;
+
+  let userAnswers = null;
+
+  if (user && currentFormHasAnswers) {
+    userAnswers = currentForm.formAnswers.find((answer) => answer.userId == user.username); // answer.userID devrait etre answers.username en BDD
+  }
 
   const getAnswer = (id) => {
-    if (answerMode) return answers?.answers.find((answer) => answer.questionId == id);
-    else return {};
+    if (answerMode && userAnswers) return userAnswers.answers.find((answer) => answer.questionId == id);
+    return {};
   };
 
   const generateComponent = (component) => {
@@ -109,18 +115,23 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
   };
 
   const hasComponentBefore = (inputPos) => inputPos > 0;
-  const hasComponentAfter = (inputPos) => inputPos < form.components.length - 1;
+  const hasComponentAfter = (inputPos) => inputPos < currentForm.components.length - 1;
 
   const removeComponentToForm = (componentId) => {
-    const newObj = form.components.filter((componentInput) => componentInput.id != componentId);
-    setForm({ ...form, components: newObj });
+    const componentsUpdated = currentForm.components.filter((currentComponent) => currentComponent.id != componentId);
+    setCurrentForm({ ...currentForm, components: componentsUpdated });
   };
+
+  // GROSSE DUPLICATION DE CODE AVEC LISTVIZUALIZER
 
   const swapPositionWithPreviousComponent = (inputPos) => {
     if (hasComponentBefore(inputPos)) {
-      const newObj = [...form.components];
-      [newObj[inputPos - 1], newObj[inputPos]] = [newObj[inputPos], newObj[inputPos - 1]];
-      setForm({ ...form, components: newObj });
+      const componentsUpdated = [...currentForm.components];
+      [componentsUpdated[inputPos - 1], componentsUpdated[inputPos]] = [
+        componentsUpdated[inputPos],
+        componentsUpdated[inputPos - 1],
+      ];
+      setCurrentForm({ ...currentForm, components: componentsUpdated });
     } else {
       console.log("Il n'y a pas de question avant celle ci, impossible de swap");
     }
@@ -128,103 +139,106 @@ export const Visualizer = ({ completeForm, answerMode = false, edit = false }) =
 
   const swapPositionWithNextComponent = (inputPos) => {
     if (hasComponentAfter(inputPos)) {
-      const newObj = [...form.components];
-      [newObj[inputPos + 1], newObj[inputPos]] = [newObj[inputPos], newObj[inputPos + 1]];
-      setForm({ ...form, components: newObj });
+      const componentsUpdated = [...currentForm.components];
+      [componentsUpdated[inputPos + 1], componentsUpdated[inputPos]] = [
+        componentsUpdated[inputPos],
+        componentsUpdated[inputPos + 1],
+      ];
+      setCurrentForm({ ...currentForm, components: componentsUpdated });
     } else {
       console.log("Il n'y a pas de question apres celle ci, impossible de swap");
     }
   };
 
   const submitAnswerForm = async () => {
-    const newObj = { ...answerForm };
-    newObj.formId = completeForm._id;
+    const componentsUpdated = { ...answerForm };
+    componentsUpdated.formId = currentForm._id;
 
-    newObj.userId = isAuthenticated ? user.username : publicName;
+    componentsUpdated.userId = isAuthenticated ? user.username : publicName;
 
-    setAnswerForm(newObj);
-    await Meteor.callAsync('forms.updateAnswers', newObj.formId, { userId: newObj.userId, answers: newObj.answers });
+    setAnswerForm(componentsUpdated);
+    await Meteor.callAsync('forms.updateAnswers', componentsUpdated.formId, {
+      userId: componentsUpdated.userId,
+      answers: componentsUpdated.answers,
+    });
     navigate('/');
   };
 
   const editComponent = (component) => {
-    setBuilder(component);
+    setComponentToEdit(component);
   };
 
   useEffect(() => {
-    if (answers) setAnswerForm(answers);
+    if (userAnswers) setAnswerForm(userAnswers);
   }, []);
 
-  if (isAuthenticated || form.isPublic) {
-    return (
-      <div>
-        {<h3 style={{ textAlign: 'center' }}>{form.title}</h3>}
-        {<h4 style={{ textAlign: 'center' }}>{form.desc}</h4>}
-        {form.components.map((componentInput, index) => (
-          <div key={componentInput.id}>
-            <br />
-            <br />
-            <div style={{ display: 'flex', justifyContent: 'center' }}>{generateComponent(componentInput)}</div>
-            {builder && builder.id === componentInput.id ? (
-              <div>
-                <ComponentBuilder componentEdit={componentInput} type={componentInput.type} />
-              </div>
-            ) : null}
-            {edit && (
-              <div style={{ display: 'flex' }}>
-                <div style={{ flexDirection: 'column' }}>
-                  {/* {hasComponentBefore(index) && ( */}
-                  <IconButton onClick={() => swapPositionWithPreviousComponent(index)}>
-                    <ArrowUpwardIcon />
-                  </IconButton>
-                  {/* )} */}
-                  {/* {hasComponentAfter(index, form) && ( */}
-                  <IconButton onClick={() => swapPositionWithNextComponent(index)}>
-                    <ArrowDownwardIcon />
-                  </IconButton>
-                </div>
+  if (!isAuthenticated && !currentForm.isPublic) return <p>Veuillez vous connecter pour répondre a ce questionnaire</p>;
+
+  // IL SEMBLE QUE edit NE SOIS JAMAIS PASSER EN PROPS DONC EDIT === FALSE toujours
+
+  return (
+    <div>
+      {<h3 style={{ textAlign: 'center' }}>{currentForm.title}</h3>}
+      {<h4 style={{ textAlign: 'center' }}>{currentForm.desc}</h4>}
+      {currentForm.components.map((currentComponent, index) => (
+        <div key={currentComponent.id}>
+          <br />
+          <br />
+          <div>{generateComponent(currentComponent)}</div>
+          {componentToEdit && componentToEdit.id === currentComponent.id ? (
+            <div>
+              <ComponentBuilder componentToEdit={currentComponent} type={currentComponent.type} />
+            </div>
+          ) : null}
+          {edit && (
+            <div style={{ display: 'flex' }}>
+              <div style={{ flexDirection: 'column' }}>
+                {/* {hasComponentBefore(index) && ( */}
+                <IconButton onClick={() => swapPositionWithPreviousComponent(index)}>
+                  <ArrowUpwardIcon />
+                </IconButton>
                 {/* )} */}
-                <IconButton sx={{ color: 'Gold' }} onClick={() => editComponent(componentInput)}>
-                  <EditIcon />
-                </IconButton>
-                <IconButton sx={{ color: 'Crimson' }} onClick={() => removeComponentToForm(componentInput.id)}>
-                  <DeleteIcon />
+                {/* {hasComponentAfter(index, currentForm) && ( */}
+                <IconButton onClick={() => swapPositionWithNextComponent(index)}>
+                  <ArrowDownwardIcon />
                 </IconButton>
               </div>
-            )}
-            <br />
-            <br />
-          </div>
-        ))}
-        {answerMode && (
-          <div>
-            {!user && (
-              <div>
-                <input
-                  type="text"
-                  name="yourName"
-                  id="yourName"
-                  value={publicName}
-                  placeholder={'entrez votre nom'}
-                  onChange={(e) => setPublicName(e.target.value)}
-                />
-                <Button disabled={!publicName} onClick={submitAnswerForm}>
-                  Soumettre ce formulaire complété
-                </Button>
-              </div>
-            )}
-            {user && (
-              <Button onClick={submitAnswerForm}>
-                {hasAlreadyRespond(user, completeForm)
-                  ? 'Mettre à jour les réponses'
-                  : 'Soumettre ce formulaire complété'}
+              {/* )} */}
+              <IconButton sx={{ color: 'Gold' }} onClick={() => editComponent(currentComponent)}>
+                <EditIcon />
+              </IconButton>
+              <IconButton sx={{ color: 'Crimson' }} onClick={() => removeComponentToForm(currentComponent.id)}>
+                <DeleteIcon />
+              </IconButton>
+            </div>
+          )}
+          <br />
+          <br />
+        </div>
+      ))}
+      {answerMode && (
+        <div>
+          {!user ? (
+            <div>
+              <input
+                type="text"
+                name="yourName"
+                id="yourName"
+                value={publicName}
+                placeholder={'entrez votre nom'}
+                onChange={(e) => setPublicName(e.target.value)}
+              />
+              <Button disabled={!publicName} onClick={submitAnswerForm}>
+                Soumettre ce formulaire complété
               </Button>
-            )}
-          </div>
-        )}
-      </div>
-    );
-  } else {
-    return <p>Veuillez vous connecter pour répondre a ce questionnaire</p>;
-  }
+            </div>
+          ) : (
+            <Button onClick={submitAnswerForm}>
+              {hasAlreadyRespond(user, currentForm) ? 'Mettre à jour les réponses' : 'Soumettre ce formulaire complété'}
+            </Button>
+          )}
+        </div>
+      )}
+    </div>
+  );
 };

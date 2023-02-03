@@ -5,9 +5,11 @@ import { useEffect } from 'react';
 import { FormContext } from '../../contexts/FormContext';
 
 export const Breadcrumb = () => {
-  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
-  const { form } = useContext(FormContext);
+
+  const { currentForm } = useContext(FormContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const url = window.location.href;
@@ -20,26 +22,26 @@ export const Breadcrumb = () => {
     }
   }, []);
 
-  function handleClick(step) {
+  const navigateTo = (step) => {
     navigate(`/builder/${step}`);
-  }
+  };
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
       <div style={{ marginBottom: '6vh', width: '60vw' }}>
         <Stepper alternativeLabel activeStep={activeStep}>
           <Step key="intro" completed={activeStep === 1 || activeStep === 2}>
-            <StepButton color="inherit" onClick={() => handleClick('intro')}>
+            <StepButton color="inherit" onClick={() => navigateTo('intro')}>
               Introduction
             </StepButton>
           </Step>
-          <Step key="components" completed={activeStep === 2} disabled={!form.title}>
-            <StepButton color="inherit" onClick={() => handleClick('components')}>
+          <Step key="components" completed={activeStep === 2} disabled={!currentForm.title}>
+            <StepButton color="inherit" onClick={() => navigateTo('components')}>
               Composant
             </StepButton>
           </Step>
-          <Step key="previsualizer" disabled={form.components.length === 0}>
-            <StepButton color="inherit" onClick={() => handleClick('previsualizer')}>
+          <Step key="previsualizer" disabled={currentForm.components.length === 0}>
+            <StepButton color="inherit" onClick={() => navigateTo('previsualizer')}>
               Prévisualisation
             </StepButton>
           </Step>

@@ -1,10 +1,8 @@
 import React from 'react';
-import { Paper } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import { Header } from '../components/system/Header';
 
-import { Header } from '../components/header/Header';
-
-export const MainLayout = ({ children }) => {
+export const MainLayout = () => {
   return (
     <>
       <Header />

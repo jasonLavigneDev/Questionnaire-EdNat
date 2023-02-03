@@ -12,18 +12,21 @@ import { InputChoice } from './InputChoice';
 import { ComponentBuilder } from '../inputs/ComponentBuilder';
 
 export const ListVisualizer = () => {
-  const { form, setForm, activeBuilder, setActiveBuilder } = useContext(FormContext);
-  const [builder, setBuilder] = useState({});
-  const [yes, setYes] = useState(false);
+  const { currentForm, setCurrentForm, activeBuilder, setActiveBuilder } = useContext(FormContext);
+  const [componentToEdit, setComponentToEdit] = useState({});
+  const [editMode, setEditMode] = useState(false);
 
   const hasComponentBefore = (inputPos) => inputPos > 0;
-  const hasComponentAfter = (inputPos) => inputPos < form.components.length - 1;
+  const hasComponentAfter = (inputPos) => inputPos < currentForm.components.length - 1;
 
   const swapPositionWithPreviousComponent = (inputPos) => {
     if (hasComponentBefore(inputPos)) {
-      const newObj = [...form.components];
-      [newObj[inputPos - 1], newObj[inputPos]] = [newObj[inputPos], newObj[inputPos - 1]];
-      setForm({ ...form, components: newObj });
+      const componentsUpdated = [...currentForm.components];
+      [componentsUpdated[inputPos - 1], componentsUpdated[inputPos]] = [
+        componentsUpdated[inputPos],
+        componentsUpdated[inputPos - 1],
+      ];
+      setCurrentForm({ ...currentForm, components: componentsUpdated });
     } else {
       console.log("Il n'y a pas de question avant celle ci, impossible de swap");
     }
@@ -31,30 +34,39 @@ export const ListVisualizer = () => {
 
   const swapPositionWithNextComponent = (inputPos) => {
     if (hasComponentAfter(inputPos)) {
-      const newObj = [...form.components];
-      [newObj[inputPos + 1], newObj[inputPos]] = [newObj[inputPos], newObj[inputPos + 1]];
-      setForm({ ...form, components: newObj });
+      const componentsUpdated = [...currentForm.components];
+      [componentsUpdated[inputPos + 1], componentsUpdated[inputPos]] = [
+        componentsUpdated[inputPos],
+        componentsUpdated[inputPos + 1],
+      ];
+      setCurrentForm({ ...currentForm, components: componentsUpdated });
     } else {
       console.log("Il n'y a pas de question apres celle ci, impossible de swap");
     }
   };
 
-  const editComponent = (component) => {
-    setBuilder(component);
-    setYes(!yes);
+  const updateComponent = (component) => {
+    setComponentToEdit(component);
+    setEditMode(true);
   };
 
-  const removeComponentToForm = (componentId) => {
-    const newObj = form.components.filter((componentInput) => componentInput.id != componentId);
-    setForm({ ...form, components: newObj });
+  const removeComponent = (componentId) => {
+    const componentsUpdated = currentForm.components.filter((componentInput) => componentInput.id != componentId);
+    setCurrentForm({ ...currentForm, components: componentsUpdated });
   };
+
+  console.log('editMode dans list', editMode);
 
   return (
     <>
       <div style={{ display: 'flex', flexDirection: 'row', maxHeight: '100%' }}>
         <div style={{ display: 'flex', flexDirection: 'column', width: '50vw' }}>
           <h3>Choisissez le type de question / réponse</h3>
-          {!yes ? <InputChoice /> : <ComponentBuilder type={builder.type} componentEdit={builder} />}
+          {editMode ? (
+            <ComponentBuilder type={componentToEdit.type} componentToEdit={componentToEdit} setEditMode={setEditMode} />
+          ) : (
+            <InputChoice />
+          )}
         </div>
 
         <div
@@ -74,9 +86,9 @@ export const ListVisualizer = () => {
               maxHeight: '60vh',
             }}
           >
-            {form.components.map((componentInput, index) => (
+            {currentForm.components.map((currentComponent, index) => (
               <Paper sx={{ display: 'flex', width: '28vw', marginBottom: 1, border: '1px black solid' }}>
-                <p style={{ paddingLeft: '0.5vw', width: '18vw' }}>{componentInput.title}</p>
+                <p style={{ paddingLeft: '0.5vw', width: '18vw' }}>{currentComponent.title}</p>
                 <div
                   style={{
                     display: 'flex',
@@ -92,10 +104,10 @@ export const ListVisualizer = () => {
                   <IconButton onClick={() => swapPositionWithNextComponent(index)}>
                     <ArrowDownwardIcon />
                   </IconButton>
-                  <IconButton sx={{ color: 'salmon' }} onClick={() => editComponent(componentInput)}>
+                  <IconButton sx={{ color: 'salmon' }} onClick={() => updateComponent(currentComponent)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton sx={{ color: 'salmon' }} onClick={() => removeComponentToForm(componentInput.id)}>
+                  <IconButton sx={{ color: 'salmon' }} onClick={() => removeComponent(currentComponent.id)}>
                     <DeleteIcon />
                   </IconButton>
                 </div>

@@ -16,75 +16,76 @@ import { FormContext } from '../../contexts/FormContext';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export const FormInfos = () => {
-  const { form, setForm } = useContext(FormContext);
-  const [groupOfThisUser, setGroupOfThisUser] = useState([]);
+  const [groupsOfThisUser, setGroupsOfThisUser] = useState([]);
   const [groupSelected, setGroupSelected] = useState({});
-  const [isOnlyForGroup, setIsOnlyForGroup] = useState(false);
+  const [isOnlyForGroup, setIsOnlyForGroup] = useState(false); // Remonter cet état au form context
+
+  const { currentForm, setCurrentForm } = useContext(FormContext);
 
   const formFromBDD = useLoaderData();
 
-  const getGroups = async () => {
+  const getUserGroups = async () => {
     Meteor.callAsync('groups.getUserGroups')
       .then((res) => {
-        setGroupOfThisUser(res);
+        setGroupsOfThisUser(res);
       })
       .catch((err) => {
         console.log('groups.getUserGroups', err.reason);
       });
   };
 
-  const filterUserGroups = () => {
-    return groupOfThisUser.filter((group) => form.groups.findIndex((groupId) => groupId === group._id) === -1);
+  const displayGroupsNotSelected = () => {
+    return groupsOfThisUser.filter((group) => currentForm.groups.findIndex((groupId) => groupId === group._id) === -1);
   };
 
-  const getGroup = (value) => {
-    const index = groupOfThisUser.findIndex((group) => group.name === value);
+  const selectGroup = (value) => {
+    const index = groupsOfThisUser.findIndex((group) => group.name === value);
     if (index === -1) {
       return;
     }
 
-    setGroupSelected(groupOfThisUser[index]);
+    setGroupSelected(groupsOfThisUser[index]);
   };
 
   const getGroupName = (id) => {
-    const index = groupOfThisUser.findIndex((group) => group._id === id);
+    const index = groupsOfThisUser.findIndex((group) => group._id === id);
     if (index !== -1) {
-      return groupOfThisUser[index].name;
+      return groupsOfThisUser[index].name;
     }
     return 'N/A';
   };
 
-  const addGroupToList = () => {
+  const addGroup = () => {
     if (groupSelected) {
-      setForm({ ...form, groups: [...form.groups, groupSelected._id] });
+      setCurrentForm({ ...currentForm, groups: [...currentForm.groups, groupSelected._id] });
       setGroupSelected({});
     }
   };
 
-  const removeGroupToAdd = (id) => {
-    const { groups } = form;
-    setForm({ ...form, groups: groups.filter((groupId) => groupId !== id) });
+  const removeGroup = (id) => {
+    const { groups } = currentForm;
+    setCurrentForm({ ...currentForm, groups: groups.filter((groupId) => groupId !== id) });
   };
 
   useEffect(() => {
     if (formFromBDD) {
-      setForm(formFromBDD);
+      setCurrentForm(formFromBDD);
     }
   }, [formFromBDD]);
 
   useEffect(() => {
-    getGroups();
-    if (form.groups.length > 0) {
+    getUserGroups();
+    if (currentForm.groups.length > 0) {
       setIsOnlyForGroup(true);
     }
-  }, [form]);
+  }, [currentForm]);
 
-  const handleChangeGroupChecked = () => {
+  const handleIsOnlyForGroup = () => {
     if (isOnlyForGroup === false) {
       setIsOnlyForGroup(true);
     } else {
       setIsOnlyForGroup(false);
-      setForm({ ...form, groups: [] });
+      setCurrentForm({ ...currentForm, groups: [] });
     }
   };
 
@@ -94,25 +95,25 @@ export const FormInfos = () => {
         id="formTitle"
         label="Entrez le titre du questionnaire"
         variant="outlined"
-        value={form.title}
+        value={currentForm.title}
         helperText="Le titre est obligatoire"
-        onChange={(e) => setForm({ ...form, title: e.target.value })}
+        onChange={(e) => setCurrentForm({ ...currentForm, title: e.target.value })}
       />
       <TextField
         id="formDescription"
         label="Entrez une description de votre formulaire"
         variant="outlined"
-        value={form.desc}
+        value={currentForm.desc}
         helperText="La description est facultative"
-        onChange={(e) => setForm({ ...form, desc: e.target.value })}
+        onChange={(e) => setCurrentForm({ ...currentForm, desc: e.target.value })}
       />
       <FormGroup>
         <FormControlLabel
           disabled={isOnlyForGroup}
           control={
             <Checkbox
-              checked={form.isPublic}
-              onChange={() => setForm({ ...form, isPublic: !form.isPublic })}
+              checked={currentForm.isPublic}
+              onChange={() => setCurrentForm({ ...currentForm, isPublic: !currentForm.isPublic })}
               name="isPublic"
             />
           }
@@ -121,15 +122,15 @@ export const FormInfos = () => {
       </FormGroup>
       <FormGroup>
         <FormControlLabel
-          disabled={form.isPublic}
+          disabled={currentForm.isPublic}
           control={
-            <Checkbox checked={isOnlyForGroup} onChange={() => handleChangeGroupChecked()} name="réservé aux groupes" />
+            <Checkbox checked={isOnlyForGroup} onChange={() => handleIsOnlyForGroup()} name="réservé aux groupes" />
           }
           label="Réservé aux groupes"
         />
       </FormGroup>
       {isOnlyForGroup ? (
-        groupOfThisUser ? (
+        groupsOfThisUser.length > 0 ? (
           <div>
             <br />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -139,17 +140,17 @@ export const FormInfos = () => {
                   labelId="selectInput-Groups"
                   value={groupSelected.name}
                   onChange={(event) => {
-                    getGroup(event.target.value);
+                    selectGroup(event.target.value);
                   }}
                 >
-                  {filterUserGroups().map((group) => (
+                  {displayGroupsNotSelected().map((group) => (
                     <MenuItem key={group._id} value={group.name}>
                       {group.name}
                     </MenuItem>
                   ))}
                 </Select>
               </FormControl>
-              <Button onClick={() => addGroupToList()}>Ajouter le groupe</Button>
+              <Button onClick={() => addGroup()}>Ajouter le groupe</Button>
             </div>
           </div>
         ) : (
@@ -158,10 +159,10 @@ export const FormInfos = () => {
       ) : null}
 
       <div>
-        {form.groups.map((id) => (
+        {currentForm.groups.map((id) => (
           <div style={{ display: 'flex' }}>
             <p>{getGroupName(id)}</p>
-            <IconButton sx={{ color: 'salmon' }} onClick={() => removeGroupToAdd(id)}>
+            <IconButton sx={{ color: 'salmon' }} onClick={() => removeGroup(id)}>
               <DeleteIcon />
             </IconButton>
           </div>
