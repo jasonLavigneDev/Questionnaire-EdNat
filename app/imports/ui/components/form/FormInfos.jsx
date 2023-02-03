@@ -10,47 +10,34 @@ import {
   Button,
   TextField,
 } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
-import { FormContext } from '../../contexts/FormContext';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React, { useContext, useState } from 'react';
 
-export const FormInfos = () => {
-  const [groupsOfThisUser, setGroupsOfThisUser] = useState([]);
+import DeleteIcon from '@mui/icons-material/Delete';
+import { FormContext } from '../../contexts/FormContext';
+
+export const FormInfos = ({ userGroups }) => {
   const [groupSelected, setGroupSelected] = useState({});
   const [isOnlyForGroup, setIsOnlyForGroup] = useState(false); // Remonter cet état au form context
 
   const { currentForm, setCurrentForm } = useContext(FormContext);
 
-  const formFromBDD = useLoaderData();
-
-  const getUserGroups = async () => {
-    Meteor.callAsync('groups.getUserGroups')
-      .then((res) => {
-        setGroupsOfThisUser(res);
-      })
-      .catch((err) => {
-        console.log('groups.getUserGroups', err.reason);
-      });
-  };
-
   const displayGroupsNotSelected = () => {
-    return groupsOfThisUser.filter((group) => currentForm.groups.findIndex((groupId) => groupId === group._id) === -1);
+    return userGroups.filter((group) => currentForm.groups.findIndex((groupId) => groupId === group._id) === -1);
   };
 
   const selectGroup = (value) => {
-    const index = groupsOfThisUser.findIndex((group) => group.name === value);
+    const index = userGroups.findIndex((group) => group.name === value);
     if (index === -1) {
       return;
     }
 
-    setGroupSelected(groupsOfThisUser[index]);
+    setGroupSelected(userGroups[index]);
   };
 
   const getGroupName = (id) => {
-    const index = groupsOfThisUser.findIndex((group) => group._id === id);
+    const index = userGroups.findIndex((group) => group._id === id);
     if (index !== -1) {
-      return groupsOfThisUser[index].name;
+      return userGroups[index].name;
     }
     return 'N/A';
   };
@@ -66,19 +53,6 @@ export const FormInfos = () => {
     const { groups } = currentForm;
     setCurrentForm({ ...currentForm, groups: groups.filter((groupId) => groupId !== id) });
   };
-
-  useEffect(() => {
-    if (formFromBDD) {
-      setCurrentForm(formFromBDD);
-    }
-  }, [formFromBDD]);
-
-  useEffect(() => {
-    getUserGroups();
-    if (currentForm.groups.length > 0) {
-      setIsOnlyForGroup(true);
-    }
-  }, [currentForm]);
 
   const handleIsOnlyForGroup = () => {
     if (isOnlyForGroup === false) {
@@ -130,7 +104,7 @@ export const FormInfos = () => {
         />
       </FormGroup>
       {isOnlyForGroup ? (
-        groupsOfThisUser.length > 0 ? (
+        userGroups.length > 0 ? (
           <div>
             <br />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -170,8 +144,4 @@ export const FormInfos = () => {
       </div>
     </div>
   );
-};
-
-export const loader = async ({ params }) => {
-  return (await Meteor.callAsync('forms.getOneFromUser', params.id)) || null;
 };

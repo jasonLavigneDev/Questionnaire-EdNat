@@ -16,7 +16,7 @@ export const FormBuilder = () => {
 
   const isDisable = !currentForm.title || currentForm.components.length === 0;
 
-  const navigateTo = () => {
+  const navigateToNextStep = () => {
     if (isDisable) {
       setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
     } else {
@@ -32,12 +32,11 @@ export const FormBuilder = () => {
     <>
       <Breadcrumb />
       <ListVisualizer />
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {/* <Visualizer edit={true} /> */}
-        {!!errorMessage.length && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
-      </div>
+      {/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
+      {!!errorMessage.length && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
+      {/* </div> */}
       <br />
-      <Footer navigateToNextStep={navigateTo} urlOfPrevStep="builder/intro" text="Suivant" />
+      <Footer nextStep={navigateToNextStep} urlOfPrevStep="builder/intro" text="Suivant" />
     </>
   );
 };
