@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { FormLabel, FormControl, FormControlLabel, RadioGroup, Radio } from '@mui/material';
+import { FormLabel, FormControl, FormControlLabel, RadioGroup, Radio, Paper } from '@mui/material';
 import { AnswerContext } from '../../../contexts/AnswerContext';
 
 export const RadioInput = ({ title, choices, answerMode, questionId, answer = {} }) => {
@@ -12,7 +12,7 @@ export const RadioInput = ({ title, choices, answerMode, questionId, answer = {}
   };
 
   return (
-    <div>
+    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
       <FormControl onChange={(e) => handleChange(e)}>
         <FormLabel>{title}</FormLabel>
         <RadioGroup defaultValue={answer.answer} name="radio-buttons-group">
@@ -23,6 +23,6 @@ export const RadioInput = ({ title, choices, answerMode, questionId, answer = {}
           ))}
         </RadioGroup>
       </FormControl>
-    </div>
+    </Paper>
   );
 };
