@@ -2,12 +2,8 @@ import React from 'react';
 import { Typography } from '@mui/material';
 
 import { FormActionButton } from './FormActionButton';
-import { useContext } from 'react';
-import { FormContext } from '../contexts/FormContext';
 
-export const ListUserForm = () => {
-  const { allUsersForms } = useContext(FormContext);
-
+export const ListUserForm = ({ allUsersForms }) => {
   return (
     <>
       {allUsersForms.map((userForm) => (

@@ -12,8 +12,8 @@ export const FormContext = createContext(initialState);
 
 export const FormProvider = ({ children }) => {
   const [currentForm, setCurrentForm] = useState(initialState);
-  const [activeStep, setActiveStep] = useState(0);
-  const [activeBuilder, setActiveBuilder] = useState({});
+  const [activeStep, setActiveStep] = useState(0); // a remplacer en se servant de l url .
+  const [activeBuilder, setActiveBuilder] = useState({}); // on s en sert pas
   const [allUsersForms, setAllUsersForms] = useState([]); // Remettre en local au niveau de HomePage .
 
   // A sortir du contexte et a mettre au local au niveau de FormActionButton

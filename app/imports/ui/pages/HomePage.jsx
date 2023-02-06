@@ -7,13 +7,14 @@ import { ListUserForm } from '../components/ListUserForm';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
-  const { setAllUsersForms, resetFormContext } = useContext(FormContext);
+  const { allUsersForms, setAllUsersForms, resetFormContext } = useContext(FormContext);
   const formFromBDD = useLoaderData();
   const navigate = useNavigate();
 
+  setAllUsersForms(formFromBDD);
+
   useEffect(() => {
     resetFormContext();
-    setAllUsersForms(formFromBDD);
   }, []);
 
   if (!user) return <p>Veuillez vous connecter</p>;
@@ -28,12 +29,12 @@ export const HomePage = () => {
       </div>
       <div>
         <h2>Liste de vos questionnaires</h2>
-        {formFromBDD && <ListUserForm />}
+        <ListUserForm allUsersForms={allUsersForms} />
       </div>
     </>
   );
 };
 
-export const loader = async ({ params }) => {
+export const loader = async () => {
   return (await Meteor.callAsync('forms.getUserForms')) || null;
 };

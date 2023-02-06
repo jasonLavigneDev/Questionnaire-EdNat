@@ -1,19 +1,9 @@
-import {
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  InputLabel,
-  IconButton,
-  MenuItem,
-  Select,
-  Button,
-  TextField,
-} from '@mui/material';
+import { FormControl, InputLabel, IconButton, MenuItem, Select, Button } from '@mui/material';
 import React, { useContext, useState } from 'react';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FormContext } from '../../contexts/FormContext';
+import FormInfoInputs from '../FormInfoInputs';
 
 export const FormInfos = ({ userGroups }) => {
   const [groupSelected, setGroupSelected] = useState({});
@@ -54,57 +44,11 @@ export const FormInfos = ({ userGroups }) => {
     setCurrentForm({ ...currentForm, groups: groups.filter((groupId) => groupId !== id) });
   };
 
-  const handleIsOnlyForGroup = () => {
-    if (isOnlyForGroup === false) {
-      setIsOnlyForGroup(true);
-    } else {
-      setIsOnlyForGroup(false);
-      setCurrentForm({ ...currentForm, groups: [] });
-    }
-  };
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <TextField
-        id="formTitle"
-        label="Entrez le titre du questionnaire"
-        variant="outlined"
-        value={currentForm.title}
-        helperText="Le titre est obligatoire"
-        onChange={(e) => setCurrentForm({ ...currentForm, title: e.target.value })}
-      />
-      <TextField
-        id="formDescription"
-        label="Entrez une description de votre formulaire"
-        variant="outlined"
-        value={currentForm.desc}
-        helperText="La description est facultative"
-        onChange={(e) => setCurrentForm({ ...currentForm, desc: e.target.value })}
-      />
-      <FormGroup>
-        <FormControlLabel
-          disabled={isOnlyForGroup}
-          control={
-            <Checkbox
-              checked={currentForm.isPublic}
-              onChange={() => setCurrentForm({ ...currentForm, isPublic: !currentForm.isPublic })}
-              name="isPublic"
-            />
-          }
-          label="Formulaire public"
-        />
-      </FormGroup>
-      <FormGroup>
-        <FormControlLabel
-          disabled={currentForm.isPublic}
-          control={
-            <Checkbox checked={isOnlyForGroup} onChange={() => handleIsOnlyForGroup()} name="réservé aux groupes" />
-          }
-          label="Réservé aux groupes"
-        />
-      </FormGroup>
-      {isOnlyForGroup ? (
-        userGroups.length > 0 ? (
+      <FormInfoInputs isOnlyForGroup={isOnlyForGroup} setIsOnlyForGroup={setIsOnlyForGroup} />
+      {isOnlyForGroup &&
+        (userGroups.length > 0 ? (
           <div>
             <br />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -129,8 +73,7 @@ export const FormInfos = ({ userGroups }) => {
           </div>
         ) : (
           <p>Vous n'appartenez à aucun groupe</p>
-        )
-      ) : null}
+        ))}
 
       <div>
         {currentForm.groups.map((id) => (
