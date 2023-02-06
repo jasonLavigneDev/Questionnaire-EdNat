@@ -1,20 +1,19 @@
 import { Button } from '@mui/material';
 import React, { useContext, useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { UserContext } from '../contexts/UserContext';
 import { FormContext } from '../contexts/FormContext';
 import { ListUserForm } from '../components/ListUserForm';
+import useUser from '../components/useUser';
 
 export const HomePage = () => {
-  const { user } = useContext(UserContext);
+  const [user] = useUser();
   const { allUsersForms, setAllUsersForms, resetFormContext } = useContext(FormContext);
   const formFromBDD = useLoaderData();
   const navigate = useNavigate();
 
-  setAllUsersForms(formFromBDD);
-
   useEffect(() => {
     resetFormContext();
+    setAllUsersForms(formFromBDD);
   }, []);
 
   if (!user) return <p>Veuillez vous connecter</p>;

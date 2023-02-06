@@ -15,17 +15,18 @@ import { TextInput } from '../inputs/TextInput';
 import { TextArea } from '../inputs/TextArea';
 import { FormContext } from '../../contexts/FormContext';
 import { AnswerContext } from '../../contexts/AnswerContext';
-import { UserContext } from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { hasAlreadyRespond } from '../../utils/utils';
 import { ComponentBuilder } from '../inputs/ComponentBuilder';
+import useUser from '../useUser';
 
 export const Visualizer = ({ answerMode = false, edit = false }) => {
   const [publicName, setPublicName] = useState('');
   const [componentToEdit, setComponentToEdit] = useState({});
 
   const { currentForm, setCurrentForm } = useContext(FormContext);
-  const { user, isAuthenticated } = useContext(UserContext);
+  // const { user, user } = useContext(UserContext);
+  const [user] = useUser();
   const { answerForm, setAnswerForm } = useContext(AnswerContext);
 
   const navigate = useNavigate();
@@ -154,7 +155,7 @@ export const Visualizer = ({ answerMode = false, edit = false }) => {
     const componentsUpdated = { ...answerForm };
     componentsUpdated.formId = currentForm._id;
 
-    componentsUpdated.userId = isAuthenticated ? user.username : publicName;
+    componentsUpdated.userId = user ? user.username : publicName;
 
     setAnswerForm(componentsUpdated);
     await Meteor.callAsync('forms.updateAnswers', componentsUpdated.formId, {
@@ -172,7 +173,7 @@ export const Visualizer = ({ answerMode = false, edit = false }) => {
     if (userAnswers) setAnswerForm(userAnswers);
   }, []);
 
-  if (!isAuthenticated && !currentForm.isPublic) return <p>Veuillez vous connecter pour répondre a ce questionnaire</p>;
+  if (!user && !currentForm.isPublic) return <p>Veuillez vous connecter pour répondre a ce questionnaire</p>;
 
   // IL SEMBLE QUE edit NE SOIS JAMAIS PASSER EN PROPS DONC EDIT === FALSE toujours
 

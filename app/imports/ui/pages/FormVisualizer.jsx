@@ -13,7 +13,7 @@ export const FormVisualizer = () => {
 
   if (!formFromBDD) return <p>Ce formulaire n'existe pas</p>;
 
-  return <div>{formFromBDD && <Visualizer answerMode={true} />}</div>;
+  return <Visualizer answerMode={true} />;
 };
 
 export const loaderVisualizer = async ({ params }) => {

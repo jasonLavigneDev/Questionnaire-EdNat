@@ -32,9 +32,7 @@ export const FormBuilder = () => {
     <>
       <Breadcrumb />
       <ListVisualizer />
-      {/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
       {!!errorMessage.length && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
-      {/* </div> */}
       <br />
       <Footer nextStep={navigateToNextStep} urlOfPrevStep="builder/intro" text="Suivant" />
     </>
