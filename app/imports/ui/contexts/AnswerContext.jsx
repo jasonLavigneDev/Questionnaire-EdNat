@@ -37,3 +37,5 @@ export const AnswerProvider = ({ children }) => {
     </AnswerContext.Provider>
   );
 };
+
+// retirer du contexte et mettre dans le seul composant qui l'utilise

@@ -45,7 +45,6 @@ export const FormActionButton = ({ currentForm }) => {
       <IconButton title="Supprimer le formulaire" sx={{ color: 'salmon' }} onClick={() => deleteForm(currentForm)}>
         <DeleteIcon />
       </IconButton>
-
       <Divider />
     </div>
   );

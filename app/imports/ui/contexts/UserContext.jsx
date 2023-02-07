@@ -15,3 +15,5 @@ export const UserProvider = ({ children }) => {
 
   return <UserContext.Provider value={{ user, isLoading, isAuthenticated }}>{children}</UserContext.Provider>;
 };
+
+// Creer un hook perso.

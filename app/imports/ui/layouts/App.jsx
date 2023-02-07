@@ -9,8 +9,6 @@ import { FormIntro, loader as loaderFormIntro } from '../pages/FormIntro';
 import { FormVisualizer, loaderVisualizer } from '../pages/FormVisualizer';
 import { FormPrevisualizer } from '../pages/FormPrevisualizer';
 import { AnswersPage, loaderAnswerPage } from '../pages/AnswersPage';
-
-import { UserProvider } from '../contexts/UserContext';
 import { FormProvider } from '../contexts/FormContext';
 import { AnswerProvider } from '../contexts/AnswerContext';
 import { AuthProvider } from '../contexts/AuthContext';
@@ -38,13 +36,11 @@ export const App = () => {
 
   return (
     <React.StrictMode>
-      <UserProvider>
-        <FormProvider>
-          <AnswerProvider>
-            <RouterProvider router={router} />
-          </AnswerProvider>
-        </FormProvider>
-      </UserProvider>
+      <FormProvider>
+        <AnswerProvider>
+          <RouterProvider router={router} />
+        </AnswerProvider>
+      </FormProvider>
     </React.StrictMode>
   );
 };

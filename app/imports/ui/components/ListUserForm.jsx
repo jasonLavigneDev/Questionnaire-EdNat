@@ -2,14 +2,12 @@ import React from 'react';
 import { Typography } from '@mui/material';
 
 import { FormActionButton } from './FormActionButton';
-import { useContext } from 'react';
-import { FormContext } from '../contexts/FormContext';
 
-export const ListUserForm = () => {
-  const { allUsersForms } = useContext(FormContext);
-
+export const ListUserForm = ({ allUsersForms }) => {
+  if (allUsersForms.length <= 0) return <p>Vous n'avez pas encore de questionnaires</p>;
   return (
     <>
+      <h2>Liste de vos questionnaires</h2>
       {allUsersForms.map((userForm) => (
         <div
           key={userForm._id}
