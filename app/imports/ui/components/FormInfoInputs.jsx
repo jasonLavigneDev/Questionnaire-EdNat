@@ -1,9 +1,11 @@
 import { Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { FormContext } from '../contexts/FormContext';
 
-export default function FormInfoInputs({ isOnlyForGroup, setIsOnlyForGroup }) {
-  const { currentForm, setCurrentForm } = useContext(FormContext);
+export default function FormInfoInputs() {
+  const { currentForm, setCurrentForm, isOnlyForGroup, setIsOnlyForGroup } = useContext(FormContext);
+
+  const isFormGroup = isOnlyForGroup || currentForm.groups.length > 0;
 
   const handleIsOnlyForGroup = () => {
     if (isOnlyForGroup === false) {
@@ -49,7 +51,7 @@ export default function FormInfoInputs({ isOnlyForGroup, setIsOnlyForGroup }) {
         <FormControlLabel
           disabled={currentForm.isPublic}
           control={
-            <Checkbox checked={isOnlyForGroup} onChange={() => handleIsOnlyForGroup()} name="réservé aux groupes" />
+            <Checkbox checked={isFormGroup} onChange={() => handleIsOnlyForGroup()} name="réservé aux groupes" />
           }
           label="Réservé aux groupes"
         />

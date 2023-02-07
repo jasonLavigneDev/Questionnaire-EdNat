@@ -4,7 +4,7 @@ import { Button, Typography, Menu, MenuItem, Avatar, Divider } from '@mui/materi
 import { identicon } from 'minidenticons';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PackageJSON from '../../../../package.json';
-import useUser from '../useUser';
+import useUser from '../../hooks/useUser';
 
 // CSS style
 const sizeAvatar = {
@@ -38,34 +38,34 @@ export const HeaderMenu = () => {
     );
 
   return (
-    user && (
-      <div>
-        <Button
-          endIcon={<ExpandMoreIcon fontSize="large" />}
-          style={{ textTransform: 'none' }}
-          onClick={(event) => openMenu(event)}
-        >
-          <Typography variant="body1" sx={{ marginRight: '1vw' }}>
-            {user.username || 'Toto'}
-          </Typography>
-          <div>
-            {user.avatar ? (
-              <Avatar sx={sizeAvatar} src={user.avatar} alt={user.username} />
-            ) : (
-              <div style={sizeAvatar}>
-                <identicon-svg username="default" />
-              </div>
-            )}
-          </div>
-        </Button>
-        <Menu anchorEl={anchor} open={open} onClick={() => setOpen(!open)}>
-          <MenuItem onClick={logout}>Se déconnecter</MenuItem>
-          <Divider />
-          <MenuItem disabled style={{ opacity: 0.3 }}>
-            Version {version}
-          </MenuItem>
-        </Menu>
-      </div>
-    )
+    // user && (
+    <div>
+      <Button
+        endIcon={<ExpandMoreIcon fontSize="large" />}
+        style={{ textTransform: 'none' }}
+        onClick={(event) => openMenu(event)}
+      >
+        <Typography variant="body1" sx={{ marginRight: '1vw' }}>
+          {user.username || 'Toto'}
+        </Typography>
+        <div>
+          {user.avatar ? (
+            <Avatar sx={sizeAvatar} src={user.avatar} alt={user.username} />
+          ) : (
+            <div style={sizeAvatar}>
+              <identicon-svg username="default" />
+            </div>
+          )}
+        </div>
+      </Button>
+      <Menu anchorEl={anchor} open={open} onClick={() => setOpen(!open)}>
+        <MenuItem onClick={logout}>Se déconnecter</MenuItem>
+        <Divider />
+        <MenuItem disabled style={{ opacity: 0.3 }}>
+          Version {version}
+        </MenuItem>
+      </Menu>
+    </div>
+    // )
   );
 };

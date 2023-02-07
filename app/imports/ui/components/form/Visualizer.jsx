@@ -18,7 +18,7 @@ import { AnswerContext } from '../../contexts/AnswerContext';
 import { useNavigate } from 'react-router-dom';
 import { hasAlreadyRespond } from '../../utils/utils';
 import { ComponentBuilder } from '../inputs/ComponentBuilder';
-import useUser from '../useUser';
+import useUser from '../../hooks/useUser';
 
 export const Visualizer = ({ answerMode = false, edit = false }) => {
   const [publicName, setPublicName] = useState('');

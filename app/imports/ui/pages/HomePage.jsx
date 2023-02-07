@@ -1,9 +1,9 @@
-import { Button } from '@mui/material';
 import React, { useContext, useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { FormContext } from '../contexts/FormContext';
+import { Button } from '@mui/material';
 import { ListUserForm } from '../components/ListUserForm';
-import useUser from '../components/useUser';
+import useUser from '../hooks/useUser';
+import { FormContext } from '../contexts/FormContext';
 
 export const HomePage = () => {
   const [user] = useUser();
@@ -17,7 +17,6 @@ export const HomePage = () => {
   }, []);
 
   if (!user) return <p>Veuillez vous connecter</p>;
-  if (!formFromBDD) return <p>Vous n'avez pas encore de questionnaires</p>;
 
   return (
     <>
@@ -26,14 +25,12 @@ export const HomePage = () => {
           Nouveau questionnaire
         </Button>
       </div>
-      <div>
-        <h2>Liste de vos questionnaires</h2>
-        <ListUserForm allUsersForms={allUsersForms} />
-      </div>
+      <ListUserForm allUsersForms={allUsersForms} />
     </>
   );
 };
 
 export const loader = async () => {
-  return (await Meteor.callAsync('forms.getUserForms')) || null;
+  const usersForm = await Meteor.callAsync('forms.getUserForms');
+  return usersForm || null;
 };

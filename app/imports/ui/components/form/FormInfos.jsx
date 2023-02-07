@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import FormInfoInputs from '../FormInfoInputs';
 import { DisplayGroups } from '../DisplayGroups';
 import SelectGroups from '../SelectGroups';
+import { FormContext } from '../../contexts/FormContext';
 
 export const FormInfos = ({ userGroups }) => {
-  const [isOnlyForGroup, setIsOnlyForGroup] = useState(false); // Remonter cet état au form context
+  const { currentForm, isOnlyForGroup } = useContext(FormContext);
+
+  const isFormGroup = isOnlyForGroup || currentForm.groups.length > 0;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <FormInfoInputs isOnlyForGroup={isOnlyForGroup} setIsOnlyForGroup={setIsOnlyForGroup} />
-      {isOnlyForGroup && <SelectGroups />}
-      <DisplayGroups userGroups={userGroups} />
+      <FormInfoInputs />
+      {isFormGroup && (
+        <>
+          <SelectGroups userGroups={userGroups} />
+          <DisplayGroups userGroups={userGroups} />
+        </>
+      )}
     </div>
   );
 };

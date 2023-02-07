@@ -39,7 +39,6 @@ export const CheckBoxInput = ({ title, choices, required = false, answerMode, qu
       answer.answer.map((resp) => {
         setAnswers([...answers, { name: resp, value: true }]);
       });
-      console.log(answers);
     }
   }, []);
 

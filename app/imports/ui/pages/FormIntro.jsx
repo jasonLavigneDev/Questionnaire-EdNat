@@ -18,7 +18,7 @@ export const FormIntro = () => {
   };
 
   useEffect(() => {
-    setCurrentForm(formFromBDD);
+    if (formFromBDD) setCurrentForm(formFromBDD);
   }, []);
 
   return (
