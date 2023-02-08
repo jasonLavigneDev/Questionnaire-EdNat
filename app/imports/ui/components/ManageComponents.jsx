@@ -8,12 +8,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useContext } from 'react';
 import { FormContext } from '../contexts/FormContext';
 
-export default function ManageComponents({ currentComponent, index, editComponent }) {
+export default function ManageComponents({ currentComponent, index, setComponentToEdit, setEditMode }) {
   const { currentForm, setCurrentForm } = useContext(FormContext);
 
   const hasComponentBefore = (inputPos) => inputPos > 0;
   const hasComponentAfter = (inputPos) => inputPos < currentForm.components.length - 1;
 
+  const updateComponent = (component) => {
+    setComponentToEdit(component);
+    setEditMode(true);
+  };
   const removeComponentToForm = (componentId) => {
     const componentsUpdated = currentForm.components.filter((currentComponent) => currentComponent.id != componentId);
     setCurrentForm({ ...currentForm, components: componentsUpdated });
@@ -53,7 +57,7 @@ export default function ManageComponents({ currentComponent, index, editComponen
       <IconButton onClick={() => swapPositionWithNextComponent(index)}>
         <ArrowDownwardIcon />
       </IconButton>
-      <IconButton sx={{ color: 'Gold' }} onClick={() => editComponent(currentComponent)}>
+      <IconButton sx={{ color: 'Gold' }} onClick={() => updateComponent(currentComponent)}>
         <EditIcon />
       </IconButton>
       <IconButton sx={{ color: 'Crimson' }} onClick={() => removeComponentToForm(currentComponent.id)}>

@@ -1,9 +1,28 @@
 import { IconButton, TextField } from '@mui/material';
 import React from 'react';
-import DeleteOption from './DeleteOption';
+import DeleteOption from './inputs/DeleteOption';
 import AddIcon from '@mui/icons-material/Add';
+import { isDuplicate } from '../utils/utils';
 
-export default function ManageOptions() {
+export default function ManageOptions({ answerText, setAnswerText, answerOptions, setAnswerOptions, setErrorMessage }) {
+  const addOption = (newOption) => {
+    if (newOption) {
+      const opt = [...answerOptions];
+      if (!isDuplicate(opt, newOption)) {
+        opt.push(newOption);
+        setAnswerOptions(opt);
+        setAnswerText('');
+      }
+    } else {
+      setErrorMessage(i18n.__('builders.errors.noOptions'));
+    }
+  };
+
+  const removeOption = (option) => {
+    const opt = answerOptions.filter((o) => option !== o);
+    setAnswerOptions(opt);
+  };
+
   return (
     <>
       <br />

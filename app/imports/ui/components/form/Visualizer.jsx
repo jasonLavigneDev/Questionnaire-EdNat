@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import { FormContext } from '../../contexts/FormContext';
 import { AnswerContext } from '../../contexts/AnswerContext';
-import { ComponentBuilder } from '../inputs/ComponentBuilder';
+import { ComponentBuilder } from '../ComponentBuilder';
 import useUser from '../../hooks/useUser';
 import SubmitAnswerForm from './SubmitAnswerForm';
 import GenerateComponent from './GenerateComponent';
@@ -10,11 +9,9 @@ import GenerateComponent from './GenerateComponent';
 export const Visualizer = ({ answerMode = false }) => {
   const [publicName, setPublicName] = useState('');
   const [componentToEdit] = useState({});
-
   const { currentForm } = useContext(FormContext);
   const [user] = useUser();
   const { setAnswerForm } = useContext(AnswerContext);
-
   const currentFormHasAnswers = !!currentForm.formAnswers;
 
   let userAnswers = null;

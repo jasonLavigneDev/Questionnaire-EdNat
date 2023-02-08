@@ -40,7 +40,7 @@ export const FormIntro = () => {
 
 export const loader = async ({ params }) => {
   const formFromBDD = (await Meteor.callAsync('forms.getOneFromUser', params.id)) || null;
-  const userGroups = await Meteor.callAsync('groups.getUserGroups');
+  const userGroups = (await Meteor.callAsync('groups.getUserGroups')) || null;
 
   return { formFromBDD, userGroups } || null;
 };

@@ -38,7 +38,6 @@ export const HeaderMenu = () => {
     );
 
   return (
-    // user && (
     <div>
       <Button
         endIcon={<ExpandMoreIcon fontSize="large" />}
@@ -66,6 +65,5 @@ export const HeaderMenu = () => {
         </MenuItem>
       </Menu>
     </div>
-    // )
   );
 };
