@@ -4,18 +4,13 @@ import { Paper } from '@mui/material';
 
 import { FormContext } from '../../contexts/FormContext';
 import { InputChoice } from './InputChoice';
-import { ComponentBuilder } from '../inputs/ComponentBuilder';
+import { ComponentBuilder } from '../ComponentBuilder';
 import ManageComponents from '../ManageComponents';
 
 export const InputBuilder = () => {
   const { currentForm } = useContext(FormContext);
   const [componentToEdit, setComponentToEdit] = useState({});
   const [editMode, setEditMode] = useState(false);
-
-  const updateComponent = (component) => {
-    setComponentToEdit(component);
-    setEditMode(true);
-  };
 
   const class1 = {
     display: 'flex',
@@ -57,7 +52,12 @@ export const InputBuilder = () => {
               <Paper sx={{ display: 'flex', width: '28vw', marginBottom: 1, border: '1px black solid' }}>
                 <p style={{ paddingLeft: '0.5vw', width: '18vw' }}>{currentComponent.title}</p>
                 <div className={class3}>
-                  <ManageComponents currentComponent={currentComponent} index={index} editComponent={updateComponent} />
+                  <ManageComponents
+                    currentComponent={currentComponent}
+                    index={index}
+                    setComponentToEdit={setComponentToEdit}
+                    setEditMode={setEditMode}
+                  />
                 </div>
               </Paper>
             ))}

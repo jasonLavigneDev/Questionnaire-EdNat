@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { FormControl, Select, InputLabel, MenuItem, OutlinedInput, Divider } from '@mui/material';
 import { FormContext } from '../../contexts/FormContext';
-import { ComponentBuilder } from '../inputs/ComponentBuilder';
+import { ComponentBuilder } from '../ComponentBuilder';
 import { LIST_OF_INPUT_BUILDER } from '../listOfInputBuilder';
 
 export const InputChoice = () => {

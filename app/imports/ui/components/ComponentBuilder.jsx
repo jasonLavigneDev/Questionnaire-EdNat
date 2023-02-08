@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
 import { TextField, Button, Paper } from '@mui/material';
-import { createComponentObject, isDuplicate, isEmptyComponent } from '../../utils/utils';
-import { MsgError } from '../system/MsgError';
-import { FormContext } from '../../contexts/FormContext';
+import { createComponentObject, isEmptyComponent } from '../utils/utils';
+import { MsgError } from './system/MsgError';
+import { FormContext } from '../contexts/FormContext';
 
 import ManageOptions from './ManageOptions';
 
@@ -19,25 +19,7 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
     return type === 'checkboxInput' || type === 'selectInput' || type === 'radioButtonInput';
   };
 
-  const addOption = (newOption) => {
-    if (newOption) {
-      const opt = [...answerOptions];
-      if (!isDuplicate(opt, newOption)) {
-        opt.push(newOption);
-        setAnswerOptions(opt);
-        setAnswerText('');
-      }
-    } else {
-      setErrorMessage(i18n.__('builders.errors.noOptions'));
-    }
-  };
-
-  const removeOption = (option) => {
-    const opt = answerOptions.filter((o) => option !== o);
-    setAnswerOptions(opt);
-  };
-
-  const handleSubmit = () => {
+  const submitComponent = () => {
     if (questionText) {
       if (IsMultiAnswersComponent() && !answerOptions) {
         setErrorMessage(i18n.__('builders.errors.noOptions'));
@@ -55,7 +37,7 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
     }
   };
 
-  const handleUpdate = () => {
+  const updateComponent = () => {
     if (questionText) {
       if (IsMultiAnswersComponent() && !answerOptions) {
         setErrorMessage(i18n.__('builders.errors.noOptions'));
@@ -91,14 +73,20 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
         sx={{ width: '90%', marginLeft: 6, marginBottom: 2, marginTop: 2 }}
       />
       {IsMultiAnswersComponent() && (
-        <ManageOptions addOption={addOption} setAnswerText={setAnswerText} removeOption={removeOption} />
+        <ManageOptions
+          answerText={answerText}
+          setAnswerText={setAnswerText}
+          answerOptions={answerOptions}
+          setAnswerOptions={setAnswerOptions}
+          setErrorMessage={setErrorMessage}
+        />
       )}
       {isEmptyComponent(componentToEdit) ? (
-        <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={handleSubmit}>
+        <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={submitComponent}>
           Valider
         </Button>
       ) : (
-        <Button style={{ textAlign: 'center', width: '100%' }} onClick={handleUpdate}>
+        <Button style={{ textAlign: 'center', width: '100%' }} onClick={updateComponent}>
           Mettre à jour
         </Button>
       )}
