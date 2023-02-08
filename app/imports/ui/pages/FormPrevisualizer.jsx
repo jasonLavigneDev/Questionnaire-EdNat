@@ -9,18 +9,14 @@ import { Footer } from '../components/system/Footer';
 
 export const FormPrevisualizer = () => {
   const [errorMessage, setErrorMessage] = useState('');
-
   const { currentForm, resetFormContext, setActiveStep } = useContext(FormContext);
-
   const navigate = useNavigate();
-
   const isDisable = !currentForm.title || currentForm.components.length === 0;
 
   const sendFormToBDD = async () => {
-    if (isDisable) {
-      setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
-    } else {
-      // possible de try catch ?
+    if (isDisable) return setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
+
+    try {
       const result = await Meteor.callAsync('forms.createForm', {
         title: currentForm.title,
         desc: currentForm.desc,
@@ -29,20 +25,20 @@ export const FormPrevisualizer = () => {
         isPublic: currentForm.isPublic,
         components: currentForm.components,
       });
-      if (!result) {
-        console.log('error');
-      } else {
+
+      if (result) {
         navigate('/');
         resetFormContext();
       }
+    } catch (error) {
+      console.log('error dans sendForm', error);
     }
   };
 
   const updateForm = async () => {
-    if (isDisable) {
-      setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
-    } else {
-      //try catch ?
+    if (isDisable) return setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
+
+    try {
       const result = await Meteor.callAsync('forms.updateForm', {
         id: currentForm._id,
         title: currentForm.title,
@@ -52,12 +48,13 @@ export const FormPrevisualizer = () => {
         isPublic: currentForm.isPublic,
         components: currentForm.components,
       });
-      if (!result) {
-        console.log('error');
-      } else {
+
+      if (result) {
         navigate('/');
         resetFormContext();
       }
+    } catch (err) {
+      console.log('error dans updateForm', err);
     }
   };
 
@@ -65,16 +62,14 @@ export const FormPrevisualizer = () => {
     setActiveStep(2);
   }, []);
 
+  if (!currentForm) return <p>ce formulaire n'existe pas</p>;
+
   return (
     <div>
-      {currentForm ? (
-        <div>
-          <Breadcrumb />
-          <Visualizer />
-        </div>
-      ) : (
-        <p>ce formulaire n'existe pas</p>
-      )}
+      <div>
+        <Breadcrumb />
+        <Visualizer />
+      </div>
       {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
       <Footer
         nextStep={currentForm._id ? updateForm : sendFormToBDD}

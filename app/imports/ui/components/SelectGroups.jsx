@@ -6,8 +6,6 @@ export default function SelectGroups({ userGroups }) {
   const [groupSelected, setGroupSelected] = useState({});
   const { currentForm, setCurrentForm } = useContext(FormContext);
 
-  console.log('userGroups dans SelectGroups', userGroups);
-
   const displayGroupsNotSelected = () => {
     return userGroups.filter((group) => currentForm.groups.findIndex((groupId) => groupId === group._id) === -1);
   };

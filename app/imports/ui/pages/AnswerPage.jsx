@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
 import { FormContext } from '../contexts/FormContext';
 
-export const FormVisualizer = () => {
+export const AnswerPage = () => {
   const { setCurrentForm } = useContext(FormContext);
   const formFromBDD = useLoaderData();
 
@@ -17,5 +17,6 @@ export const FormVisualizer = () => {
 };
 
 export const loaderVisualizer = async ({ params }) => {
-  return (await Meteor.callAsync('forms.getOne', params.id)) || null;
+  const userForm = await Meteor.callAsync('forms.getOne', params.id);
+  return userForm || null;
 };

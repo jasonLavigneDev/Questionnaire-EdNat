@@ -6,9 +6,9 @@ import { Logout } from '../pages/Logout';
 import { HomePage, loader as loaderHomePage } from '../pages/HomePage';
 import { FormBuilder } from '../pages/FormBuilder';
 import { FormIntro, loader as loaderFormIntro } from '../pages/FormIntro';
-import { FormVisualizer, loaderVisualizer } from '../pages/FormVisualizer';
+import { AnswerPage, loaderVisualizer } from '../pages/AnswerPage';
 import { FormPrevisualizer } from '../pages/FormPrevisualizer';
-import { AnswersPage, loaderAnswerPage } from '../pages/AnswersPage';
+import { ResultPage, loaderAnswerPage } from '../pages/ResultPage';
 import { FormProvider } from '../contexts/FormContext';
 import { AnswerProvider } from '../contexts/AnswerContext';
 import { AuthProvider } from '../contexts/AuthContext';
@@ -20,11 +20,11 @@ export const App = () => {
     createRoutesFromElements(
       <>
         <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
-          <Route path="visualizer/:id" element={<FormVisualizer />} loader={loaderVisualizer} />
+          <Route path="visualizer/:id" element={<AnswerPage />} loader={loaderVisualizer} />
           <Route element={<AuthProvider />}>
             <Route path="" element={<HomePage />} loader={loaderHomePage} errorElement={<ErrorPage />} />
             <Route path="logout" element={<Logout />} />
-            <Route path="answers/:id" element={<AnswersPage />} loader={loaderAnswerPage} />
+            <Route path="answers/:id" element={<ResultPage />} loader={loaderAnswerPage} />
             <Route path="builder/intro/:id?" element={<FormIntro />} loader={loaderFormIntro} />
             <Route path="builder/components/:id?" element={<FormBuilder />} />
             <Route path="builder/previsualizer" element={<FormPrevisualizer />} />
