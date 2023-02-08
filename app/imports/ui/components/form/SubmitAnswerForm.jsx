@@ -2,11 +2,12 @@ import { Button } from '@mui/material';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnswerContext } from '../../contexts/AnswerContext';
-import useUser from '../../hooks/useUser';
+import { UserContext } from '../../contexts/UserContext';
 import { hasAlreadyRespond } from '../../utils/utils';
 
 export default function SubmitAnswerForm({ publicName, setPublicName, currentForm }) {
-  const [user] = useUser();
+  const { user } = useContext(UserContext);
+
   const { answerForm, setAnswerForm } = useContext(AnswerContext);
 
   const navigate = useNavigate();

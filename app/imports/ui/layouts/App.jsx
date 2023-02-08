@@ -14,6 +14,7 @@ import { AnswerProvider } from '../contexts/AnswerContext';
 import { AuthProvider } from '../contexts/AuthContext';
 
 import { MainLayout } from './MainLayout';
+import { UserProvider } from '../contexts/UserContext';
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -36,11 +37,13 @@ export const App = () => {
 
   return (
     <React.StrictMode>
-      <FormProvider>
-        <AnswerProvider>
-          <RouterProvider router={router} />
-        </AnswerProvider>
-      </FormProvider>
+      <UserProvider>
+        <FormProvider>
+          <AnswerProvider>
+            <RouterProvider router={router} />
+          </AnswerProvider>
+        </FormProvider>
+      </UserProvider>
     </React.StrictMode>
   );
 };

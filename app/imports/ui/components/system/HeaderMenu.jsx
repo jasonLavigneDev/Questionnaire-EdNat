@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Typography, Menu, MenuItem, Avatar, Divider } from '@mui/material';
 import { identicon } from 'minidenticons';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PackageJSON from '../../../../package.json';
-import useUser from '../../hooks/useUser';
+import { UserContext } from '../../contexts/UserContext';
 
 // CSS style
 const sizeAvatar = {
@@ -15,7 +15,7 @@ const sizeAvatar = {
 export const HeaderMenu = () => {
   const [open, setOpen] = useState(false);
   const [anchor, setAnchor] = useState(null);
-  const [user] = useUser();
+  const { user } = useContext(UserContext);
   const { version } = PackageJSON;
 
   const navigate = useNavigate();
