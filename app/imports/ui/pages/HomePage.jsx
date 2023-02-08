@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { UserForm } from '../components/UserForm';
-import useUser from '../hooks/useUser';
 import { FormContext } from '../contexts/FormContext';
+import { UserContext } from '../contexts/UserContext';
 
 export const HomePage = () => {
-  const [user] = useUser();
+  const { user } = useContext(UserContext);
   const [allUserForms, setAllUserForms] = useState();
   const { resetFormContext } = useContext(FormContext);
   const formFromBDD = useLoaderData();
@@ -32,9 +32,7 @@ export const HomePage = () => {
         </Button>
       </div>
       <h2>Liste de vos questionnaires</h2>
-      {allUserForms.map((userForm) => (
-        <UserForm userForm={userForm} deleteForm={deleteForm} />
-      ))}
+      {allUserForms && allUserForms.map((userForm) => <UserForm userForm={userForm} deleteForm={deleteForm} />)}
     </>
   );
 };
