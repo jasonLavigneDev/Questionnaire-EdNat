@@ -29,7 +29,6 @@ export const FormActionButton = ({ currentForm }) => {
         sx={{ color: 'gold' }}
         onClick={() => navigate(`/visualizer/${currentForm._id}`)}
       >
-        {/* {hasAlreadyRespond(user, form) ? 'Modifier les réponses' : 'Répondre au formulaire'} */}
         <EditIcon />
       </IconButton>
       <IconButton title="Copier l'URL" onClick={() => copyUrlToClipBoard(currentForm._id)}>

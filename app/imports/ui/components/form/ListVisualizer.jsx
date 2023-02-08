@@ -1,61 +1,21 @@
 import React, { useContext, useState } from 'react';
 
-import { Paper, IconButton } from '@mui/material';
-
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import { Paper } from '@mui/material';
 
 import { FormContext } from '../../contexts/FormContext';
 import { InputChoice } from './InputChoice';
 import { ComponentBuilder } from '../inputs/ComponentBuilder';
+import ManageComponents from '../ManageComponents';
 
 export const ListVisualizer = () => {
-  const { currentForm, setCurrentForm } = useContext(FormContext);
+  const { currentForm } = useContext(FormContext);
   const [componentToEdit, setComponentToEdit] = useState({});
   const [editMode, setEditMode] = useState(false);
-
-  const hasComponentBefore = (inputPos) => inputPos > 0;
-  const hasComponentAfter = (inputPos) => inputPos < currentForm.components.length - 1;
-
-  const swapPositionWithPreviousComponent = (inputPos) => {
-    if (hasComponentBefore(inputPos)) {
-      const componentsUpdated = [...currentForm.components];
-      [componentsUpdated[inputPos - 1], componentsUpdated[inputPos]] = [
-        componentsUpdated[inputPos],
-        componentsUpdated[inputPos - 1],
-      ];
-      setCurrentForm({ ...currentForm, components: componentsUpdated });
-    } else {
-      console.log("Il n'y a pas de question avant celle ci, impossible de swap");
-    }
-  };
-
-  const swapPositionWithNextComponent = (inputPos) => {
-    if (hasComponentAfter(inputPos)) {
-      const componentsUpdated = [...currentForm.components];
-      [componentsUpdated[inputPos + 1], componentsUpdated[inputPos]] = [
-        componentsUpdated[inputPos],
-        componentsUpdated[inputPos + 1],
-      ];
-      setCurrentForm({ ...currentForm, components: componentsUpdated });
-    } else {
-      console.log("Il n'y a pas de question apres celle ci, impossible de swap");
-    }
-  };
 
   const updateComponent = (component) => {
     setComponentToEdit(component);
     setEditMode(true);
   };
-
-  const removeComponent = (componentId) => {
-    const componentsUpdated = currentForm.components.filter((componentInput) => componentInput.id != componentId);
-    setCurrentForm({ ...currentForm, components: componentsUpdated });
-  };
-
-  console.log('editMode dans list', editMode);
 
   return (
     <>
@@ -98,18 +58,7 @@ export const ListVisualizer = () => {
                     margin: 'auto',
                   }}
                 >
-                  <IconButton onClick={() => swapPositionWithPreviousComponent(index)}>
-                    <ArrowUpwardIcon />
-                  </IconButton>
-                  <IconButton onClick={() => swapPositionWithNextComponent(index)}>
-                    <ArrowDownwardIcon />
-                  </IconButton>
-                  <IconButton sx={{ color: 'salmon' }} onClick={() => updateComponent(currentComponent)}>
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton sx={{ color: 'salmon' }} onClick={() => removeComponent(currentComponent.id)}>
-                    <DeleteIcon />
-                  </IconButton>
+                  <ManageComponents currentComponent={currentComponent} index={index} editComponent={updateComponent} />
                 </div>
               </Paper>
             ))}
