@@ -11,7 +11,7 @@ export const FormBuilder = () => {
   const { currentForm, setActiveStep } = useContext(FormContext);
   const navigate = useNavigate();
   const isDisable = !currentForm.title || currentForm.components.length === 0;
-  const haveErrorMessages = errorMessage.length;
+  const haveErrorMessages = !!errorMessage.length;
 
   const navigateToNextStep = () => {
     if (isDisable) {
