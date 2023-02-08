@@ -44,7 +44,7 @@ export const createForm = new ValidatedMethod({
 
   async run({ title, desc, isModel, isPublic, groups, components }) {
     if (!this.userId) {
-      throw new Meteor.Error('api.forms.createForm.notLoggedIn', "Pas d'utilisateur connecté");
+      throw new Meteor.Error('api.forms.createForm.noUser', 'api.forms.createForm.notLoggedIn');
     }
     _createForm(title, desc, this.userId, isModel, isPublic, groups, components);
     const form = await Forms.findOneAsync({ title });
@@ -68,15 +68,12 @@ export const updateForm = new ValidatedMethod({
 
   async run({ id, title, desc, isModel, isPublic, groups, components }) {
     if (!this.userId) {
-      throw new Meteor.Error('api.forms.createForm.notLoggedIn', "Pas d'utilisateur connecté");
+      throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
     }
 
     const form = await Forms.findOneAsync({ _id: id });
     if (this.userId !== form.owner) {
-      throw new Meteor.Error(
-        'api.forms.deleteForm.permissionDenied',
-        "Le formulaire n'appartient pas à l'utilisateur courant",
-      );
+      throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
     }
 
     _updateForm(id, title, desc, this.userId, isModel, isPublic, groups, components);
@@ -93,18 +90,15 @@ export const deleteForm = new ValidatedMethod({
 
   async run({ id }) {
     if (!this.userId) {
-      throw new Meteor.Error('api.forms.createForm.notLoggedIn', "Pas d'utilisateur connecté");
+      throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
     }
 
     const form = await Forms.findOneAsync({ _id: id });
     if (!form) {
-      throw new Meteor.Error('api.forms.deleteForm.notExist', "Le formulaire n'existe pas");
+      throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
     }
     if (form.owner !== this.userId) {
-      throw new Meteor.Error(
-        'api.forms.deleteForm.permissionDenied',
-        "Le formulaire n'appartient pas à l'utilisateur courant",
-      );
+      throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
     }
 
     await Forms.removeAsync({ _id: id });
@@ -148,15 +142,12 @@ export const getOneFormFromuser = new ValidatedMethod({
       return null;
     }
     if (!this.userId) {
-      throw new Meteor.Error('api.forms.createForm.notLoggedIn', "Pas d'utilisateur connecté");
+      throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
     }
 
     const form = await Forms.findOneAsync({ _id: id });
     if (form.owner !== this.userId) {
-      throw new Meteor.Error(
-        'api.forms.deleteForm.permissionDenied',
-        "Le formulaire n'appartient pas à l'utilisateur courant",
-      );
+      throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
     }
 
     return form;
@@ -179,7 +170,7 @@ export const getUserForms = new ValidatedMethod({
       const res = await Forms.find({ owner: this.userId }).mapAsync((x) => x);
       return res;
     } else {
-      throw new Meteor.Error('api.forms.getUserForms.notLoggedIn', "Pas d'utilisateur connecté");
+      throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
     }
   },
 });

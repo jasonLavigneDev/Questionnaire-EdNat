@@ -1,8 +1,97 @@
 {
-  "builders": {
-    "errors": {
-      "noTitle": "Titre manquant",
-      "noOptions": "Option manquante"
+  "api": {
+    "users": {
+      "labels": {
+        "username": "Nom d'utilisateur",
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "emails": "Adresse Électronique",
+        "emailAddress": "Adresse Électronique",
+        "emailVerified": "Adresse Vérifiée",
+        "createdAt": "Créé le",
+        "lastLogin": "Dernière connexion",
+        "profile": "Profil",
+        "services": "Services",
+        "heartbeat": "Heartbeat",
+        "structure": "Structure",
+        "primaryEmail": "Adresse électronique principale",
+        "language": "Langage Préféré",
+        "logoutType": "Méthode De Déconnexion",
+        "avatar": "Avatar"
+      },
+      "setLogoutType": {
+        "notPermitted": "Non autorisé"
+      },
+      "mustBeLoggedIn": "L'utilisateur doit être connecté"
+    },
+    "forms": {
+      "labels": {
+        "title": "Titre",
+        "desc": "Description",
+        "isModel": "Modèle",
+        "createdAt": "Créé le",
+        "owner": "Propriétaire",
+        "public": "Public",
+        "groups": "Groupes",
+        "components": "Composants",
+        "formAnswers": {
+          "answers": "Réponses",
+          "userId": "ID utilisateur",
+          "answer": "Réponse"
+        }, 
+        "component": {
+          "id": "ID composant",
+          "type": "Type de composant",
+          "title": "Titre du composant",
+          "choices": "Choix du composant"
+        }    
+      },
+      "createForm": {
+        "noUser": "Aucun utilisateur trouvé.",
+        "notLoggedIn": "L'utilisateur n'est pas connecté."
+      },
+      "deleteForm": {
+        "permissionDenied": "Permission refusée.",
+        "notOwner": "L'utilisateur courant n'est pas propriétaire du formulaire.",
+        "notFound": "Formulaire introuvable.",
+        "notExist": "Le formulaire spéficié n'existe pas."
+      }
+    },
+    "groups": {
+      "labels": {
+        "name": "Nom",
+        "slug": "Slug",
+        "description": "Description",
+        "content": "Description longue",
+        "active": "Actif",
+        "groupPadID": "ID de Pad du groupe",
+        "digest": "Digest",
+        "type": "Type",
+        "avatar": "Avatar",
+        "applications": "ID de l'application",
+        "owner": "Propriétaire",
+        "admins": "Administrateur",
+        "animators": "Animateurs",
+        "members": "Membres",
+        "candidates": "Candidats",
+        "numCandidates": "Nombre de candidats",
+        "plugins": "Plugins",
+        "articles": "Publications",
+        "meetingParams": "Paramètre de meeting"
+      },
+      "types": {
+        "open": "ouvert",
+        "moderated": "modéré",
+        "private": "réservé",
+        "automatic": "automatique"
+      }
     }
+
+  },
+  "page": {
+
+  },
+  "component":{
+
   }
 }

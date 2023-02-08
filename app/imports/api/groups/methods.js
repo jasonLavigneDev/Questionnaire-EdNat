@@ -12,10 +12,10 @@ export const getUserGroups = new ValidatedMethod({
         const res = await Groups.find({ _id: { $in: user.favGroups } }).mapAsync((x) => x);
         return res;
       } else {
-        throw new Meteor.Error('api.forms.getUserForms.notLoggedIn', "Pas d'utilisateur connecté");
+        throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
       }
     } else {
-      throw new Meteor.Error('api.forms.getUserForms.notLoggedIn', "Pas d'utilisateur connecté");
+      throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
     }
   },
 });
