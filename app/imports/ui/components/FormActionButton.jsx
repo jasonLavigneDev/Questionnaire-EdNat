@@ -1,17 +1,14 @@
 import { Divider, IconButton } from '@mui/material';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FormContext } from '../contexts/FormContext';
 import { copyUrlToClipBoard, hasNotAnswers } from '../utils/utils';
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
-export const FormActionButton = ({ currentForm }) => {
-  const { deleteForm } = useContext(FormContext);
+export const FormActionButton = ({ deleteForm, currentForm }) => {
   const navigate = useNavigate();
 
   return (
