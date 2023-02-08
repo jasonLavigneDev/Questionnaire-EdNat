@@ -9,11 +9,8 @@ import { Footer } from '../components/system/Footer';
 
 export const FormPrevisualizer = () => {
   const [errorMessage, setErrorMessage] = useState('');
-
   const { currentForm, resetFormContext, setActiveStep } = useContext(FormContext);
-
   const navigate = useNavigate();
-
   const isDisable = !currentForm.title || currentForm.components.length === 0;
 
   const sendFormToBDD = async () => {
@@ -65,16 +62,14 @@ export const FormPrevisualizer = () => {
     setActiveStep(2);
   }, []);
 
+  if (!currentForm) return <p>ce formulaire n'existe pas</p>;
+
   return (
     <div>
-      {currentForm ? (
-        <div>
-          <Breadcrumb />
-          <Visualizer />
-        </div>
-      ) : (
-        <p>ce formulaire n'existe pas</p>
-      )}
+      <div>
+        <Breadcrumb />
+        <Visualizer />
+      </div>
       {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
       <Footer
         nextStep={currentForm._id ? updateForm : sendFormToBDD}

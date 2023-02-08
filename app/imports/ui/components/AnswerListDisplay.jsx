@@ -10,7 +10,7 @@ export default function AnswerListDisplay({ finalArray }) {
             <ul>
               <li>
                 <b>
-                  {response.userName} (répondu le: {response.createdAt}){' '}
+                  {response.userName} (répondu le: {response.createdAt})
                 </b>
                 : {response.response}
               </li>

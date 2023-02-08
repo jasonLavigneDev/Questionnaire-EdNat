@@ -1,11 +1,9 @@
 import { Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { FormContext } from '../contexts/FormContext';
 
-export default function FormInfoInputs() {
+export default function FormInfoInputs({ isFormGroup }) {
   const { currentForm, setCurrentForm, isOnlyForGroup, setIsOnlyForGroup } = useContext(FormContext);
-
-  const isFormGroup = isOnlyForGroup || currentForm.groups.length > 0;
 
   const handleIsOnlyForGroup = () => {
     if (isOnlyForGroup === false) {

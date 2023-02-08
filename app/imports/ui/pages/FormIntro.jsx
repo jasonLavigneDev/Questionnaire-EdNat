@@ -11,11 +11,8 @@ import FormInfoInputs from '../components/FormInfoInputs';
 export const FormIntro = () => {
   const { currentForm, isOnlyForGroup, setCurrentForm } = useContext(FormContext);
   const { formFromBDD, userGroups } = useLoaderData();
-
   const isFormGroup = isOnlyForGroup || currentForm.groups.length > 0;
-
   const navigate = useNavigate();
-
   const navigateTo = () => {
     navigate(`/builder/components`);
   };
@@ -28,7 +25,7 @@ export const FormIntro = () => {
     <>
       <Breadcrumb />
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <FormInfoInputs />
+        <FormInfoInputs isFormGroup={isFormGroup} />
         {isFormGroup && (
           <>
             <SelectGroups userGroups={userGroups} />
