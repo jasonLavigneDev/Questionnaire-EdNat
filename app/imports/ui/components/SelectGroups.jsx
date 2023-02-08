@@ -9,13 +9,12 @@ export default function SelectGroups({ userGroups }) {
   const displayGroupsNotSelected = () => {
     return userGroups.filter((group) => currentForm.groups.findIndex((groupId) => groupId === group._id) === -1);
   };
+
   const selectGroup = (value) => {
     const index = userGroups.findIndex((group) => group.name === value);
-    if (index === -1) {
-      return;
-    }
-    setGroupSelected(userGroups[index]);
+    if (index !== -1) return setGroupSelected(userGroups[index]);
   };
+
   const addGroup = () => {
     if (groupSelected) {
       setCurrentForm({ ...currentForm, groups: [...currentForm.groups, groupSelected._id] });
@@ -23,7 +22,9 @@ export default function SelectGroups({ userGroups }) {
     }
   };
 
-  if (!userGroups || !userGroups.length.length <= 0) return <p>Vous n'appartenez à aucun groupe</p>;
+  const haveNotGroup = !userGroups || userGroups.length <= 0;
+
+  if (haveNotGroup) return <p>Vous n'appartenez à aucun groupe</p>;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>

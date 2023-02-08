@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { UserForm } from '../components/UserForm';
@@ -7,17 +7,22 @@ import { FormContext } from '../contexts/FormContext';
 
 export const HomePage = () => {
   const [user] = useUser();
-  const { allUsersForms, setAllUsersForms, resetFormContext } = useContext(FormContext);
+  const [allUserForms, setAllUserForms] = useState();
+  const { resetFormContext } = useContext(FormContext);
   const formFromBDD = useLoaderData();
   const navigate = useNavigate();
 
+  const deleteForm = async (form) => {
+    await Meteor.callAsync('forms.deleteForm', { id: form._id });
+    setAllUserForms(allUserForms.filter((f) => f._id !== form._id));
+  };
+
   useEffect(() => {
     resetFormContext();
-    setAllUsersForms(formFromBDD);
+    setAllUserForms(formFromBDD);
   }, []);
 
   if (!user) return <p>Veuillez vous connecter</p>;
-  if (allUsersForms.length <= 0) return <p>Vous n'avez pas encore de questionnaires</p>;
 
   return (
     <>
@@ -27,8 +32,8 @@ export const HomePage = () => {
         </Button>
       </div>
       <h2>Liste de vos questionnaires</h2>
-      {allUsersForms.map((userForm) => (
-        <UserForm userForm={userForm} />
+      {allUserForms.map((userForm) => (
+        <UserForm userForm={userForm} deleteForm={deleteForm} />
       ))}
     </>
   );

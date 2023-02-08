@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 
 import { FormActionButton } from './FormActionButton';
 
-export const UserForm = ({ userForm }) => {
+export const UserForm = ({ userForm, deleteForm }) => {
   return (
     <div
       key={userForm._id}
@@ -18,7 +18,7 @@ export const UserForm = ({ userForm }) => {
       <div style={{ flexDirection: 'column' }}>
         <Typography variant="body1">{userForm.title}</Typography>
       </div>
-      <FormActionButton currentForm={userForm} />
+      <FormActionButton deleteForm={deleteForm} currentForm={userForm} />
     </div>
   );
 };
