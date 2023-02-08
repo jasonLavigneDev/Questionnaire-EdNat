@@ -16,8 +16,6 @@ export const FormIntro = () => {
     navigate(`/builder/components`);
   };
 
-  console.log('isFormGroup', isFormGroup);
-
   useEffect(() => {
     if (formFromBDD) setCurrentForm(formFromBDD);
   }, []);
