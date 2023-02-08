@@ -4,13 +4,12 @@ import { FormContext } from '../../contexts/FormContext';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { ComponentBuilder } from '../inputs/ComponentBuilder';
 import useUser from '../../hooks/useUser';
-import ManageComponents from '../ManageComponents';
 import SubmitAnswerForm from './SubmitAnswerForm';
 import GenerateComponent from './GenerateComponent';
 
-export const Visualizer = ({ answerMode = false, edit = false }) => {
+export const Visualizer = ({ answerMode = false }) => {
   const [publicName, setPublicName] = useState('');
-  const [componentToEdit, setComponentToEdit] = useState({});
+  const [componentToEdit] = useState({});
 
   const { currentForm } = useContext(FormContext);
   const [user] = useUser();
@@ -29,37 +28,24 @@ export const Visualizer = ({ answerMode = false, edit = false }) => {
     return {};
   };
 
-  const editComponent = (component) => {
-    setComponentToEdit(component);
-  };
-
   useEffect(() => {
     if (userAnswers) setAnswerForm(userAnswers);
   }, []);
 
   if (!user && !currentForm.isPublic) return <p>Veuillez vous connecter pour répondre a ce questionnaire</p>;
 
-  // IL SEMBLE QUE edit NE SOIS JAMAIS PASSER EN PROPS DONC EDIT === FALSE toujours
-
   return (
     <div>
       {<h3 style={{ textAlign: 'center' }}>{currentForm.title}</h3>}
       {<h4 style={{ textAlign: 'center' }}>{currentForm.desc}</h4>}
-      {currentForm.components.map((currentComponent, index) => (
+      {currentForm.components.map((currentComponent) => (
         <div key={currentComponent.id}>
           <br />
           <br />
           <GenerateComponent currentComponent={currentComponent} getAnswer={getAnswer} answerMode={answerMode} />
           {componentToEdit && componentToEdit.id === currentComponent.id && (
-            <div>
-              <ComponentBuilder componentToEdit={currentComponent} type={currentComponent.type} />
-            </div>
+            <ComponentBuilder componentToEdit={currentComponent} type={currentComponent.type} />
           )}
-          {/* {edit && (
-            <div style={{ display: 'flex' }}>
-              <ManageComponents currentComponent={currentComponent} index={index} editComponent={editComponent} />
-            </div>
-          )} */}
           <br />
           <br />
         </div>

@@ -8,8 +8,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useContext } from 'react';
 import { FormContext } from '../contexts/FormContext';
 
-export default function ManageComponents({ currentComponent, index }) {
-  const { currentForm } = useContext(FormContext);
+export default function ManageComponents({ currentComponent, index, editComponent }) {
+  const { currentForm, setCurrentForm } = useContext(FormContext);
 
   const hasComponentBefore = (inputPos) => inputPos > 0;
   const hasComponentAfter = (inputPos) => inputPos < currentForm.components.length - 1;

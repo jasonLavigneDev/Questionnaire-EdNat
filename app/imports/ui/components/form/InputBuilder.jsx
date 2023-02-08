@@ -7,7 +7,7 @@ import { InputChoice } from './InputChoice';
 import { ComponentBuilder } from '../inputs/ComponentBuilder';
 import ManageComponents from '../ManageComponents';
 
-export const ListVisualizer = () => {
+export const InputBuilder = () => {
   const { currentForm } = useContext(FormContext);
   const [componentToEdit, setComponentToEdit] = useState({});
   const [editMode, setEditMode] = useState(false);
@@ -15,6 +15,28 @@ export const ListVisualizer = () => {
   const updateComponent = (component) => {
     setComponentToEdit(component);
     setEditMode(true);
+  };
+
+  const class1 = {
+    display: 'flex',
+    flexDirection: 'column',
+    marginLeft: '5vw',
+    overflow: 'auto',
+    width: '45%',
+    maxHeight: '60vh',
+  };
+
+  const class2 = {
+    overflow: 'auto',
+    maxHeight: '60vh',
+  };
+
+  const class3 = {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    maxHeight: '5vh',
+    marginTop: '0.70vh',
+    margin: 'auto',
   };
 
   return (
@@ -28,36 +50,13 @@ export const ListVisualizer = () => {
             <InputChoice />
           )}
         </div>
-
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginLeft: '5vw',
-            overflow: 'auto',
-            width: '45%',
-            maxHeight: '60vh',
-          }}
-        >
+        <div className={class1}>
           <h3>Organisez vos questions</h3>
-          <div
-            style={{
-              overflow: 'auto',
-              maxHeight: '60vh',
-            }}
-          >
+          <div className={class2}>
             {currentForm.components.map((currentComponent, index) => (
               <Paper sx={{ display: 'flex', width: '28vw', marginBottom: 1, border: '1px black solid' }}>
                 <p style={{ paddingLeft: '0.5vw', width: '18vw' }}>{currentComponent.title}</p>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    maxHeight: '5vh',
-                    marginTop: '0.70vh',
-                    margin: 'auto',
-                  }}
-                >
+                <div className={class3}>
                   <ManageComponents currentComponent={currentComponent} index={index} editComponent={updateComponent} />
                 </div>
               </Paper>

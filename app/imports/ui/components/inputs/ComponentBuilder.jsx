@@ -1,14 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
-
-import { TextField, Button, Paper, IconButton, Divider } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
-
+import { TextField, Button, Paper } from '@mui/material';
 import { createComponentObject, isDuplicate, isEmptyComponent } from '../../utils/utils';
 import { MsgError } from '../system/MsgError';
 import { FormContext } from '../../contexts/FormContext';
-import { v4 as uuidv4 } from 'uuid';
+
+import ManageOptions from './ManageOptions';
 
 export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = null }) => {
   const [questionText, setQuestionText] = useState(componentToEdit.title || '');
@@ -94,37 +91,7 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
         sx={{ width: '90%', marginLeft: 6, marginBottom: 2, marginTop: 2 }}
       />
       {IsMultiAnswersComponent() && (
-        <>
-          <br />
-          <div style={{ display: 'flex' }}>
-            <TextField
-              id="option"
-              label="Entrez un choix de réponse"
-              variant="outlined"
-              value={answerText}
-              onChange={(e) => setAnswerText(e.target.value)}
-              sx={{ width: '85%', marginLeft: 6 }}
-            />
-            <IconButton onClick={() => addOption(answerText)}>
-              <AddIcon fontSize="large" />
-            </IconButton>
-          </div>
-          {answerOptions.map((option) => (
-            <>
-              <div
-                style={{ display: 'flex', maxWidth: '42.6vw', marginLeft: '3vw', justifyContent: 'space-between' }}
-                key={uuidv4()}
-              >
-                <p>{option}</p>
-                <IconButton onClick={() => removeOption(option)}>
-                  <DeleteIcon />
-                </IconButton>
-              </div>
-              <Divider variant="middle" />
-            </>
-          ))}
-          <br />
-        </>
+        <ManageOptions addOption={addOption} setAnswerText={setAnswerText} removeOption={removeOption} />
       )}
       {isEmptyComponent(componentToEdit) ? (
         <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={handleSubmit}>
