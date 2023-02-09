@@ -30,7 +30,7 @@ export const InputChoice = () => {
               <div style={{ display: 'flex', justifyContent: 'start' }}>
                 {inputBuilder.icon}
                 <Divider orientation="vertical" flexItem sx={{ margin: '0 1vw' }} />
-                {inputBuilder.name}
+                {i18n.__(`component.inputs.${inputBuilder.name}`)}
               </div>
             </MenuItem>
           ))}

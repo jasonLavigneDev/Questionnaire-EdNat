@@ -15,7 +15,7 @@ export default function ManageOptions({ answerText, setAnswerText, answerOptions
         setAnswerText('');
       }
     } else {
-      setErrorMessage(i18n.__('componentBuilder.errors.noOptions'));
+      setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
     }
   };
 
@@ -30,7 +30,7 @@ export default function ManageOptions({ answerText, setAnswerText, answerOptions
       <div style={{ display: 'flex' }}>
         <TextField
           id="option"
-          label={i18n.__('componentBuilder.errors.inputChoice')}
+          label={i18n.__('component.componentBuilder.inputChoice')}
           variant="outlined"
           value={answerText}
           onChange={(e) => setAnswerText(e.target.value)}

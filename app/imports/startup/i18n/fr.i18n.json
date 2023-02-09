@@ -97,7 +97,7 @@
       "desc": "Une erreur s'est produite"
     },
     "formIntro": {
-      "goNext": "Passer à  l'étape suivante"
+      "goNext": "Passer à l'étape suivante"
     },
     "formPrevisualizer": {
       "saveForm": "Enregistrer le résultat",
@@ -169,7 +169,7 @@
       "deleteForm": "Supprimer le formulaire",
       "copyUrl": "Copier l'URL du formulaire"
     },
-    "formIntroInputs": {
+    "formInfoInputs": {
       "formTitle": "Entrez le titre du formulaire",
       "formDesc": "Entrez la description du formulaire",
       "formDescHelp": "La description est facultative",

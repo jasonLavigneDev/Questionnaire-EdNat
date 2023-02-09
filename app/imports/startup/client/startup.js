@@ -1,9 +1,10 @@
 import React from 'react';
 import i18n from 'meteor/universe:i18n';
 import { createRoot } from 'react-dom/client';
+import '../locales';
 import { Meteor } from 'meteor/meteor';
 import { App } from '../../ui/layouts/App';
-import getLang from '../../ui/utils/utils';
+import { getLang } from '../../api/utils';
 
 /** Startup the application by rendering the router. */
 Meteor.startup(() => {

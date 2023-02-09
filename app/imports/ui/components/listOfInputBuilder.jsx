@@ -11,37 +11,37 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 export const LIST_OF_INPUT_BUILDER = [
   {
     id: 'radioButtonInput',
-    name: i18n.__('component.inputs.radioButton'),
+    name: 'radioButton',
     icon: <RadioButtonCheckedIcon />,
   },
   {
     id: 'checkboxInput',
-    name: i18n.__('component.inputs.checkbox'),
+    name: 'checkbox',
     icon: <CheckBoxIcon />,
   },
   {
     id: 'selectInput',
-    name: i18n.__('component.inputs.select'),
+    name: 'select',
     icon: <KeyboardArrowDownIcon />,
   },
   {
     id: 'numberInput',
-    name: i18n.__('component.inputs.number'),
+    name: 'number',
     icon: <MoneyIcon />,
   },
   {
     id: 'textInput',
-    name: i18n.__('component.inputs.text'),
+    name: 'text',
     icon: <ShortTextIcon />,
   },
   {
     id: 'textArea',
-    name: i18n.__('component.inputs.textArea'),
+    name: 'textArea',
     icon: <NotesIcon />,
   },
   {
     id: 'dateInput',
-    name: i18n.__('component.inputs.date'),
+    name: 'date',
     icon: <CalendarMonthIcon />,
   },
 ];
