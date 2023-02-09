@@ -1,6 +1,7 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Outlet } from 'react-router-dom';
+import UserNotConnected from '../components/UserNotConnected';
 
 export const AuthContext = createContext();
 
@@ -13,11 +14,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ isAuthenticated }}>
-      {isAuthenticated ? (
-        <Outlet />
-      ) : (
-        <button onClick={() => Meteor.loginWithKeycloak()}>Veuillez vous connecter : AuthProvider</button>
-      )}
+      {isAuthenticated ? <Outlet /> : <UserNotConnected />}
     </AuthContext.Provider>
   );
 };
