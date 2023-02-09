@@ -3,6 +3,7 @@ import i18n from 'meteor/universe:i18n';
 import { Link } from 'react-router-dom';
 import { AppBar, Slide, useScrollTrigger } from '@mui/material';
 import { HeaderMenu } from './HeaderMenu';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const appBarStyle = {
   display: 'flex',
@@ -30,6 +31,7 @@ export const Header = () => {
           <h1 style={{ fontFamily: 'OdinRounded', color: '#372f84' }}>{i18n.__('component.header.title')}</h1>
         </Link>
         <HeaderMenu />
+        <LanguageSwitcher relative />
       </AppBar>
     </Slide>
   );

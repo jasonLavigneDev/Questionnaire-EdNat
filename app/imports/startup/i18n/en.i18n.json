@@ -1,0 +1,203 @@
+{
+    "api": {
+      "users": {
+        "labels": {
+          "username": "Nom d'utilisateur",
+          "firstName": "Prénom",
+          "lastName": "Nom",
+          "emails": "Adresse Électronique",
+          "emailAddress": "Adresse Électronique",
+          "emailVerified": "Adresse Vérifiée",
+          "createdAt": "Créé le",
+          "lastLogin": "Dernière connexion",
+          "profile": "Profil",
+          "services": "Services",
+          "heartbeat": "Heartbeat",
+          "structure": "Structure",
+          "primaryEmail": "Adresse électronique principale",
+          "language": "Langage Préféré",
+          "logoutType": "Méthode De Déconnexion",
+          "avatar": "Avatar"
+        },
+        "setLogoutType": {
+          "notPermitted": "Non autorisé"
+        },
+        "mustBeLoggedIn": "L'utilisateur doit être connecté"
+      },
+      "forms": {
+        "labels": {
+          "title": "Titre",
+          "desc": "Description",
+          "isModel": "Modèle",
+          "createdAt": "Créé le",
+          "owner": "Propriétaire",
+          "public": "Public",
+          "groups": "Groupes",
+          "components": "Composants",
+          "formAnswers": {
+            "answers": "Réponses",
+            "userId": "ID utilisateur",
+            "answer": "Réponse"
+          }, 
+          "component": {
+            "id": "ID composant",
+            "type": "Type de composant",
+            "title": "Titre du composant",
+            "choices": "Choix du composant"
+          }    
+        },
+        "createForm": {
+          "noUser": "Aucun utilisateur trouvé.",
+          "notLoggedIn": "L'utilisateur n'est pas connecté."
+        },
+        "deleteForm": {
+          "permissionDenied": "Permission refusée.",
+          "notOwner": "L'utilisateur courant n'est pas propriétaire du formulaire.",
+          "notFound": "Formulaire introuvable.",
+          "notExist": "Le formulaire spéficié n'existe pas."
+        }
+      },
+      "groups": {
+        "labels": {
+          "name": "Nom",
+          "slug": "Slug",
+          "description": "Description",
+          "content": "Description longue",
+          "active": "Actif",
+          "groupPadID": "ID de Pad du groupe",
+          "digest": "Digest",
+          "type": "Type",
+          "avatar": "Avatar",
+          "applications": "ID de l'application",
+          "owner": "Propriétaire",
+          "admins": "Administrateur",
+          "animators": "Animateurs",
+          "members": "Membres",
+          "candidates": "Candidats",
+          "numCandidates": "Nombre de candidats",
+          "plugins": "Plugins",
+          "articles": "Publications",
+          "meetingParams": "Paramètre de meeting"
+        },
+        "types": {
+          "open": "ouvert",
+          "moderated": "modéré",
+          "private": "réservé",
+          "automatic": "automatique"
+        }
+      }
+  
+    },
+    "page": {
+      "answerPage":{
+        "formNotFound": "Le formulaire n'existe pas"
+      },
+      "errorPage": {
+        "title": "Erreur",
+        "desc": "Une erreur s'est produite"
+      },
+      "formIntro": {
+        "goNext": "Passer à l'étape suivante"
+      },
+      "formPrevisualizer": {
+        "saveForm": "Enregistrer le résultat",
+        "updateForm": "Mettre à jour le formulaire"
+      },
+      "homePage": {
+        "login": "Veuillez vous connecter",
+        "newForm": "Nouveau questionnaire",
+        "formsList": "Forms list"
+      },
+      "resultPage": {
+        "noAnswers": "Il n'y a pas de réponses pour ce formulaire",
+        "goBack": "Retour",
+        "formAnswers": "Réponses au formulaire",
+        "answersByUser": "Voir les réponses par utilisateur",
+        "answersStats": "Voir les statistiques"
+      }
+    },
+    "component":{
+      "inputBuilder": {
+        "inputType": "Choisissez le type de question / réponse",
+        "inputOrder": "Organisez vos questions"
+      },
+      "inputChoice": {
+        "questionType": "Type de question"
+      },
+      "submitAnswerForm": {
+        "enterName": "Entrez votre nom",
+        "updateAnswers": "Mettre à jour les réponses",
+        "submitAnswers": "Soumettre ce formulaire complété"
+      },
+      "visualizer": {
+        "connect": "Veuillez vous connecter pour répondre a ce questionnaire"
+      },
+      "breadcrumb": {
+        "intro": "Introduction",
+        "components": "Composants",
+        "previsualization": "Prévisualisation"
+      },
+      "footer": {
+        "goBack": "Retour"
+      },
+      "header": {
+        "title": "Questionnaire"
+      },
+      "headerMenu": {
+        "login": "Se connecter",
+        "logout": "Se déconnecter"
+      },
+      "answerListDisplay": {
+        "answerAt": "Répondu le"
+      },
+      "componentBuilder": {
+        "errors": {
+          "noTitle": "Titre manquant",
+          "noOptions": "Options manquantes",
+          "notFound": "Le composant n'existe pas",
+          "noTitleOrOptions": "Le formulaire ne contient pas de titre ou de questions"
+        },
+        "questionTitle": "Entrez le titre de la question",
+        "inputChoice": "Entrez un choix de réponse",
+        "submit": "Valider",
+        "update": "Mettre à jour"
+      },
+      "formActionButton": {
+        "answer": "Répondre",
+        "editAnswers": "Modifier les réponses",
+        "editForm": "Modifier le formulaire",
+        "deleteForm": "Supprimer le formulaire",
+        "copyUrl": "Copier l'URL du formulaire"
+      },
+      "formInfoInputs": {
+        "formTitle": "Enter forms's title",
+        "formDesc": "Entrez la description du formulaire",
+        "formDescHelp": "La description est facultative",
+        "formPublic": "Formulaire public",
+        "formGroups": "Réservé aux groupes"
+      },
+      "inputs": {
+        "radioButton": "Bouton radio (choix unique)",
+        "checkbox": "Case à cocher (choix multiple)",
+        "select": "Liste déroulante",
+        "number": "Nombre",
+        "text": "Texte court",
+        "textArea": "Texte long",
+        "date": "Date"
+      },
+      "componentManager": {
+        "errors": {
+          "noQuestionBefore": "Déplacement impossible: il n'y a pas de question avant celle-ci.",
+          "noQuestionAfter": "Déplacement impossible: il n'y a pas de question après celle-ci."
+        }
+      },
+      "selectGroups": {
+        "noGroup": "Vous n'appartenez à aucun groupe",
+        "groupChoice": "Choix du groupe",
+        "addGroup": "Ajouter le groupe"
+      },
+      "statsDisplay": {
+        "numberOfAnswers": "Nombre de réponses: "
+      }
+    }
+  }
