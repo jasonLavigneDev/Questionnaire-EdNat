@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import React from 'react';
+import i18n from 'meteor/universe:i18n';
 import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import AnswerListDisplay from '../components/AnswerListDisplay';
@@ -77,14 +78,16 @@ export const ResultPage = () => {
     <>
       {hasNotAnswers() ? (
         <>
-          <p>Il n'y a pas de reponses</p>
-          <Button onClick={() => navigate('/')}>Retour </Button>
+          <p>{i18n.__('page.resultPage.noAnswers')}</p>
+          <Button onClick={() => navigate('/')}>{i18n.__('page.resultPage.goBack')}</Button>
         </>
       ) : (
         <>
-          <h1 style={{ textAlign: 'center' }}>Reponses du questionnaire : {formFromBDD.title}</h1>
+          <h1 style={{ textAlign: 'center' }}>
+            {i18n.__('page.resultPage.formAnswers')} : {formFromBDD.title}
+          </h1>
           <Button onClick={() => setStatMode(!statMode)}>
-            {statMode ? 'Voir les réponses par utilisateur' : 'Voir les Statistiques'}
+            {statMode ? i18n.__('page.resultPage.answersByUser') : i18n.__('page.resultPage.answersStats')}
           </Button>
           {statMode ? <GenerateChart statArray={statArray} /> : <AnswerListDisplay finalArray={finalArray} />}
         </>

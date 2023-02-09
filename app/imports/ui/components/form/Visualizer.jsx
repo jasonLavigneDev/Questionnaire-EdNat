@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import i18n from 'meteor/universe:i18n';
 import { FormContext } from '../../contexts/FormContext';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { ComponentBuilder } from '../ComponentBuilder';
@@ -31,7 +32,7 @@ export const Visualizer = ({ answerMode = false }) => {
     if (userAnswers) setAnswerForm(userAnswers);
   }, []);
 
-  if (!user && !currentForm.isPublic) return <p>Veuillez vous connecter pour répondre a ce questionnaire</p>;
+  if (!user && !currentForm.isPublic) return <p>{i18n.__('component.visualizer.connect')}</p>;
 
   return (
     <div>

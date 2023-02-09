@@ -1,5 +1,6 @@
 import { Divider, IconButton } from '@mui/material';
 import React from 'react';
+import { i18n } from 'meteor/universe:i18n';
 import { useNavigate } from 'react-router-dom';
 import { copyUrlToClipBoard, hasNotAnswers } from '../utils/utils';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -14,7 +15,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
   return (
     <div style={{ flexDirection: 'column', flex: 1 }}>
       <IconButton
-        title="Répondre"
+        title={i18n.__('component.formActionButton.answer')}
         sx={{ color: 'lightGreen' }}
         disabled={hasNotAnswers(currentForm)}
         onClick={() => navigate(`/answers/${currentForm._id}`)}
@@ -22,23 +23,30 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
         <ListAltIcon />
       </IconButton>
       <IconButton
-        title="Editez vos réponses"
+        title={i18n.__('component.formActionButton.editAnswers')}
         sx={{ color: 'gold' }}
         onClick={() => navigate(`/visualizer/${currentForm._id}`)}
       >
         <EditIcon />
       </IconButton>
-      <IconButton title="Copier l'URL" onClick={() => copyUrlToClipBoard(currentForm._id)}>
+      <IconButton
+        title={i18n.__('component.formActionButton.copyUrl')}
+        onClick={() => copyUrlToClipBoard(currentForm._id)}
+      >
         <ContentCopyIcon />
       </IconButton>
       <IconButton
-        title="Editer le formulaire"
+        title={i18n.__('component.formActionButton.editForm')}
         sx={{ color: 'lightBlue' }}
         onClick={() => navigate(`/builder/intro/${currentForm._id}`)}
       >
         <DesignServicesIcon />
       </IconButton>
-      <IconButton title="Supprimer le formulaire" sx={{ color: 'salmon' }} onClick={() => deleteForm(currentForm)}>
+      <IconButton
+        title={i18n.__('component.formActionButton.deleteForm')}
+        sx={{ color: 'salmon' }}
+        onClick={() => deleteForm(currentForm)}
+      >
         <DeleteIcon />
       </IconButton>
       <Divider />

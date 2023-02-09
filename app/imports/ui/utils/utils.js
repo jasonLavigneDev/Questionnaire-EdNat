@@ -35,3 +35,13 @@ export const copyUrlToClipBoard = (id) => {
   console.log('url copy to ClipBoard', url);
   return navigator.clipboard.writeText(url);
 };
+
+export default function getLang() {
+  return (
+    (navigator.languages && navigator.languages[0]) ||
+    navigator.language ||
+    navigator.browserLanguage ||
+    navigator.userLanguage ||
+    'en-US'
+  );
+}

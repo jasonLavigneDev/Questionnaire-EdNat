@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
+import i18n from 'meteor/universe:i18n';
 import { useNavigate } from 'react-router-dom';
 
 import { BottomNavigation, Button } from '@mui/material';
-
 import { FormContext } from '../../contexts/FormContext';
 
 export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
@@ -27,7 +27,7 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
           {urlOfPrevStep ? (
             <>
               <Button variant="contained" sx={{ marginRight: '5vw' }} onClick={() => navigate(`/${urlOfPrevStep}`)}>
-                Retour
+                {i18n.__('component.footer.goBack')}
               </Button>
               <Button variant="contained" disabled={isDisable} onClick={() => nextStep()}>
                 {text}

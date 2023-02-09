@@ -1,5 +1,6 @@
 import { Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useContext, useState } from 'react';
+import { i18n } from 'meteor/universe:i18n';
 import { FormContext } from '../contexts/FormContext';
 
 export default function SelectGroups({ userGroups }) {
@@ -24,12 +25,12 @@ export default function SelectGroups({ userGroups }) {
 
   const haveNotGroup = !userGroups || userGroups.length <= 0;
 
-  if (haveNotGroup) return <p>Vous n'appartenez à aucun groupe</p>;
+  if (haveNotGroup) return <p>{i18n.__('component.selectGroups.noGroup')}</p>;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <FormControl>
-        <InputLabel id="selectInput-Groups">Choix du groupe</InputLabel>
+        <InputLabel id="selectInput-Groups">{i18n.__('component.selectGroups.groupChoice')}</InputLabel>
         <Select
           labelId="selectInput-Groups"
           value={groupSelected.name}
@@ -44,7 +45,7 @@ export default function SelectGroups({ userGroups }) {
           ))}
         </Select>
       </FormControl>
-      <Button onClick={() => addGroup()}>Ajouter le groupe</Button>
+      <Button onClick={() => addGroup()}>{i18n.__('component.selectGroups.addGroup')}</Button>
     </div>
   );
 }

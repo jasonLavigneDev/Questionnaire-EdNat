@@ -1,7 +1,12 @@
 import React, { useContext, useState } from 'react';
+<<<<<<< HEAD
 
 import { Paper, Tooltip } from '@mui/material';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
+=======
+import i18n from 'meteor/universe:i18n';
+import { Paper } from '@mui/material';
+>>>>>>> 47e731b (add translation for ui)
 
 import { FormContext } from '../../contexts/FormContext';
 import { InputChoice } from './InputChoice';
@@ -39,7 +44,7 @@ export const InputBuilder = () => {
     <>
       <div style={{ display: 'flex', flexDirection: 'row', maxHeight: '100%' }}>
         <div style={{ display: 'flex', flexDirection: 'column', width: '50vw' }}>
-          <h3>Choisissez le type de question / réponse</h3>
+          <h3>{i18n.__('component.inputBuilder.inputType')}</h3>
           {editMode ? (
             <ComponentBuilder type={componentToEdit.type} componentToEdit={componentToEdit} setEditMode={setEditMode} />
           ) : (
@@ -47,7 +52,7 @@ export const InputBuilder = () => {
           )}
         </div>
         <div className={class1}>
-          <h3>Organisez vos questions</h3>
+          <h3>{i18n.__('component.inputBuilder.inputOrder')}</h3>
           <div className={class2}>
             {currentForm.components.map((currentComponent, index) => (
               <Paper sx={{ display: 'flex', width: '28vw', marginBottom: 1, border: '1px black solid' }}>

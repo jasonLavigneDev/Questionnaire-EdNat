@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import i18n from 'meteor/universe:i18n';
 import { FormControl, Select, InputLabel, MenuItem, OutlinedInput, Divider } from '@mui/material';
 import { FormContext } from '../../contexts/FormContext';
 import { ComponentBuilder } from '../ComponentBuilder';
@@ -15,11 +16,11 @@ export const InputChoice = () => {
   return (
     <div>
       <FormControl fullWidth>
-        <InputLabel id="selectInput-title">Type de question</InputLabel>
+        <InputLabel id="selectInput-title">{i18n.__('component.inputChoice.questionType')}</InputLabel>
         <Select
           labelId="selectInput-title"
           value={inputType}
-          input={<OutlinedInput label="Type de question" />}
+          input={<OutlinedInput label={i18n.__('component.inputChoice.questionType')} />}
           onChange={(event) => {
             setInputType(event.target.value);
           }}

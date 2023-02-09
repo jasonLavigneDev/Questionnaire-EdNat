@@ -1,5 +1,6 @@
-import { Button, FormControlLabel, Checkbox } from '@mui/material';
-import React, { useContext, useState, useEffect } from 'react';
+import { Button } from '@mui/material';
+import i18n from 'meteor/universe:i18n';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { UserContext } from '../../contexts/UserContext';
@@ -62,7 +63,7 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
             name="yourName"
             id="yourName"
             value={publicName}
-            placeholder={'entrez votre nom'}
+            placeholder={i18n.__('component.submitAnswerForm.enterName')}
             onChange={(e) => setPublicName(e.target.value)}
           />
           <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -72,7 +73,7 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
             />
           </div>
           <Button disabled={!publicName || !isCheckedRgpd || !answersAreComplete} onClick={submitAnswerForm}>
-            Soumettre ce formulaire complété
+            {i18n.__('component.submitAnswerForm.submitAnswers')}
           </Button>
         </div>
       ) : (
@@ -85,7 +86,9 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Button onClick={submitAnswerForm} disabled={!isCheckedRgpd || !answersAreComplete}>
-              {hasAlreadyRespond(user, currentForm) ? 'Mettre à jour les réponses' : 'Soumettre ce formulaire complété'}
+              {hasAlreadyRespond(user, currentForm)
+                ? i18n.__('component.submitAnswerForm.updateAnswers')
+                : i18n.__('component.submitAnswerForm.submitAnswers')}
             </Button>
           </div>
         </>
