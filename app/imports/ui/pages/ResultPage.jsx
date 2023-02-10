@@ -29,12 +29,8 @@ export const ResultPage = () => {
         .filter((answer) => answer.questionId === questionId)
         .map((answer) => answer.answer);
 
-      if (response[0] instanceof Array) {
-        response = response[0].join(' - ');
-      }
-
       questionObj.responses.push({
-        response,
+        response: response[0],
         userName: userAnswer.userId,
         createdAt: userAnswer.createdAt.toLocaleDateString(),
       });
@@ -50,11 +46,11 @@ export const ResultPage = () => {
     if (CanHaveStat(question.questionType)) {
       const stat = [];
       question.responses.map((response) => {
-        const index = stat.findIndex((res) => response.response[0] === res.answer);
+        const index = stat.findIndex((res) => response.response === res.answer);
         if (index !== -1) {
           stat[index].count++;
         } else {
-          stat.push({ answer: response.response[0], count: 1 });
+          stat.push({ answer: response.response, count: 1 });
         }
       });
       statArray.push({ questionTitle: question.questionTitle, questionId: question.questionId, stat: stat });

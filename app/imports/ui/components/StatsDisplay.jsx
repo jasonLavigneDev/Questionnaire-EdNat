@@ -64,7 +64,7 @@ export default function StatsDisplay({ statArray }) {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {question.stat.map((stat) => (
                 <p>
-                  {stat.answer}: {(stat.count / getAllCountStat(question.stat)) * 100}%
+                  {stat.answer}: {((stat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%
                 </p>
               ))}
             </div>
