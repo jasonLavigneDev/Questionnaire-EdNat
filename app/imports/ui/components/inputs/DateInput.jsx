@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { InputLabel, TextField, Paper } from '@mui/material';
 import { AnswerContext } from '../../contexts/AnswerContext';
 
-export const DateInput = ({ title, answerMode, questionId, answer = {} }) => {
+export const DateInput = ({ title, answerMode, questionId, answer = {}, answerRequired }) => {
   const { addAnswers } = useContext(AnswerContext);
 
   const validateAnswer = (event) => {
@@ -17,7 +17,7 @@ export const DateInput = ({ title, answerMode, questionId, answer = {} }) => {
         sx={{ width: '30vw' }}
         type="date"
         defaultValue={answer.answer}
-        required
+        required={answerRequired}
         onBlur={(e) => validateAnswer(e)}
       />
     </Paper>

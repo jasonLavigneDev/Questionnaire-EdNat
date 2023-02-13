@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { InputLabel, Paper, TextField } from '@mui/material';
 import { AnswerContext } from '../../contexts/AnswerContext';
 
-export const NumberInput = ({ title, answerMode, questionId, answer = {} }) => {
+export const NumberInput = ({ title, answerMode, questionId, answer = {}, answerRequired }) => {
   const { addAnswers } = useContext(AnswerContext);
 
   const validateAnswer = (event) => {
@@ -19,6 +19,7 @@ export const NumberInput = ({ title, answerMode, questionId, answer = {} }) => {
         defaultValue={answer.answer}
         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
         onBlur={(e) => validateAnswer(e)}
+        required={answerRequired}
       />
     </Paper>
   );

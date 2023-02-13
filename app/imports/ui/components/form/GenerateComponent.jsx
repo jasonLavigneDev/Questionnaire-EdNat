@@ -18,6 +18,7 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             answerMode={answerMode}
             questionId={component.id}
             answer={getAnswer(component.id)}
+            answerRequired={component.answerRequired}
           />
         );
       case 'selectInput':
@@ -28,6 +29,7 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             answerMode={answerMode}
             questionId={component.id}
             answer={getAnswer(component.id)}
+            answerRequired={component.answerRequired}
           />
         );
       case 'radioButtonInput':
@@ -38,6 +40,7 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             answerMode={answerMode}
             questionId={component.id}
             answer={getAnswer(component.id)}
+            answerRequired={component.answerRequired}
           />
         );
       case 'dateInput':
@@ -47,6 +50,7 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             answerMode={answerMode}
             questionId={component.id}
             answer={getAnswer(component.id)}
+            answerRequired={component.answerRequired}
           />
         );
       case 'numberInput':
@@ -56,6 +60,7 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             answerMode={answerMode}
             questionId={component.id}
             answer={getAnswer(component.id)}
+            answerRequired={component.answerRequired}
           />
         );
       case 'textInput':
@@ -65,6 +70,7 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             answerMode={answerMode}
             questionId={component.id}
             answer={getAnswer(component.id)}
+            answerRequired={component.answerRequired}
           />
         );
       case 'textArea':
@@ -74,6 +80,7 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             answerMode={answerMode}
             questionId={component.id}
             answer={getAnswer(component.id)}
+            answerRequired={component.answerRequired}
           />
         );
     }

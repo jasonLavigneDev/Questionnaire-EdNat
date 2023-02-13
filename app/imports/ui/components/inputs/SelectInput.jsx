@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { FormControl, InputLabel, Select, MenuItem, Paper } from '@mui/material';
 import { AnswerContext } from '../../contexts/AnswerContext';
 
-export const SelectInput = ({ title, choices, answerMode, questionId, answer = {} }) => {
+export const SelectInput = ({ title, choices, answerMode, questionId, answer = {}, answerRequired }) => {
   const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
   const { addAnswers } = useContext(AnswerContext);
 
