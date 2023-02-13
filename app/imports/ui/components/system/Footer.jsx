@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { BottomNavigation, Button } from '@mui/material';
+import { BottomNavigation, Button, FormControlLabel, Checkbox } from '@mui/material';
 
 import { FormContext } from '../../contexts/FormContext';
 
@@ -15,13 +15,23 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
 
   const navigate = useNavigate();
 
-  const { currentForm } = useContext(FormContext);
+  const { currentForm, activeStep } = useContext(FormContext);
+  const [isCheckedRgpd, setIsCheckedRgpd] = useState(false);
 
-  const isDisable = !currentForm.title || currentForm.components.length === 0;
+  const isDisable =
+    !currentForm.title || currentForm.components.length === 0 || (activeStep === 2 && isCheckedRgpd === false);
   const isTitleMissing = !currentForm.title;
 
   return (
     <div style={{ position: 'fixed', bottom: 30, left: 0, right: 0 }}>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {activeStep === 2 && (
+          <FormControlLabel
+            control={<Checkbox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
+            label="Accept RGPD"
+          />
+        )}
+      </div>
       <BottomNavigation sx={bottomBarStyle} showLabels>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           {urlOfPrevStep ? (

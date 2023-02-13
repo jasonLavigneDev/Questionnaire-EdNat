@@ -6,7 +6,6 @@ const initialState = {
   components: [],
   groups: [],
   isPublic: false,
-  acceptRgpd: false,
 };
 
 export const FormContext = createContext(initialState);
@@ -22,6 +21,7 @@ export const FormProvider = ({ children }) => {
   const resetFormContext = () => {
     setCurrentForm(initialState);
     setActiveStep(0);
+    setAcceptRgpd(false);
   };
 
   console.log('currentForm Context', currentForm);
