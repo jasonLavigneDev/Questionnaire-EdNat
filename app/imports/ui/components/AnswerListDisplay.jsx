@@ -6,16 +6,13 @@ export default function AnswerListDisplay({ finalArray }) {
 
   finalArray.map((questionObj) => {
     questionObj.responses?.map((res) => {
-      const obj = {
-        questionTitle: questionObj.questionTitle,
-        response: res.response,
-        createdAt: res.createdAt,
-      };
+      var obj = {};
+      var key = questionObj.questionTitle;
+
+      obj[key] = res.response;
       csvArray.push(obj);
     });
   });
-
-  console.log(csvArray);
 
   return (
     <>
