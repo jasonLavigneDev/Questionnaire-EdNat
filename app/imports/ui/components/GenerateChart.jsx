@@ -1,6 +1,6 @@
 import React from 'react';
-import TestBar from './TestBar';
-import TestPie from './TestPie';
+import StatsBar from './StatsBar';
+import StatsPie from './StatsPie';
 
 export default function GenerateChart({ statArray }) {
   console.log('statArray', statArray);
@@ -8,9 +8,13 @@ export default function GenerateChart({ statArray }) {
     switch (question.questionType) {
       case 'radioButtonInput':
       case 'selectInput':
-        return <TestPie stat={question.stat} />;
+      case 'numberInput':
+      case 'textInput':
+      case 'textArea':
+      case 'dateInput':
+        return <StatsPie question={question} />;
       case 'checkboxInput':
-        return <TestBar question={question} />;
+        return <StatsBar question={question} />;
       default:
         return <p>Default value</p>;
     }

@@ -2,8 +2,10 @@ import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
-export default function TestPie({ stat }) {
+export default function StatsPie({ question }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
+
+  console.log('question', question);
 
   const getAllCountStat = (stats) => {
     let cpt = 0;
@@ -51,6 +53,13 @@ export default function TestPie({ stat }) {
     return chartData;
   };
 
+  const choicesStats = {};
+
+  question.questionChoices.forEach((key) => (choicesStats[key] = 0));
+  question.stat.forEach((element) => {
+    choicesStats[element.answer]++;
+  });
+
   return (
     <div
       style={{
@@ -62,13 +71,13 @@ export default function TestPie({ stat }) {
       }}
     >
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {stat.map((oneStat) => (
+        {question.stat.map((oneStat) => (
           <p>
-            {oneStat.answer}: {((oneStat.count / getAllCountStat(stat)) * 100).toFixed(2)}%
+            {oneStat.answer}: {((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%
           </p>
         ))}
       </div>
-      <Pie data={generateChartData(stat)} />
+      <Pie data={generateChartData(question.stat)} />
     </div>
   );
 }
