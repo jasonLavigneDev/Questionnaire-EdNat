@@ -2,6 +2,21 @@ import React from 'react';
 import { CSVLink } from 'react-csv';
 
 export default function AnswerListDisplay({ finalArray }) {
+  const csvArray = [];
+
+  finalArray.map((questionObj) => {
+    questionObj.responses?.map((res) => {
+      const obj = {
+        questionTitle: questionObj.questionTitle,
+        response: res.response,
+        createdAt: res.createdAt,
+      };
+      csvArray.push(obj);
+    });
+  });
+
+  console.log(csvArray);
+
   return (
     <>
       {finalArray.map((question) => (
@@ -19,7 +34,7 @@ export default function AnswerListDisplay({ finalArray }) {
           ))}
         </div>
       ))}
-      <CSVLink data={finalArray} filename={'my-file.csv'} className="btn btn-primary" target="_blank">
+      <CSVLink data={csvArray} filename={'my-file.csv'} className="btn btn-primary" target="_blank">
         Download me
       </CSVLink>
       ;
