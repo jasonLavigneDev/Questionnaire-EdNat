@@ -39,7 +39,7 @@ export default function AnswerListDisplay({ finalArray }) {
           ))}
         </div>
       ))}
-      <CSVLink data={statArray} filename={'my-file.csv'} className="btn btn-primary" target="_blank">
+      <CSVLink data={csvArray} filename={'my-file.csv'} className="btn btn-primary" target="_blank">
         Download me
       </CSVLink>
       ;
