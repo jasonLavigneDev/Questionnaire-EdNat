@@ -4,15 +4,23 @@ import { CSVLink } from 'react-csv';
 export default function AnswerListDisplay({ finalArray }) {
   const csvArray = [];
 
-  finalArray.map((questionObj) => {
-    questionObj.responses?.map((res) => {
-      var obj = {};
-      var key = questionObj.questionTitle;
-
-      obj[key] = res.response;
-      csvArray.push(obj);
+  finalArray.map((question) => {
+    let key = question.questionTitle;
+    question.responses.map((response) => {
+      const index = csvArray.findIndex((answer) => answer.user === response.userName);
+      if (index === -1) {
+        let newObj = { user: response.userName };
+        newObj[key] = response.response[0];
+        csvArray.push(newObj);
+      } else {
+        if (csvArray[index]['user'] === response.userName) {
+          csvArray[index][key] = response.response[0];
+        }
+      }
     });
   });
+
+  csvArray.forEach((obj) => delete obj.user);
 
   return (
     <>
@@ -31,7 +39,7 @@ export default function AnswerListDisplay({ finalArray }) {
           ))}
         </div>
       ))}
-      <CSVLink data={csvArray} filename={'my-file.csv'} className="btn btn-primary" target="_blank">
+      <CSVLink data={statArray} filename={'my-file.csv'} className="btn btn-primary" target="_blank">
         Download me
       </CSVLink>
       ;
