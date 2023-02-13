@@ -36,6 +36,10 @@ export const Component = new SimpleSchema({
     optional: true,
   },
   'choices.$': { type: String },
+  answerRequired: {
+    type: Boolean,
+    defaultValue: false,
+  },
 });
 
 export const Answers = new SimpleSchema({

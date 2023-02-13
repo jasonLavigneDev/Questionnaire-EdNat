@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel } from '@mui/material';
 import { AnswerContext } from '../../contexts/AnswerContext';
 
-export const CheckBoxInput = ({ title, choices, required = false, answerMode, questionId, answer = {} }) => {
+export const CheckBoxInput = ({ title, choices, answerMode, questionId, answer = {} }) => {
   const [answers, setAnswers] = useState([]);
 
   const { addAnswers } = useContext(AnswerContext);
@@ -58,7 +58,6 @@ export const CheckBoxInput = ({ title, choices, required = false, answerMode, qu
                   />
                 }
                 label={`${choice}`}
-                required={required}
               />
             </div>
           ))}
