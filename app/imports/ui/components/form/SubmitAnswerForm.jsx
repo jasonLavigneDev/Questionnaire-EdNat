@@ -1,5 +1,5 @@
-import { Button } from '@mui/material';
-import React, { useContext } from 'react';
+import { Button, FormControlLabel, Checkbox } from '@mui/material';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { UserContext } from '../../contexts/UserContext';
@@ -7,7 +7,7 @@ import { hasAlreadyRespond } from '../../utils/utils';
 
 export default function SubmitAnswerForm({ publicName, setPublicName, currentForm }) {
   const { user } = useContext(UserContext);
-
+  const [isCheckedRgpd, setIsCheckedRgpd] = useState(false);
   const { answerForm, setAnswerForm } = useContext(AnswerContext);
 
   const navigate = useNavigate();
@@ -38,14 +38,30 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
             placeholder={'entrez votre nom'}
             onChange={(e) => setPublicName(e.target.value)}
           />
-          <Button disabled={!publicName} onClick={submitAnswerForm}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <FormControlLabel
+              control={<Checkbox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
+              label="Accept RGPD"
+            />
+          </div>
+          <Button disabled={!publicName || !isCheckedRgpd} onClick={submitAnswerForm}>
             Soumettre ce formulaire complété
           </Button>
         </div>
       ) : (
-        <Button onClick={submitAnswerForm}>
-          {hasAlreadyRespond(user, currentForm) ? 'Mettre à jour les réponses' : 'Soumettre ce formulaire complété'}
-        </Button>
+        <>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <FormControlLabel
+              control={<Checkbox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
+              label="Accept RGPD"
+            />
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button onClick={submitAnswerForm} disabled={!isCheckedRgpd}>
+              {hasAlreadyRespond(user, currentForm) ? 'Mettre à jour les réponses' : 'Soumettre ce formulaire complété'}
+            </Button>
+          </div>
+        </>
       )}
     </div>
   );

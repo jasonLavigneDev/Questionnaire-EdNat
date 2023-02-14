@@ -15,9 +15,10 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
 
   const navigate = useNavigate();
 
-  const { currentForm } = useContext(FormContext);
+  const { currentForm, activeStep, acceptRgpd } = useContext(FormContext);
 
-  const isDisable = !currentForm.title || currentForm.components.length === 0;
+  const isDisable =
+    !currentForm.title || currentForm.components.length === 0 || (activeStep === 2 && acceptRgpd === false);
   const isTitleMissing = !currentForm.title;
 
   return (

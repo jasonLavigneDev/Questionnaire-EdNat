@@ -7,9 +7,10 @@ import { useLoaderData } from 'react-router-dom';
 import { DisplayGroups } from '../components/DisplayGroups';
 import SelectGroups from '../components/SelectGroups';
 import FormInfoInputs from '../components/FormInfoInputs';
+import ModalRgpd from '../components/system/ModalRgpd';
 
 export const FormIntro = () => {
-  const { isFormGroup, setCurrentForm } = useContext(FormContext);
+  const { isFormGroup, setCurrentForm, acceptRgpd } = useContext(FormContext);
   const { formFromBDD, userGroups } = useLoaderData();
   const navigate = useNavigate();
   const navigateTo = () => {
@@ -22,17 +23,23 @@ export const FormIntro = () => {
 
   return (
     <>
-      <Breadcrumb />
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <FormInfoInputs isFormGroup={isFormGroup} />
-        {isFormGroup && (
-          <>
-            <SelectGroups userGroups={userGroups} />
-            <DisplayGroups userGroups={userGroups} />
-          </>
-        )}
-      </div>
-      <Footer text="Passer a l etape suivante" nextStep={navigateTo} />
+      {acceptRgpd ? (
+        <>
+          <Breadcrumb />
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <FormInfoInputs isFormGroup={isFormGroup} />
+            {isFormGroup && (
+              <>
+                <SelectGroups userGroups={userGroups} />
+                <DisplayGroups userGroups={userGroups} />
+              </>
+            )}
+          </div>
+          <Footer text="Passer a l etape suivante" nextStep={navigateTo} />
+        </>
+      ) : (
+        <ModalRgpd />
+      )}
     </>
   );
 };
