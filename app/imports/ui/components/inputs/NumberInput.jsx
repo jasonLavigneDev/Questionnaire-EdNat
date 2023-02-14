@@ -1,26 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
-import { InputLabel, Paper, TextField } from '@mui/material';
+import { Paper, TextField, FormControl, FormLabel } from '@mui/material';
 import { AnswerContext } from '../../contexts/AnswerContext';
 
 export const NumberInput = ({ title, answerMode, questionId, answer = {}, answerRequired }) => {
   const { addAnswers } = useContext(AnswerContext);
+  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
 
   const validateAnswer = (event) => {
+    setCurrentAnswer(event.target.value);
     if (answerMode) addAnswers(questionId, event.target.value);
   };
 
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <InputLabel id="numberInput-title">{title}</InputLabel>
-      <TextField
-        type="number"
-        sx={{ width: '60%' }}
-        defaultValue={answer.answer}
-        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-        onBlur={(e) => validateAnswer(e)}
-        required={answerRequired}
-      />
+      <FormControl required={answerRequired}>
+        <FormLabel id="numberInput-title">{title}</FormLabel>
+        <TextField
+          type="number"
+          sx={{ width: '60%' }}
+          defaultValue={answer.answer}
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+          onBlur={(e) => validateAnswer(e)}
+          error={answerRequired && !!!currentAnswer}
+        />
+      </FormControl>
     </Paper>
   );
 };

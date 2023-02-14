@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel, Paper } from '@mui/material';
 import { AnswerContext } from '../../contexts/AnswerContext';
 
 export const CheckBoxInput = ({ title, choices, answerMode, questionId, answer = {}, answerRequired }) => {
   const [answers, setAnswers] = useState([]);
+  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
 
   const { addAnswers } = useContext(AnswerContext);
 
@@ -13,6 +14,7 @@ export const CheckBoxInput = ({ title, choices, answerMode, questionId, answer =
   };
 
   const addCheckedAnswers = (event) => {
+    setCurrentAnswer(event.target.value);
     const index = getIndex(event.target.name);
 
     if (index === -1) {
@@ -44,8 +46,12 @@ export const CheckBoxInput = ({ title, choices, answerMode, questionId, answer =
   }, []);
 
   return (
-    <div>
-      <FormControl required={answerRequired} onChange={() => validateAnswer()}>
+    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
+      <FormControl
+        required={answerRequired}
+        error={answerRequired && !!!currentAnswer}
+        onChange={() => validateAnswer()}
+      >
         <FormLabel>{title}</FormLabel>
         <FormGroup>
           {choices.map((choice) => (
@@ -64,6 +70,6 @@ export const CheckBoxInput = ({ title, choices, answerMode, questionId, answer =
           ))}
         </FormGroup>
       </FormControl>
-    </div>
+    </Paper>
   );
 };
