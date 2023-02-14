@@ -18,7 +18,7 @@ export const RadioInput = ({ title, choices, answerMode, questionId, answer = {}
         <RadioGroup defaultValue={answer.answer} name="radio-buttons-group">
           {choices.map((choice) => (
             <div key={uuidv4()}>
-              <FormControlLabel value={choice} control={<Radio />} label={choice} />
+              <FormControlLabel value={choice} control={<Radio />} label={choice} placeholder={'test'} />
             </div>
           ))}
         </RadioGroup>

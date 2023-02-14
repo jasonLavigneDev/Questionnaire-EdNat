@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import AnswerListDisplay from '../components/AnswerListDisplay';
-import StatsDisplay from '../components/StatsDisplay';
+import GenerateChart from '../components/GenerateChart';
 
 export const ResultPage = () => {
   const formFromBDD = useLoaderData();
@@ -29,12 +29,8 @@ export const ResultPage = () => {
         .filter((answer) => answer.questionId === questionId)
         .map((answer) => answer.answer);
 
-      if (response[0] instanceof Array) {
-        response = response[0].join(' - ');
-      }
-
       questionObj.responses.push({
-        response,
+        response: response[0],
         userName: userAnswer.userId,
         createdAt: userAnswer.createdAt.toLocaleDateString(),
       });
@@ -50,14 +46,26 @@ export const ResultPage = () => {
     if (CanHaveStat(question.questionType)) {
       const stat = [];
       question.responses.map((response) => {
-        const index = stat.findIndex((res) => response.response[0] === res.answer);
+        const index = stat.findIndex((res) => response.response === res.answer);
         if (index !== -1) {
           stat[index].count++;
         } else {
-          stat.push({ answer: response.response[0], count: 1 });
+          stat.push({ answer: response.response, count: 1 });
         }
       });
-      statArray.push({ questionTitle: question.questionTitle, questionId: question.questionId, stat: stat });
+
+      let choices = [];
+      if (question.questionType === 'checkboxInput') {
+        choices = formFromBDD.components.filter((component) => component.id === question.questionId)[0].choices;
+      }
+
+      statArray.push({
+        questionTitle: question.questionTitle,
+        questionId: question.questionId,
+        questionType: question.questionType,
+        stat: stat,
+        questionChoices: choices,
+      });
     }
   });
   const hasNotAnswers = () => {
@@ -78,7 +86,7 @@ export const ResultPage = () => {
           <Button onClick={() => setStatMode(!statMode)}>
             {statMode ? 'Voir les réponses par utilisateur' : 'Voir les Statistiques'}
           </Button>
-          {statMode ? <StatsDisplay statArray={statArray} /> : <AnswerListDisplay finalArray={finalArray} />}
+          {statMode ? <GenerateChart statArray={statArray} /> : <AnswerListDisplay finalArray={finalArray} />}
         </>
       )}
     </>
