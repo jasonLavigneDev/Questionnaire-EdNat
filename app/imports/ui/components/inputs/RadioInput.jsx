@@ -1,27 +1,25 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
 import { FormLabel, FormControl, FormControlLabel, RadioGroup, Radio, Paper } from '@mui/material';
-import { AnswerContext } from '../../contexts/AnswerContext';
+import { addAnswers } from '../../redux/slices/answerFormSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const RadioInput = ({ title, choices, answerMode, questionId, answer = {}, answerRequired }) => {
-  const { addAnswers } = useContext(AnswerContext);
-  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
+export const RadioInput = ({ title, choices, answerMode, questionId, answerRequired }) => {
+  console.log('answerRequired', answerRequired);
+  const dispatch = useDispatch();
+  const inputAnswer = useSelector((state) =>
+    state.answerForm.answers.find((answer) => answer.questionId === questionId),
+  );
 
   const validateAnswer = (event) => {
-    setCurrentAnswer(event.target.value);
-    if (answerMode) addAnswers(questionId, event.target.value);
+    if (answerMode) dispatch(addAnswers({ questionId, value: event.target.value }));
   };
 
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <FormControl
-        required={answerRequired}
-        onChange={(e) => validateAnswer(e)}
-        error={answerRequired && !!!currentAnswer}
-      >
+      <FormControl required={answerRequired} onChange={(e) => validateAnswer(e)} error={answerRequired && !inputAnswer}>
         <FormLabel>{title}</FormLabel>
-        <RadioGroup defaultValue={answer.answer} name="radio-buttons-group">
+        <RadioGroup defaultValue={inputAnswer?.answer ?? ''} name="radio-buttons-group">
           {choices.map((choice) => (
             <div key={uuidv4()}>
               <FormControlLabel value={choice} control={<Radio />} label={choice} placeholder={'test'} />

@@ -11,22 +11,36 @@ import { DisplayGroups } from '../components/DisplayGroups';
 import SelectGroups from '../components/SelectGroups';
 import FormInfoInputs from '../components/FormInfoInputs';
 import ModalRgpd from '../components/system/ModalRgpd';
-import { hasNotAnswers } from '../utils/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { fillForm } from '../redux/slices/formSlice';
 
 export const FormIntro = () => {
-  const { isFormGroup, setCurrentForm, acceptRgpd } = useContext(FormContext);
+  const { acceptRgpd } = useContext(FormContext);
   const { formFromBDD, userGroups } = useLoaderData();
   const navigate = useNavigate();
   const navigateTo = () => {
     navigate(`/builder/components`);
   };
+  const dispatch = useDispatch();
+  const isFormGroup = useSelector((state) => state.form.isForGroup);
 
   useEffect(() => {
     if (formFromBDD) {
-      if (formFromBDD.active || !hasNotAnswers(formFromBDD)) {
-        return navigate(`/`);
-      }
-      setCurrentForm(formFromBDD);
+      const { title, desc, components, groups, _id, isPublic, formAnswers } = formFromBDD;
+      const onlyGroup = !!formFromBDD.groups.length;
+
+      const fieldForPopulateState = {
+        title,
+        desc,
+        components,
+        groups,
+        isPublic,
+        formId: _id,
+        formAnswers,
+        onlyGroup,
+      };
+
+      dispatch(fillForm(fieldForPopulateState));
     }
   }, []);
 
@@ -37,7 +51,7 @@ export const FormIntro = () => {
           <Breadcrumb />
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Paper style={{ display: 'flex', flexDirection: 'column', padding: 20, width: '80%' }}>
-              <FormInfoInputs isFormGroup={isFormGroup} />
+              <FormInfoInputs />
               {isFormGroup && (
                 <>
                   <SelectGroups userGroups={userGroups} />

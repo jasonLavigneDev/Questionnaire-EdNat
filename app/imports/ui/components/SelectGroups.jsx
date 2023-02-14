@@ -1,14 +1,16 @@
 import { Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
-import { FormContext } from '../contexts/FormContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { addGroups } from '../redux/slices/formSlice';
 
 export default function SelectGroups({ userGroups }) {
   const [groupSelected, setGroupSelected] = useState({});
-  const { currentForm, setCurrentForm } = useContext(FormContext);
+  const dispatch = useDispatch();
+  const form = useSelector((state) => state.form);
 
   const displayGroupsNotSelected = () => {
-    return userGroups.filter((group) => currentForm.groups.findIndex((groupId) => groupId === group._id) === -1);
+    return userGroups.filter((group) => form.groups.findIndex((groupId) => groupId === group._id) === -1);
   };
 
   const selectGroup = (value) => {
@@ -16,9 +18,9 @@ export default function SelectGroups({ userGroups }) {
     if (index !== -1) return setGroupSelected(userGroups[index]);
   };
 
-  const addGroup = () => {
+  const addGroupToForm = () => {
     if (groupSelected) {
-      setCurrentForm({ ...currentForm, groups: [...currentForm.groups, groupSelected._id] });
+      dispatch(addGroups(groupSelected._id));
       setGroupSelected({});
     }
   };
@@ -46,7 +48,7 @@ export default function SelectGroups({ userGroups }) {
           ))}
         </Select>
       </FormControl>
-      <Button onClick={() => addGroup()}>{i18n.__('component.selectGroups.addGroup')}</Button>
+      <Button onClick={() => addGroupToForm()}>{i18n.__('component.selectGroups.addGroup')}</Button>
     </div>
   );
 }

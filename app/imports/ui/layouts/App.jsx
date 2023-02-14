@@ -10,7 +10,6 @@ import { AnswerPage, loaderVisualizer } from '../pages/AnswerPage';
 import { FormPrevisualizer } from '../pages/FormPrevisualizer';
 import { ResultPage, loaderAnswerPage } from '../pages/ResultPage';
 import { FormProvider } from '../contexts/FormContext';
-import { AnswerProvider } from '../contexts/AnswerContext';
 import { AuthProvider } from '../contexts/AuthContext';
 
 import { MainLayout } from './MainLayout';
@@ -36,14 +35,10 @@ export const App = () => {
   );
 
   return (
-    <React.StrictMode>
-      <UserProvider>
-        <FormProvider>
-          <AnswerProvider>
-            <RouterProvider router={router} />
-          </AnswerProvider>
-        </FormProvider>
-      </UserProvider>
-    </React.StrictMode>
+    <UserProvider>
+      <FormProvider>
+        <RouterProvider router={router} />
+      </FormProvider>
+    </UserProvider>
   );
 };

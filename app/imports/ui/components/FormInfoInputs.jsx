@@ -1,19 +1,13 @@
-import { Checkbox, FormControlLabel, FormGroup, Paper, TextField } from '@mui/material';
-import React, { useContext } from 'react';
 import { i18n } from 'meteor/universe:i18n';
-import { FormContext } from '../contexts/FormContext';
+import { Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addDesc, addTitle, toggleIsForGroup, toggleIsPublic } from '../redux/slices/formSlice';
 
-export default function FormInfoInputs({ isFormGroup }) {
-  const { currentForm, setCurrentForm, isOnlyForGroup, setIsOnlyForGroup } = useContext(FormContext);
-
-  const handleIsOnlyForGroup = () => {
-    if (isOnlyForGroup === false) {
-      setIsOnlyForGroup(true);
-    } else {
-      setIsOnlyForGroup(false);
-      setCurrentForm({ ...currentForm, groups: [] });
-    }
-  };
+export default function FormInfoInputs() {
+  const form = useSelector((state) => state.form);
+  const dispatch = useDispatch();
+  const isFormGroup = useSelector((state) => state.form.isForGroup);
 
   return (
     <>
@@ -21,38 +15,32 @@ export default function FormInfoInputs({ isFormGroup }) {
         id="formTitle"
         label={i18n.__('component.formInfoInputs.formTitle')}
         variant="outlined"
-        value={currentForm.title}
+        value={form.title}
         helperText="Le titre est obligatoire"
-        onChange={(e) => setCurrentForm({ ...currentForm, title: e.target.value })}
+        onChange={(e) => dispatch(addTitle({ title: e.target.value }))}
       />
       <TextField
         id="formDescription"
         label={i18n.__('component.formInfoInputs.formDesc')}
         variant="outlined"
-        value={currentForm.desc}
+        value={form.desc}
         helperText={i18n.__('component.formInfoInputs.formDescHelp')}
-        onChange={(e) => setCurrentForm({ ...currentForm, desc: e.target.value })}
+        onChange={(e) => dispatch(addDesc({ desc: e.target.value }))}
       />
       <FormGroup>
         <FormControlLabel
-          disabled={isOnlyForGroup}
-          control={
-            <Checkbox
-              checked={currentForm.isPublic}
-              onChange={() => setCurrentForm({ ...currentForm, isPublic: !currentForm.isPublic })}
-              name="isPublic"
-            />
-          }
-          label={i18n.__('component.formInfoInputs.formPublic')}
+          disabled={form.isForGroup}
+          control={<Checkbox checked={form.isPublic} onChange={(e) => dispatch(toggleIsPublic())} name="isPublic" />}
+          label="Formulaire public"
         />
       </FormGroup>
       <FormGroup>
         <FormControlLabel
-          disabled={currentForm.isPublic}
+          disabled={form.isPublic}
           control={
             <Checkbox
               checked={isFormGroup}
-              onChange={() => handleIsOnlyForGroup()}
+              onChange={() => dispatch(toggleIsForGroup())}
               name={i18n.__('component.formInfoInputs.formGroups')}
             />
           }

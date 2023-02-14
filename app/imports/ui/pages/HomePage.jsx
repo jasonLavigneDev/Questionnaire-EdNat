@@ -3,13 +3,19 @@ import i18n from 'meteor/universe:i18n';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { UserForm } from '../components/UserForm';
-import { FormContext } from '../contexts/FormContext';
 import { UserContext } from '../contexts/UserContext';
+import { useDispatch } from 'react-redux';
+import { resetFormObject } from '../redux/slices/formSlice';
+import { FormContext } from '../contexts/FormContext';
+import { resetUserAnswerObject } from '../redux/slices/answerFormSlice';
+import { resetQuestionObject } from '../redux/slices/questionSlice';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
+  const { setActiveStep, setAcceptRgpd } = useContext(FormContext);
+
   const [allUserForms, setAllUserForms] = useState();
-  const { resetFormContext } = useContext(FormContext);
+  const dispatch = useDispatch();
   const formFromBDD = useLoaderData();
   const navigate = useNavigate();
 
@@ -19,7 +25,11 @@ export const HomePage = () => {
   };
 
   useEffect(() => {
-    resetFormContext();
+    dispatch(resetFormObject());
+    dispatch(resetUserAnswerObject());
+    dispatch(resetQuestionObject());
+    setActiveStep(0);
+    setAcceptRgpd(false);
     setAllUserForms(formFromBDD);
   }, []);
 

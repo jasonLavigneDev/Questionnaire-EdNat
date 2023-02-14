@@ -4,7 +4,6 @@ import StatsBar from './StatsBar';
 import StatsPie from './StatsPie';
 
 export default function GenerateChart({ statArray }) {
-  console.log('statArray', statArray);
   function generateChart(question) {
     switch (question.questionType) {
       case 'radioButtonInput':
@@ -12,6 +11,7 @@ export default function GenerateChart({ statArray }) {
       case 'numberInput':
       case 'textInput':
       case 'textArea':
+      case 'textInput':
       case 'dateInput':
         return <StatsPie question={question} />;
       case 'checkboxInput':

@@ -1,15 +1,16 @@
-import React, { useContext, useState } from 'react';
-
+import React from 'react';
 import { FormLabel, TextField, Paper, FormControl } from '@mui/material';
-import { AnswerContext } from '../../contexts/AnswerContext';
+import { addAnswers } from '../../redux/slices/answerFormSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const TextArea = ({ title, answerMode, questionId, answer = {}, answerRequired }) => {
-  const { addAnswers } = useContext(AnswerContext);
-  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
+export const TextArea = ({ title, answerMode, questionId, answerRequired }) => {
+  const dispatch = useDispatch();
+  const inputAnswer = useSelector((state) =>
+    state.answerForm.answers.find((answer) => answer.questionId === questionId),
+  );
 
   const validateAnswer = (event) => {
-    setCurrentAnswer(event.target.value);
-    if (answerMode) addAnswers(questionId, event.target.value);
+    if (answerMode) dispatch(addAnswers({ questionId, value: event.target.value }));
   };
 
   return (
@@ -18,10 +19,10 @@ export const TextArea = ({ title, answerMode, questionId, answer = {}, answerReq
         <FormLabel id="textAreaInput-title">{title}</FormLabel>
         <TextField
           multiline
-          defaultValue={answer.answer}
+          defaultValue={inputAnswer?.answer ?? ''}
           rows={3}
           onBlur={(e) => validateAnswer(e)}
-          error={answerRequired && !!!currentAnswer}
+          error={answerRequired && !inputAnswer}
         />
       </FormControl>
     </Paper>

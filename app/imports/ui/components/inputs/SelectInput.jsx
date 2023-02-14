@@ -1,23 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { FormControl, InputLabel, Select, MenuItem, Paper, FormLabel } from '@mui/material';
+import { addAnswers } from '../../redux/slices/answerFormSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { FormControl, FormLabel, Select, MenuItem, Paper } from '@mui/material';
-import { AnswerContext } from '../../contexts/AnswerContext';
-
-export const SelectInput = ({ title, choices, answerMode, questionId, answer = {}, answerRequired }) => {
-  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
-  const { addAnswers } = useContext(AnswerContext);
+export const SelectInput = ({ title, choices, answerMode, questionId, answerRequired }) => {
+  const inputAnswer = useSelector((state) =>
+    state.answerForm.answers.find((answer) => answer.questionId === questionId),
+  );
+  const dispatch = useDispatch();
 
   const validateAnswer = (event) => {
-    setCurrentAnswer(event.target.value);
-    if (answerMode) addAnswers(questionId, event.target.value);
+    if (answerMode) dispatch(addAnswers({ questionId, value: event.target.value }));
   };
 
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <FormControl sx={{ width: '30vw' }} required={answerRequired} error={answerRequired && !!!currentAnswer}>
+      <FormControl sx={{ width: '30vw' }} required={answerRequired} error={answerRequired && !inputAnswer}>
         <FormLabel id="selectInput-title">{title}</FormLabel>
-        <Select labelId="selectInput-title" label={title} value={currentAnswer} onChange={validateAnswer}>
+        <Select labelId="selectInput-title" label={title} value={inputAnswer?.answer ?? ''} onChange={validateAnswer}>
           {choices.map((choice) => (
             <MenuItem key={uuidv4()} value={choice}>
               {choice}

@@ -1,22 +1,23 @@
-import React, { useContext, useState } from 'react';
-
+import React from 'react';
 import { FormLabel, Paper, TextField, FormControl } from '@mui/material';
-import { AnswerContext } from '../../contexts/AnswerContext';
+import { addAnswers } from '../../redux/slices/answerFormSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const TextInput = ({ title, answerMode, questionId, answer = {}, answerRequired }) => {
-  const { addAnswers } = useContext(AnswerContext);
-  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
+export const TextInput = ({ title, answerMode, questionId, answerRequired }) => {
+  const dispatch = useDispatch();
+  const inputAnswer = useSelector((state) =>
+    state.answerForm.answers.find((answer) => answer.questionId === questionId),
+  );
 
-  const handleChange = (event) => {
-    setCurrentAnswer(event.target.value);
-    if (answerMode) addAnswers(questionId, event.target.value);
+  const validateAnswer = (event) => {
+    if (answerMode) dispatch(addAnswers({ questionId, value: event.target.value }));
   };
 
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <FormControl required={answerRequired} error={answerRequired && !!!currentAnswer} sx={{ width: '80%' }}>
+      <FormControl required={answerRequired} error={answerRequired && !inputAnswer} sx={{ width: '80%' }}>
         <FormLabel id="textInput-title">{title}</FormLabel>
-        <TextField sx={{ width: '60%' }} defaultValue={answer.answer} onBlur={(e) => handleChange(e)} />
+        <TextField sx={{ width: '60%' }} defaultValue={inputAnswer?.answer ?? ''} onBlur={(e) => handleChange(e)} />
       </FormControl>
     </Paper>
   );

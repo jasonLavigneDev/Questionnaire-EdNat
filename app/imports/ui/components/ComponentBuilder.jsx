@@ -1,64 +1,67 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
 import { TextField, Button, Paper, Checkbox, FormControlLabel, Divider } from '@mui/material';
-import { createComponentObject, isEmptyComponent } from '../utils/utils';
+import { createComponentObject } from '../utils/utils';
 import { MsgError } from './system/MsgError';
-import { FormContext } from '../contexts/FormContext';
-
 import ManageOptions from './ManageOptions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addComponents } from '../redux/slices/formSlice';
+import { addQuestionText, resetQuestionObject, toggleAnswerIsRequired } from '../redux/slices/questionSlice';
 
-export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = null }) => {
-  const [questionText, setQuestionText] = useState(componentToEdit.title || '');
+export const ComponentBuilder = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const [answerText, setAnswerText] = useState('');
-  const [answerOptions, setAnswerOptions] = useState(componentToEdit.choices || []);
-  const [answerIsRequired, setAnswerIsRequired] = useState(componentToEdit.answerRequired || false);
-
-  const { currentForm, setCurrentForm } = useContext(FormContext);
+  const form = useSelector((state) => state.form);
+  const question = useSelector((state) => state.question);
+  const dispatch = useDispatch();
 
   const IsMultiAnswersComponent = () => {
-    return type === 'checkboxInput' || type === 'selectInput' || type === 'radioButtonInput';
+    return question.type === 'checkboxInput' || question.type === 'selectInput' || question.type === 'radioButtonInput';
   };
 
   const submitComponent = () => {
-    if (questionText) {
-      if (IsMultiAnswersComponent() && !answerOptions) {
+    if (question.title) {
+      if (IsMultiAnswersComponent() && !question.choices) {
         setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
         return;
       }
-      const componentListFinal = [...currentForm.components];
-      const newComponent = createComponentObject(questionText, type, answerOptions, answerIsRequired);
+      const componentListFinal = [...form.components];
+      const newComponent = createComponentObject(
+        question.title,
+        question.type,
+        question.choices,
+        question.answerRequired,
+      );
       componentListFinal.push(newComponent);
-      setCurrentForm({ ...currentForm, components: componentListFinal });
-      setQuestionText('');
-      setAnswerText('');
-      setAnswerOptions([]);
+      dispatch(addComponents(componentListFinal));
+      dispatch(resetQuestionObject());
     } else {
       setErrorMessage(i18n.__('component.componentBuilder.errors.noTitle'));
     }
   };
 
   const updateComponent = () => {
-    if (questionText) {
-      if (IsMultiAnswersComponent() && !answerOptions) {
+    if (question.title) {
+      if (IsMultiAnswersComponent() && !question.choices) {
         setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
         return;
       }
-      const componentListFinal = [...currentForm.components];
-      const index = componentListFinal.findIndex((component) => component.id === componentToEdit.id);
+      const componentListFinal = [...form.components];
+      const index = componentListFinal.findIndex((component) => component.id === question.id);
       if (index !== -1) {
-        componentListFinal[index] = createComponentObject(questionText, type, answerOptions, answerIsRequired);
+        componentListFinal[index] = createComponentObject(
+          question.title,
+          question.type,
+          question.choices,
+          question.answerRequired,
+        );
       } else {
         setErrorMessage(i18n.__('component.componentBuilder.errors.notFound'));
         return;
       }
-      setCurrentForm({ ...currentForm, components: componentListFinal });
-      setQuestionText('');
-      setAnswerText('');
-      setAnswerOptions([]);
-      setEditMode(false);
+      dispatch(addComponents(componentListFinal));
+      dispatch(resetQuestionObject());
     } else {
-      if (!questionText) {
+      if (!question.title) {
         setErrorMessage(i18n.__('component.componentBuilder.errors.noTitle'));
       }
     }
@@ -68,9 +71,9 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
     <Paper>
       <div key={'test'} style={{ display: 'flex', marginLeft: '2.5vw' }}>
         <FormControlLabel
-          control={<Checkbox name="required" checked={answerIsRequired} />}
+          control={<Checkbox name="required" checked={question.answerRequired} />}
           label="réponse obligatoire"
-          onChange={() => setAnswerIsRequired(!answerIsRequired)}
+          onChange={() => dispatch(toggleAnswerIsRequired())}
         />
       </div>
       <Divider variant="middle" />
@@ -78,21 +81,12 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
         id="questionText"
         label={i18n.__('component.componentBuilder.questionTitle')}
         variant="outlined"
-        value={questionText}
-        onChange={(e) => setQuestionText(e.target.value)}
+        value={question.title}
+        onChange={(e) => dispatch(addQuestionText({ title: e.target.value }))}
         sx={{ width: '90%', marginLeft: 6, marginBottom: 2, marginTop: 2 }}
       />
-
-      {IsMultiAnswersComponent() && (
-        <ManageOptions
-          answerText={answerText}
-          setAnswerText={setAnswerText}
-          answerOptions={answerOptions}
-          setAnswerOptions={setAnswerOptions}
-          setErrorMessage={setErrorMessage}
-        />
-      )}
-      {isEmptyComponent(componentToEdit) ? (
+      {IsMultiAnswersComponent() && <ManageOptions setErrorMessage={setErrorMessage} />}
+      {question.id === '' ? (
         <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={submitComponent}>
           {i18n.__('component.componentBuilder.submit')}
         </Button>

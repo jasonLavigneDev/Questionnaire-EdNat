@@ -7,7 +7,7 @@ import { NumberInput } from '../inputs/NumberInput';
 import { TextInput } from '../inputs/TextInput';
 import { TextArea } from '../inputs/TextArea';
 
-export default function GenerateComponent({ currentComponent, getAnswer, answerMode }) {
+export default function GenerateComponent({ currentComponent, answerMode }) {
   const generateComponent = (component) => {
     switch (component.type) {
       case 'checkboxInput':
@@ -17,7 +17,6 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             choices={component.choices}
             answerMode={answerMode}
             questionId={component.id}
-            answer={getAnswer(component.id)}
             answerRequired={component.answerRequired}
           />
         );
@@ -28,7 +27,6 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             choices={component.choices}
             answerMode={answerMode}
             questionId={component.id}
-            answer={getAnswer(component.id)}
             answerRequired={component.answerRequired}
           />
         );
@@ -39,7 +37,6 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             choices={component.choices}
             answerMode={answerMode}
             questionId={component.id}
-            answer={getAnswer(component.id)}
             answerRequired={component.answerRequired}
           />
         );
@@ -49,7 +46,6 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             title={component.title}
             answerMode={answerMode}
             questionId={component.id}
-            answer={getAnswer(component.id)}
             answerRequired={component.answerRequired}
           />
         );
@@ -59,7 +55,6 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             title={component.title}
             answerMode={answerMode}
             questionId={component.id}
-            answer={getAnswer(component.id)}
             answerRequired={component.answerRequired}
           />
         );
@@ -69,7 +64,6 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             title={component.title}
             answerMode={answerMode}
             questionId={component.id}
-            answer={getAnswer(component.id)}
             answerRequired={component.answerRequired}
           />
         );
@@ -79,7 +73,6 @@ export default function GenerateComponent({ currentComponent, getAnswer, answerM
             title={component.title}
             answerMode={answerMode}
             questionId={component.id}
-            answer={getAnswer(component.id)}
             answerRequired={component.answerRequired}
           />
         );
