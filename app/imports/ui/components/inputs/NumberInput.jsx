@@ -14,11 +14,10 @@ export const NumberInput = ({ title, answerMode, questionId, answer = {}, answer
 
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <FormControl required={answerRequired}>
+      <FormControl required={answerRequired} sx={{ width: '80%' }}>
         <FormLabel id="numberInput-title">{title}</FormLabel>
         <TextField
           type="number"
-          sx={{ width: '60%' }}
           defaultValue={answer.answer}
           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
           onBlur={(e) => validateAnswer(e)}

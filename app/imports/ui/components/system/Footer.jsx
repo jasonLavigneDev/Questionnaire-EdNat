@@ -9,8 +9,7 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
   const bottomBarStyle = {
     display: 'flex',
     alignItems: 'center',
-    padding: '0 2%',
-    height: '6vh',
+    height: '8vh',
   };
 
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
   const isTitleMissing = !currentForm.title;
 
   return (
-    <div style={{ position: 'fixed', bottom: 30, left: 0, right: 0 }}>
+    <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
       <BottomNavigation sx={bottomBarStyle} showLabels>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           {urlOfPrevStep ? (

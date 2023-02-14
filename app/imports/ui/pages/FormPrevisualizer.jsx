@@ -66,7 +66,7 @@ export const FormPrevisualizer = () => {
 
   return (
     <div>
-      <div>
+      <div style={{ marginBottom: '10vh' }}>
         <Breadcrumb />
         <Visualizer />
       </div>

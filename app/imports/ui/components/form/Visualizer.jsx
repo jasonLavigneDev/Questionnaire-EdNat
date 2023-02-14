@@ -38,15 +38,14 @@ export const Visualizer = ({ answerMode = false }) => {
       {<h3 style={{ textAlign: 'center' }}>{currentForm.title}</h3>}
       {<h4 style={{ textAlign: 'center' }}>{currentForm.desc}</h4>}
       {currentForm.components.map((currentComponent) => (
-        <div key={currentComponent.id}>
-          <br />
-          <br />
+        <div
+          key={currentComponent.id}
+          style={{ display: 'flex', justifyContent: 'center', marginTop: '5vh', marginBottom: '2vh' }}
+        >
           <GenerateComponent currentComponent={currentComponent} getAnswer={getAnswer} answerMode={answerMode} />
           {componentToEdit && componentToEdit.id === currentComponent.id && (
             <ComponentBuilder componentToEdit={currentComponent} type={currentComponent.type} />
           )}
-          <br />
-          <br />
         </div>
       ))}
       {answerMode && (
