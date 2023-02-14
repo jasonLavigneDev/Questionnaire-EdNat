@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
-import { TextField, Button, Paper, Checkbox, FormControlLabel } from '@mui/material';
+import { TextField, Button, Paper, Checkbox, FormControlLabel, Divider } from '@mui/material';
 import { createComponentObject, isEmptyComponent } from '../utils/utils';
 import { MsgError } from './system/MsgError';
 import { FormContext } from '../contexts/FormContext';
@@ -65,13 +65,14 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
 
   return (
     <Paper>
-      <div key={'test'}>
+      <div key={'test'} style={{ display: 'flex', marginLeft: '2.5vw' }}>
         <FormControlLabel
           control={<Checkbox name="required" checked={answerIsRequired} />}
           label="réponse obligatoire"
           onChange={() => setAnswerIsRequired(!answerIsRequired)}
         />
       </div>
+      <Divider variant="middle" />
       <TextField
         id="questionText"
         label="Entrez le titre de la question"

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 
-import { Paper } from '@mui/material';
+import { Paper, Tooltip } from '@mui/material';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 import { FormContext } from '../../contexts/FormContext';
 import { InputChoice } from './InputChoice';
@@ -29,9 +30,9 @@ export const InputBuilder = () => {
   const class3 = {
     display: 'flex',
     justifyContent: 'flex-end',
-    maxHeight: '5vh',
-    marginTop: '0.70vh',
-    margin: 'auto',
+    alignItems: 'center',
+    height: '5vh',
+    marginTop: '1vh',
   };
 
   return (
@@ -50,7 +51,18 @@ export const InputBuilder = () => {
           <div className={class2}>
             {currentForm.components.map((currentComponent, index) => (
               <Paper sx={{ display: 'flex', width: '28vw', marginBottom: 1, border: '1px black solid' }}>
-                <p style={{ paddingLeft: '0.5vw', width: '18vw' }}>{currentComponent.title}</p>
+                <div
+                  style={{ display: 'flex', paddingLeft: '0.5vw', width: '18vw', alignItems: 'center', height: '5vh' }}
+                >
+                  {currentComponent.title}
+                  <div>
+                    {currentComponent.answerRequired && (
+                      <Tooltip title="la question est required">
+                        <PriorityHighIcon />
+                      </Tooltip>
+                    )}
+                  </div>
+                </div>
                 <div className={class3}>
                   <ManageComponents
                     currentComponent={currentComponent}
