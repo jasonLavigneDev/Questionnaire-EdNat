@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import i18n from 'meteor/universe:i18n';
 import Menu from '@mui/material/Menu';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 
@@ -30,7 +29,7 @@ const LanguageSwitcher = () => {
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         {allLanguages.map((lan) => (
           <MenuItem key={lan} onClick={() => switchLanguage(lan)}>
-            {lan}
+            {i18n.__(`i18n.${lan}`)}
           </MenuItem>
         ))}
       </Menu>

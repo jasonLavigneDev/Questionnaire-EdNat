@@ -38,13 +38,13 @@
           "answers": "Réponses",
           "userId": "ID utilisateur",
           "answer": "Réponse"
-        }, 
+        },
         "component": {
           "id": "ID composant",
           "type": "Type de composant",
           "title": "Titre du composant",
           "choices": "Choix du composant"
-        }    
+        }
       },
       "createForm": {
         "noUser": "Aucun utilisateur trouvé.",
@@ -86,10 +86,13 @@
         "automatic": "automatique"
       }
     }
-
+  },
+  "i18n": {
+    "fr": "Français",
+    "en": "Anglais"
   },
   "page": {
-    "answerPage":{
+    "answerPage": {
       "formNotFound": "Le formulaire n'existe pas"
     },
     "errorPage": {
@@ -116,7 +119,7 @@
       "answersStats": "Voir les statistiques"
     }
   },
-  "component":{
+  "component": {
     "inputBuilder": {
       "inputType": "Choisissez le type de question / réponse",
       "inputOrder": "Organisez vos questions"
