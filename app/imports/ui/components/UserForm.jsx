@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Typography, Tooltip } from '@mui/material';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
 import { FormActionButton } from './FormActionButton';
 
@@ -15,10 +16,19 @@ export const UserForm = ({ userForm, deleteForm }) => {
         justifyContent: 'space-between',
       }}
     >
-      <div style={{ flexDirection: 'column' }}>
-        <Typography variant="body1">{userForm.title}</Typography>
+      <div style={{ display: 'flex' }}>
+        {userForm.isPublic === false && (
+          <Tooltip title="formulaire privé">
+            <VisibilityOffOutlinedIcon />
+          </Tooltip>
+        )}
+        <Typography variant="body1" sx={{ marginLeft: userForm.isPublic ? '2.25vw' : '1vw' }}>
+          {userForm.title}
+        </Typography>
       </div>
-      <FormActionButton deleteForm={deleteForm} currentForm={userForm} />
+      <div>
+        <FormActionButton deleteForm={deleteForm} currentForm={userForm} />
+      </div>
     </div>
   );
 };
