@@ -1,12 +1,8 @@
 import React, { useContext, useState } from 'react';
-<<<<<<< HEAD
 
 import { Paper, Tooltip } from '@mui/material';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
-=======
 import i18n from 'meteor/universe:i18n';
-import { Paper } from '@mui/material';
->>>>>>> 47e731b (add translation for ui)
 
 import { FormContext } from '../../contexts/FormContext';
 import { InputChoice } from './InputChoice';
