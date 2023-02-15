@@ -1,6 +1,7 @@
-import { Button } from '@mui/material';
+import CheckBox from '@mui/icons-material/CheckBox';
+import { Button, FormControlLabel } from '@mui/material';
 import i18n from 'meteor/universe:i18n';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { UserContext } from '../../contexts/UserContext';
@@ -80,7 +81,7 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
         <>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <FormControlLabel
-              control={<Checkbox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
+              control={<CheckBox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
               label="Accept RGPD"
             />
           </div>
