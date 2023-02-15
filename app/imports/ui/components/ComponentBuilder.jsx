@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
-import { TextField, Button, Paper } from '@mui/material';
+import { TextField, Button, Paper, Checkbox, FormControlLabel, Divider } from '@mui/material';
 import { createComponentObject, isEmptyComponent } from '../utils/utils';
 import { MsgError } from './system/MsgError';
 import { FormContext } from '../contexts/FormContext';
@@ -12,6 +12,7 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
   const [errorMessage, setErrorMessage] = useState('');
   const [answerText, setAnswerText] = useState('');
   const [answerOptions, setAnswerOptions] = useState(componentToEdit.choices || []);
+  const [answerIsRequired, setAnswerIsRequired] = useState(componentToEdit.answerRequired || false);
 
   const { currentForm, setCurrentForm } = useContext(FormContext);
 
@@ -26,7 +27,7 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
         return;
       }
       const componentListFinal = [...currentForm.components];
-      const newComponent = createComponentObject(questionText, type, answerOptions);
+      const newComponent = createComponentObject(questionText, type, answerOptions, answerIsRequired);
       componentListFinal.push(newComponent);
       setCurrentForm({ ...currentForm, components: componentListFinal });
       setQuestionText('');
@@ -46,7 +47,7 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
       const componentListFinal = [...currentForm.components];
       const index = componentListFinal.findIndex((component) => component.id === componentToEdit.id);
       if (index !== -1) {
-        componentListFinal[index] = createComponentObject(questionText, type, answerOptions);
+        componentListFinal[index] = createComponentObject(questionText, type, answerOptions, answerIsRequired);
       } else {
         console.log('error, component does not exist');
       }
@@ -64,6 +65,14 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
 
   return (
     <Paper>
+      <div key={'test'} style={{ display: 'flex', marginLeft: '2.5vw' }}>
+        <FormControlLabel
+          control={<Checkbox name="required" checked={answerIsRequired} />}
+          label="réponse obligatoire"
+          onChange={() => setAnswerIsRequired(!answerIsRequired)}
+        />
+      </div>
+      <Divider variant="middle" />
       <TextField
         id="questionText"
         label="Entrez le titre de la question"
@@ -72,6 +81,7 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
         onChange={(e) => setQuestionText(e.target.value)}
         sx={{ width: '90%', marginLeft: 6, marginBottom: 2, marginTop: 2 }}
       />
+
       {IsMultiAnswersComponent() && (
         <ManageOptions
           answerText={answerText}

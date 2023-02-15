@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel, Paper } from '@mui/material';
 import { AnswerContext } from '../../contexts/AnswerContext';
 
-export const CheckBoxInput = ({ title, choices, required = false, answerMode, questionId, answer = {} }) => {
+export const CheckBoxInput = ({ title, choices, answerMode, questionId, answer = {}, answerRequired }) => {
   const [answers, setAnswers] = useState([]);
+  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
 
   const { addAnswers } = useContext(AnswerContext);
 
@@ -13,8 +14,8 @@ export const CheckBoxInput = ({ title, choices, required = false, answerMode, qu
   };
 
   const addCheckedAnswers = (event) => {
-    // const index = answers.findIndex((answer) => answer.name === event.target.name);
-    const index = getIndex(event.target.value);
+    setCurrentAnswer(event.target.value);
+    const index = getIndex(event.target.name);
 
     if (index === -1) {
       answers.push({ name: event.target.name, value: event.target.checked });
@@ -30,21 +31,27 @@ export const CheckBoxInput = ({ title, choices, required = false, answerMode, qu
 
   const getValue = (choice) => {
     const index = getIndex(choice);
-    // return answers[answers.findIndex((o) => o.name === choice)]?.value;
+    if (index === -1) return false;
     return answers[index]?.value;
   };
 
   useEffect(() => {
     if (answer.answer) {
+      const answersCopy = [...answers];
       answer.answer.map((resp) => {
-        setAnswers([...answers, { name: resp, value: true }]);
+        answersCopy.push({ name: resp, value: true });
       });
+      setAnswers(answersCopy);
     }
   }, []);
 
   return (
-    <div>
-      <FormControl onChange={() => validateAnswer()}>
+    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
+      <FormControl
+        required={answerRequired}
+        error={answerRequired && !!!currentAnswer}
+        onChange={() => validateAnswer()}
+      >
         <FormLabel>{title}</FormLabel>
         <FormGroup>
           {choices.map((choice) => (
@@ -58,12 +65,11 @@ export const CheckBoxInput = ({ title, choices, required = false, answerMode, qu
                   />
                 }
                 label={`${choice}`}
-                required={required}
               />
             </div>
           ))}
         </FormGroup>
       </FormControl>
-    </div>
+    </Paper>
   );
 };

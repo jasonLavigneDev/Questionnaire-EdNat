@@ -1,5 +1,5 @@
 import { Button, FormControlLabel, Checkbox } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnswerContext } from '../../contexts/AnswerContext';
 import { UserContext } from '../../contexts/UserContext';
@@ -8,6 +8,7 @@ import { hasAlreadyRespond } from '../../utils/utils';
 export default function SubmitAnswerForm({ publicName, setPublicName, currentForm }) {
   const { user } = useContext(UserContext);
   const [isCheckedRgpd, setIsCheckedRgpd] = useState(false);
+  const [answersAreComplete, setAnswersAreComplete] = useState(false);
   const { answerForm, setAnswerForm } = useContext(AnswerContext);
 
   const navigate = useNavigate();
@@ -25,6 +26,32 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
     });
     navigate('/');
   };
+
+  let questionRequired = [];
+  currentForm.components.map((component) => {
+    if (component.answerRequired === true) {
+      questionRequired.push(component.id);
+    }
+  });
+
+  useEffect(() => {
+    setAnswersAreComplete(false);
+    let questionMissing = [];
+    console.log(questionRequired);
+    questionRequired.map((question) => {
+      answerForm.answers.map((answer) => {
+        if (question === answer.questionId) {
+          if (answer.answer !== '') {
+            setAnswersAreComplete(true);
+          } else {
+            questionMissing.push(answer.questionId);
+          }
+        } else {
+          questionMissing.push(answer.questionId);
+        }
+      });
+    });
+  }, [answerForm]);
 
   return (
     <div>
@@ -44,7 +71,7 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
               label="Accept RGPD"
             />
           </div>
-          <Button disabled={!publicName || !isCheckedRgpd} onClick={submitAnswerForm}>
+          <Button disabled={!publicName || !isCheckedRgpd || !answersAreComplete} onClick={submitAnswerForm}>
             Soumettre ce formulaire complété
           </Button>
         </div>
@@ -57,7 +84,7 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
             />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button onClick={submitAnswerForm} disabled={!isCheckedRgpd}>
+            <Button onClick={submitAnswerForm} disabled={!isCheckedRgpd || !answersAreComplete}>
               {hasAlreadyRespond(user, currentForm) ? 'Mettre à jour les réponses' : 'Soumettre ce formulaire complété'}
             </Button>
           </div>

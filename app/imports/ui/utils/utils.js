@@ -4,12 +4,13 @@ export const isDuplicate = (allOpts, newOption) => {
   return allOpts.includes(newOption);
 };
 
-export const createComponentObject = (title, type, choices = []) => {
+export const createComponentObject = (title, type, choices = [], answerRequired) => {
   const component = {
     id: uuidv4(),
     title: title,
     type: type,
     choices: choices,
+    answerRequired: answerRequired,
   };
   return component;
 };

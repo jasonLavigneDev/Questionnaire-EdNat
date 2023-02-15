@@ -1,25 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
-import { InputLabel, TextField, Paper } from '@mui/material';
+import { FormLabel, TextField, Paper, FormControl } from '@mui/material';
 import { AnswerContext } from '../../contexts/AnswerContext';
 
-export const TextArea = ({ title, answerMode, questionId, answer = {} }) => {
+export const TextArea = ({ title, answerMode, questionId, answer = {}, answerRequired }) => {
   const { addAnswers } = useContext(AnswerContext);
+  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
 
   const validateAnswer = (event) => {
+    setCurrentAnswer(event.target.value);
     if (answerMode) addAnswers(questionId, event.target.value);
   };
 
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <InputLabel id="textAreaInput-title">{title}</InputLabel>
-      <TextField
-        sx={{ width: '60%' }}
-        multiline
-        defaultValue={answer.answer}
-        rows={3}
-        onBlur={(e) => validateAnswer(e)}
-      />
+      <FormControl required={answerRequired}>
+        <FormLabel id="textAreaInput-title">{title}</FormLabel>
+        <TextField
+          sx={{ width: '60%' }}
+          multiline
+          defaultValue={answer.answer}
+          rows={3}
+          onBlur={(e) => validateAnswer(e)}
+          error={answerRequired && !!!currentAnswer}
+        />
+      </FormControl>
     </Paper>
   );
 };
