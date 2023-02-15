@@ -148,7 +148,6 @@ Meteor.methods({
     if (form) {
       if (form.owner == this.userId) {
         form.active = active;
-        console.log(form);
         await Forms.updateAsync({ _id: formId }, { $set: { active: form.active } });
       } else {
         throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
