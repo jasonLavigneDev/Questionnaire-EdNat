@@ -17,9 +17,11 @@ export default function StatsBar({ question }) {
 
   question.questionChoices.forEach((key) => (choicesStats[key] = 0));
   question.stat.forEach((element) => {
-    element.answer.forEach((response) => {
-      choicesStats[response]++;
-    });
+    if (element.answer) {
+      element.answer.forEach((response) => {
+        choicesStats[response]++;
+      });
+    }
   });
 
   let keys = Object.keys(choicesStats);

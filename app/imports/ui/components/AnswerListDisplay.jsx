@@ -9,12 +9,16 @@ export default function AnswerListDisplay({ finalArray }) {
     question.responses.map((response) => {
       const index = csvArray.findIndex((answer) => answer.user === response.userName);
       if (index === -1) {
-        let newObj = { user: response.userName };
-        newObj[key] = response.response[0];
-        csvArray.push(newObj);
+        if (response.response) {
+          let newObj = { user: response.userName };
+          newObj[key] = response.response[0];
+          csvArray.push(newObj);
+        }
       } else {
         if (csvArray[index]['user'] === response.userName) {
-          csvArray[index][key] = response.response[0];
+          if (response.response) {
+            csvArray[index][key] = response.response[0];
+          }
         }
       }
     });
