@@ -13,6 +13,13 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
 
   const navigate = useNavigate();
 
+  let questionRequired = [];
+  currentForm.components.map((component) => {
+    if (component.answerRequired == true) {
+      questionRequired.push(component.id);
+    }
+  });
+
   const submitAnswerForm = async () => {
     const componentsUpdated = { ...answerForm };
     componentsUpdated.formId = currentForm._id;
@@ -27,21 +34,13 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
     navigate('/');
   };
 
-  let questionRequired = [];
-  currentForm.components.map((component) => {
-    if (component.answerRequired === true) {
-      questionRequired.push(component.id);
-    }
-  });
-
   useEffect(() => {
-    setAnswersAreComplete(false);
+    setAnswersAreComplete(questionRequired.length == 0);
     let questionMissing = [];
-    console.log(questionRequired);
     questionRequired.map((question) => {
       answerForm.answers.map((answer) => {
         if (question === answer.questionId) {
-          if (answer.answer !== '') {
+          if (answer.answer) {
             setAnswersAreComplete(true);
           } else {
             questionMissing.push(answer.questionId);
@@ -51,7 +50,7 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
         }
       });
     });
-  }, [answerForm]);
+  }, [answerForm, isCheckedRgpd]);
 
   return (
     <div>
