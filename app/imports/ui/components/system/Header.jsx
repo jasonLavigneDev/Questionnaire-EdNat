@@ -30,8 +30,10 @@ export const Header = () => {
           />
           <h1 style={{ fontFamily: 'OdinRounded', color: '#372f84' }}>{i18n.__('component.header.title')}</h1>
         </Link>
-        <HeaderMenu />
-        <LanguageSwitcher relative />
+        <div style={{ display: 'flex' }}>
+          <HeaderMenu />
+          <LanguageSwitcher />
+        </div>
       </AppBar>
     </Slide>
   );
