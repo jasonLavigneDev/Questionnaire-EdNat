@@ -105,6 +105,11 @@ Forms.schema = new SimpleSchema(
       type: Boolean,
       label: getLabel('api.forms.labels.public'),
     },
+    active: {
+      type: Boolean,
+      defaultValue: false,
+      label: getLabel('api.forms.labels.active'),
+    },
     groups: {
       type: Array,
       label: getLabel('api.forms.labels.groups'),
