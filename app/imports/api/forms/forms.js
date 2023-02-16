@@ -122,7 +122,7 @@ Forms.schema = new SimpleSchema(
 
     formAnswers: {
       type: Array,
-      label: getLabel('api.forms.labels.formAnswers'),
+      label: getLabel('api.forms.labels.formAnswers.answers'),
       optional: true,
     },
     'formAnswers.$': { type: Answers },

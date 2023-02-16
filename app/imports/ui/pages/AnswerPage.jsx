@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import i18n from 'meteor/universe:i18n';
 import { useLoaderData } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
 import { FormContext } from '../contexts/FormContext';
@@ -11,7 +12,7 @@ export const AnswerPage = () => {
     setCurrentForm(formFromBDD);
   }, []);
 
-  if (!formFromBDD) return <p>Ce formulaire n'existe pas</p>;
+  if (!formFromBDD) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
 
   return <Visualizer answerMode={true} />;
 };

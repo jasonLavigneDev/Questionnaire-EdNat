@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
+import i18n from 'meteor/universe:i18n';
 import { useNavigate } from 'react-router-dom';
 import { Button, Typography, Menu, MenuItem, Avatar, Divider } from '@mui/material';
-import { identicon } from 'minidenticons';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PackageJSON from '../../../../package.json';
 import { UserContext } from '../../contexts/UserContext';
@@ -33,7 +33,7 @@ export const HeaderMenu = () => {
   if (!user)
     return (
       <Button variant="outlined" onClick={() => Meteor.loginWithKeycloak()}>
-        Se connecter
+        {i18n.__('component.headerMenu.login')}
       </Button>
     );
 
@@ -58,7 +58,7 @@ export const HeaderMenu = () => {
         </div>
       </Button>
       <Menu anchorEl={anchor} open={open} onClick={() => setOpen(!open)}>
-        <MenuItem onClick={logout}>Se déconnecter</MenuItem>
+        <MenuItem onClick={logout}>{i18n.__('component.headerMenu.logout')}</MenuItem>
         <Divider />
         <MenuItem disabled style={{ opacity: 0.3 }}>
           Version {version}

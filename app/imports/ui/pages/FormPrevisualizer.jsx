@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import i18n from 'meteor/universe:i18n';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
@@ -14,7 +15,7 @@ export const FormPrevisualizer = () => {
   const isDisable = !currentForm.title || currentForm.components.length === 0;
 
   const sendFormToBDD = async () => {
-    if (isDisable) return setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
+    if (isDisable) return setErrorMessage(i18n.__('component.componentBuilder.errors.noTitleOrOptions'));
 
     try {
       const result = await Meteor.callAsync('forms.createForm', {
@@ -36,7 +37,7 @@ export const FormPrevisualizer = () => {
   };
 
   const updateForm = async () => {
-    if (isDisable) return setErrorMessage('Le formulaire ne contient pas de titre ou de questions');
+    if (isDisable) return setErrorMessage(i18n.__('component.componentBuilder.errors.noTitleOrOptions'));
 
     try {
       const result = await Meteor.callAsync('forms.updateForm', {
@@ -62,7 +63,7 @@ export const FormPrevisualizer = () => {
     setActiveStep(2);
   }, []);
 
-  if (!currentForm) return <p>ce formulaire n'existe pas</p>;
+  if (!currentForm) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
 
   return (
     <div>
@@ -74,7 +75,9 @@ export const FormPrevisualizer = () => {
       <Footer
         nextStep={currentForm._id ? updateForm : sendFormToBDD}
         urlOfPrevStep="builder/components"
-        text={currentForm._id ? 'Mettre à jour le formulaire' : 'Enregistrer le résultat'}
+        text={
+          currentForm._id ? i18n.__('page.formPrevisualizer.updateForm') : i18n.__('page.formPrevisualizer.saveForm')
+        }
       />
     </div>
   );

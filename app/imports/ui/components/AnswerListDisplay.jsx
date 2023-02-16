@@ -1,5 +1,6 @@
 import React from 'react';
 import { CSVLink } from 'react-csv';
+import i18n from 'meteor/universe:i18n';
 
 export default function AnswerListDisplay({ finalArray }) {
   const csvArray = [];
@@ -35,7 +36,7 @@ export default function AnswerListDisplay({ finalArray }) {
             <ul>
               <li>
                 <b>
-                  {response.userName} (répondu le: {response.createdAt})
+                  {response.userName} ({i18n.__('component.answerListDisplay.answerAt')}: {response.createdAt})
                 </b>
                 : {response.response}
               </li>

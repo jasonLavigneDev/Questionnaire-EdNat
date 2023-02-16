@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import i18n from 'meteor/universe:i18n';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { UserForm } from '../components/UserForm';
@@ -22,16 +23,16 @@ export const HomePage = () => {
     setAllUserForms(formFromBDD);
   }, []);
 
-  if (!user) return <p>Veuillez vous connecter</p>;
+  if (!user) return <p>{i18n.__('page.homePage.login')}</p>;
 
   return (
     <>
       <div style={{ textAlign: 'center' }}>
         <Button size="large" onClick={() => navigate('/builder/intro')}>
-          Nouveau questionnaire
+          {i18n.__('page.homePage.newForm')}
         </Button>
       </div>
-      <h2>Liste de vos questionnaires</h2>
+      <h2>{i18n.__('page.homePage.formsList')}</h2>
       {allUserForms && allUserForms.map((userForm) => <UserForm userForm={userForm} deleteForm={deleteForm} />)}
     </>
   );

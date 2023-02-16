@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { i18n } from 'meteor/universe:i18n';
 import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -7,9 +8,11 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useContext } from 'react';
 import { FormContext } from '../contexts/FormContext';
+import { MsgError } from './system/MsgError';
 
 export default function ManageComponents({ currentComponent, index, setComponentToEdit, setEditMode }) {
   const { currentForm, setCurrentForm } = useContext(FormContext);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const hasComponentBefore = (inputPos) => inputPos > 0;
   const hasComponentAfter = (inputPos) => inputPos < currentForm.components.length - 1;
@@ -32,7 +35,7 @@ export default function ManageComponents({ currentComponent, index, setComponent
       ];
       setCurrentForm({ ...currentForm, components: componentsUpdated });
     } else {
-      console.log("Il n'y a pas de question avant celle ci, impossible de swap");
+      setErrorMessage(i18n.__('component.componentManager.errors.noQuestionBefore'));
     }
   };
 
@@ -45,7 +48,7 @@ export default function ManageComponents({ currentComponent, index, setComponent
       ];
       setCurrentForm({ ...currentForm, components: componentsUpdated });
     } else {
-      console.log("Il n'y a pas de question apres celle ci, impossible de swap");
+      setErrorMessage(i18n.__('component.componentManager.errors.noQuestionAfter'));
     }
   };
 
@@ -63,6 +66,7 @@ export default function ManageComponents({ currentComponent, index, setComponent
       <IconButton sx={{ color: 'Crimson' }} onClick={() => removeComponentToForm(currentComponent.id)}>
         <DeleteIcon />
       </IconButton>
+      {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
     </>
   );
 }

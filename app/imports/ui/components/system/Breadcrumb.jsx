@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import i18n from 'meteor/universe:i18n';
 import { useNavigate } from 'react-router-dom';
 import { Stepper, Step, StepButton } from '@mui/material';
 import { useEffect } from 'react';
@@ -32,17 +33,17 @@ export const Breadcrumb = () => {
         <Stepper alternativeLabel activeStep={activeStep}>
           <Step key="intro" completed={activeStep === 1 || activeStep === 2}>
             <StepButton color="inherit" onClick={() => navigateTo('intro')}>
-              Introduction
+              {i18n.__('component.breadcrumb.intro')}
             </StepButton>
           </Step>
           <Step key="components" completed={activeStep === 2} disabled={!currentForm.title}>
             <StepButton color="inherit" onClick={() => navigateTo('components')}>
-              Composant
+              {i18n.__('component.breadcrumb.components')}
             </StepButton>
           </Step>
           <Step key="previsualizer" disabled={currentForm.components.length === 0}>
             <StepButton color="inherit" onClick={() => navigateTo('previsualizer')}>
-              Prévisualisation
+              {i18n.__('component.breadcrumb.previsualization')}
             </StepButton>
           </Step>
         </Stepper>

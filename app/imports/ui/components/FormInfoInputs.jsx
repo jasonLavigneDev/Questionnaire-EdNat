@@ -1,5 +1,6 @@
 import { Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
 import React, { useContext } from 'react';
+import { i18n } from 'meteor/universe:i18n';
 import { FormContext } from '../contexts/FormContext';
 
 export default function FormInfoInputs({ isFormGroup }) {
@@ -18,7 +19,7 @@ export default function FormInfoInputs({ isFormGroup }) {
     <>
       <TextField
         id="formTitle"
-        label="Entrez le titre du questionnaire"
+        label={i18n.__('component.formInfoInputs.formTitle')}
         variant="outlined"
         value={currentForm.title}
         helperText="Le titre est obligatoire"
@@ -26,10 +27,10 @@ export default function FormInfoInputs({ isFormGroup }) {
       />
       <TextField
         id="formDescription"
-        label="Entrez une description de votre formulaire"
+        label={i18n.__('component.formInfoInputs.formDesc')}
         variant="outlined"
         value={currentForm.desc}
-        helperText="La description est facultative"
+        helperText={i18n.__('component.formInfoInputs.formDescHelp')}
         onChange={(e) => setCurrentForm({ ...currentForm, desc: e.target.value })}
       />
       <FormGroup>
@@ -42,16 +43,20 @@ export default function FormInfoInputs({ isFormGroup }) {
               name="isPublic"
             />
           }
-          label="Formulaire public"
+          label={i18n.__('component.formInfoInputs.formPublic')}
         />
       </FormGroup>
       <FormGroup>
         <FormControlLabel
           disabled={currentForm.isPublic}
           control={
-            <Checkbox checked={isFormGroup} onChange={() => handleIsOnlyForGroup()} name="réservé aux groupes" />
+            <Checkbox
+              checked={isFormGroup}
+              onChange={() => handleIsOnlyForGroup()}
+              name={i18n.__('component.formInfoInputs.formGroups')}
+            />
           }
-          label="Réservé aux groupes"
+          label={i18n.__('component.formInfoInputs.formGroups')}
         />
       </FormGroup>
     </>

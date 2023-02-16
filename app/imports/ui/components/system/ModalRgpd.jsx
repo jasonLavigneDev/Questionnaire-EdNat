@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import i18n from 'meteor/universe:i18n';
 import { Modal, Box, Typography, Button } from '@mui/material';
 import { FormContext } from '../../contexts/FormContext';
 import { useNavigate } from 'react-router-dom';
@@ -39,8 +40,8 @@ const ModalRgpd = () => {
           호출로 다시 불러오게 됩니다).
         </Typography>
         <div style={{ display: 'flex', marginTop: '2vh', justifyContent: 'space-between' }}>
-          <Button onClick={handleReject}>Refuser</Button>
-          <Button onClick={handleAccept}>Accept</Button>
+          <Button onClick={handleReject}>{i18n.__('component.modalRgpd.refuse')}</Button>
+          <Button onClick={handleAccept}>{i18n.__('component.modalRgpd.accept')}</Button>
         </div>
       </Box>
     </Modal>

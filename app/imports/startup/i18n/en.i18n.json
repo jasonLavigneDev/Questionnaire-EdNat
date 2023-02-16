@@ -1,0 +1,211 @@
+{
+  "api": {
+    "users": {
+      "labels": {
+        "username": "Username",
+        "firstName": "Firstname",
+        "lastName": "Lastname",
+        "emails": "Emails",
+        "emailAddress": "Email address",
+        "emailVerified": "Email verified",
+        "createdAt": "Created at",
+        "lastLogin": "Last login",
+        "profile": "Profile",
+        "services": "Services",
+        "heartbeat": "Heartbeat",
+        "structure": "Structure",
+        "primaryEmail": "Primary Email address",
+        "language": "Preferred Language",
+        "logoutType": "Logout type",
+        "avatar": "Avatar"
+      },
+      "setLogoutType": {
+        "notPermitted": "Not authorized"
+      },
+      "mustBeLoggedIn": "User must be logged in"
+    },
+    "forms": {
+      "labels": {
+        "title": "Title",
+        "desc": "Description",
+        "isModel": "Model",
+        "createdAt": "Created at",
+        "owner": "Owner",
+        "public": "Public",
+        "groups": "Groups",
+        "components": "Components",
+        "formAnswers": {
+          "answers": "Answers",
+          "userId": "User ID",
+          "answer": "Answer"
+        },
+        "component": {
+          "id": "Component ID",
+          "type": "Component type",
+          "title": "Component Title",
+          "choices": "Component Choice"
+        }
+      },
+      "createForm": {
+        "noUser": "No user found.",
+        "notLoggedIn": "User is not logged in."
+      },
+      "deleteForm": {
+        "permissionDenied": "Permission denied.",
+        "notOwner": "Current user is not form owner.",
+        "notFound": "Form not found.",
+        "notExist": "Specified form does not exist."
+      }
+    },
+    "groups": {
+      "labels": {
+        "name": "Name",
+        "slug": "Slug",
+        "description": "Description",
+        "content": "Long description",
+        "active": "Active",
+        "groupPadID": "Group pad ID",
+        "digest": "Digest",
+        "type": "Type",
+        "avatar": "Avatar",
+        "applications": "Application ID",
+        "owner": "Owner",
+        "admins": "Administrators",
+        "animators": "Animators",
+        "members": "Members",
+        "candidates": "Candidates",
+        "numCandidates": "Candidates number",
+        "plugins": "Plugins",
+        "articles": "Articles",
+        "meetingParams": "Meeting parameters"
+      },
+      "types": {
+        "open": "open",
+        "moderated": "moderated",
+        "private": "private",
+        "automatic": "automatic"
+      }
+    }
+  },
+  "i18n": {
+    "fr": "French",
+    "en": "English"
+  },
+  "page": {
+    "answerPage": {
+      "formNotFound": "Form does not exist"
+    },
+    "errorPage": {
+      "title": "Error",
+      "desc": "An error occurred"
+    },
+    "formIntro": {
+      "goNext": "Go to next step"
+    },
+    "formPrevisualizer": {
+      "saveForm": "Save result",
+      "updateForm": "Update form"
+    },
+    "homePage": {
+      "login": "Please log in",
+      "newForm": "New form",
+      "formsList": "Forms list"
+    },
+    "resultPage": {
+      "noAnswers": "There are no answers for this form",
+      "goBack": "Back",
+      "formAnswers": "Form answers",
+      "answersByUser": "Display answers by user",
+      "answersStats": "Display statistics"
+    }
+  },
+  "component": {
+    "inputBuilder": {
+      "inputType": "Choose question / answer type",
+      "inputOrder": "Organise your questions"
+    },
+    "inputChoice": {
+      "questionType": "Question type"
+    },
+    "submitAnswerForm": {
+      "enterName": "Enter your name",
+      "updateAnswers": "Update answers",
+      "submitAnswers": "Submit this completed form",
+      "acceptRgpd": "Accept RGPD"
+    },
+    "visualizer": {
+      "connect": "Please log in to answer this form"
+    },
+    "breadcrumb": {
+      "intro": "Introduction",
+      "components": "Components",
+      "previsualization": "Preview"
+    },
+    "footer": {
+      "goBack": "Back"
+    },
+    "header": {
+      "title": "Questionnaire"
+    },
+    "headerMenu": {
+      "login": "Log in",
+      "logout": "Logout"
+    },
+    "answerListDisplay": {
+      "answerAt": "Answered at "
+    },
+    "componentBuilder": {
+      "errors": {
+        "noTitle": "Title is missing",
+        "noOptions": "Options are missing",
+        "notFound": "Component does not exist",
+        "noTitleOrOptions": "Form does not include title or options"
+      },
+      "questionTitle": "Enter this question's title",
+      "inputChoice": "Enter an answer choice",
+      "submit": "Submit",
+      "update": "Update"
+    },
+    "formActionButton": {
+      "answer": "Answer",
+      "editAnswers": "Edit answers",
+      "editForm": "Edit form",
+      "deleteForm": "Delete form",
+      "copyUrl": "Copy form URL"
+    },
+    "formInfoInputs": {
+      "formTitle": "Enter forms's title",
+      "formDesc": "Enter form description",
+      "formDescHelp": "Description is optional",
+      "formPublic": "Public form",
+      "formGroups": "Limited to groups"
+    },
+    "inputs": {
+      "radioButton": "Radio button (single choice)",
+      "checkbox": "Check box (multiple choices)",
+      "select": "Dropdown list",
+      "number": "Number",
+      "text": "Short text",
+      "textArea": "Long text",
+      "date": "Date"
+    },
+    "componentManager": {
+      "errors": {
+        "noQuestionBefore": "Can not move: there is no question before this one.",
+        "noQuestionAfter": "Can not move: there is no question after this one."
+      }
+    },
+    "selectGroups": {
+      "noGroup": "You're not member of any group",
+      "groupChoice": "Group choice",
+      "addGroup": "Add group"
+    },
+    "statsDisplay": {
+      "numberOfAnswers": "Answers count: "
+    },
+    "modalRgpd": {
+      "refuse": "Refuse",
+      "accept": "Accept"
+    }
+  }
+}

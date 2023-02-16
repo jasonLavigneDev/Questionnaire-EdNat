@@ -1,4 +1,5 @@
 import { IconButton, TextField } from '@mui/material';
+import { i18n } from 'meteor/universe:i18n';
 import React from 'react';
 import DeleteOption from './inputs/DeleteOption';
 import AddIcon from '@mui/icons-material/Add';
@@ -14,7 +15,7 @@ export default function ManageOptions({ answerText, setAnswerText, answerOptions
         setAnswerText('');
       }
     } else {
-      setErrorMessage(i18n.__('builders.errors.noOptions'));
+      setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
     }
   };
 
@@ -29,7 +30,7 @@ export default function ManageOptions({ answerText, setAnswerText, answerOptions
       <div style={{ display: 'flex' }}>
         <TextField
           id="option"
-          label="Entrez un choix de réponse"
+          label={i18n.__('component.componentBuilder.inputChoice')}
           variant="outlined"
           value={answerText}
           onChange={(e) => setAnswerText(e.target.value)}

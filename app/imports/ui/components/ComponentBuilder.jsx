@@ -23,7 +23,7 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
   const submitComponent = () => {
     if (questionText) {
       if (IsMultiAnswersComponent() && !answerOptions) {
-        setErrorMessage(i18n.__('builders.errors.noOptions'));
+        setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
         return;
       }
       const componentListFinal = [...currentForm.components];
@@ -34,14 +34,14 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
       setAnswerText('');
       setAnswerOptions([]);
     } else {
-      setErrorMessage(i18n.__('builders.errors.noTitle'));
+      setErrorMessage(i18n.__('component.componentBuilder.errors.noTitle'));
     }
   };
 
   const updateComponent = () => {
     if (questionText) {
       if (IsMultiAnswersComponent() && !answerOptions) {
-        setErrorMessage(i18n.__('builders.errors.noOptions'));
+        setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
         return;
       }
       const componentListFinal = [...currentForm.components];
@@ -49,7 +49,8 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
       if (index !== -1) {
         componentListFinal[index] = createComponentObject(questionText, type, answerOptions, answerIsRequired);
       } else {
-        console.log('error, component does not exist');
+        setErrorMessage(i18n.__('component.componentBuilder.errors.notFound'));
+        return;
       }
       setCurrentForm({ ...currentForm, components: componentListFinal });
       setQuestionText('');
@@ -58,7 +59,7 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
       setEditMode(false);
     } else {
       if (!questionText) {
-        setErrorMessage(i18n.__('builders.errors.noTitle'));
+        setErrorMessage(i18n.__('component.componentBuilder.errors.noTitle'));
       }
     }
   };
@@ -75,7 +76,7 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
       <Divider variant="middle" />
       <TextField
         id="questionText"
-        label="Entrez le titre de la question"
+        label={i18n.__('component.componentBuilder.questionTitle')}
         variant="outlined"
         value={questionText}
         onChange={(e) => setQuestionText(e.target.value)}
@@ -93,11 +94,11 @@ export const ComponentBuilder = ({ componentToEdit = {}, type, setEditMode = nul
       )}
       {isEmptyComponent(componentToEdit) ? (
         <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={submitComponent}>
-          Valider
+          {i18n.__('component.componentBuilder.submit')}
         </Button>
       ) : (
         <Button style={{ textAlign: 'center', width: '100%' }} onClick={updateComponent}>
-          Mettre à jour
+          {i18n.__('component.componentBuilder.update')}
         </Button>
       )}
       {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}

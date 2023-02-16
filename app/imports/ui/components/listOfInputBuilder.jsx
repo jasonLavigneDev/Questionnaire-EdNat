@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { i18n } from 'meteor/universe:i18n';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -11,37 +11,37 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 export const LIST_OF_INPUT_BUILDER = [
   {
     id: 'radioButtonInput',
-    name: 'Bouton radio (choix unique)',
+    name: 'radioButton',
     icon: <RadioButtonCheckedIcon />,
   },
   {
     id: 'checkboxInput',
-    name: 'Case à cocher (choix multiple)',
+    name: 'checkbox',
     icon: <CheckBoxIcon />,
   },
   {
     id: 'selectInput',
-    name: 'Liste déroulante',
+    name: 'select',
     icon: <KeyboardArrowDownIcon />,
   },
   {
     id: 'numberInput',
-    name: 'Nombre',
+    name: 'number',
     icon: <MoneyIcon />,
   },
   {
     id: 'textInput',
-    name: 'Texte court',
+    name: 'text',
     icon: <ShortTextIcon />,
   },
   {
     id: 'textArea',
-    name: 'Texte long',
+    name: 'textArea',
     icon: <NotesIcon />,
   },
   {
     id: 'dateInput',
-    name: 'Date',
+    name: 'date',
     icon: <CalendarMonthIcon />,
   },
 ];

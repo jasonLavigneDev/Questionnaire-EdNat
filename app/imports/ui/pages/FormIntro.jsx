@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import i18n from 'meteor/universe:i18n';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
@@ -35,7 +36,7 @@ export const FormIntro = () => {
               </>
             )}
           </div>
-          <Footer text="Passer a l etape suivante" nextStep={navigateTo} />
+          <Footer text={i18n.__('page.formIntro.goNext')} nextStep={navigateTo} />
         </>
       ) : (
         <ModalRgpd />

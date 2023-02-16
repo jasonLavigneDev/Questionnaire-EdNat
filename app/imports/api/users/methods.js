@@ -21,3 +21,19 @@ export const setLogoutType = new ValidatedMethod({
     });
   },
 });
+
+export const setLanguage = new ValidatedMethod({
+  name: 'users.setLanguage',
+  validate: new SimpleSchema({
+    language: { type: String, label: getLabel('api.users.labels.language') },
+  }).validator(),
+
+  async run({ language }) {
+    if (!this.userId) {
+      throw new Meteor.Error('api.users.setLanguage.notPermitted', i18n.__('api.users.mustBeLoggedIn'));
+    }
+    await Meteor.users.updateAsync(this.userId, {
+      $set: { language },
+    });
+  },
+});
