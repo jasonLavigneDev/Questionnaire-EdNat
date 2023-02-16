@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import AnswerListDisplay from '../components/AnswerListDisplay';
 import GenerateChart from '../components/GenerateChart';
+import { hasNotAnswers } from '../utils/utils';
 
 export const ResultPage = () => {
   const formFromBDD = useLoaderData();
@@ -69,14 +70,16 @@ export const ResultPage = () => {
       });
     }
   });
-  const hasNotAnswers = () => {
-    if (!formFromBDD.formAnswers || formFromBDD.formAnswers.length === 0) return true;
-    return false;
+
+  const deleteAllAnswers = async () => {
+    formFromBDD.formAnswers = [];
+    await Meteor.callAsync('forms.clearAnswers', formFromBDD._id);
+    navigate('/');
   };
 
   return (
     <>
-      {hasNotAnswers() ? (
+      {hasNotAnswers(formFromBDD) ? (
         <>
           <p>{i18n.__('page.resultPage.noAnswers')}</p>
           <Button onClick={() => navigate('/')}>{i18n.__('page.resultPage.goBack')}</Button>
@@ -89,6 +92,7 @@ export const ResultPage = () => {
           <Button onClick={() => setStatMode(!statMode)}>
             {statMode ? i18n.__('page.resultPage.answersByUser') : i18n.__('page.resultPage.answersStats')}
           </Button>
+          <Button onClick={() => deleteAllAnswers()}>Supprimer les réponses</Button>
           {statMode ? <GenerateChart statArray={statArray} /> : <AnswerListDisplay finalArray={finalArray} />}
         </>
       )}

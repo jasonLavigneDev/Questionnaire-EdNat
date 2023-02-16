@@ -128,6 +128,24 @@ Meteor.methods({
 });
 
 Meteor.methods({
+  'forms.clearAnswers': async function (formId) {
+    if (!this.userId) {
+      throw new Meteor.Error('api.forms.createForm.notLoggedIn', "Pas d'utilisateur connecté");
+    }
+    const form = await Forms.findOneAsync({ _id: formId });
+    if (form) {
+      if (form.owner !== this.userId) {
+        throw new Meteor.Error(
+          'api.forms.deleteForm.permissionDenied',
+          "Le formulaire n'appartient pas à l'utilisateur courant",
+        );
+      }
+      await Forms.updateAsync({ _id: formId }, { $set: { formAnswers: [] } });
+    }
+  },
+});
+
+Meteor.methods({
   'forms.getOne': async (id) => {
     return await Forms.findOneAsync({ _id: id });
   },
