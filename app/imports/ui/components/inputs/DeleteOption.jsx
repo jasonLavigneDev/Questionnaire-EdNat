@@ -11,11 +11,11 @@ export default function DeleteOption({ option, removeOption }) {
         key={uuidv4()}
       >
         <p>{option}</p>
-        <IconButton onClick={() => removeOption(option)}>
+        <IconButton onClick={() => removeOption(option)} sx={{ color: 'Crimson' }}>
           <DeleteIcon />
         </IconButton>
       </div>
-      <Divider variant="middle" />
+      <Divider variant="middle" sx={{ width: '85%', marginLeft: '6%' }} />
     </>
   );
 }
