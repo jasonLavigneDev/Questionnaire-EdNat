@@ -1,6 +1,7 @@
 import React from 'react';
 import { CSVLink } from 'react-csv';
 import i18n from 'meteor/universe:i18n';
+import { Button, Paper } from '@mui/material';
 
 export default function AnswerListDisplay({ finalArray }) {
   const csvArray = [];
@@ -29,25 +30,33 @@ export default function AnswerListDisplay({ finalArray }) {
 
   return (
     <>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: 15 }}>
+        <CSVLink
+          data={csvArray}
+          filename={'my-file.csv'}
+          target="_blank"
+          style={{ textDecoration: 'none', justifyContent: 'center' }}
+        >
+          <Button variant="contained">Télécharger les statistiques</Button>
+        </CSVLink>
+      </div>
       {finalArray.map((question) => (
-        <div>
-          <h2>{question.questionTitle}</h2>
-          {question.responses.map((response) => (
-            <ul>
-              <li>
-                <b>
-                  {response.userName} ({i18n.__('component.answerListDisplay.answerAt')}: {response.createdAt})
-                </b>
-                : {response.response}
-              </li>
-            </ul>
-          ))}
+        <div style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
+          <Paper sx={{ display: 'flex', flexDirection: 'column', width: '50%', padding: 5 }}>
+            <h2>{question.questionTitle}</h2>
+            {question.responses.map((response) => (
+              <ul>
+                <li>
+                  <b>
+                    {response.userName} (({i18n.__('component.answerListDisplay.answerAt')}: {response.createdAt})
+                  </b>
+                  : {response.response}
+                </li>
+              </ul>
+            ))}
+          </Paper>
         </div>
       ))}
-      <CSVLink data={csvArray} filename={'my-file.csv'} className="btn btn-primary" target="_blank">
-        Download me
-      </CSVLink>
-      ;
     </>
   );
 }
