@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import i18n from 'meteor/universe:i18n';
 import { useNavigate } from 'react-router-dom';
+import { Paper } from '@mui/material';
+
 import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
 import { FormContext } from '../contexts/FormContext';
-import { useLoaderData } from 'react-router-dom';
 import { DisplayGroups } from '../components/DisplayGroups';
 import SelectGroups from '../components/SelectGroups';
 import FormInfoInputs from '../components/FormInfoInputs';
@@ -27,14 +28,16 @@ export const FormIntro = () => {
       {acceptRgpd ? (
         <>
           <Breadcrumb />
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <FormInfoInputs isFormGroup={isFormGroup} />
-            {isFormGroup && (
-              <>
-                <SelectGroups userGroups={userGroups} />
-                <DisplayGroups userGroups={userGroups} />
-              </>
-            )}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Paper style={{ display: 'flex', flexDirection: 'column', padding: 20, width: '80%' }}>
+              <FormInfoInputs isFormGroup={isFormGroup} />
+              {isFormGroup && (
+                <>
+                  <SelectGroups userGroups={userGroups} />
+                  <DisplayGroups userGroups={userGroups} />
+                </>
+              )}
+            </Paper>
           </div>
           <Footer text={i18n.__('page.formIntro.goNext')} nextStep={navigateTo} />
         </>

@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, Paper, TextField } from '@mui/material';
 import React, { useContext } from 'react';
 import { i18n } from 'meteor/universe:i18n';
 import { FormContext } from '../contexts/FormContext';
