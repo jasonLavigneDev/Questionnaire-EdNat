@@ -2,88 +2,88 @@
   "api": {
     "users": {
       "labels": {
-        "username": "Nom d'utilisateur",
-        "firstName": "Prénom",
-        "lastName": "Nom",
-        "emails": "Adresse Électronique",
-        "emailAddress": "Adresse Électronique",
-        "emailVerified": "Adresse Vérifiée",
-        "createdAt": "Créé le",
-        "lastLogin": "Dernière connexion",
-        "profile": "Profil",
+        "username": "Username",
+        "firstName": "Firstname",
+        "lastName": "Lastname",
+        "emails": "Emails",
+        "emailAddress": "Email address",
+        "emailVerified": "Email verified",
+        "createdAt": "Created at",
+        "lastLogin": "Last login",
+        "profile": "Profile",
         "services": "Services",
         "heartbeat": "Heartbeat",
         "structure": "Structure",
-        "primaryEmail": "Adresse électronique principale",
-        "language": "Langage Préféré",
-        "logoutType": "Méthode De Déconnexion",
+        "primaryEmail": "Primary Email address",
+        "language": "Preferred Language",
+        "logoutType": "Logout type",
         "avatar": "Avatar"
       },
       "setLogoutType": {
-        "notPermitted": "Non autorisé"
+        "notPermitted": "Not authorized"
       },
-      "mustBeLoggedIn": "L'utilisateur doit être connecté"
+      "mustBeLoggedIn": "User must be logged in"
     },
     "forms": {
       "labels": {
-        "title": "Titre",
+        "title": "Title",
         "desc": "Description",
-        "isModel": "Modèle",
-        "createdAt": "Créé le",
-        "owner": "Propriétaire",
+        "isModel": "Model",
+        "createdAt": "Created at",
+        "owner": "Owner",
         "public": "Public",
-        "groups": "Groupes",
-        "components": "Composants",
+        "groups": "Groups",
+        "components": "Components",
         "formAnswers": {
-          "answers": "Réponses",
-          "userId": "ID utilisateur",
-          "answer": "Réponse"
+          "answers": "Answers",
+          "userId": "User ID",
+          "answer": "Answer"
         },
         "component": {
-          "id": "ID composant",
-          "type": "Type de composant",
-          "title": "Titre du composant",
-          "choices": "Choix du composant"
+          "id": "Component ID",
+          "type": "Component type",
+          "title": "Component Title",
+          "choices": "Component Choice"
         }
       },
       "createForm": {
-        "noUser": "Aucun utilisateur trouvé.",
-        "notLoggedIn": "L'utilisateur n'est pas connecté."
+        "noUser": "No user found.",
+        "notLoggedIn": "User is not logged in."
       },
       "deleteForm": {
-        "permissionDenied": "Permission refusée.",
-        "notOwner": "L'utilisateur courant n'est pas propriétaire du formulaire.",
-        "notFound": "Formulaire introuvable.",
-        "notExist": "Le formulaire spéficié n'existe pas."
+        "permissionDenied": "Permission denied.",
+        "notOwner": "Current user is not form owner.",
+        "notFound": "Form not found.",
+        "notExist": "Specified form does not exist."
       }
     },
     "groups": {
       "labels": {
-        "name": "Nom",
+        "name": "Name",
         "slug": "Slug",
         "description": "Description",
-        "content": "Description longue",
-        "active": "Actif",
-        "groupPadID": "ID de Pad du groupe",
+        "content": "Long description",
+        "active": "Active",
+        "groupPadID": "Group pad ID",
         "digest": "Digest",
         "type": "Type",
         "avatar": "Avatar",
-        "applications": "ID de l'application",
-        "owner": "Propriétaire",
-        "admins": "Administrateur",
-        "animators": "Animateurs",
-        "members": "Membres",
-        "candidates": "Candidats",
-        "numCandidates": "Nombre de candidats",
+        "applications": "Application ID",
+        "owner": "Owner",
+        "admins": "Administrators",
+        "animators": "Animators",
+        "members": "Members",
+        "candidates": "Candidates",
+        "numCandidates": "Candidates number",
         "plugins": "Plugins",
-        "articles": "Publications",
-        "meetingParams": "Paramètre de meeting"
+        "articles": "Articles",
+        "meetingParams": "Meeting parameters"
       },
       "types": {
-        "open": "ouvert",
-        "moderated": "modéré",
-        "private": "réservé",
-        "automatic": "automatique"
+        "open": "open",
+        "moderated": "moderated",
+        "private": "private",
+        "automatic": "automatic"
       }
     }
   },
@@ -93,115 +93,115 @@
   },
   "page": {
     "answerPage": {
-      "formNotFound": "Le formulaire n'existe pas"
+      "formNotFound": "Form does not exist"
     },
     "errorPage": {
-      "title": "Erreur",
-      "desc": "Une erreur s'est produite"
+      "title": "Error",
+      "desc": "An error occurred"
     },
     "formIntro": {
-      "goNext": "Passer à l'étape suivante"
+      "goNext": "Go to next step"
     },
     "formPrevisualizer": {
-      "saveForm": "Enregistrer le résultat",
-      "updateForm": "Mettre à jour le formulaire"
+      "saveForm": "Save result",
+      "updateForm": "Update form"
     },
     "homePage": {
-      "login": "Veuillez vous connecter",
-      "newForm": "Nouveau questionnaire",
+      "login": "Please log in",
+      "newForm": "New form",
       "formsList": "Forms list"
     },
     "resultPage": {
-      "noAnswers": "Il n'y a pas de réponses pour ce formulaire",
-      "goBack": "Retour",
-      "formAnswers": "Réponses au formulaire",
-      "answersByUser": "Voir les réponses par utilisateur",
-      "answersStats": "Voir les statistiques"
+      "noAnswers": "There are no answers for this form",
+      "goBack": "Back",
+      "formAnswers": "Form answers",
+      "answersByUser": "Display answers by user",
+      "answersStats": "Display statistics"
     }
   },
   "component": {
     "inputBuilder": {
-      "inputType": "Choisissez le type de question / réponse",
-      "inputOrder": "Organisez vos questions"
+      "inputType": "Choose question / answer type",
+      "inputOrder": "Organise your questions"
     },
     "inputChoice": {
-      "questionType": "Type de question"
+      "questionType": "Question type"
     },
     "submitAnswerForm": {
-      "enterName": "Entrez votre nom",
-      "updateAnswers": "Mettre à jour les réponses",
-      "submitAnswers": "Soumettre ce formulaire complété",
+      "enterName": "Enter your name",
+      "updateAnswers": "Update answers",
+      "submitAnswers": "Submit this completed form",
       "acceptRgpd": "Accept RGPD"
     },
     "visualizer": {
-      "connect": "Veuillez vous connecter pour répondre a ce questionnaire"
+      "connect": "Please log in to answer this form"
     },
     "breadcrumb": {
       "intro": "Introduction",
-      "components": "Composants",
-      "previsualization": "Prévisualisation"
+      "components": "Components",
+      "previsualization": "Preview"
     },
     "footer": {
-      "goBack": "Retour"
+      "goBack": "Back"
     },
     "header": {
       "title": "Questionnaire"
     },
     "headerMenu": {
-      "login": "Se connecter",
-      "logout": "Se déconnecter"
+      "login": "Log in",
+      "logout": "Logout"
     },
     "answerListDisplay": {
-      "answerAt": "Répondu le"
+      "answerAt": "Answered at "
     },
     "componentBuilder": {
       "errors": {
-        "noTitle": "Titre manquant",
-        "noOptions": "Options manquantes",
-        "notFound": "Le composant n'existe pas",
-        "noTitleOrOptions": "Le formulaire ne contient pas de titre ou de questions"
+        "noTitle": "Title is missing",
+        "noOptions": "Options are missing",
+        "notFound": "Component does not exist",
+        "noTitleOrOptions": "Form does not include title or options"
       },
-      "questionTitle": "Entrez le titre de la question",
-      "inputChoice": "Entrez un choix de réponse",
-      "submit": "Valider",
-      "update": "Mettre à jour"
+      "questionTitle": "Enter this question's title",
+      "inputChoice": "Enter an answer choice",
+      "submit": "Submit",
+      "update": "Update"
     },
     "formActionButton": {
-      "answer": "Répondre",
-      "editAnswers": "Modifier les réponses",
-      "editForm": "Modifier le formulaire",
-      "deleteForm": "Supprimer le formulaire",
-      "copyUrl": "Copier l'URL du formulaire"
+      "answer": "Answer",
+      "editAnswers": "Edit answers",
+      "editForm": "Edit form",
+      "deleteForm": "Delete form",
+      "copyUrl": "Copy form URL"
     },
     "formInfoInputs": {
       "formTitle": "Enter forms's title",
-      "formDesc": "Entrez la description du formulaire",
-      "formDescHelp": "La description est facultative",
-      "formPublic": "Formulaire public",
-      "formGroups": "Réservé aux groupes"
+      "formDesc": "Enter form description",
+      "formDescHelp": "Description is optional",
+      "formPublic": "Public form",
+      "formGroups": "Limited to groups"
     },
     "inputs": {
-      "radioButton": "Bouton radio (choix unique)",
-      "checkbox": "Case à cocher (choix multiple)",
-      "select": "Liste déroulante",
-      "number": "Nombre",
-      "text": "Texte court",
-      "textArea": "Texte long",
+      "radioButton": "Radio button (single choice)",
+      "checkbox": "Check box (multiple choices)",
+      "select": "Dropdown list",
+      "number": "Number",
+      "text": "Short text",
+      "textArea": "Long text",
       "date": "Date"
     },
     "componentManager": {
       "errors": {
-        "noQuestionBefore": "Déplacement impossible: il n'y a pas de question avant celle-ci.",
-        "noQuestionAfter": "Déplacement impossible: il n'y a pas de question après celle-ci."
+        "noQuestionBefore": "Can not move: there is no question before this one.",
+        "noQuestionAfter": "Can not move: there is no question after this one."
       }
     },
     "selectGroups": {
-      "noGroup": "Vous n'appartenez à aucun groupe",
-      "groupChoice": "Choix du groupe",
-      "addGroup": "Ajouter le groupe"
+      "noGroup": "You're not member of any group",
+      "groupChoice": "Group choice",
+      "addGroup": "Add group"
     },
     "statsDisplay": {
-      "numberOfAnswers": "Nombre de réponses: "
+      "numberOfAnswers": "Answers count: "
     },
     "modalRgpd": {
       "refuse": "Refuse",
