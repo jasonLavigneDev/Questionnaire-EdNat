@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import i18n from 'meteor/universe:i18n';
 import { useNavigate } from 'react-router-dom';
 import { Paper } from '@mui/material';
+import { useLoaderData } from 'react-router-dom';
 
 import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
