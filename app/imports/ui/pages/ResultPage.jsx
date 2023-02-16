@@ -92,7 +92,7 @@ export const ResultPage = () => {
           <Button onClick={() => setStatMode(!statMode)}>
             {statMode ? i18n.__('page.resultPage.answersByUser') : i18n.__('page.resultPage.answersStats')}
           </Button>
-          <Button onClick={() => deleteAllAnswers()}>Supprimer les réponses</Button>
+          <Button onClick={() => deleteAllAnswers()}>{i18n.__('page.resultPage.deleteAnswers')}</Button>
           {statMode ? <GenerateChart statArray={statArray} /> : <AnswerListDisplay finalArray={finalArray} />}
         </>
       )}

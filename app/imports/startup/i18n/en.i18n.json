@@ -116,7 +116,8 @@
       "goBack": "Back",
       "formAnswers": "Form answers",
       "answersByUser": "Display answers by user",
-      "answersStats": "Display statistics"
+      "answersStats": "Display statistics",
+      "deleteAnswers": "Delete all answers"
     }
   },
   "component": {
