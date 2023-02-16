@@ -14,10 +14,9 @@ export const TextArea = ({ title, answerMode, questionId, answer = {}, answerReq
 
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <FormControl required={answerRequired}>
+      <FormControl required={answerRequired} sx={{ width: '80%' }}>
         <FormLabel id="textAreaInput-title">{title}</FormLabel>
         <TextField
-          sx={{ width: '60%' }}
           multiline
           defaultValue={answer.answer}
           rows={3}

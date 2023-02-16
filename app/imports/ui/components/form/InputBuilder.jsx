@@ -38,7 +38,7 @@ export const InputBuilder = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'row', maxHeight: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', maxHeight: '100%', justifyContent: 'space-evenly' }}>
         <div style={{ display: 'flex', flexDirection: 'column', width: '50vw' }}>
           <h3>{i18n.__('component.inputBuilder.inputType')}</h3>
           {editMode ? (
@@ -55,7 +55,7 @@ export const InputBuilder = () => {
                 <div
                   style={{ display: 'flex', paddingLeft: '0.5vw', width: '18vw', alignItems: 'center', height: '5vh' }}
                 >
-                  {currentComponent.title}
+                  <p style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}> {currentComponent.title}</p>
                   <div>
                     {currentComponent.answerRequired && (
                       <Tooltip title="la question est required">

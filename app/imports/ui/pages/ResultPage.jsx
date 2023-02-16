@@ -1,8 +1,11 @@
-import { Button } from '@mui/material';
+import { Button, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import React from 'react';
 import i18n from 'meteor/universe:i18n';
 import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import BarChartIcon from '@mui/icons-material/BarChart';
+
 import AnswerListDisplay from '../components/AnswerListDisplay';
 import GenerateChart from '../components/GenerateChart';
 import { hasNotAnswers } from '../utils/utils';
@@ -86,13 +89,19 @@ export const ResultPage = () => {
         </>
       ) : (
         <>
-          <h1 style={{ textAlign: 'center' }}>
-            {i18n.__('page.resultPage.formAnswers')} : {formFromBDD.title}
-          </h1>
-          <Button onClick={() => setStatMode(!statMode)}>
-            {statMode ? i18n.__('page.resultPage.answersByUser') : i18n.__('page.resultPage.answersStats')}
-          </Button>
-          <Button onClick={() => deleteAllAnswers()}>{i18n.__('page.resultPage.deleteAnswers')}</Button>
+          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+            <h1 style={{ display: 'flex', flex: 3 }}>{formFromBDD.title}</h1>
+            <div style={{ justifyContent: 'flex-end' }}>
+              <ToggleButtonGroup value={statMode} exclusive>
+                <ToggleButton value={false} onClick={() => setStatMode(!statMode)}>
+                  <ListAltIcon />
+                </ToggleButton>
+                <ToggleButton value={true} onClick={() => setStatMode(!statMode)}>
+                  <BarChartIcon />
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </div>
+          </div>
           {statMode ? <GenerateChart statArray={statArray} /> : <AnswerListDisplay finalArray={finalArray} />}
         </>
       )}

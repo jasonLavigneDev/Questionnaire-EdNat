@@ -1,3 +1,4 @@
+import { Paper } from '@mui/material';
 import React from 'react';
 import StatsBar from './StatsBar';
 import StatsPie from './StatsPie';
@@ -23,10 +24,12 @@ export default function GenerateChart({ statArray }) {
   return (
     <>
       {statArray.map((question) => (
-        <>
-          <h2>{question.questionTitle}</h2>
-          {generateChart(question)}
-        </>
+        <div style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
+          <Paper sx={{ display: 'flex', flexDirection: 'column', width: '50%', padding: 5 }}>
+            <h2>{question.questionTitle}</h2>
+            <div>{generateChart(question)}</div>
+          </Paper>
+        </div>
       ))}
     </>
   );

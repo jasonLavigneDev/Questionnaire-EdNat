@@ -22,7 +22,7 @@ export const DisplayGroups = ({ userGroups }) => {
   return (
     <div>
       {currentForm.groups.map((id) => (
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '50%' }}>
           <p>{getGroupName(id)}</p>
           <IconButton sx={{ color: 'salmon' }} onClick={() => removeGroup(id)}>
             <DeleteIcon />
