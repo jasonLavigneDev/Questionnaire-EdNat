@@ -65,9 +65,7 @@ export default function StatsPie({ question }) {
       style={{
         display: 'flex',
         height: '35vh',
-        width: '50vw',
         justifyContent: 'space-between',
-        marginLeft: '4vw',
       }}
     >
       <div style={{ display: 'flex', flexDirection: 'column' }}>

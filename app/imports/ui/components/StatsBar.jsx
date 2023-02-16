@@ -51,5 +51,30 @@ export default function StatsBar({ question }) {
     ],
   };
 
-  return <Bar options={options} data={data} />;
+  const getAllCountStat = (stats) => {
+    let cpt = 0;
+    stats.map((stat) => {
+      cpt += stat.count;
+    });
+    return cpt;
+  };
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        height: '35vh',
+        justifyContent: 'space-between',
+      }}
+    >
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {question.stat.map((oneStat) => (
+          <p>
+            {oneStat.answer}: {((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%
+          </p>
+        ))}
+      </div>
+      <Bar options={options} data={data} />
+    </div>
+  );
 }
