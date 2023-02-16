@@ -55,6 +55,17 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
     });
   }, [answerForm]);
 
+  const AcceptRgpd = () => {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <FormControlLabel
+          control={<CheckBox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
+          label={i18n.__('component.submitAnswerForm.acceptRgpd')}
+        />
+      </div>
+    );
+  };
+
   return (
     <div>
       {!user ? (
@@ -67,24 +78,14 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
             placeholder={i18n.__('component.submitAnswerForm.enterName')}
             onChange={(e) => setPublicName(e.target.value)}
           />
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <FormControlLabel
-              control={<Checkbox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
-              label="Accept RGPD"
-            />
-          </div>
+          <AcceptRgpd />
           <Button disabled={!publicName || !isCheckedRgpd || !answersAreComplete} onClick={submitAnswerForm}>
             {i18n.__('component.submitAnswerForm.submitAnswers')}
           </Button>
         </div>
       ) : (
         <>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <FormControlLabel
-              control={<CheckBox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
-              label="Accept RGPD"
-            />
-          </div>
+          <AcceptRgpd />
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Button onClick={submitAnswerForm} disabled={!isCheckedRgpd || !answersAreComplete}>
               {hasAlreadyRespond(user, currentForm)

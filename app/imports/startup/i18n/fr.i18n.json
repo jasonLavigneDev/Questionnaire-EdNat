@@ -130,7 +130,8 @@
     "submitAnswerForm": {
       "enterName": "Entrez votre nom",
       "updateAnswers": "Mettre à jour les réponses",
-      "submitAnswers": "Soumettre ce formulaire complété"
+      "submitAnswers": "Soumettre ce formulaire complété",
+      "acceptRgpd": "Accepter le RGPD"
     },
     "visualizer": {
       "connect": "Veuillez vous connecter pour répondre a ce questionnaire"
@@ -201,6 +202,10 @@
     },
     "statsDisplay": {
       "numberOfAnswers": "Nombre de réponses: "
+    },
+    "modalRgpd": {
+      "refuse": "Refuser",
+      "accept": "Accepter"
     }
   }
 }
