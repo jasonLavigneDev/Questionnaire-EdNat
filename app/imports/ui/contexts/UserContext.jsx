@@ -15,7 +15,7 @@ export const UserProvider = ({ children }) => {
   const isAuthenticated = !!user;
 
   useEffect(() => {
-    if (user) {
+    if (user && !isLoading) {
       i18n.setLocale(user.language);
       document.documentElement.setAttribute('lang', user.language);
     }

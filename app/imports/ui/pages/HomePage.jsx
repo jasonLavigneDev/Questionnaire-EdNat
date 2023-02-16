@@ -33,7 +33,8 @@ export const HomePage = () => {
         </Button>
       </div>
       <h2>{i18n.__('page.homePage.formsList')}</h2>
-      {allUserForms && allUserForms.map((userForm) => <UserForm userForm={userForm} deleteForm={deleteForm} />)}
+      {allUserForms &&
+        allUserForms.map((userForm) => <UserForm userForm={userForm} deleteForm={deleteForm} key={userForm._id} />)}
     </>
   );
 };
