@@ -143,6 +143,23 @@ Meteor.methods({
 });
 
 Meteor.methods({
+  'forms.toggleActive': async function (formId, active) {
+    const form = await Forms.findOneAsync({ _id: formId });
+    if (form) {
+      if (form.owner == this.userId) {
+        form.active = active;
+        console.log(form);
+        await Forms.updateAsync({ _id: formId }, { $set: { active: form.active } });
+      } else {
+        throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
+      }
+    } else {
+      throw new Meteor.Error('api.forms.deleteForm.notExist', i18n.__('api.forms.deleteForm.notExist'));
+    }
+  },
+});
+
+Meteor.methods({
   'forms.getOne': async (id) => {
     return await Forms.findOneAsync({ _id: id });
   },

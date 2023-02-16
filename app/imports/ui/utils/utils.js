@@ -24,6 +24,15 @@ export const hasNotAnswers = (form) => {
   return false;
 };
 
+export const isFormActive = (form) => {
+  return form.active;
+};
+
+export const toggleActiveForm = async (form) => {
+  form.active = !form.active;
+  await Meteor.callAsync('forms.toggleActive', form._id, form.active);
+};
+
 export const hasAlreadyRespond = (user, form) => {
   if (hasNotAnswers(form)) return false;
   const { formAnswers } = form;

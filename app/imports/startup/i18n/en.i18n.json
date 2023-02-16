@@ -135,7 +135,8 @@
       "acceptRgpd": "Accept RGPD"
     },
     "visualizer": {
-      "connect": "Please log in to answer this form"
+      "connect": "Please log in to answer this form",
+      "formNotActive": "This form is not active."
     },
     "breadcrumb": {
       "intro": "Introduction",
@@ -172,7 +173,9 @@
       "editAnswers": "Edit answers",
       "editForm": "Edit form",
       "deleteForm": "Delete form",
-      "copyUrl": "Copy form URL"
+      "copyUrl": "Copy form URL",
+      "isActive": "Ce formulaire est actif.",
+      "isNotActive": "Ce formulaire n'est pas actif."
     },
     "formInfoInputs": {
       "formTitle": "Enter forms's title",

@@ -135,7 +135,8 @@
       "acceptRgpd": "Accepter le RGPD"
     },
     "visualizer": {
-      "connect": "Veuillez vous connecter pour répondre a ce questionnaire"
+      "connect": "Veuillez vous connecter pour répondre a ce questionnaire",
+      "formNotActive": "Ce formulaire n'est pas actif."
     },
     "breadcrumb": {
       "intro": "Introduction",
@@ -172,7 +173,9 @@
       "editAnswers": "Modifier les réponses",
       "editForm": "Modifier le formulaire",
       "deleteForm": "Supprimer le formulaire",
-      "copyUrl": "Copier l'URL du formulaire"
+      "copyUrl": "Copier l'URL du formulaire",
+      "isActive": "Ce formulaire est actif.",
+      "isNotActive": "Ce formulaire n'est pas actif."
     },
     "formInfoInputs": {
       "formTitle": "Entrez le titre du formulaire",

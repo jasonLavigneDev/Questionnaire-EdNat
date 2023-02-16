@@ -9,6 +9,7 @@ import { DisplayGroups } from '../components/DisplayGroups';
 import SelectGroups from '../components/SelectGroups';
 import FormInfoInputs from '../components/FormInfoInputs';
 import ModalRgpd from '../components/system/ModalRgpd';
+import { hasNotAnswers } from '../utils/utils';
 
 export const FormIntro = () => {
   const { isFormGroup, setCurrentForm, acceptRgpd } = useContext(FormContext);
@@ -19,7 +20,12 @@ export const FormIntro = () => {
   };
 
   useEffect(() => {
-    if (formFromBDD) setCurrentForm(formFromBDD);
+    if (formFromBDD) {
+      if (formFromBDD.active || !hasNotAnswers(formFromBDD)) {
+        return navigate(`/`);
+      }
+      setCurrentForm(formFromBDD);
+    }
   }, []);
 
   return (

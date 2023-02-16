@@ -32,6 +32,7 @@ export const Visualizer = ({ answerMode = false }) => {
     if (userAnswers) setAnswerForm(userAnswers);
   }, []);
 
+  if (!currentForm.active) return <p>{i18n.__('component.visualizer.formNotActive')}</p>;
   if (!user && !currentForm.isPublic) return <p>{i18n.__('component.visualizer.connect')}</p>;
 
   return (
