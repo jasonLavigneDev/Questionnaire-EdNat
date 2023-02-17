@@ -18,7 +18,7 @@ export const RadioInput = ({ title, choices, answerMode, questionId, answer = {}
       <FormControl
         required={answerRequired}
         onChange={(e) => validateAnswer(e)}
-        error={answerRequired && !!!currentAnswer}
+        error={answerRequired && !currentAnswer}
       >
         <FormLabel>{title}</FormLabel>
         <RadioGroup defaultValue={answer.answer} name="radio-buttons-group">

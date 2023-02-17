@@ -3,7 +3,7 @@ import { CSVLink } from 'react-csv';
 import i18n from 'meteor/universe:i18n';
 import { Button, Paper } from '@mui/material';
 
-export default function AnswerListDisplay({ finalArray }) {
+export default function AnswerListDisplay({ title, finalArray }) {
   const csvArray = [];
 
   finalArray.map((question) => {
@@ -13,13 +13,13 @@ export default function AnswerListDisplay({ finalArray }) {
       if (index === -1) {
         if (response.response) {
           let newObj = { user: response.userName };
-          newObj[key] = response.response[0];
+          newObj[key] = response.response;
           csvArray.push(newObj);
         }
       } else {
         if (csvArray[index]['user'] === response.userName) {
           if (response.response) {
-            csvArray[index][key] = response.response[0];
+            csvArray[index][key] = response.response;
           }
         }
       }
@@ -33,7 +33,7 @@ export default function AnswerListDisplay({ finalArray }) {
       <div style={{ display: 'flex', justifyContent: 'center', margin: 15 }}>
         <CSVLink
           data={csvArray}
-          filename={'my-file.csv'}
+          filename={`${title}.csv`}
           target="_blank"
           style={{ textDecoration: 'none', justifyContent: 'center' }}
         >

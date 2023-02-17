@@ -22,7 +22,7 @@ export const DateInput = ({ title, answerMode, questionId, answer = {}, answerRe
           defaultValue={answer.answer}
           required={answerRequired}
           onBlur={(e) => validateAnswer(e)}
-          error={answerRequired && !!!currentAnswer}
+          error={answerRequired && !currentAnswer}
         />
       </FormControl>
     </Paper>

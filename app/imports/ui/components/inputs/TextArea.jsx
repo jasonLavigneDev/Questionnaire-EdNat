@@ -21,7 +21,7 @@ export const TextArea = ({ title, answerMode, questionId, answer = {}, answerReq
           defaultValue={answer.answer}
           rows={3}
           onBlur={(e) => validateAnswer(e)}
-          error={answerRequired && !!!currentAnswer}
+          error={answerRequired && !currentAnswer}
         />
       </FormControl>
     </Paper>

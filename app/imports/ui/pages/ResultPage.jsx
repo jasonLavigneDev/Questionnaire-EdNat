@@ -101,8 +101,15 @@ export const ResultPage = () => {
                 </ToggleButton>
               </ToggleButtonGroup>
             </div>
+            <Button disabled onClick={() => deleteAllAnswers()}>
+              {i18n.__('page.resultPage.deleteAnswers')}
+            </Button>
           </div>
-          {statMode ? <GenerateChart statArray={statArray} /> : <AnswerListDisplay finalArray={finalArray} />}
+          {statMode ? (
+            <GenerateChart statArray={statArray} />
+          ) : (
+            <AnswerListDisplay title={formFromBDD.title} finalArray={finalArray} />
+          )}
         </>
       )}
     </>

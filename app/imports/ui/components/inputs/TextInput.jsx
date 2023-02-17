@@ -14,7 +14,7 @@ export const TextInput = ({ title, answerMode, questionId, answer = {}, answerRe
 
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <FormControl required={answerRequired} error={answerRequired && !!!currentAnswer} sx={{ width: '80%' }}>
+      <FormControl required={answerRequired} error={answerRequired && !currentAnswer} sx={{ width: '80%' }}>
         <FormLabel id="textInput-title">{title}</FormLabel>
         <TextField sx={{ width: '60%' }} defaultValue={answer.answer} onBlur={(e) => handleChange(e)} />
       </FormControl>

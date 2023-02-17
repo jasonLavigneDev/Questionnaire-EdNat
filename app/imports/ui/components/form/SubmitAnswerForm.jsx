@@ -1,5 +1,4 @@
-import CheckBox from '@mui/icons-material/CheckBox';
-import { Button, FormControlLabel } from '@mui/material';
+import { Button, Checkbox, FormControlLabel } from '@mui/material';
 import i18n from 'meteor/universe:i18n';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -58,7 +57,7 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <FormControlLabel
-          control={<CheckBox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
+          control={<Checkbox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
           label={i18n.__('component.submitAnswerForm.acceptRgpd')}
         />
       </div>
