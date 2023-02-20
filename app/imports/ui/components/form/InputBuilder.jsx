@@ -1,6 +1,5 @@
 import React from 'react';
-import { Paper, Tooltip } from '@mui/material';
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
+import { Paper, Tooltip, Typography } from '@mui/material';
 import i18n from 'meteor/universe:i18n';
 import { InputChoice } from './InputChoice';
 import ManageComponents from '../ManageComponents';
@@ -49,13 +48,14 @@ export const InputBuilder = () => {
                   style={{ display: 'flex', paddingLeft: '0.5vw', width: '18vw', alignItems: 'center', height: '5vh' }}
                 >
                   <p style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}> {currentComponent.title}</p>
-                  <div>
-                    {currentComponent.answerRequired && (
-                      <Tooltip title="la question est required">
-                        <PriorityHighIcon />
-                      </Tooltip>
-                    )}
-                  </div>
+                  {currentComponent.answerRequired && (
+                    <Tooltip title="la question est required">
+                      <Typography sx={{ marginLeft: 0.5 }} color="red" variant="h4">
+                        *
+                      </Typography>
+                    </Tooltip>
+                  )}
+                  <div></div>
                 </div>
                 <div className={class3}>
                   <ManageComponents currentComponent={currentComponent} index={index} />
