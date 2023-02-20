@@ -20,7 +20,7 @@ export const ComponentBuilder = () => {
 
   const submitComponent = () => {
     if (question.title) {
-      if (IsMultiAnswersComponent() && !question.choices) {
+      if (IsMultiAnswersComponent() && (!question.choices || question.choices.length == 0)) {
         setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
         return;
       }
