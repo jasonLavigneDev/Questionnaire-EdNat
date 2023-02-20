@@ -144,7 +144,8 @@
       "previsualization": "Preview"
     },
     "footer": {
-      "goBack": "Back"
+      "goBack": "Back",
+      "cancel": "Cancel"
     },
     "header": {
       "title": "Questionnaire"

@@ -104,6 +104,9 @@ export const ResultPage = () => {
                 </ToggleButton>
               </ToggleButtonGroup>
             </div>
+            <Button sx={{ marginTop: 2 }} onClick={() => navigate('/')}>
+              {i18n.__('page.resultPage.goBack')}
+            </Button>
           </div>
           {statMode ? <GenerateChart statArray={statArray} /> : <AnswerListDisplay finalArray={finalArray} />}
         </>

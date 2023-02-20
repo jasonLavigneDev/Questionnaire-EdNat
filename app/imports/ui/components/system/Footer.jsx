@@ -35,9 +35,14 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
               </Button>
             </>
           ) : (
-            <Button variant="contained" disabled={isTitleMissing} onClick={() => nextStep()}>
-              {text}
-            </Button>
+            <>
+              <Button variant="contained" sx={{ marginRight: '5vw' }} onClick={() => navigate(`/`)}>
+                {i18n.__('component.footer.cancel')}
+              </Button>
+              <Button variant="contained" disabled={isTitleMissing} onClick={() => nextStep()}>
+                {text}
+              </Button>
+            </>
           )}
         </div>
       </BottomNavigation>
