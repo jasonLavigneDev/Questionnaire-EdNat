@@ -37,6 +37,5 @@ export const hasAlreadyRespond = (user, form) => {
 
 export const copyUrlToClipBoard = (id) => {
   const url = `http://localhost:3060/visualizer/${id}`;
-  console.log('url copy to ClipBoard', url);
   return navigator.clipboard.writeText(url);
 };

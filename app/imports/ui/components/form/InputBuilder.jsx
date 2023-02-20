@@ -8,8 +8,6 @@ import { useSelector } from 'react-redux';
 export const InputBuilder = () => {
   const form = useSelector((state) => state.form);
 
-  console.log('form', form);
-
   const class1 = {
     display: 'flex',
     flexDirection: 'column',
@@ -45,9 +43,25 @@ export const InputBuilder = () => {
             {form.components.map((currentComponent, index) => (
               <Paper sx={{ display: 'flex', width: '28vw', marginBottom: 1, border: '1px black solid' }}>
                 <div
-                  style={{ display: 'flex', paddingLeft: '0.5vw', width: '18vw', alignItems: 'center', height: '5vh' }}
+                  style={{
+                    display: 'flex',
+                    paddingLeft: '0.5vw',
+                    width: '18vw',
+                    alignItems: 'center',
+                    height: '5vh',
+                  }}
                 >
-                  <p style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}> {currentComponent.title}</p>
+                  <p
+                    style={{
+                      maxHeight: '1.2rem',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                      overflowY: 'hidden',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {currentComponent.title}
+                  </p>
                   {currentComponent.answerRequired && (
                     <Tooltip title="la question est required">
                       <Typography sx={{ marginLeft: 0.5 }} color="red" variant="h4">
