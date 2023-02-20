@@ -17,7 +17,9 @@ const LanguageSwitcher = () => {
     handleClose();
     i18n.setLocale(lan);
     document.documentElement.setAttribute('lang', lan);
-    await Meteor.callAsync('users.setLanguage', { language: lan });
+    if (user) {
+      await Meteor.callAsync('users.setLanguage', { language: lan });
+    }
   };
 
   const flag = <img style={{ height: 40 }} alt="langue" src={`/images/i18n/fr.png`} />;
