@@ -48,7 +48,7 @@ export default function AnswerListDisplay({ finalArray }) {
               <ul>
                 <li>
                   <b>
-                    {response.userName} (({i18n.__('component.answerListDisplay.answerAt')}: {response.createdAt})
+                    {response.userName} ({i18n.__('component.answerListDisplay.answerAt')}: {response.createdAt})
                   </b>
                   : {response.response}
                 </li>
