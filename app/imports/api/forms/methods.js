@@ -108,6 +108,7 @@ export const deleteForm = new ValidatedMethod({
 Meteor.methods({
   'forms.updateAnswers': async (formId, newAnswer) => {
     const a = await Forms.findOneAsync({ _id: formId });
+
     let newTab = [];
     if (a) {
       if (a.formAnswers) {

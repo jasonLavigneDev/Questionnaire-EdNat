@@ -1,21 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel, Paper } from '@mui/material';
-import { AnswerContext } from '../../contexts/AnswerContext';
+import { addAnswers } from '../../redux/slices/answerFormSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const CheckBoxInput = ({ title, choices, answerMode, questionId, answer = {}, answerRequired }) => {
+export const CheckBoxInput = ({ title, choices, answerMode, questionId, answerRequired }) => {
   const [answers, setAnswers] = useState([]);
-  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
-
-  const { addAnswers } = useContext(AnswerContext);
+  const dispatch = useDispatch();
+  const inputAnswer = useSelector((state) =>
+    state.answerForm.answers.find((answer) => answer.questionId === questionId),
+  );
 
   const getIndex = (obj) => {
     return answers.findIndex((answer) => answer.name === obj);
   };
 
   const addCheckedAnswers = (event) => {
-    setCurrentAnswer(event.target.value);
-    const index = getIndex(event.target.name);
+    const index = getIndex(event.target.value);
 
     if (index === -1) {
       answers.push({ name: event.target.name, value: event.target.checked });
@@ -26,19 +27,19 @@ export const CheckBoxInput = ({ title, choices, answerMode, questionId, answer =
 
   const validateAnswer = () => {
     const tab = answers.filter((obj) => obj.value === true).map((obj) => obj.name);
-    if (answerMode) addAnswers(questionId, tab);
+    if (answerMode) dispatch(addAnswers({ questionId, value: tab }));
   };
 
   const getValue = (choice) => {
     const index = getIndex(choice);
-    if (index === -1) return false;
     return answers[index]?.value;
   };
 
   useEffect(() => {
-    if (answer.answer) {
+    if (inputAnswer) {
       const answersCopy = [...answers];
-      answer.answer.map((resp) => {
+
+      inputAnswer.answer.map((resp) => {
         answersCopy.push({ name: resp, value: true });
       });
       setAnswers(answersCopy);
@@ -47,11 +48,7 @@ export const CheckBoxInput = ({ title, choices, answerMode, questionId, answer =
 
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <FormControl
-        required={answerRequired}
-        error={answerRequired && !!!currentAnswer}
-        onChange={() => validateAnswer()}
-      >
+      <FormControl required={answerRequired} error={answerRequired && !inputAnswer} onChange={() => validateAnswer()}>
         <FormLabel>{title}</FormLabel>
         <FormGroup>
           {choices.map((choice) => (

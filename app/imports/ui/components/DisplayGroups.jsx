@@ -1,10 +1,12 @@
 import { IconButton } from '@mui/material';
-import React, { useContext } from 'react';
-import { FormContext } from '../contexts/FormContext';
+import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeGroup } from '../redux/slices/formSlice';
 
 export const DisplayGroups = ({ userGroups }) => {
-  const { currentForm, setCurrentForm } = useContext(FormContext);
+  const dispatch = useDispatch();
+  const formGroups = useSelector((state) => state.form.groups);
 
   const getGroupName = (id) => {
     const index = userGroups.findIndex((group) => group._id === id);
@@ -14,17 +16,12 @@ export const DisplayGroups = ({ userGroups }) => {
     return 'N/A';
   };
 
-  const removeGroup = (id) => {
-    const { groups } = currentForm;
-    setCurrentForm({ ...currentForm, groups: groups.filter((groupId) => groupId !== id) });
-  };
-
   return (
     <div>
-      {currentForm.groups.map((id) => (
-        <div style={{ display: 'flex', justifyContent: 'space-between', width: '50%' }}>
+      {formGroups.map((id) => (
+        <div style={{ display: 'flex' }}>
           <p>{getGroupName(id)}</p>
-          <IconButton sx={{ color: 'salmon' }} onClick={() => removeGroup(id)}>
+          <IconButton sx={{ color: 'salmon' }} onClick={() => dispatch(removeGroup({ id }))}>
             <DeleteIcon />
           </IconButton>
         </div>

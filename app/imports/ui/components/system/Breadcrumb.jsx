@@ -3,12 +3,12 @@ import i18n from 'meteor/universe:i18n';
 import { useNavigate } from 'react-router-dom';
 import { Stepper, Step, StepButton } from '@mui/material';
 import { useEffect } from 'react';
-import { FormContext } from '../../contexts/FormContext';
+import { useSelector } from 'react-redux';
 
 export const Breadcrumb = () => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const { currentForm } = useContext(FormContext);
+  const form = useSelector((state) => state.form);
 
   const navigate = useNavigate();
 
@@ -36,12 +36,12 @@ export const Breadcrumb = () => {
               {i18n.__('component.breadcrumb.intro')}
             </StepButton>
           </Step>
-          <Step key="components" completed={activeStep === 2} disabled={!currentForm.title}>
+          <Step key="components" completed={activeStep === 2} disabled={!form.title}>
             <StepButton color="inherit" onClick={() => navigateTo('components')}>
               {i18n.__('component.breadcrumb.components')}
             </StepButton>
           </Step>
-          <Step key="previsualizer" disabled={currentForm.components.length === 0}>
+          <Step key="previsualizer" disabled={form.components.length === 0}>
             <StepButton color="inherit" onClick={() => navigateTo('previsualizer')}>
               {i18n.__('component.breadcrumb.previsualization')}
             </StepButton>

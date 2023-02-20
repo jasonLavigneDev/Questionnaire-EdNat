@@ -48,36 +48,39 @@ export const ResultPage = () => {
   };
 
   finalArray.map((question) => {
-    if (CanHaveStat(question.questionType)) {
-      const stat = [];
-      question.responses.map((response) => {
-        const index = stat.findIndex((res) => response.response === res.answer);
-        if (index !== -1) {
-          stat[index].count++;
-        } else {
-          stat.push({ answer: response.response, count: 1 });
-        }
-      });
-
-      let choices = [];
-      if (question.questionType === 'checkboxInput') {
-        choices = formFromBDD.components.filter((component) => component.id === question.questionId)[0].choices;
+    const stat = [];
+    question.responses.map((response) => {
+      const index = stat.findIndex((res) => response.response === res.answer);
+      if (index !== -1) {
+        stat[index].count++;
+      } else {
+        stat.push({ answer: response.response, count: 1 });
       }
+    });
 
-      statArray.push({
-        questionTitle: question.questionTitle,
-        questionId: question.questionId,
-        questionType: question.questionType,
-        stat: stat,
-        questionChoices: choices,
-      });
+    let choices = [];
+    if (question.questionType === 'checkboxInput') {
+      choices = formFromBDD.components.filter((component) => component.id === question.questionId)[0].choices;
     }
+
+    statArray.push({
+      questionTitle: question.questionTitle,
+      questionId: question.questionId,
+      questionType: question.questionType,
+      stat: stat,
+      questionChoices: choices,
+    });
   });
 
   const deleteAllAnswers = async () => {
     formFromBDD.formAnswers = [];
     await Meteor.callAsync('forms.clearAnswers', formFromBDD._id);
     navigate('/');
+  };
+
+  const hasNotAnswers = () => {
+    if (!formFromBDD.formAnswers || formFromBDD.formAnswers.length === 0) return true;
+    return false;
   };
 
   return (

@@ -5,6 +5,8 @@ import '../locales';
 import { Meteor } from 'meteor/meteor';
 import { App } from '../../ui/layouts/App';
 import { getLang } from '../../api/utils';
+import store from '../../ui/redux/store';
+import { Provider } from 'react-redux';
 
 /** Startup the application by rendering the router. */
 Meteor.startup(() => {
@@ -14,5 +16,11 @@ Meteor.startup(() => {
 
   const root = createRoot(container);
 
-  root.render(<App />);
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>,
+  );
 });

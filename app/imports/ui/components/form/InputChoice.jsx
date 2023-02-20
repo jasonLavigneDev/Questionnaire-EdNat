@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import i18n from 'meteor/universe:i18n';
+import React from 'react';
 import { FormControl, Select, InputLabel, MenuItem, OutlinedInput, Divider } from '@mui/material';
-import { FormContext } from '../../contexts/FormContext';
 import { ComponentBuilder } from '../ComponentBuilder';
 import { LIST_OF_INPUT_BUILDER } from '../listOfInputBuilder';
+import { useDispatch, useSelector } from 'react-redux';
+import { addQuestionType } from '../../redux/slices/questionSlice';
 
 export const InputChoice = () => {
-  const [inputType, setInputType] = useState('');
-  const { currentForm } = useContext(FormContext);
-
-  useEffect(() => {
-    setInputType('');
-  }, [currentForm.components]);
+  const question = useSelector((state) => state.question);
+  const inputType = question.type;
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -22,7 +19,7 @@ export const InputChoice = () => {
           value={inputType}
           input={<OutlinedInput label={i18n.__('component.inputChoice.questionType')} />}
           onChange={(event) => {
-            setInputType(event.target.value);
+            dispatch(addQuestionType({ type: event.target.value }));
           }}
         >
           {LIST_OF_INPUT_BUILDER.map((inputBuilder) => (
@@ -40,7 +37,7 @@ export const InputChoice = () => {
         <>
           <br />
           <div>
-            <ComponentBuilder type={inputType} />
+            <ComponentBuilder />
           </div>
         </>
       )}

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { BottomNavigation, Button } from '@mui/material';
 import { FormContext } from '../../contexts/FormContext';
+import { useSelector } from 'react-redux';
 
 export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
   const bottomBarStyle = {
@@ -14,11 +15,11 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
 
   const navigate = useNavigate();
 
-  const { currentForm, activeStep, acceptRgpd } = useContext(FormContext);
+  const { activeStep, acceptRgpd } = useContext(FormContext);
+  const form = useSelector((state) => state.form);
 
-  const isDisable =
-    !currentForm.title || currentForm.components.length === 0 || (activeStep === 2 && acceptRgpd === false);
-  const isTitleMissing = !currentForm.title;
+  const isDisable = !form.title || form.components.length === 0 || (activeStep === 2 && acceptRgpd === false);
+  const isTitleMissing = !form.title;
 
   return (
     <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>

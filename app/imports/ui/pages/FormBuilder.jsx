@@ -6,12 +6,14 @@ import { MsgError } from '../components/system/MsgError';
 import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
 import { InputBuilder } from '../components/form/InputBuilder';
+import { useSelector } from 'react-redux';
 
 export const FormBuilder = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const { currentForm, setActiveStep } = useContext(FormContext);
+  const { setActiveStep } = useContext(FormContext);
+  const form = useSelector((state) => state.form);
   const navigate = useNavigate();
-  const isDisable = !currentForm.title || currentForm.components.length === 0;
+  const isDisable = !form.title || form.components.length === 0;
   const haveErrorMessages = !!errorMessage.length;
 
   const navigateToNextStep = () => {

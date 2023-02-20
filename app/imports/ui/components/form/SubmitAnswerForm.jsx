@@ -1,37 +1,34 @@
-import CheckBox from '@mui/icons-material/CheckBox';
-import { Button, FormControlLabel } from '@mui/material';
+import { Button, FormControlLabel, Checkbox } from '@mui/material';
 import i18n from 'meteor/universe:i18n';
 import React, { useContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AnswerContext } from '../../contexts/AnswerContext';
 import { UserContext } from '../../contexts/UserContext';
 import { hasAlreadyRespond } from '../../utils/utils';
 
-export default function SubmitAnswerForm({ publicName, setPublicName, currentForm }) {
+export default function SubmitAnswerForm() {
   const { user } = useContext(UserContext);
+  const [publicName, setPublicName] = useState('');
   const [isCheckedRgpd, setIsCheckedRgpd] = useState(false);
   const [answersAreComplete, setAnswersAreComplete] = useState(false);
-  const { answerForm, setAnswerForm } = useContext(AnswerContext);
+  const answerForms = useSelector((state) => state.answerForm);
 
   const navigate = useNavigate();
+  const form = useSelector((state) => state.form);
+  const formId = useSelector((state) => state.form.formId);
 
   let questionRequired = [];
-  currentForm.components.map((component) => {
+  form.components.map((component) => {
     if (component.answerRequired == true) {
       questionRequired.push(component.id);
     }
   });
 
   const submitAnswerForm = async () => {
-    const componentsUpdated = { ...answerForm };
-    componentsUpdated.formId = currentForm._id;
-
-    componentsUpdated.userId = user ? user.username : publicName;
-
-    setAnswerForm(componentsUpdated);
-    await Meteor.callAsync('forms.updateAnswers', componentsUpdated.formId, {
-      userId: componentsUpdated.userId,
-      answers: componentsUpdated.answers,
+    let name = user ? user.username : publicName;
+    await Meteor.callAsync('forms.updateAnswers', formId, {
+      userId: name,
+      answers: answerForms.answers,
     });
     navigate('/');
   };
@@ -40,7 +37,7 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
     setAnswersAreComplete(questionRequired.length == 0);
     let questionMissing = [];
     questionRequired.map((question) => {
-      answerForm.answers.map((answer) => {
+      answerForms.answers.map((answer) => {
         if (question === answer.questionId) {
           if (answer.answer) {
             setAnswersAreComplete(true);
@@ -52,13 +49,13 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
         }
       });
     });
-  }, [answerForm, isCheckedRgpd]);
+  }, [answerForms, isCheckedRgpd]);
 
   const AcceptRgpd = () => {
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <FormControlLabel
-          control={<CheckBox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
+          control={<Checkbox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
           label={i18n.__('component.submitAnswerForm.acceptRgpd')}
         />
       </div>
@@ -87,7 +84,7 @@ export default function SubmitAnswerForm({ publicName, setPublicName, currentFor
           <AcceptRgpd />
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Button onClick={submitAnswerForm} disabled={!isCheckedRgpd || !answersAreComplete}>
-              {hasAlreadyRespond(user, currentForm)
+              {hasAlreadyRespond(user, form)
                 ? i18n.__('component.submitAnswerForm.updateAnswers')
                 : i18n.__('component.submitAnswerForm.submitAnswers')}
             </Button>

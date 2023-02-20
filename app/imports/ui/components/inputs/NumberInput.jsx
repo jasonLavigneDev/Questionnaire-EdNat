@@ -1,15 +1,16 @@
-import React, { useContext, useState } from 'react';
-
+import React from 'react';
 import { Paper, TextField, FormControl, FormLabel } from '@mui/material';
-import { AnswerContext } from '../../contexts/AnswerContext';
+import { addAnswers } from '../../redux/slices/answerFormSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const NumberInput = ({ title, answerMode, questionId, answer = {}, answerRequired }) => {
-  const { addAnswers } = useContext(AnswerContext);
-  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
+export const NumberInput = ({ title, answerMode, questionId, answerRequired }) => {
+  const dispatch = useDispatch();
+  const inputAnswer = useSelector((state) =>
+    state.answerForm.answers.find((answer) => answer.questionId === questionId),
+  );
 
   const validateAnswer = (event) => {
-    setCurrentAnswer(event.target.value);
-    if (answerMode) addAnswers(questionId, event.target.value);
+    if (answerMode) dispatch(addAnswers({ questionId, value: event.target.value }));
   };
 
   return (
@@ -18,10 +19,10 @@ export const NumberInput = ({ title, answerMode, questionId, answer = {}, answer
         <FormLabel id="numberInput-title">{title}</FormLabel>
         <TextField
           type="number"
-          defaultValue={answer.answer}
+          defaultValue={Number(inputAnswer?.answer)}
           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
           onBlur={(e) => validateAnswer(e)}
-          error={answerRequired && !!!currentAnswer}
+          error={answerRequired && !inputAnswer}
         />
       </FormControl>
     </Paper>

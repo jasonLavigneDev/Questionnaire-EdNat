@@ -1,15 +1,17 @@
-import React, { useContext, useState } from 'react';
-
+import React from 'react';
 import { FormLabel, TextField, Paper, FormControl } from '@mui/material';
-import { AnswerContext } from '../../contexts/AnswerContext';
 
-export const DateInput = ({ title, answerMode, questionId, answer = {}, answerRequired }) => {
-  const { addAnswers } = useContext(AnswerContext);
-  const [currentAnswer, setCurrentAnswer] = useState(answer.answer || '');
+import { addAnswers } from '../../redux/slices/answerFormSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+export const DateInput = ({ title, answerMode, questionId, answerRequired }) => {
+  const dispatch = useDispatch();
+  const inputAnswer = useSelector((state) =>
+    state.answerForm.answers.find((answer) => answer.questionId === questionId),
+  );
 
   const validateAnswer = (event) => {
-    setCurrentAnswer(event.target.value);
-    if (answerMode) addAnswers(questionId, event.target.value);
+    if (answerMode) dispatch(addAnswers({ questionId, value: event.target.value }));
   };
 
   return (
@@ -19,10 +21,10 @@ export const DateInput = ({ title, answerMode, questionId, answer = {}, answerRe
         <TextField
           sx={{ width: '30vw' }}
           type="date"
-          defaultValue={answer.answer}
+          defaultValue={inputAnswer?.answer ?? ''}
           required={answerRequired}
           onBlur={(e) => validateAnswer(e)}
-          error={answerRequired && !!!currentAnswer}
+          error={answerRequired && !inputAnswer}
         />
       </FormControl>
     </Paper>

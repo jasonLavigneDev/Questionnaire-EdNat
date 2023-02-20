@@ -5,8 +5,6 @@ import { Pie } from 'react-chartjs-2';
 export default function StatsPie({ question }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
-  console.log('question', question);
-
   const getAllCountStat = (stats) => {
     let cpt = 0;
     stats.map((stat) => {

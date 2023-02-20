@@ -7,29 +7,35 @@ import { MsgError } from '../components/system/MsgError';
 import { FormContext } from '../contexts/FormContext';
 import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetFormObject } from '../redux/slices/formSlice';
 
 export const FormPrevisualizer = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const { currentForm, resetFormContext, setActiveStep } = useContext(FormContext);
+  const { setActiveStep, setAcceptRgpd } = useContext(FormContext);
   const navigate = useNavigate();
-  const isDisable = !currentForm.title || currentForm.components.length === 0;
+  const form = useSelector((state) => state.form);
+  const isDisable = !form.title || form.components.length === 0;
+  const dispatch = useDispatch();
 
   const sendFormToBDD = async () => {
     if (isDisable) return setErrorMessage(i18n.__('component.componentBuilder.errors.noTitleOrOptions'));
 
     try {
       const result = await Meteor.callAsync('forms.createForm', {
-        title: currentForm.title,
-        desc: currentForm.desc,
+        title: form.title,
+        desc: form.desc,
         isModel: false,
-        groups: currentForm.groups,
-        isPublic: currentForm.isPublic,
-        components: currentForm.components,
+        groups: form.groups,
+        isPublic: form.isPublic,
+        components: form.components,
       });
 
       if (result) {
         navigate('/');
-        resetFormContext();
+        dispatch(resetFormObject());
+        setActiveStep(0);
+        setAcceptRgpd(false);
       }
     } catch (error) {
       console.log('error dans sendForm', error);
@@ -41,18 +47,18 @@ export const FormPrevisualizer = () => {
 
     try {
       const result = await Meteor.callAsync('forms.updateForm', {
-        id: currentForm._id,
-        title: currentForm.title,
-        desc: currentForm.desc,
+        id: form.formId,
+        title: form.title,
+        desc: form.desc,
         isModel: false,
-        groups: currentForm.groups,
-        isPublic: currentForm.isPublic,
-        components: currentForm.components,
+        groups: form.groups,
+        isPublic: form.isPublic,
+        components: form.components,
       });
 
       if (result) {
         navigate('/');
-        resetFormContext();
+        resetFormObject();
       }
     } catch (err) {
       console.log('error dans updateForm', err);
@@ -63,7 +69,7 @@ export const FormPrevisualizer = () => {
     setActiveStep(2);
   }, []);
 
-  if (!currentForm) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
+  if (!form) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
 
   return (
     <div>
@@ -73,11 +79,9 @@ export const FormPrevisualizer = () => {
       </div>
       {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
       <Footer
-        nextStep={currentForm._id ? updateForm : sendFormToBDD}
+        nextStep={form.formId ? updateForm : sendFormToBDD}
         urlOfPrevStep="builder/components"
-        text={
-          currentForm._id ? i18n.__('page.formPrevisualizer.updateForm') : i18n.__('page.formPrevisualizer.saveForm')
-        }
+        text={form._id ? i18n.__('page.formPrevisualizer.updateForm') : i18n.__('page.formPrevisualizer.saveForm')}
       />
     </div>
   );

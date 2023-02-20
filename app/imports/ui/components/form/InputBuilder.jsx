@@ -1,18 +1,15 @@
-import React, { useContext, useState } from 'react';
-
+import React from 'react';
 import { Paper, Tooltip } from '@mui/material';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import i18n from 'meteor/universe:i18n';
-
-import { FormContext } from '../../contexts/FormContext';
 import { InputChoice } from './InputChoice';
-import { ComponentBuilder } from '../ComponentBuilder';
 import ManageComponents from '../ManageComponents';
+import { useSelector } from 'react-redux';
 
 export const InputBuilder = () => {
-  const { currentForm } = useContext(FormContext);
-  const [componentToEdit, setComponentToEdit] = useState({});
-  const [editMode, setEditMode] = useState(false);
+  const form = useSelector((state) => state.form);
+
+  console.log('form', form);
 
   const class1 = {
     display: 'flex',
@@ -41,16 +38,12 @@ export const InputBuilder = () => {
       <div style={{ display: 'flex', flexDirection: 'row', maxHeight: '100%', justifyContent: 'space-evenly' }}>
         <div style={{ display: 'flex', flexDirection: 'column', width: '50vw' }}>
           <h3>{i18n.__('component.inputBuilder.inputType')}</h3>
-          {editMode ? (
-            <ComponentBuilder type={componentToEdit.type} componentToEdit={componentToEdit} setEditMode={setEditMode} />
-          ) : (
-            <InputChoice />
-          )}
+          {<InputChoice />}
         </div>
         <div className={class1}>
           <h3>{i18n.__('component.inputBuilder.inputOrder')}</h3>
           <div className={class2}>
-            {currentForm.components.map((currentComponent, index) => (
+            {form.components.map((currentComponent, index) => (
               <Paper sx={{ display: 'flex', width: '28vw', marginBottom: 1, border: '1px black solid' }}>
                 <div
                   style={{ display: 'flex', paddingLeft: '0.5vw', width: '18vw', alignItems: 'center', height: '5vh' }}
@@ -65,12 +58,7 @@ export const InputBuilder = () => {
                   </div>
                 </div>
                 <div className={class3}>
-                  <ManageComponents
-                    currentComponent={currentComponent}
-                    index={index}
-                    setComponentToEdit={setComponentToEdit}
-                    setEditMode={setEditMode}
-                  />
+                  <ManageComponents currentComponent={currentComponent} index={index} />
                 </div>
               </Paper>
             ))}
