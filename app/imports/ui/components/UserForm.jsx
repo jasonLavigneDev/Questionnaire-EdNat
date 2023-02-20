@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Tooltip } from '@mui/material';
-import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import GroupsIcon from '@mui/icons-material/Groups';
+import SecurityIcon from '@mui/icons-material/Security';
 
 import { FormActionButton } from './FormActionButton';
 
@@ -17,12 +18,18 @@ export const UserForm = ({ userForm, deleteForm }) => {
       }}
     >
       <div style={{ display: 'flex' }}>
-        {userForm.isPublic === false && (
-          <Tooltip title="formulaire privé">
-            <VisibilityOffOutlinedIcon />
+        {userForm.groups.length !== 0 ? (
+          <Tooltip title="formulaire de groupe">
+            <GroupsIcon />
           </Tooltip>
+        ) : (
+          userForm.isPublic === false && (
+            <Tooltip title="formulaire privé">
+              <SecurityIcon />
+            </Tooltip>
+          )
         )}
-        <Typography variant="body1" sx={{ marginLeft: userForm.isPublic ? '2.25vw' : '1vw' }}>
+        <Typography variant="body1" sx={{ marginLeft: userForm.isPublic ? '2.5vw' : '1vw' }}>
           {userForm.title}
         </Typography>
       </div>
