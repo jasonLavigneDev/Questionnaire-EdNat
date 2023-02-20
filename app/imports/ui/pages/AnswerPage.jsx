@@ -8,7 +8,6 @@ import { fillForm } from '../redux/slices/formSlice';
 import { fillUserAnswersObject } from '../redux/slices/answerFormSlice';
 
 export const AnswerPage = () => {
-  console.log('je suis appelé');
   const formFromBDD = useLoaderData();
   const dispatch = useDispatch();
   const { user } = useContext(UserContext);

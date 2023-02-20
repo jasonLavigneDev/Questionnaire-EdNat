@@ -11,45 +11,36 @@ export default function SubmitAnswerForm() {
   const [publicName, setPublicName] = useState('');
   const [isCheckedRgpd, setIsCheckedRgpd] = useState(false);
   const [answersAreComplete, setAnswersAreComplete] = useState(false);
-  const answerForms = useSelector((state) => state.answerForm);
+  const answerForm = useSelector((state) => state.answerForm);
+  const userAnswers = useSelector((state) => state.answerForm.answers);
 
   const navigate = useNavigate();
   const form = useSelector((state) => state.form);
   const formId = useSelector((state) => state.form.formId);
 
-  let questionRequired = [];
-  form.components.map((component) => {
-    if (component.answerRequired == true) {
-      questionRequired.push(component.id);
-    }
-  });
-
   const submitAnswerForm = async () => {
     let name = user ? user.username : publicName;
     await Meteor.callAsync('forms.updateAnswers', formId, {
       userId: name,
-      answers: answerForms.answers,
+      answers: answerForm.answers,
     });
     navigate('/');
   };
 
   useEffect(() => {
-    setAnswersAreComplete(questionRequired.length == 0);
-    let questionMissing = [];
-    questionRequired.map((question) => {
-      answerForms.answers.map((answer) => {
-        if (question === answer.questionId) {
-          if (answer.answer) {
-            setAnswersAreComplete(true);
-          } else {
-            questionMissing.push(answer.questionId);
-          }
-        } else {
-          questionMissing.push(answer.questionId);
+    const componentsWithAnswerRequired = form.components.filter((component) => component.answerRequired);
+    let questionsRequired = componentsWithAnswerRequired;
+    if (componentsWithAnswerRequired.length == 0) return setAnswersAreComplete(true);
+
+    userAnswers.map((userAnswer) => {
+      componentsWithAnswerRequired.map((answerRequired) => {
+        if (answerRequired.id === userAnswer.questionId && userAnswer.answer.length) {
+          questionsRequired = questionsRequired.filter((component) => component.id != userAnswer.questionId);
         }
       });
     });
-  }, [answerForms, isCheckedRgpd]);
+    setAnswersAreComplete(questionsRequired.length == 0);
+  }, [answerForm]);
 
   const AcceptRgpd = () => {
     return (
