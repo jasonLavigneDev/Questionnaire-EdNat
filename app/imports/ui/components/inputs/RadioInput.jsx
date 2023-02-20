@@ -5,7 +5,6 @@ import { addAnswers } from '../../redux/slices/answerFormSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const RadioInput = ({ title, choices, answerMode, questionId, answerRequired }) => {
-  console.log('answerRequired', answerRequired);
   const dispatch = useDispatch();
   const inputAnswer = useSelector((state) =>
     state.answerForm.answers.find((answer) => answer.questionId === questionId),

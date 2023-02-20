@@ -18,7 +18,6 @@ export default function ManageComponents({ currentComponent, index }) {
   const hasComponentAfter = (inputPos) => inputPos < form.components.length - 1;
 
   const updateComponent = (component) => {
-    console.log('component', component);
     dispatch(fillQuestionObject(component));
   };
 

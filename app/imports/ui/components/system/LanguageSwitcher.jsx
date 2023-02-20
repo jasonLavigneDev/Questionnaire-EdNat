@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import i18n from 'meteor/universe:i18n';
 import Menu from '@mui/material/Menu';
 import IconButton from '@mui/material/IconButton';
@@ -9,7 +9,7 @@ import { UserContext } from '../../contexts/UserContext';
 const LanguageSwitcher = () => {
   const { user } = useContext(UserContext);
   const allLanguages = ['fr', 'en'];
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
