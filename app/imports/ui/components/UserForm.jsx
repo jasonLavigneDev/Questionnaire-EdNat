@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Tooltip } from '@mui/material';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SecurityIcon from '@mui/icons-material/Security';
-
+import LanguageIcon from '@mui/icons-material/Language';
 import { FormActionButton } from './FormActionButton';
 
 export const UserForm = ({ userForm, deleteForm }) => {
@@ -22,14 +22,16 @@ export const UserForm = ({ userForm, deleteForm }) => {
           <Tooltip title="formulaire de groupe">
             <GroupsIcon />
           </Tooltip>
+        ) : userForm.isPublic === false ? (
+          <Tooltip title="formulaire privé">
+            <SecurityIcon />
+          </Tooltip>
         ) : (
-          userForm.isPublic === false && (
-            <Tooltip title="formulaire privé">
-              <SecurityIcon />
-            </Tooltip>
-          )
+          <Tooltip title="formulaire publique">
+            <LanguageIcon />
+          </Tooltip>
         )}
-        <Typography variant="body1" sx={{ marginLeft: userForm.isPublic ? '2.5vw' : '1vw' }}>
+        <Typography variant="body1" sx={{ marginLeft: '1vw' }}>
           {userForm.title}
         </Typography>
       </div>
