@@ -49,10 +49,10 @@ export default function ManageComponents({ currentComponent, index }) {
 
   return (
     <>
-      <IconButton onClick={() => swapPositionWithPreviousComponent(index)}>
+      <IconButton disabled={!hasComponentBefore(index)} onClick={() => swapPositionWithPreviousComponent(index)}>
         <ArrowUpwardIcon />
       </IconButton>
-      <IconButton onClick={() => swapPositionWithNextComponent(index)}>
+      <IconButton disabled={!hasComponentAfter(index)} onClick={() => swapPositionWithNextComponent(index)}>
         <ArrowDownwardIcon />
       </IconButton>
       <IconButton sx={{ color: 'Gold' }} onClick={() => updateComponent(currentComponent)}>
