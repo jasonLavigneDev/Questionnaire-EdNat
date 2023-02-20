@@ -13,13 +13,13 @@ export default function AnswerListDisplay({ finalArray }) {
       if (index === -1) {
         if (response.response) {
           let newObj = { user: response.userName };
-          newObj[key] = response.response[0];
+          newObj[key] = response.response;
           csvArray.push(newObj);
         }
       } else {
         if (csvArray[index]['user'] === response.userName) {
           if (response.response) {
-            csvArray[index][key] = response.response[0];
+            csvArray[index][key] = response.response;
           }
         }
       }
