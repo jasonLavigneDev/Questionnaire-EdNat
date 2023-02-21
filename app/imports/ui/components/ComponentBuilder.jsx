@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
 import { TextField, Button, Paper, Checkbox, FormControlLabel, Divider } from '@mui/material';
-import { isDuplicate } from '../utils/utils';
+import { createComponentObject } from '../utils/utils';
 import { MsgError } from './system/MsgError';
 import ManageOptions from './ManageOptions';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComponents } from '../redux/slices/formSlice';
-import {
-  addAnswerOptions,
-  addQuestionText,
-  resetAnswerText,
-  resetQuestionObject,
-  toggleAnswerIsRequired,
-} from '../redux/slices/questionSlice';
-import { v4 as uuidv4 } from 'uuid';
+import { addQuestionText, resetQuestionObject, toggleAnswerIsRequired } from '../redux/slices/questionSlice';
 
 export const ComponentBuilder = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -25,51 +18,21 @@ export const ComponentBuilder = () => {
     return question.type === 'checkboxInput' || question.type === 'selectInput' || question.type === 'radioButtonInput';
   };
 
-  const addOption = (newOption) => {
-    if (newOption) {
-      if (!isDuplicate(question.choices, newOption)) {
-        dispatch(addAnswerOptions({ choices: newOption }));
-        dispatch(resetAnswerText());
-      }
-    } else {
-      setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
-    }
-  };
-
-  // const createComponentObject =  () => {
-  //   const component = {
-  //     id: uuidv4(),
-  //     title: question.title,
-  //     type: question.type,
-  //     choices: choicesTest,
-  //     answerRequired: question.answerRequired,
-  //   };
-  //   return component;
-  // };
-
   const submitComponent = () => {
     if (question.title) {
       if (IsMultiAnswersComponent() && (!question.choices || question.choices.length == 0)) {
         setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
         return;
       }
-
-      if (question.answerText !== '') {
-        addOption(question.answerText);
-      }
-
-      choicesAlreadySubmit = [...question.choices];
-      choicesAlreadySubmit.push(question.answerText);
-
-      const newComponent = {
-        id: uuidv4(),
-        title: question.title,
-        type: question.type,
-        choices: choicesAlreadySubmit,
-        answerRequired: question.answerRequired,
-      };
-
-      dispatch(addComponents(newComponent));
+      const componentListFinal = [...form.components];
+      const newComponent = createComponentObject(
+        question.title,
+        question.type,
+        question.choices,
+        question.answerRequired,
+      );
+      componentListFinal.push(newComponent);
+      dispatch(addComponents(componentListFinal));
       dispatch(resetQuestionObject());
     } else {
       setErrorMessage(i18n.__('component.componentBuilder.errors.noTitle'));
@@ -84,17 +47,17 @@ export const ComponentBuilder = () => {
       }
       const componentListFinal = [...form.components];
       const index = componentListFinal.findIndex((component) => component.id === question.id);
-      // if (index !== -1) {
-      //   componentListFinal[index] = createComponentObject(
-      //     question.title,
-      //     question.type,
-      //     question.choices,
-      //     question.answerRequired,
-      //   );
-      // } else {
-      //   setErrorMessage(i18n.__('component.componentBuilder.errors.notFound'));
-      //   return;
-      // }
+      if (index !== -1) {
+        componentListFinal[index] = createComponentObject(
+          question.title,
+          question.type,
+          question.choices,
+          question.answerRequired,
+        );
+      } else {
+        setErrorMessage(i18n.__('component.componentBuilder.errors.notFound'));
+        return;
+      }
       dispatch(addComponents(componentListFinal));
       dispatch(resetQuestionObject());
     } else {

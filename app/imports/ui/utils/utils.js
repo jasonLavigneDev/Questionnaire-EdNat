@@ -1,18 +1,19 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const isDuplicate = (allOpts, newOption) => {
   return allOpts.includes(newOption);
 };
 
-// export const createComponentObject = (title, type, choices = [], answerRequired) => {
-//   console.log('choices', choices);
-//   const component = {
-//     id: uuidv4(),
-//     title: title,
-//     type: type,
-//     choices: choices,
-//     answerRequired: answerRequired,
-//   };
-//   return component;
-// };
+export const createComponentObject = (title, type, choices = [], answerRequired) => {
+  const component = {
+    id: uuidv4(),
+    title: title,
+    type: type,
+    choices: choices,
+    answerRequired: answerRequired,
+  };
+  return component;
+};
 
 export const hasNotAnswers = (form) => {
   if (!form.formAnswers || form.formAnswers.length === 0) return true; // formAnswers peut etre initialisé a tableau vide pour retirer la 1ere condition !?
