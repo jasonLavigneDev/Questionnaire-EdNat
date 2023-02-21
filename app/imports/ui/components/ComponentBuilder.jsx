@@ -36,8 +36,9 @@ export const ComponentBuilder = () => {
         choices: question.choices,
         answerRequired: question.answerRequired,
       };
-
       dispatch(addComponents(newComponent));
+      dispatch(resetQuestionObject());
+      return;
     } else if (action === 'update') {
       const componentUpdated = {
         id: question.id,
@@ -46,13 +47,10 @@ export const ComponentBuilder = () => {
         choices: question.choices,
         answerRequired: question.answerRequired,
       };
-
       dispatch(updateComponent(componentUpdated));
-    } else {
-      console.log('ERROR');
+      dispatch(resetQuestionObject());
       return;
     }
-    dispatch(resetQuestionObject());
   };
 
   return (
@@ -75,11 +73,19 @@ export const ComponentBuilder = () => {
       />
       {IsMultiAnswersComponent() && <ManageOptions setErrorMessage={setErrorMessage} />}
       {question.id === '' ? (
-        <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={() => submitComponent('create')}>
+        <Button
+          style={{ textAlign: 'center', width: '100%', marginTop: 1 }}
+          disabled={question.answerText !== ''}
+          onClick={() => submitComponent('create')}
+        >
           {i18n.__('component.componentBuilder.submit')}
         </Button>
       ) : (
-        <Button style={{ textAlign: 'center', width: '100%' }} onClick={() => submitComponent('update')}>
+        <Button
+          style={{ textAlign: 'center', width: '100%' }}
+          disabled={question.answerText !== ''}
+          onClick={() => submitComponent('update')}
+        >
           {i18n.__('component.componentBuilder.update')}
         </Button>
       )}

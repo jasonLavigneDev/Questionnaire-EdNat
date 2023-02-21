@@ -20,14 +20,18 @@ export default function ManageOptions({ setErrorMessage }) {
   const question = useSelector((state) => state.question);
 
   const addOption = (newOption) => {
-    if (newOption) {
-      if (!isDuplicate(question.choices, newOption)) {
-        dispatch(addAnswerOptions({ choices: newOption }));
-        dispatch(resetAnswerText());
-      }
-    } else {
+    if (!newOption) {
       setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
+      return;
     }
+
+    if (isDuplicate(question.choices, newOption)) {
+      console.log('Vincent tu met ton toast LA !');
+      return;
+    }
+
+    dispatch(addAnswerOptions({ choices: newOption }));
+    dispatch(resetAnswerText());
   };
 
   // Function witch catch keydown event and check if enter key is pressed
