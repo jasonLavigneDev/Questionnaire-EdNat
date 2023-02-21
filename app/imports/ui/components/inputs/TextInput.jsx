@@ -14,10 +14,10 @@ export const TextInput = ({ title, questionId, answerRequired }) => {
   };
 
   return (
-    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <FormControl required={answerRequired} error={answerRequired && !inputAnswer} sx={{ width: '80%' }}>
+    <Paper className="wd-50 pad-2">
+      <FormControl required={answerRequired} error={answerRequired && !inputAnswer} className="wd-80pct">
         <FormLabel id="textInput-title">{title}</FormLabel>
-        <TextField sx={{ width: '60%' }} defaultValue={inputAnswer?.answer ?? ''} onChange={(e) => validateAnswer(e)} />
+        <TextField className="wd-60pct" defaultValue={inputAnswer?.answer ?? ''} onChange={(e) => validateAnswer(e)} />
       </FormControl>
     </Paper>
   );

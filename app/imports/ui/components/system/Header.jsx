@@ -5,36 +5,23 @@ import { AppBar, Slide, useScrollTrigger } from '@mui/material';
 import { HeaderMenu } from './HeaderMenu';
 import LanguageSwitcher from './LanguageSwitcher';
 
-const appBarStyle = {
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  paddingLeft: '2%',
-  paddingRight: '2%',
-  height: '60px',
-  backgroundColor: '#F9F9FD',
-};
-
 export const Header = () => {
   const trigger = useScrollTrigger();
 
   return (
     <Slide appear={false} direction="down" in={!trigger}>
-      <AppBar sx={appBarStyle}>
-        <Link to="/" style={{ textDecoration: 'none', display: 'flex' }}>
-          <img
-            src="/images/puce_eole.png"
-            alt="eole logo"
-            style={{ height: 30, marginTop: '2.5vh', paddingRight: '1vh' }}
-          />
-          <h1 style={{ fontFamily: 'OdinRounded', color: '#372f84' }}>{i18n.__('component.header.title')}</h1>
-        </Link>
-        <div style={{ display: 'flex' }}>
-          <HeaderMenu />
-          <LanguageSwitcher />
-        </div>
-      </AppBar>
+      <div className="link">
+        <AppBar className="appBar flex row jc-spaceb center padl-2pct padr-2pct ht-60">
+          <Link className="link txtdeco-no center" to="/">
+            <img src="/images/puce_eole.png" alt="eole logo" className="wd-5 padtb-2" />
+            <h1 className="h1-title-app">{i18n.__('component.header.title')}</h1>
+          </Link>
+          <div className="link">
+            <HeaderMenu />
+            <LanguageSwitcher />
+          </div>
+        </AppBar>
+      </div>
     </Slide>
   );
 };

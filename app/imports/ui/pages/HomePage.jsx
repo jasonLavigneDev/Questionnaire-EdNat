@@ -30,8 +30,8 @@ export const HomePage = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', width: '49.5vw', alignItems: 'center' }}>
+      <div className="flex column center">
+        <div className="flex jc-spaceb wd-49p5 center">
           <h2>{i18n.__('page.homePage.formsList')}</h2>
           <Button variant="contained" size="large" onClick={() => navigate('/builder/intro')}>
             {i18n.__('page.homePage.newForm')}

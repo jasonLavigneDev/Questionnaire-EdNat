@@ -24,9 +24,9 @@ export const InputChoice = () => {
         >
           {LIST_OF_INPUT_BUILDER.map((inputBuilder) => (
             <MenuItem key={inputBuilder.id} value={inputBuilder.id}>
-              <div style={{ display: 'flex', justifyContent: 'start' }}>
+              <div className="flex jc-start">
                 {inputBuilder.icon}
-                <Divider orientation="vertical" flexItem sx={{ margin: '0 1vw' }} />
+                <Divider orientation="vertical" flexItem className="mlr-1" />
                 {i18n.__(`component.inputs.${inputBuilder.name}`)}
               </div>
             </MenuItem>

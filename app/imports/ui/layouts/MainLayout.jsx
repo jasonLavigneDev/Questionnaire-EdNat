@@ -7,7 +7,7 @@ export const MainLayout = () => {
     <>
       <Header />
       <main>
-        <div style={{ marginTop: '8vh' }}>
+        <div className="mt-8">
           <Outlet />
         </div>
       </main>

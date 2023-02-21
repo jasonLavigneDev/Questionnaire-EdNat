@@ -7,12 +7,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PackageJSON from '../../../../package.json';
 import { UserContext } from '../../contexts/UserContext';
 
-// CSS style
-const sizeAvatar = {
-  width: 40,
-  height: 40,
-};
-
 export const HeaderMenu = () => {
   const [open, setOpen] = useState(false);
   const [anchor, setAnchor] = useState(null);
@@ -42,18 +36,18 @@ export const HeaderMenu = () => {
     <div>
       <Button
         endIcon={<ExpandMoreIcon fontSize="large" />}
-        style={{ textTransform: 'none' }}
+        className="txtTrans-none"
         onClick={(event) => openMenu(event)}
       >
-        <Typography variant="body1" sx={{ marginRight: '1vw' }}>
-          {user.username || i18n.__('api.users.labels.noUsername')}
+        <Typography variant="body1" className="mr-1">
+          {user.username || 'Toto'}
         </Typography>
         <div>
           {user.avatar ? (
-            <Avatar sx={sizeAvatar} src={user.avatar} alt={user.username} />
+            <Avatar className="sizeAvatar" src={user.avatar} alt={user.username} />
           ) : (
-            <div style={sizeAvatar}>
-              <identicon-svg style={sizeAvatar} username="default" />
+            <div className="sizeAvatar">
+              <identicon-svg className="sizeAvatar" username="default" />
             </div>
           )}
         </div>
@@ -61,7 +55,7 @@ export const HeaderMenu = () => {
       <Menu anchorEl={anchor} open={open} onClick={() => setOpen(!open)}>
         <MenuItem onClick={logout}>{i18n.__('component.headerMenu.logout')}</MenuItem>
         <Divider />
-        <MenuItem disabled style={{ opacity: 0.3 }}>
+        <MenuItem disabled className="opac-0p3">
           Version {version}
         </MenuItem>
       </Menu>

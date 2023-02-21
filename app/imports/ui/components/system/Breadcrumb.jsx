@@ -28,8 +28,8 @@ export const Breadcrumb = () => {
   }, [url]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-      <div style={{ marginBottom: '6vh', width: '60vw' }}>
+    <div className="flex jc-center wd-100pct">
+      <div className="mb-6 wd-60">
         <Stepper alternativeLabel activeStep={activeStep}>
           <Step key="intro" completed={activeStep === 1 || activeStep === 2}>
             <StepButton color="inherit" onClick={() => navigateTo('intro')}>

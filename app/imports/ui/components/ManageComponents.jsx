@@ -55,11 +55,11 @@ export default function ManageComponents({ currentComponent, index }) {
       <IconButton disabled={!hasComponentAfter(index)} onClick={() => swapPositionWithNextComponent(index)}>
         <ArrowDownwardIcon />
       </IconButton>
-      <IconButton sx={{ color: 'Gold' }} onClick={() => updateComponent(currentComponent)}>
+      <IconButton className="color-black" onClick={() => updateComponent(currentComponent)}>
         <EditIcon />
       </IconButton>
       <IconButton
-        sx={{ color: 'Crimson' }}
+        className="color-red"
         onClick={() => {
           dispatch(removeComponents({ componentId: currentComponent.id }));
           dispatch(resetQuestionObject());

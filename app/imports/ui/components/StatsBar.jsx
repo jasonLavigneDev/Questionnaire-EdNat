@@ -60,14 +60,8 @@ export default function StatsBar({ question }) {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        height: '35vh',
-        justifyContent: 'space-between',
-      }}
-    >
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className="flex ht-35vh jc-spaceb">
+      <div className="flex column">
         {keys.map((key) => (
           <p>
             {key}: {((choicesStats[key] / getAllCountStat(question.stat)) * 100).toFixed(2)}%

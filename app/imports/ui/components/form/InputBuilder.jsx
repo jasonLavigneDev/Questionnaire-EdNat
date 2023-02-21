@@ -32,8 +32,8 @@ export const InputBuilder = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'row', maxHeight: '100%', justifyContent: 'space-evenly' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', width: '50vw' }}>
+      <div className="flex row maxHt-100 jc-spaceEven">
+        <div className="flex column wd-50pct">
           <h3>{i18n.__('component.inputBuilder.inputType')}</h3>
           {<InputChoice />}
         </div>
@@ -41,30 +41,12 @@ export const InputBuilder = () => {
           <h3>{i18n.__('component.inputBuilder.inputOrder')}</h3>
           <div className={class2}>
             {form.components.map((currentComponent, index) => (
-              <Paper sx={{ display: 'flex', width: '28vw', marginBottom: 1, border: '1px black solid' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    paddingLeft: '0.5vw',
-                    width: '18vw',
-                    alignItems: 'center',
-                    height: '5vh',
-                  }}
-                >
-                  <p
-                    style={{
-                      maxHeight: '1.2rem',
-                      whiteSpace: 'nowrap',
-                      textOverflow: 'ellipsis',
-                      overflowY: 'hidden',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {currentComponent.title}
-                  </p>
+              <Paper className="flex wd-28 mb-1 border">
+                <div className="flex padl-1 wd-18 ali-center ht-5vh">
+                  <p className="maxHt-1p2 overflow-ellipsis">{currentComponent.title}</p>
                   {currentComponent.answerRequired && (
                     <Tooltip title={i18n.__('component.inputBuilder.inputRequired')}>
-                      <Typography sx={{ marginLeft: 0.5 }} color="red" variant="h4">
+                      <Typography className="ml-1px" color="red" variant="h4">
                         *
                       </Typography>
                     </Tooltip>

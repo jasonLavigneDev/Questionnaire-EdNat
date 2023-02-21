@@ -63,12 +63,8 @@ export default function ManageOptions({ setErrorMessage }) {
         {question.choices.map((option, index) => (
           <>
             <Paper
+              className="flex ml-3 mt-1 jc-spaceb padlr-1"
               sx={{
-                display: 'flex',
-                marginLeft: '3vw',
-                marginTop: '1vh',
-                justifyContent: 'space-between',
-                padding: '0 1vw',
                 '&:hover': {
                   backgroundColor: 'rgb(180, 180, 180)',
                 },
@@ -76,23 +72,12 @@ export default function ManageOptions({ setErrorMessage }) {
               key={option.id}
               title="Déplacer cette option"
             >
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="flex ali-center">
                 <DragIndicatorIcon sx={{ color: 'rgb(180, 180, 180)', marginLeft: -2 }} />
-                <p
-                  style={{
-                    maxHeight: '1.2rem',
-                    whiteSpace: 'nowrap',
-                    textOverflow: 'ellipsis',
-                    overflowY: 'hidden',
-                    overflow: 'hidden',
-                    marginLeft: '0.5vw',
-                  }}
-                >
-                  {option}
-                </p>
+                <p className="maxHt-1p2rem overflow-ellipsis ml-0p5">{option}</p>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <IconButton onClick={() => removeOption(index)} sx={{ color: 'salmon' }}>
+              <div className="flex center">
+                <IconButton onClick={() => removeOption(index)} className="color-salmon">
                   <DeleteIcon />
                 </IconButton>
               </div>
@@ -106,14 +91,14 @@ export default function ManageOptions({ setErrorMessage }) {
   return (
     <>
       <br />
-      <div style={{ display: 'flex' }}>
+      <div className="flex">
         <TextField
           id="option"
           label={i18n.__('component.componentBuilder.inputChoice')}
           variant="outlined"
           value={question.answerText}
           onChange={(e) => dispatch(addAnswerText({ answerText: e.target.value }))}
-          sx={{ width: '85%', marginLeft: 6 }}
+          className="ml-6 wd-85pct"
           onKeyDown={(event) => pressEnter(event)}
         />
         <IconButton onClick={() => addOption(question.answerText)}>
@@ -124,13 +109,13 @@ export default function ManageOptions({ setErrorMessage }) {
         open={openAlert}
         autoHideDuration={4000}
         onClose={() => setOpenAlert(false)}
-        sx={{ position: 'relative', top: 0, marginLeft: '1.5vw' }}
+        className="pos-relative top-0 ml-1p5"
       >
-        <Alert onClose={() => setOpenAlert(false)} severity="warning" sx={{ width: '83%' }}>
+        <Alert onClose={() => setOpenAlert(false)} severity="warning" className="wd-83pct">
           {i18n.__('component.manageOptions.duplicate')}
         </Alert>
       </Snackbar>
-      <div style={{ maxWidth: '45vw', marginTop: '2vh' }}>
+      <div className="maxWd-45 mt-2">
         <DraggableRender />
       </div>
 

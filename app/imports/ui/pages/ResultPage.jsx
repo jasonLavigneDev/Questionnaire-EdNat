@@ -94,9 +94,9 @@ export const ResultPage = () => {
         </>
       ) : (
         <>
-          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-            <h1 style={{ display: 'flex', flex: 3 }}>{formFromBDD.title}</h1>
-            <div style={{ justifyContent: 'flex-end' }}>
+          <div className="flex center column">
+            <h1 className="flex flex-3">{formFromBDD.title}</h1>
+            <div className="jc-flexend">
               <ToggleButtonGroup value={statMode} exclusive>
                 <ToggleButton value={false} onClick={() => setStatMode(!statMode)}>
                   <ListAltIcon />
@@ -106,7 +106,7 @@ export const ResultPage = () => {
                 </ToggleButton>
               </ToggleButtonGroup>
             </div>
-            <Button variant="contained" sx={{ marginTop: 2 }} onClick={() => navigate('/')}>
+            <Button variant="contained" className="mt-2" onClick={() => navigate('/')}>
               {i18n.__('page.resultPage.goBack')}
             </Button>
           </div>

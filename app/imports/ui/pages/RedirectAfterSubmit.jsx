@@ -5,13 +5,6 @@ import { Button } from '@mui/material';
 import i18n from 'meteor/universe:i18n';
 import { UserContext } from '../contexts/UserContext';
 
-const flexCenterStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyItems: 'center',
-  alignItems: 'center',
-};
-
 const RedirectSubmitPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,10 +26,10 @@ const RedirectSubmitPage = () => {
   }, [count]);
 
   return (
-    <div style={flexCenterStyle}>
-      <h1 style={{ display: 'flex' }}>
+    <div className="flex center column">
+      <h1 className="flex">
         {i18n.__('page.redirectPage.title')}
-        <CheckCircleIcon fontSize="large" sx={{ color: 'green', marginLeft: '1vw' }} />
+        <CheckCircleIcon fontSize="large" className="color-green ml-1" />
       </h1>
       {urlForEdition && (
         <>

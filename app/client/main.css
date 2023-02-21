@@ -1,4 +1,423 @@
 body {
-  padding: 10px;
   font-family: sans-serif;
+  --bg-paper-color: #f9f9fd;
+  --app-title-color: #372f84;
+  --delete-button-color: 'salmon';
+  --valid-button-color: 'green';
+  --default-icon-color: 'black';
+  --error-icon-color: 'crimson';
+}
+
+/* SPECIFIC CLASSES FOR MUI COMPONENTS
+  IMPORTANT OPTION IS REQUIRED BECAUSE MUI
+*/
+
+.appBar {
+  background-color: var(--bg-paper-color) !important;
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.link {
+  display: flex !important;
+}
+
+.footer {
+  position: 'absolute' !important;
+  bottom: 0 !important;
+  left: 37vw;
+}
+
+.h1-title-app {
+  font-family: 'OdinRounded';
+  color: var(--app-title-color);
+}
+
+.overflow-ellipsis {
+  overflow: hidden;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sizeAvatar {
+  width : 3vw;
+  height : 5vh;
+}
+
+.modalDeleteConfirmation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: var(--bg-paper-color);
+  border-radius: 10px;
+  width: 400px;
+  padding: 8px;
+}
+
+********************************
+/* FLEX PART */
+
+div .flex {
+  display: flex;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+********************************
+/* SPACING */
+
+/* Padding */
+
+.pad-2 {
+  padding: 2vh 2vw;
+}
+
+.pad-10 {
+  padding: 10px;
+}
+
+.pad-15 {
+  padding: 15px;
+}
+
+.pad-20 {
+  padding: 20px;
+}
+
+.padr-1 {
+  padding-right: 1vh;
+}
+
+.padr-2pct {
+  padding-right: 2%;
+}
+
+.padl-1 {
+  padding-left: 1vw;
+}
+
+.padl-2pct {
+  padding-left: 2%;
+}
+
+.padlr-1 {
+  padding: 0 1vw;
+}
+
+.padtb-2 {
+  margin: 3vh 0;
+}
+
+********************************
+/* Margin */
+
+.m-10 {
+  margin: 10px;
+}
+
+.m-15 {
+  margin: 15px;
+}
+
+.mb-1 {
+  margin-bottom: 1vh;
+}
+
+.mb-2 {
+  margin-bottom: 2vh;
+}
+
+.mb-6 {
+  margin-bottom: 6vh;
+}
+
+.mb-10 {
+  margin-bottom: 10vh;
+}
+
+.mt-1 {
+  margin-top: 1vh;
+}
+
+.mt-2 {
+  margin-top: 2vh;
+}
+
+.mt-2p5 {
+  margin-top: 2.5vh;
+}
+
+.mt-5 {
+  margin-top: 5vh;
+}
+
+.mt-7p2 {
+  margin-top: 7.2vh;
+}
+
+.mt-8 {
+  margin-top: 8vh;
+}
+
+.ml-1px {
+  margin-left: 1px;
+}
+
+.ml-0p5 {
+  margin-left: 0.5vw;
+}
+
+.ml-1 {
+  margin-left: 1vw;
+}
+
+.ml-1p5 {
+  margin-left: 1.5vw;
+}
+
+.ml-2 {
+  margin-left: 2vw;
+}
+
+.ml-2p5 {
+  margin-left: 2, 5;
+}
+
+.ml-3 {
+  margin-left: 3vw;
+}
+
+.ml-4 {
+  margin-left: 4vw;
+}
+
+.ml-6 {
+  margin-left: 6vw;
+}
+
+.mr-1 {
+  margin-right: 1vw;
+}
+
+.mr-5 {
+  margin-right: 5vw;
+}
+
+.mlr-1 {
+  margin: 0 1vw;
+}
+
+********************************
+/* Width */
+
+.wd-2 {
+  width: 2vw;
+}
+
+.wd-5 {
+  width: 3vw;
+}
+
+.wd-18 {
+  width: 18vw;
+}
+
+.wd-28 {
+  width: 28vw;
+}
+
+.wd-30 {
+  width: 30vw;
+}
+
+.wd-49p5 {
+  width: 49.5vw;
+}
+
+.wd-50 {
+  width: 50vw;
+}
+
+.wd-60 {
+  width: 60vw;
+}
+
+.wd-50pct {
+  width: 50%;
+}
+
+.wd-60pct {
+  width: 60%;
+}
+
+.wd-80pct {
+  width: 80%;
+}
+
+.wd-83pct {
+  width: 83%;
+}
+
+.wd-85pct {
+  width: 85%;
+}
+
+.wd-90pct {
+  width: 90%;
+}
+
+.wd-100pct {
+  width: 100%;
+}
+
+.maxWd-45 {
+  max-width: 45vw;
+}
+
+********************************
+/* Height */
+
+
+.ht-30 {
+  height: 30px ;
+}
+
+.ht-60 {
+  height: 60px;
+}
+
+.ht-5vh {
+  height: 5vh;
+}
+
+.ht-8vh {
+  height: 8vh;
+}
+
+.ht-10vh {
+  height: 10vh;
+}
+
+.ht-20vh {
+  height: 20vh;
+}
+
+.ht-35vh {
+  height: 35vh;
+}
+
+.maxHt-1p2rem {
+  max-height: 1.2rem;
+}
+
+.maxHt-100 {
+  max-height: 100%;
+}
+
+********************************
+/* Content placement */
+/* Justify content */
+
+.jc-flexend {
+  justify-content: flex-end;
+}
+
+.jc-spaceb {
+  justify-content: space-between;
+}
+
+.jc-center {
+  justify-content: center;
+}
+
+.jc-spaceEven {
+  justify-content: space-evenly;
+}
+
+.jc-start {
+  justify-content: start;
+}
+
+********************************
+/* Align */
+
+.ali-center {
+  align-items: center;
+}
+
+.aliContent-spaceb {
+  align-content: space-between;
+}
+
+.txtAli-center {
+  text-align: center;
+}
+
+.txtdeco-no {
+  text-decoration: none;
+}
+
+.txtTrans-none {
+  text-transform: none !important;
+}
+
+.pos-relative {
+  position: relative;
+}
+
+.pos-absolute {
+  position: absolute;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.border {
+  border: "1px solid black";
+}
+
+.opac-0p3 {
+  opacity: 0.3;
+}
+
+.color-salmon {
+  color: var(--delete-button-color);
+}
+
+.color-green {
+  color: var(--valid-button-color);
+}
+
+.color-black {
+  color: var(--default-icon-color);
+}
+
+.color-red {
+  color: var(--error-icon-color);
 }

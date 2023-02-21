@@ -64,10 +64,10 @@ export default function FormInfoInputs() {
         />
       </FormGroup>
       <Divider variant="middle" />
-      <Typography sx={{ marginTop: '1vh' }} variant="body1">
+      <Typography className="mt-1" variant="body1">
         {i18n.__('component.formInfoInputs.formType')}
       </Typography>
-      <FormControl sx={{ marginLeft: '2vw' }}>
+      <FormControl className="ml-2">
         <RadioGroup value={radioValue} onChange={(e) => validateFormMode(e)} defaultValue="private">
           <FormControlLabel
             control={<Radio />}

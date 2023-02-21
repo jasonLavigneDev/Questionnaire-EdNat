@@ -64,14 +64,8 @@ export default function StatsPie({ question }) {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        height: '35vh',
-        justifyContent: 'space-between',
-      }}
-    >
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className="flex jc-spaceb ht-35vh">
+      <div className="flex column">
         {question.stat.map((oneStat) => (
           <p>
             {displayAnswer(oneStat.answer)}: {((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%

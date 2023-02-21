@@ -42,12 +42,12 @@ const ModalRgpd = ({ answerMode = false }) => {
 
   return (
     <Modal open={openModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-      <Box sx={style}>
+      <Box className="modalDeleteConfirmation">
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Acceptation RGPD
         </Typography>
         {ownerForm && answerMode ? (
-          <Typography sx={{ mt: 2 }}>
+          <Typography className="mt-2">
             Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par
             <b> {ownerForm.firstName + ' ' + ownerForm.lastName}</b> pour <b>consultation et analyse</b>.
             <br /> La base légale du traitement est <b>le consentement</b>.
@@ -85,7 +85,7 @@ const ModalRgpd = ({ answerMode = false }) => {
             NB: En cas de refus il vous sera impossible d'accéder au questionnaire.
           </Typography>
         ) : (
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Typography id="modal-modal-description" className="mt-2">
             Vous vous apprêtez à créer un formulaire ou des données saisies par des utilisateurs sont recueillies et
             stockées.
             <br />
@@ -107,7 +107,7 @@ const ModalRgpd = ({ answerMode = false }) => {
             .
           </Typography>
         )}
-        <div style={{ display: 'flex', marginTop: '2vh', justifyContent: 'space-between' }}>
+        <div className="flex mt-2 jc-spaceb">
           <Button variant="contained" onClick={handleReject}>
             {i18n.__('component.modalRgpd.refuse')}
           </Button>

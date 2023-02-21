@@ -9,19 +9,8 @@ import { FormActionButton } from './FormActionButton';
 
 export const UserForm = ({ userForm, deleteForm }) => {
   return (
-    <Paper
-      key={userForm._id}
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        width: '50%',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 10,
-        margin: 10,
-      }}
-    >
-      <div style={{ display: 'flex' }}>
+    <Paper key={userForm._id} className="flex row wd-50pct center jc-spaceb m-10">
+      <div className="flex pad-20">
         {userForm.groups.length !== 0 ? (
           <Tooltip title={i18n.__('component.userForm.form.group')}>
             <GroupsIcon />
@@ -35,7 +24,7 @@ export const UserForm = ({ userForm, deleteForm }) => {
             <LanguageIcon />
           </Tooltip>
         )}
-        <Typography variant="body1" sx={{ marginLeft: '1vw' }}>
+        <Typography variant="body1" className="ml-1">
           {userForm.title}
         </Typography>
       </div>

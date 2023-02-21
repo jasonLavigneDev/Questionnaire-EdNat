@@ -35,8 +35,8 @@ export const FormIntro = () => {
       {acceptRgpd || formId ? (
         <>
           <Breadcrumb />
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Paper style={{ display: 'flex', flexDirection: 'column', padding: 20, width: '80%' }}>
+          <div className="flex center column">
+            <Paper className="flex column pad-20 wd-80pct">
               <FormInfoInputs />
               {isFormGroup && (
                 <>

@@ -26,18 +26,15 @@ export const Visualizer = ({ answerMode = false }) => {
   return (
     <div>
       {answerMode && <ModalRgpd answerMode={answerMode} />}
-      {<h3 style={{ textAlign: 'center' }}>{form.title}</h3>}
-      {<h4 style={{ textAlign: 'center' }}>{form.desc}</h4>}
+      {<h3 className="txtAli-center">{form.title}</h3>}
+      {<h4 className="txtAli-center">{form.desc}</h4>}
       {ownerForm && (
-        <h4 style={{ textAlign: 'center' }}>
+        <h4 className="txtAli-center">
           {i18n.__('component.visualizer.createdBy')} {ownerForm.firstName} {ownerForm.lastName} ({ownerForm.username})
         </h4>
       )}
       {form.components.map((currentComponent) => (
-        <div
-          key={currentComponent.id}
-          style={{ display: 'flex', justifyContent: 'center', marginTop: '5vh', marginBottom: '2vh' }}
-        >
+        <div key={currentComponent.id} className="flex jc-center mt-5 mb-2">
           <GenerateComponent currentComponent={currentComponent} />
           {componentToEdit && componentToEdit.id === currentComponent.id && <ComponentBuilder />}
         </div>

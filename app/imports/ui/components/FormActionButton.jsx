@@ -33,19 +33,19 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
   };
 
   return (
-    <div style={{ flexDirection: 'column', flex: 1 }}>
+    <div className="flex flex-1">
       <IconButton
         title={
           active ? i18n.__('component.formActionButton.isActive') : i18n.__('component.formActionButton.isNotActive')
         }
-        sx={active ? { color: 'lightGreen' } : { color: 'salmon' }}
+        className={active ? 'color-green' : 'color-salmon'}
         onClick={() => activeForm()}
       >
         {active ? <VisibilityIcon /> : <VisibilityOffIcon />}
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.answer')}
-        sx={{ color: 'lightGreen' }}
+        className="color-black"
         disabled={hasNotAnswers(currentForm)}
         onClick={() => navigate(`/answers/${currentForm._id}`)}
       >
@@ -53,7 +53,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.editAnswers')}
-        sx={{ color: 'gold' }}
+        className="color-black"
         disabled={!active || alreadyRespond()}
         onClick={() => navigate(`/visualizer/${currentForm._id}`)}
       >
@@ -67,7 +67,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.editForm')}
-        sx={{ color: 'lightBlue' }}
+        className="color-black"
         disabled={active || !hasNotAnswers(currentForm)}
         onClick={() => navigate(`/builder/intro/${currentForm._id}`)}
       >
@@ -75,7 +75,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.deleteForm')}
-        sx={{ color: 'salmon' }}
+        className="color-salmon"
         onClick={() => handleDeleteForm()}
       >
         <DeleteIcon />

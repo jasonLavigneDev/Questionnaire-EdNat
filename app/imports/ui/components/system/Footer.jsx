@@ -6,12 +6,6 @@ import { BottomNavigation, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
-  const bottomBarStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    height: '8vh',
-  };
-
   const navigate = useNavigate();
   const form = useSelector((state) => state.form);
   const acceptRgpd = useSelector((state) => state.form.acceptRGPD);
@@ -20,12 +14,12 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
   const isTitleMissing = !form.title;
 
   return (
-    <div style={{ position: 'fixed', bottom: 0, left: '37vw' }}>
-      <BottomNavigation sx={bottomBarStyle} showLabels>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div>
+      <BottomNavigation showLabels className="footer flex center ht-8vh">
+        <div className="flex jc-center">
           {urlOfPrevStep ? (
             <>
-              <Button variant="contained" sx={{ marginRight: '5vw' }} onClick={() => navigate(`/${urlOfPrevStep}`)}>
+              <Button variant="contained" className="mr-5" onClick={() => navigate(`/${urlOfPrevStep}`)}>
                 {i18n.__('component.footer.goBack')}
               </Button>
               <Button variant="contained" disabled={isDisable} onClick={() => nextStep()}>
@@ -34,7 +28,7 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
             </>
           ) : (
             <>
-              <Button variant="contained" sx={{ marginRight: '5vw' }} onClick={() => navigate(`/`)}>
+              <Button variant="contained" className="mr-5" onClick={() => navigate(`/`)}>
                 {i18n.__('component.footer.cancel')}
               </Button>
               <Button variant="contained" disabled={isTitleMissing} onClick={() => nextStep()}>

@@ -15,8 +15,8 @@ export const SelectInput = ({ title, choices, questionId, answerRequired }) => {
   };
 
   return (
-    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <FormControl sx={{ width: '30vw' }} required={answerRequired}>
+    <Paper className="pad-2 wd-50">
+      <FormControl className="wd-30" required={answerRequired}>
         <FormLabel id="selectInput-title" error={answerRequired && !inputAnswer}>
           {title}
         </FormLabel>

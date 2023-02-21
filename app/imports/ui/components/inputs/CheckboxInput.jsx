@@ -47,7 +47,7 @@ export const CheckBoxInput = ({ title, choices, questionId, answerRequired }) =>
   }, []);
 
   return (
-    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
+    <Paper className="pad-2 wd-50">
       <FormControl required={answerRequired} error={answerRequired && !inputAnswer} onChange={() => validateAnswer()}>
         <FormLabel>{title}</FormLabel>
         <FormGroup>

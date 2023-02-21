@@ -53,16 +53,8 @@ export default function StatsDisplay({ statArray }) {
       {statArray.map((question) => (
         <>
           <h2>{question.questionTitle}</h2>
-          <div
-            style={{
-              display: 'flex',
-              height: '35vh',
-              width: '50vw',
-              justifyContent: 'space-between',
-              marginLeft: '4vw',
-            }}
-          >
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="flex ht-35vh wd-50pct jc-spaceb ml-4">
+            <div className="flex column">
               {question.stat.map((stat) => (
                 <p>
                   {stat.answer}: {(stat.count / getAllCountStat(question.stat)) * 100}%

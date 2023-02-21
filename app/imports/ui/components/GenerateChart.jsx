@@ -24,8 +24,8 @@ export default function GenerateChart({ statArray }) {
   return (
     <>
       {statArray.map((question) => (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
-          <Paper sx={{ display: 'flex', flexDirection: 'column', width: '50%', padding: 5 }}>
+        <div className="flex center pad-10">
+          <Paper className="flex column wd-50pct pad-10">
             <h2>{question.questionTitle}</h2>
             <div>{generateChart(question)}</div>
           </Paper>

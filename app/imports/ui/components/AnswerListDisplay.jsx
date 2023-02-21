@@ -34,19 +34,14 @@ export default function AnswerListDisplay({ finalArray }) {
 
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'center', margin: 15 }}>
-        <CSVLink
-          data={csvArray}
-          filename={'my-file.csv'}
-          target="_blank"
-          style={{ textDecoration: 'none', justifyContent: 'center' }}
-        >
+      <div className="flex center m-15">
+        <CSVLink data={csvArray} filename={'my-file.csv'} target="_blank" className="center txtdeco-no">
           <Button variant="contained">{i18n.__('component.answerListDisplay.download')}</Button>
         </CSVLink>
       </div>
       {finalArray.map((question) => (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
-          <Paper sx={{ display: 'flex', flexDirection: 'column', width: '50%', padding: 5 }}>
+        <div className="flex center pad-10">
+          <Paper className="flex column wd-50pct pad-20 mb-2">
             <h2>{question.questionTitle}</h2>
             {question.responses.map((response, index) => (
               <ul>

@@ -64,10 +64,9 @@ export const FormPrevisualizer = () => {
   };
 
   if (!form) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
-
   return (
     <div>
-      <div style={{ marginBottom: '10vh' }}>
+      <div className="mb-10">
         <Breadcrumb />
         <Visualizer />
       </div>

@@ -55,7 +55,7 @@ export const ComponentBuilder = () => {
 
   return (
     <Paper>
-      <div key={'test'} style={{ display: 'flex', marginLeft: '2.5vw' }}>
+      <div className="flex ml-2p5">
         <FormControlLabel
           control={<Checkbox name="required" checked={question.answerRequired} />}
           label="réponse obligatoire"
@@ -69,21 +69,17 @@ export const ComponentBuilder = () => {
         variant="outlined"
         value={question.title}
         onChange={(e) => dispatch(addQuestionText({ title: e.target.value }))}
-        sx={{ width: '90%', marginLeft: 6, marginBottom: 2, marginTop: 2 }}
+        className="wd-90pct ml-6 mb-2 mt-2"
       />
       {IsMultiAnswersComponent() && <ManageOptions setErrorMessage={setErrorMessage} />}
       {question.id === '' ? (
-        <div style={{ textAlign: 'center', width: '100%', marginTop: 1 }}>
-          <Button variant="contained" onClick={() => submitComponent('create')} sx={{ margin: 1, width: '20%' }}>
-            {i18n.__('component.componentBuilder.submit')}
-          </Button>
-        </div>
+        <Button variant="contained" className="center wd-100pct mt-1" onClick={() => submitComponent('create')}>
+          {i18n.__('component.componentBuilder.submit')}
+        </Button>
       ) : (
-        <div style={{ textAlign: 'center', width: '100%', marginTop: 1 }}>
-          <Button variant="contained" sx={{ margin: 1, width: '20%' }} onClick={() => submitComponent('update')}>
-            {i18n.__('component.componentBuilder.update')}
-          </Button>
-        </div>
+        <Button variant="contained" className="center wd-100pct" onClick={() => submitComponent('update')}>
+          {i18n.__('component.componentBuilder.update')}
+        </Button>
       )}
       {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
     </Paper>
