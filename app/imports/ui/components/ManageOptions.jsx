@@ -1,6 +1,6 @@
 import { IconButton, Divider, TextField } from '@mui/material';
 import { i18n } from 'meteor/universe:i18n';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -19,13 +19,11 @@ import {
 export default function ManageOptions({ setErrorMessage }) {
   const dispatch = useDispatch();
   const question = useSelector((state) => state.question);
-  const [localeOptions, setLocaleOptions] = useState(question.choices);
 
   const addOption = (newOption) => {
     if (newOption) {
       if (!isDuplicate(question.choices, newOption)) {
         dispatch(addAnswerOptions({ choices: newOption }));
-        setLocaleOptions([...localeOptions, newOption]);
         dispatch(resetAnswerText());
       }
     } else {
@@ -44,23 +42,51 @@ export default function ManageOptions({ setErrorMessage }) {
   };
 
   getChangedPos = (currentPos, newPos) => {
+    console.log('question.choices', question.choices);
+    console.log(currentPos, newPos);
     const optionsUpdated = [...question.choices];
     optionsUpdated.splice(newPos, 0, optionsUpdated.splice(currentPos, 1)[0]);
+    console.log('question.choices', question.choices);
     dispatch(updateIndexAnswerOptions(optionsUpdated));
-    setLocaleOptions(optionsUpdated);
   };
 
   removeOption = (choiceIndex) => {
     const optionsUpdated = [...question.choices];
     optionsUpdated.splice(choiceIndex, 1);
     dispatch(updateIndexAnswerOptions(optionsUpdated));
-    setLocaleOptions(optionsUpdated);
   };
 
-  useEffect(() => {
-    console.log('localeOptions', localeOptions);
-    console.log('question.choices', question.choices);
-    setLocaleOptions(question.choices);
+  const DraggableRender = useCallback(() => {
+    return (
+      <Draggable onPosChange={this.getChangedPos}>
+        {question.choices.map((option, index) => (
+          <>
+            <div
+              style={{ display: 'flex', maxWidth: '42.6vw', marginLeft: '3vw', justifyContent: 'space-between' }}
+              key={option.id}
+            >
+              <p
+                style={{
+                  maxHeight: '1.2rem',
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  overflowY: 'hidden',
+                  overflow: 'hidden',
+                }}
+              >
+                {option}
+              </p>
+              <div>
+                <IconButton onClick={() => removeOption(index)} sx={{ color: 'salmon' }}>
+                  <DeleteIcon />
+                </IconButton>
+              </div>
+            </div>
+            <Divider variant="middle" />
+          </>
+        ))}
+      </Draggable>
+    );
   }, [question.choices]);
 
   return (
@@ -82,34 +108,7 @@ export default function ManageOptions({ setErrorMessage }) {
       </div>
       <div className="flex-container">
         <div className="row">
-          <Draggable onPosChange={() => getChangedPos}>
-            {localeOptions.map((option, index) => (
-              <>
-                <div
-                  style={{ display: 'flex', maxWidth: '42.6vw', marginLeft: '3vw', justifyContent: 'space-between' }}
-                  key={option.id}
-                >
-                  <p
-                    style={{
-                      maxHeight: '1.2rem',
-                      whiteSpace: 'nowrap',
-                      textOverflow: 'ellipsis',
-                      overflowY: 'hidden',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {option}
-                  </p>
-                  <div>
-                    <IconButton onClick={() => removeOption(index)} sx={{ color: 'salmon' }}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </div>
-                </div>
-                <Divider variant="middle" />
-              </>
-            ))}
-          </Draggable>
+          <DraggableRender />
         </div>
       </div>
       <br />
