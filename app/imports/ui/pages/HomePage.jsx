@@ -42,9 +42,11 @@ export const HomePage = () => {
           {i18n.__('page.homePage.newForm')}
         </Button>
       </div>
-      <h2>{i18n.__('page.homePage.formsList')}</h2>
-      {allUserForms &&
-        allUserForms.map((userForm) => <UserForm userForm={userForm} deleteForm={deleteForm} key={userForm._id} />)}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <h2>{i18n.__('page.homePage.formsList')}</h2>
+        {allUserForms &&
+          allUserForms.map((userForm) => <UserForm userForm={userForm} deleteForm={deleteForm} key={userForm._id} />)}
+      </div>
     </>
   );
 };
