@@ -23,7 +23,7 @@ export const Visualizer = ({ answerMode = false }) => {
           key={currentComponent.id}
           style={{ display: 'flex', justifyContent: 'center', marginTop: '5vh', marginBottom: '2vh' }}
         >
-          <GenerateComponent currentComponent={currentComponent} answerMode={answerMode} />
+          <GenerateComponent currentComponent={currentComponent} />
           {componentToEdit && componentToEdit.id === currentComponent.id && <ComponentBuilder />}
         </div>
       ))}

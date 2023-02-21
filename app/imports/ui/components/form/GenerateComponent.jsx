@@ -7,7 +7,7 @@ import { NumberInput } from '../inputs/NumberInput';
 import { TextInput } from '../inputs/TextInput';
 import { TextArea } from '../inputs/TextArea';
 
-export default function GenerateComponent({ currentComponent, answerMode }) {
+export default function GenerateComponent({ currentComponent }) {
   const generateComponent = (component) => {
     switch (component.type) {
       case 'checkboxInput':
@@ -15,7 +15,6 @@ export default function GenerateComponent({ currentComponent, answerMode }) {
           <CheckBoxInput
             title={component.title}
             choices={component.choices}
-            answerMode={answerMode}
             questionId={component.id}
             answerRequired={component.answerRequired}
           />
@@ -25,7 +24,6 @@ export default function GenerateComponent({ currentComponent, answerMode }) {
           <SelectInput
             title={component.title}
             choices={component.choices}
-            answerMode={answerMode}
             questionId={component.id}
             answerRequired={component.answerRequired}
           />
@@ -35,47 +33,24 @@ export default function GenerateComponent({ currentComponent, answerMode }) {
           <RadioInput
             title={component.title}
             choices={component.choices}
-            answerMode={answerMode}
             questionId={component.id}
             answerRequired={component.answerRequired}
           />
         );
       case 'dateInput':
         return (
-          <DateInput
-            title={component.title}
-            answerMode={answerMode}
-            questionId={component.id}
-            answerRequired={component.answerRequired}
-          />
+          <DateInput title={component.title} questionId={component.id} answerRequired={component.answerRequired} />
         );
       case 'numberInput':
         return (
-          <NumberInput
-            title={component.title}
-            answerMode={answerMode}
-            questionId={component.id}
-            answerRequired={component.answerRequired}
-          />
+          <NumberInput title={component.title} questionId={component.id} answerRequired={component.answerRequired} />
         );
       case 'textInput':
         return (
-          <TextInput
-            title={component.title}
-            answerMode={answerMode}
-            questionId={component.id}
-            answerRequired={component.answerRequired}
-          />
+          <TextInput title={component.title} questionId={component.id} answerRequired={component.answerRequired} />
         );
       case 'textArea':
-        return (
-          <TextArea
-            title={component.title}
-            answerMode={answerMode}
-            questionId={component.id}
-            answerRequired={component.answerRequired}
-          />
-        );
+        return <TextArea title={component.title} questionId={component.id} answerRequired={component.answerRequired} />;
     }
   };
   return <div>{generateComponent(currentComponent)}</div>;

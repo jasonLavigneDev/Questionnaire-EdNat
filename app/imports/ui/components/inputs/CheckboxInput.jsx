@@ -4,7 +4,7 @@ import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel, Paper } 
 import { addAnswers } from '../../redux/slices/answerFormSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const CheckBoxInput = ({ title, choices, answerMode, questionId, answerRequired }) => {
+export const CheckBoxInput = ({ title, choices, questionId, answerRequired }) => {
   const [answers, setAnswers] = useState([]);
   const dispatch = useDispatch();
   const inputAnswer = useSelector((state) =>
@@ -27,7 +27,7 @@ export const CheckBoxInput = ({ title, choices, answerMode, questionId, answerRe
 
   const validateAnswer = () => {
     const tab = answers.filter((obj) => obj.value === true).map((obj) => obj.name);
-    if (answerMode) dispatch(addAnswers({ questionId, value: tab }));
+    dispatch(addAnswers({ questionId, value: tab }));
   };
 
   const getValue = (choice) => {
