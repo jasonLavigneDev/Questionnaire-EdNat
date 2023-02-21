@@ -34,6 +34,9 @@ export const questionSlice = createSlice({
     addAnswerOptions: (state, action) => {
       state.choices.push(action.payload.choices);
     },
+    updateIndexAnswerOptions: (state, action) => {
+      state.choices = action.payload;
+    },
     removeOption: (state, action) => {
       state.choices = state.choices.filter((o) => o !== action.payload.option);
     },
@@ -53,6 +56,7 @@ export const {
   resetAnswerText,
   addQuestionType,
   toggleAnswerIsRequired,
+  updateIndexAnswerOptions,
 } = questionSlice.actions;
 
 export default questionSlice.reducer;
