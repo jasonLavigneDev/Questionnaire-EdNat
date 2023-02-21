@@ -21,7 +21,7 @@ export const NumberInput = ({ title, questionId, answerRequired }) => {
           type="number"
           defaultValue={Number(inputAnswer?.answer)}
           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-          onBlur={(e) => validateAnswer(e)}
+          onChange={(e) => validateAnswer(e)}
           error={answerRequired && !inputAnswer}
         />
       </FormControl>
