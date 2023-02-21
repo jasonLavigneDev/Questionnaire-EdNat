@@ -63,7 +63,7 @@ export const InputBuilder = () => {
                     {currentComponent.title}
                   </p>
                   {currentComponent.answerRequired && (
-                    <Tooltip title="la question est required">
+                    <Tooltip title={i18n.__('component.inputBuilder.inputRequired')}>
                       <Typography sx={{ marginLeft: 0.5 }} color="red" variant="h4">
                         *
                       </Typography>

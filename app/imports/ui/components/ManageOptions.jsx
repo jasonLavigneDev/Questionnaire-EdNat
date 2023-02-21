@@ -22,6 +22,8 @@ export default function ManageOptions({ setErrorMessage }) {
     }
   };
 
+  // Function witch catch keydown event and check if enter key is pressed
+  // add Option if true and redirect focus
   const pressEnter = (event) => {
     const code = event.which || event.keyCode;
     if (code == 13) {
