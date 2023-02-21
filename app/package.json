@@ -30,7 +30,9 @@
     "react-chartjs-2": "^5.2.0",
     "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
+    "react-drag-reorder": "^1.2.0",
     "react-redux": "^8.0.5",
+    "react-reorder-draggable": "0.0.3",
     "react-router-dom": "^6.6.1",
     "simpl-schema": "^3.4.0",
     "uuid": "^9.0.0"
