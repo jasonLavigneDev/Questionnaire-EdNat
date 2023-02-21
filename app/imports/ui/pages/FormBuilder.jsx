@@ -34,7 +34,7 @@ export const FormBuilder = () => {
       <InputBuilder />
       {haveErrorMessages && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
       <br />
-      <Footer nextStep={navigateToNextStep} urlOfPrevStep="builder/intro" text="Suivant" />
+      <Footer nextStep={navigateToNextStep} urlOfPrevStep="builder/intro" text={i18n.__('page.formIntro.goNext')} />
     </>
   );
 };

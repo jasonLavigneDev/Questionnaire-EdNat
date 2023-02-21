@@ -155,7 +155,8 @@
       "logout": "Logout"
     },
     "answerListDisplay": {
-      "answerAt": "Answered at "
+      "answerAt": "Answered at ",
+      "download": "Download statistics"
     },
     "componentBuilder": {
       "errors": {
@@ -175,13 +176,14 @@
       "editForm": "Edit form",
       "deleteForm": "Delete form",
       "copyUrl": "Copy form URL",
-      "isActive": "Ce formulaire est actif.",
-      "isNotActive": "Ce formulaire n'est pas actif."
+      "isActive": "This form is active.",
+      "isNotActive": "This form is not active."
     },
     "formInfoInputs": {
       "formTitle": "Enter forms's title",
       "formDesc": "Enter form description",
       "formDescHelp": "Description is optional",
+      "mandatoryTitle": "Title is mandatory",
       "formPublic": "Public form",
       "formGroups": "Limited to groups"
     },
@@ -211,6 +213,9 @@
     "modalRgpd": {
       "refuse": "Refuse",
       "accept": "Accept"
+    },
+    "userNotConnected": {
+      "notLoggedIn": "Please log in using upper right button."
     }
   }
 }

@@ -37,7 +37,7 @@ export default function AnswerListDisplay({ finalArray }) {
           target="_blank"
           style={{ textDecoration: 'none', justifyContent: 'center' }}
         >
-          <Button variant="contained">Télécharger les statistiques</Button>
+          <Button variant="contained">{i18n.__('component.answerListDisplay.download')}</Button>
         </CSVLink>
       </div>
       {finalArray.map((question) => (

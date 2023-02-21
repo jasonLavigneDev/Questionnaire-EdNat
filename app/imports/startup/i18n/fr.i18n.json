@@ -155,7 +155,8 @@
       "logout": "Se déconnecter"
     },
     "answerListDisplay": {
-      "answerAt": "Répondu le"
+      "answerAt": "Répondu le",
+      "download": "Télécharger les statistiques"
     },
     "componentBuilder": {
       "errors": {
@@ -182,6 +183,7 @@
       "formTitle": "Entrez le titre du formulaire",
       "formDesc": "Entrez la description du formulaire",
       "formDescHelp": "La description est facultative",
+      "mandatoryTitle": "Le titre est obligatoire",
       "formPublic": "Formulaire public",
       "formGroups": "Réservé aux groupes"
     },
@@ -211,6 +213,9 @@
     "modalRgpd": {
       "refuse": "Refuser",
       "accept": "Accepter"
+    },
+    "userNotConnected": {
+      "notLoggedIn": "Veuillez vous connecter à l'aide du bouton en haut à droite."
     }
   }
 }

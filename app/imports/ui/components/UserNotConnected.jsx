@@ -1,10 +1,10 @@
 import React from 'react';
+import { i18n } from 'meteor/universe:i18n';
 
 export default function UserNotConnected() {
   return (
-    <>
-      <h1>AuthProvider Trigger: utilisateur non connecte</h1>
-      <button onClick={() => Meteor.loginWithKeycloak()}>Veuillez vous connecter : AuthProvider</button>
-    </>
+    <div style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
+      <h1>{i18n.__('component.userNotConnected.notLoggedIn')}</h1>
+    </div>
   );
 }

@@ -16,7 +16,7 @@ export default function FormInfoInputs() {
         label={i18n.__('component.formInfoInputs.formTitle')}
         variant="outlined"
         value={form.title}
-        helperText="Le titre est obligatoire"
+        helperText={i18n.__('component.formInfoInputs.mandatoryTitle')}
         onChange={(e) => dispatch(addTitle({ title: e.target.value }))}
       />
       <TextField
@@ -31,7 +31,7 @@ export default function FormInfoInputs() {
         <FormControlLabel
           disabled={form.isForGroup}
           control={<Checkbox checked={form.isPublic} onChange={(e) => dispatch(toggleIsPublic())} name="isPublic" />}
-          label="Formulaire public"
+          label={i18n.__('component.formInfoInputs.formPublic')}
         />
       </FormGroup>
       <FormGroup>
