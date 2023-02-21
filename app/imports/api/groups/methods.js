@@ -1,5 +1,11 @@
 import Groups from './groups';
 
+export const getStrucGroupName = (group) => {
+  if (group.type !== 15) return group.name;
+
+  return `[STRUC] ${group.name.slice(group.name.indexOf('_') + 1, group.name.length)}`;
+};
+
 export const getUserGroups = new ValidatedMethod({
   name: 'groups.getUserGroups',
   validate: null,
