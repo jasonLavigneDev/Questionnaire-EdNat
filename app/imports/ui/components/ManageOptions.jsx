@@ -42,11 +42,8 @@ export default function ManageOptions({ setErrorMessage }) {
   };
 
   getChangedPos = (currentPos, newPos) => {
-    console.log('question.choices', question.choices);
-    console.log(currentPos, newPos);
     const optionsUpdated = [...question.choices];
     optionsUpdated.splice(newPos, 0, optionsUpdated.splice(currentPos, 1)[0]);
-    console.log('question.choices', question.choices);
     dispatch(updateIndexAnswerOptions(optionsUpdated));
   };
 
