@@ -65,14 +65,14 @@ export default function ManageOptions({ setErrorMessage }) {
                 justifyContent: 'space-between',
                 padding: '0 1vw',
                 '&:hover': {
-                  backgroundColor: 'lightgrey',
+                  backgroundColor: 'rgb(180, 180, 180)',
                 },
               }}
               key={option.id}
               title="Déplacer cette option"
             >
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <DragIndicatorIcon sx={{ color: 'lightgrey', marginLeft: -2 }} />
+                <DragIndicatorIcon sx={{ color: 'rgb(180, 180, 180)', marginLeft: -2 }} />
                 <p
                   style={{
                     maxHeight: '1.2rem',
