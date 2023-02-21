@@ -16,7 +16,7 @@ export const CheckBoxInput = ({ title, choices, answerMode, questionId, answerRe
   };
 
   const addCheckedAnswers = (event) => {
-    const index = getIndex(event.target.value);
+    const index = getIndex(event.target.name);
 
     if (index === -1) {
       answers.push({ name: event.target.name, value: event.target.checked });
