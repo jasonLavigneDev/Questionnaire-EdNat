@@ -1,7 +1,9 @@
 import React from 'react';
+import i18n from 'meteor/universe:i18n';
 import { Typography, Tooltip } from '@mui/material';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SecurityIcon from '@mui/icons-material/Security';
+import LanguageIcon from '@mui/icons-material/Language';
 
 import { FormActionButton } from './FormActionButton';
 
@@ -19,17 +21,19 @@ export const UserForm = ({ userForm, deleteForm }) => {
     >
       <div style={{ display: 'flex' }}>
         {userForm.groups.length !== 0 ? (
-          <Tooltip title="formulaire de groupe">
+          <Tooltip title={i18n.__('component.userForm.form.group')}>
             <GroupsIcon />
           </Tooltip>
+        ) : userForm.isPublic === false ? (
+          <Tooltip title={i18n.__('component.userForm.form.private')}>
+            <SecurityIcon />
+          </Tooltip>
         ) : (
-          userForm.isPublic === false && (
-            <Tooltip title="formulaire privé">
-              <SecurityIcon />
-            </Tooltip>
-          )
+          <Tooltip title={i18n.__('component.userForm.form.public')}>
+            <LanguageIcon />
+          </Tooltip>
         )}
-        <Typography variant="body1" sx={{ marginLeft: userForm.isPublic ? '2.5vw' : '1vw' }}>
+        <Typography variant="body1" sx={{ marginLeft: '1vw' }}>
           {userForm.title}
         </Typography>
       </div>

@@ -123,7 +123,8 @@
   "component": {
     "inputBuilder": {
       "inputType": "Choisissez le type de question / réponse",
-      "inputOrder": "Organisez vos questions"
+      "inputOrder": "Organisez vos questions",
+      "inputRequired": "La question est obligatoire"
     },
     "inputChoice": {
       "questionType": "Type de question"
@@ -216,6 +217,13 @@
     },
     "userNotConnected": {
       "notLoggedIn": "Veuillez vous connecter à l'aide du bouton en haut à droite."
+    },
+    "userForm": {
+      "form": {
+        "group": "Formulaire de groupe",
+        "private": "Formulaire privé",
+        "public": "Formulaire publique"
+      }
     }
   }
 }

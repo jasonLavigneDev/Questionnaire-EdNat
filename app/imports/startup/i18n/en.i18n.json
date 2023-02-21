@@ -123,7 +123,8 @@
   "component": {
     "inputBuilder": {
       "inputType": "Choose question / answer type",
-      "inputOrder": "Organise your questions"
+      "inputOrder": "Organise your questions",
+      "inputRequired": "Question is required"
     },
     "inputChoice": {
       "questionType": "Question type"
@@ -216,6 +217,13 @@
     },
     "userNotConnected": {
       "notLoggedIn": "Please log in using upper right button."
+    },
+    "userForm": {
+      "form": {
+        "group": "Group form",
+        "private": "Private form",
+        "public": "Public form"
+      }
     }
   }
 }

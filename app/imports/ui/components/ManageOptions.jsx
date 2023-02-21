@@ -1,5 +1,4 @@
 import { IconButton, Divider, TextField } from '@mui/material';
-import { v4 as uuidv4 } from 'uuid';
 import { i18n } from 'meteor/universe:i18n';
 import React from 'react';
 import AddIcon from '@mui/icons-material/Add';
@@ -23,6 +22,16 @@ export default function ManageOptions({ setErrorMessage }) {
     }
   };
 
+  // Function witch catch keydown event and check if enter key is pressed
+  // add Option if true and redirect focus
+  const pressEnter = (event) => {
+    const code = event.which || event.keyCode;
+    if (code == 13) {
+      addOption(question.answerText);
+    }
+    event.target.focus();
+  };
+
   return (
     <>
       <br />
@@ -34,6 +43,7 @@ export default function ManageOptions({ setErrorMessage }) {
           value={question.answerText}
           onChange={(e) => dispatch(addAnswerText({ answerText: e.target.value }))}
           sx={{ width: '85%', marginLeft: 6 }}
+          onKeyDown={(event) => pressEnter(event)}
         />
         <IconButton onClick={() => addOption(question.answerText)}>
           <AddIcon fontSize="large" />
@@ -43,7 +53,7 @@ export default function ManageOptions({ setErrorMessage }) {
         <>
           <div
             style={{ display: 'flex', maxWidth: '42.6vw', marginLeft: '3vw', justifyContent: 'space-between' }}
-            key={uuidv4()}
+            key={option.id}
           >
             <p>{option}</p>
             <IconButton onClick={() => dispatch(removeOption({ option: option }))}>

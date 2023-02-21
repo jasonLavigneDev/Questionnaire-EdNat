@@ -1,6 +1,5 @@
 import React from 'react';
-import { Paper, Tooltip } from '@mui/material';
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
+import { Paper, Tooltip, Typography } from '@mui/material';
 import i18n from 'meteor/universe:i18n';
 import { InputChoice } from './InputChoice';
 import ManageComponents from '../ManageComponents';
@@ -8,8 +7,6 @@ import { useSelector } from 'react-redux';
 
 export const InputBuilder = () => {
   const form = useSelector((state) => state.form);
-
-  console.log('form', form);
 
   const class1 = {
     display: 'flex',
@@ -46,16 +43,33 @@ export const InputBuilder = () => {
             {form.components.map((currentComponent, index) => (
               <Paper sx={{ display: 'flex', width: '28vw', marginBottom: 1, border: '1px black solid' }}>
                 <div
-                  style={{ display: 'flex', paddingLeft: '0.5vw', width: '18vw', alignItems: 'center', height: '5vh' }}
+                  style={{
+                    display: 'flex',
+                    paddingLeft: '0.5vw',
+                    width: '18vw',
+                    alignItems: 'center',
+                    height: '5vh',
+                  }}
                 >
-                  <p style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}> {currentComponent.title}</p>
-                  <div>
-                    {currentComponent.answerRequired && (
-                      <Tooltip title="la question est required">
-                        <PriorityHighIcon />
-                      </Tooltip>
-                    )}
-                  </div>
+                  <p
+                    style={{
+                      maxHeight: '1.2rem',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                      overflowY: 'hidden',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {currentComponent.title}
+                  </p>
+                  {currentComponent.answerRequired && (
+                    <Tooltip title={i18n.__('component.inputBuilder.inputRequired')}>
+                      <Typography sx={{ marginLeft: 0.5 }} color="red" variant="h4">
+                        *
+                      </Typography>
+                    </Tooltip>
+                  )}
+                  <div></div>
                 </div>
                 <div className={class3}>
                   <ManageComponents currentComponent={currentComponent} index={index} />
