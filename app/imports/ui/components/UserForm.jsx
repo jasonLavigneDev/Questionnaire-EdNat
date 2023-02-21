@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from 'meteor/universe:i18n';
-import { Typography, Tooltip } from '@mui/material';
+import { Typography, Tooltip, Paper } from '@mui/material';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SecurityIcon from '@mui/icons-material/Security';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -9,7 +9,7 @@ import { FormActionButton } from './FormActionButton';
 
 export const UserForm = ({ userForm, deleteForm }) => {
   return (
-    <div
+    <Paper
       key={userForm._id}
       style={{
         display: 'flex',
@@ -17,6 +17,8 @@ export const UserForm = ({ userForm, deleteForm }) => {
         width: '50%',
         alignItems: 'center',
         justifyContent: 'space-between',
+        padding: 10,
+        margin: 10,
       }}
     >
       <div style={{ display: 'flex' }}>
@@ -40,6 +42,6 @@ export const UserForm = ({ userForm, deleteForm }) => {
       <div>
         <FormActionButton deleteForm={deleteForm} currentForm={userForm} />
       </div>
-    </div>
+    </Paper>
   );
 };

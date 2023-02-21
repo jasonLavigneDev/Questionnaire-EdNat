@@ -68,7 +68,6 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       >
         <DeleteIcon />
       </IconButton>
-      <Divider />
     </div>
   );
 };
