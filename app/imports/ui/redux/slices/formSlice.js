@@ -52,7 +52,11 @@ export const formSlice = createSlice({
       state.groups = state.groups.filter((groupId) => groupId !== action.payload.id);
     },
     addComponents: (state, action) => {
-      state.components = action.payload;
+      state.components.push(action.payload);
+    },
+    updateComponent: (state, action) => {
+      const index = state.components.findIndex((component) => component.id === action.payload.id);
+      state.components[index] = action.payload;
     },
     removeComponents: (state, action) => {
       state.components = state.components.filter(
@@ -73,6 +77,7 @@ export const {
   addDesc,
   toggleIsForGroup,
   toggleIsPublic,
+  updateComponent,
 } = formSlice.actions;
 
 export default formSlice.reducer;

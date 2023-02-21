@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
 import { TextField, Button, Paper, Checkbox, FormControlLabel, Divider } from '@mui/material';
-import { createComponentObject } from '../utils/utils';
 import { MsgError } from './system/MsgError';
 import ManageOptions from './ManageOptions';
 import { useDispatch, useSelector } from 'react-redux';
-import { addComponents } from '../redux/slices/formSlice';
+import { addComponents, updateComponent } from '../redux/slices/formSlice';
 import { addQuestionText, resetQuestionObject, toggleAnswerIsRequired } from '../redux/slices/questionSlice';
+import { v4 as uuidv4 } from 'uuid';
 
 export const ComponentBuilder = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const form = useSelector((state) => state.form);
   const question = useSelector((state) => state.question);
   const dispatch = useDispatch();
 
@@ -18,53 +17,42 @@ export const ComponentBuilder = () => {
     return question.type === 'checkboxInput' || question.type === 'selectInput' || question.type === 'radioButtonInput';
   };
 
-  const submitComponent = () => {
-    if (question.title) {
-      if (IsMultiAnswersComponent() && (!question.choices || question.choices.length == 0)) {
-        setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
-        return;
-      }
-      const componentListFinal = [...form.components];
-      const newComponent = createComponentObject(
-        question.title,
-        question.type,
-        question.choices,
-        question.answerRequired,
-      );
-      componentListFinal.push(newComponent);
-      dispatch(addComponents(componentListFinal));
-      dispatch(resetQuestionObject());
-    } else {
+  const submitComponent = (action) => {
+    if (!question.title) {
       setErrorMessage(i18n.__('component.componentBuilder.errors.noTitle'));
+      return;
     }
-  };
 
-  const updateComponent = () => {
-    if (question.title) {
-      if (IsMultiAnswersComponent() && !question.choices) {
-        setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
-        return;
-      }
-      const componentListFinal = [...form.components];
-      const index = componentListFinal.findIndex((component) => component.id === question.id);
-      if (index !== -1) {
-        componentListFinal[index] = createComponentObject(
-          question.title,
-          question.type,
-          question.choices,
-          question.answerRequired,
-        );
-      } else {
-        setErrorMessage(i18n.__('component.componentBuilder.errors.notFound'));
-        return;
-      }
-      dispatch(addComponents(componentListFinal));
-      dispatch(resetQuestionObject());
-    } else {
-      if (!question.title) {
-        setErrorMessage(i18n.__('component.componentBuilder.errors.noTitle'));
-      }
+    if (IsMultiAnswersComponent() && (!question.choices || question.choices.length == 0)) {
+      setErrorMessage(i18n.__('component.componentBuilder.errors.noOptions'));
+      return;
     }
+
+    if (action === 'create') {
+      const newComponent = {
+        id: uuidv4(),
+        title: question.title,
+        type: question.type,
+        choices: question.choices,
+        answerRequired: question.answerRequired,
+      };
+
+      dispatch(addComponents(newComponent));
+    } else if (action === 'update') {
+      const componentUpdated = {
+        id: question.id,
+        title: question.title,
+        type: question.type,
+        choices: question.choices,
+        answerRequired: question.answerRequired,
+      };
+
+      dispatch(updateComponent(componentUpdated));
+    } else {
+      console.log('ERROR');
+      return;
+    }
+    dispatch(resetQuestionObject());
   };
 
   return (
@@ -87,11 +75,11 @@ export const ComponentBuilder = () => {
       />
       {IsMultiAnswersComponent() && <ManageOptions setErrorMessage={setErrorMessage} />}
       {question.id === '' ? (
-        <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={submitComponent}>
+        <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={() => submitComponent('create')}>
           {i18n.__('component.componentBuilder.submit')}
         </Button>
       ) : (
-        <Button style={{ textAlign: 'center', width: '100%' }} onClick={updateComponent}>
+        <Button style={{ textAlign: 'center', width: '100%' }} onClick={() => submitComponent('update')}>
           {i18n.__('component.componentBuilder.update')}
         </Button>
       )}
