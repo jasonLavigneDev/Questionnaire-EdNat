@@ -27,6 +27,7 @@ export default function ManageOptions({ setErrorMessage }) {
     if (code == 13) {
       addOption(question.answerText);
     }
+    event.target.focus();
   };
 
   return (
