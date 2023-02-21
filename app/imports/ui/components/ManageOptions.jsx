@@ -92,22 +92,34 @@ export default function ManageOptions({ setErrorMessage }) {
             style={{ display: 'flex', maxWidth: '42.6vw', marginLeft: '3vw', justifyContent: 'space-between' }}
             key={option.id}
           >
-            <p>{option}</p>
-            <IconButton
-              disabled={!hasOptionBefore(index)}
-              onClick={() => swapPositionWithPreviousOption(index, question)}
+            <p
+              style={{
+                maxHeight: '1.2rem',
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis',
+                overflowY: 'hidden',
+                overflow: 'hidden',
+              }}
             >
-              <ArrowUpwardIcon />
-            </IconButton>
-            <IconButton
-              disabled={!hasOptionAfter(index, question)}
-              onClick={() => swapPositionWithNextOption(index, question)}
-            >
-              <ArrowDownwardIcon />
-            </IconButton>
-            <IconButton onClick={() => dispatch(removeOption({ option: option }))}>
-              <DeleteIcon />
-            </IconButton>
+              {option}
+            </p>
+            <div>
+              <IconButton
+                disabled={!hasOptionBefore(index)}
+                onClick={() => swapPositionWithPreviousOption(index, question)}
+              >
+                <ArrowUpwardIcon />
+              </IconButton>
+              <IconButton
+                disabled={!hasOptionAfter(index, question)}
+                onClick={() => swapPositionWithNextOption(index, question)}
+              >
+                <ArrowDownwardIcon />
+              </IconButton>
+              <IconButton onClick={() => dispatch(removeOption({ option: option }))} sx={{ color: 'salmon' }}>
+                <DeleteIcon />
+              </IconButton>
+            </div>
           </div>
           <Divider variant="middle" />
         </>
