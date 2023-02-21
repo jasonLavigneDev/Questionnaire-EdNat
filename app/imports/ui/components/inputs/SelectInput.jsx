@@ -4,14 +4,14 @@ import { FormControl, InputLabel, Select, MenuItem, Paper, FormLabel } from '@mu
 import { addAnswers } from '../../redux/slices/answerFormSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const SelectInput = ({ title, choices, answerMode, questionId, answerRequired }) => {
+export const SelectInput = ({ title, choices, questionId, answerRequired }) => {
   const inputAnswer = useSelector((state) =>
     state.answerForm.answers.find((answer) => answer.questionId === questionId),
   );
   const dispatch = useDispatch();
 
   const validateAnswer = (event) => {
-    if (answerMode) dispatch(addAnswers({ questionId, value: event.target.value }));
+    dispatch(addAnswers({ questionId, value: event.target.value }));
   };
 
   return (

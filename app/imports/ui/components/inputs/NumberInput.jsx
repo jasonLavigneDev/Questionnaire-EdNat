@@ -3,14 +3,14 @@ import { Paper, TextField, FormControl, FormLabel } from '@mui/material';
 import { addAnswers } from '../../redux/slices/answerFormSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const NumberInput = ({ title, answerMode, questionId, answerRequired }) => {
+export const NumberInput = ({ title, questionId, answerRequired }) => {
   const dispatch = useDispatch();
   const inputAnswer = useSelector((state) =>
     state.answerForm.answers.find((answer) => answer.questionId === questionId),
   );
 
   const validateAnswer = (event) => {
-    if (answerMode) dispatch(addAnswers({ questionId, value: event.target.value }));
+    dispatch(addAnswers({ questionId, value: event.target.value }));
   };
 
   return (
