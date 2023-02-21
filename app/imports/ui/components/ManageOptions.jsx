@@ -1,9 +1,8 @@
-import { IconButton, Divider, TextField } from '@mui/material';
+import { IconButton, Paper, TextField } from '@mui/material';
 import { i18n } from 'meteor/universe:i18n';
 import React, { useCallback, useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Draggable } from 'react-drag-reorder';
 import { isDuplicate } from '../utils/utils';
@@ -58,28 +57,41 @@ export default function ManageOptions({ setErrorMessage }) {
       <Draggable onPosChange={this.getChangedPos}>
         {question.choices.map((option, index) => (
           <>
-            <div
-              style={{ display: 'flex', maxWidth: '42.6vw', marginLeft: '3vw', justifyContent: 'space-between' }}
+            <Paper
+              sx={{
+                display: 'flex',
+                marginLeft: '3vw',
+                marginTop: '1vh',
+                justifyContent: 'space-between',
+                padding: '0 1vw',
+                '&:hover': {
+                  backgroundColor: 'lightgrey',
+                },
+              }}
               key={option.id}
+              title="Déplacer cette option"
             >
-              <p
-                style={{
-                  maxHeight: '1.2rem',
-                  whiteSpace: 'nowrap',
-                  textOverflow: 'ellipsis',
-                  overflowY: 'hidden',
-                  overflow: 'hidden',
-                }}
-              >
-                {option}
-              </p>
-              <div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <DragIndicatorIcon sx={{ color: 'lightgrey', marginLeft: -2 }} />
+                <p
+                  style={{
+                    maxHeight: '1.2rem',
+                    whiteSpace: 'nowrap',
+                    textOverflow: 'ellipsis',
+                    overflowY: 'hidden',
+                    overflow: 'hidden',
+                    marginLeft: '0.5vw',
+                  }}
+                >
+                  {option}
+                </p>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <IconButton onClick={() => removeOption(index)} sx={{ color: 'salmon' }}>
                   <DeleteIcon />
                 </IconButton>
               </div>
-            </div>
-            <Divider variant="middle" />
+            </Paper>
           </>
         ))}
       </Draggable>
@@ -103,10 +115,8 @@ export default function ManageOptions({ setErrorMessage }) {
           <AddIcon fontSize="large" />
         </IconButton>
       </div>
-      <div className="flex-container">
-        <div className="row">
-          <DraggableRender />
-        </div>
+      <div style={{ maxWidth: '45vw', marginTop: '2vh' }}>
+        <DraggableRender />
       </div>
       <br />
     </>
