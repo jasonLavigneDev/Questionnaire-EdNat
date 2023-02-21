@@ -12,7 +12,7 @@ const appBarStyle = {
   alignItems: 'center',
   paddingLeft: '2%',
   paddingRight: '2%',
-  height: '6vh',
+  height: '60px',
   backgroundColor: '#F9F9FD',
 };
 
