@@ -52,7 +52,7 @@ export const formSlice = createSlice({
       state.groups = state.groups.filter((groupId) => groupId !== action.payload.id);
     },
     addComponents: (state, action) => {
-      state.components = action.payload;
+      state.components.push(action.payload);
     },
     removeComponents: (state, action) => {
       state.components = state.components.filter(
