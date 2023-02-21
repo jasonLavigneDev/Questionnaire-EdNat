@@ -3,6 +3,7 @@ import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeGroup } from '../redux/slices/formSlice';
+import { getStrucGroupName } from '../../api/groups/methods';
 
 export const DisplayGroups = ({ userGroups }) => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ export const DisplayGroups = ({ userGroups }) => {
   const getGroupName = (id) => {
     const index = userGroups.findIndex((group) => group._id === id);
     if (index !== -1) {
-      return userGroups[index].name;
+      return getStrucGroupName(userGroups[index]);
     }
     return 'N/A';
   };

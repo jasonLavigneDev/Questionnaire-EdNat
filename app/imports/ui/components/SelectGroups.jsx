@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { i18n } from 'meteor/universe:i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { addGroups } from '../redux/slices/formSlice';
+import { getStrucGroupName } from '../../api/groups/methods';
 
 export default function SelectGroups({ userGroups }) {
   const [groupSelected, setGroupSelected] = useState({});
@@ -43,7 +44,7 @@ export default function SelectGroups({ userGroups }) {
         >
           {displayGroupsNotSelected().map((group) => (
             <MenuItem key={group._id} value={group.name}>
-              {group.name}
+              {getStrucGroupName(group)}
             </MenuItem>
           ))}
         </Select>
