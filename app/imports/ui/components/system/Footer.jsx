@@ -22,7 +22,7 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
   const isTitleMissing = !form.title;
 
   return (
-    <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
+    <div style={{ position: 'fixed', bottom: 0, left: '37vw' }}>
       <BottomNavigation sx={bottomBarStyle} showLabels>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           {urlOfPrevStep ? (
