@@ -173,7 +173,7 @@
     },
     "formActionButton": {
       "answer": "Show answers",
-      "editAnswers": "Edit answers",
+      "editAnswers": "Answer",
       "editForm": "Edit form",
       "deleteForm": "Delete form",
       "copyUrl": "Copy form URL",
