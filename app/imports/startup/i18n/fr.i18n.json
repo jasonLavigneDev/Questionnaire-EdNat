@@ -173,7 +173,7 @@
     },
     "formActionButton": {
       "answer": "Voir les réponses",
-      "editAnswers": "Modifier les réponses",
+      "editAnswers": "Répondre au questionnaire",
       "editForm": "Modifier le formulaire",
       "deleteForm": "Supprimer le formulaire",
       "copyUrl": "Copier l'URL du formulaire",
