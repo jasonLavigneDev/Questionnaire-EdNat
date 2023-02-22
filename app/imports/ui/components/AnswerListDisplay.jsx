@@ -9,6 +9,9 @@ export default function AnswerListDisplay({ finalArray }) {
   finalArray.map((question) => {
     let key = question.questionTitle;
     question.responses.map((response) => {
+      if (response.response instanceof Array) {
+        response.response = response.response.toString().replace(',', ' - ');
+      }
       const index = csvArray.findIndex((answer) => answer.user === response.userName);
       if (index === -1) {
         if (response.response) {
