@@ -59,6 +59,8 @@ export default function StatsBar({ question }) {
     return cpt;
   };
 
+  console.log(question);
+
   return (
     <div
       style={{
@@ -68,9 +70,9 @@ export default function StatsBar({ question }) {
       }}
     >
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {question.stat.map((oneStat) => (
+        {keys.map((key) => (
           <p>
-            {oneStat.answer}: {((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%
+            {key}: {((choicesStats[key] / getAllCountStat(question.stat)) * 100).toFixed(2)}%
           </p>
         ))}
       </div>

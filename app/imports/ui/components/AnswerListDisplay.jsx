@@ -9,6 +9,9 @@ export default function AnswerListDisplay({ finalArray }) {
   finalArray.map((question) => {
     let key = question.questionTitle;
     question.responses.map((response) => {
+      if (response.response instanceof Array) {
+        response.response = response.response.toString().replace(',', ' - ');
+      }
       const index = csvArray.findIndex((answer) => answer.user === response.userName);
       if (index === -1) {
         if (response.response) {
@@ -27,6 +30,7 @@ export default function AnswerListDisplay({ finalArray }) {
   });
 
   csvArray.forEach((obj) => delete obj.user);
+  finalArray.forEach((resp) => delete resp.userName);
 
   return (
     <>
@@ -44,11 +48,11 @@ export default function AnswerListDisplay({ finalArray }) {
         <div style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
           <Paper sx={{ display: 'flex', flexDirection: 'column', width: '50%', padding: 5 }}>
             <h2>{question.questionTitle}</h2>
-            {question.responses.map((response) => (
+            {question.responses.map((response, index) => (
               <ul>
                 <li>
                   <b>
-                    {response.userName} ({i18n.__('component.answerListDisplay.answerAt')}: {response.createdAt})
+                    Réponse #{index + 1} ({i18n.__('component.answerListDisplay.answerAt')}: {response.createdAt})
                   </b>
                   : {response.response}
                 </li>

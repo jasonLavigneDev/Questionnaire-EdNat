@@ -58,6 +58,11 @@ export default function StatsPie({ question }) {
     choicesStats[element.answer]++;
   });
 
+  const displayAnswer = (answer) => {
+    if (answer instanceof Array) return answer.toString().replace(',', ' - ');
+    return answer;
+  };
+
   return (
     <div
       style={{
@@ -69,7 +74,7 @@ export default function StatsPie({ question }) {
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         {question.stat.map((oneStat) => (
           <p>
-            {oneStat.answer}: {((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%
+            {displayAnswer(oneStat.answer)}: {((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%
           </p>
         ))}
       </div>
