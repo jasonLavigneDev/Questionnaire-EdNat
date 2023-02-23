@@ -37,13 +37,13 @@ export const HomePage = () => {
 
   return (
     <>
-      <div style={{ textAlign: 'center' }}>
-        <Button size="large" onClick={() => navigate('/builder/intro')}>
-          {i18n.__('page.homePage.newForm')}
-        </Button>
-      </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h2>{i18n.__('page.homePage.formsList')}</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '49.5vw', alignItems: 'center' }}>
+          <h2>{i18n.__('page.homePage.formsList')}</h2>
+          <Button variant="contained" size="large" onClick={() => navigate('/builder/intro')}>
+            {i18n.__('page.homePage.newForm')}
+          </Button>
+        </div>
         {allUserForms &&
           allUserForms.map((userForm) => <UserForm userForm={userForm} deleteForm={deleteForm} key={userForm._id} />)}
       </div>
