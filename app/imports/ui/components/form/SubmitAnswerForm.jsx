@@ -1,4 +1,4 @@
-import { Button, FormControlLabel, Checkbox } from '@mui/material';
+import { Button, FormControlLabel, Checkbox, TextField } from '@mui/material';
 import i18n from 'meteor/universe:i18n';
 import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -56,14 +56,15 @@ export default function SubmitAnswerForm() {
   return (
     <div>
       {!user ? (
-        <div>
-          <input
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          <TextField
             type="text"
             name="yourName"
             id="yourName"
             value={publicName}
             placeholder={i18n.__('component.submitAnswerForm.enterName')}
             onChange={(e) => setPublicName(e.target.value)}
+            sx={{ width: '50%' }}
           />
           <AcceptRgpd />
           <Button disabled={!publicName || !isCheckedRgpd || !answersAreComplete} onClick={submitAnswerForm}>
