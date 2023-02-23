@@ -59,7 +59,7 @@ export default function StatsPie({ question }) {
   });
 
   const displayAnswer = (answer) => {
-    if (answer instanceof Array) return answer.toString().replace(',', ' - ');
+    if (answer instanceof Array) return answer.join(' - ');
     return answer;
   };
 
