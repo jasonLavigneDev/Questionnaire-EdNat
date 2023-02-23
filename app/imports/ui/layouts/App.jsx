@@ -19,15 +19,25 @@ export const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
-          <Route path="visualizer/:id" element={<AnswerPage />} loader={loaderVisualizer} />
+        <Route element={<MainLayout />}>
+          <Route
+            path="visualizer/:id"
+            element={<AnswerPage />}
+            loader={loaderVisualizer}
+            errorElement={<ErrorPage />}
+          />
           <Route element={<AuthProvider />}>
-            <Route path="" element={<HomePage />} loader={loaderHomePage} errorElement={<ErrorPage />} />
-            <Route path="logout" element={<Logout />} />
-            <Route path="answers/:id" element={<ResultPage />} loader={loaderAnswerPage} />
-            <Route path="builder/intro/:id?" element={<FormIntro />} loader={loaderFormIntro} />
-            <Route path="builder/components/:id?" element={<FormBuilder />} />
-            <Route path="builder/previsualizer" element={<FormPrevisualizer />} />
+            <Route path="/" element={<HomePage />} loader={loaderHomePage} errorElement={<ErrorPage />} />
+            <Route path="logout" element={<Logout />} errorElement={<ErrorPage />} />
+            <Route path="answers/:id" element={<ResultPage />} loader={loaderAnswerPage} errorElement={<ErrorPage />} />
+            <Route
+              path="builder/intro/:id?"
+              element={<FormIntro />}
+              loader={loaderFormIntro}
+              errorElement={<ErrorPage />}
+            />
+            <Route path="builder/components/:id?" element={<FormBuilder />} errorElement={<ErrorPage />} />
+            <Route path="builder/previsualizer" element={<FormPrevisualizer />} errorElement={<ErrorPage />} />
           </Route>
         </Route>
       </>,
