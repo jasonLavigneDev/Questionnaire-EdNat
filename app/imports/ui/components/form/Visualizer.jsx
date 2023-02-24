@@ -5,6 +5,7 @@ import SubmitAnswerForm from './SubmitAnswerForm';
 import GenerateComponent from './GenerateComponent';
 import { UserContext } from '../../contexts/UserContext';
 import { useSelector } from 'react-redux';
+import ModalRgpd from '../system/ModalRgpd';
 
 export const Visualizer = ({ answerMode = false }) => {
   const [componentToEdit] = useState({});
@@ -16,6 +17,7 @@ export const Visualizer = ({ answerMode = false }) => {
 
   return (
     <div>
+      {answerMode && <ModalRgpd answerMode={answerMode} />}
       {<h3 style={{ textAlign: 'center' }}>{form.title}</h3>}
       {<h4 style={{ textAlign: 'center' }}>{form.desc}</h4>}
       {form.components.map((currentComponent) => (

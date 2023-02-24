@@ -52,7 +52,7 @@ export const HeaderMenu = () => {
             <Avatar sx={sizeAvatar} src={user.avatar} alt={user.username} />
           ) : (
             <div style={sizeAvatar}>
-              <identicon-svg username="default" />
+              <identicon-svg style={sizeAvatar} username="default" />
             </div>
           )}
         </div>
