@@ -9,7 +9,6 @@ import { hasAlreadyRespond } from '../../utils/utils';
 export default function SubmitAnswerForm() {
   const { user } = useContext(UserContext);
   const [publicName, setPublicName] = useState('');
-  const [isCheckedRgpd, setIsCheckedRgpd] = useState(false);
   const [answersAreComplete, setAnswersAreComplete] = useState(false);
   const answerForm = useSelector((state) => state.answerForm);
   const userAnswers = useSelector((state) => state.answerForm.answers);
@@ -42,17 +41,6 @@ export default function SubmitAnswerForm() {
     setAnswersAreComplete(questionsRequired.length == 0);
   }, [answerForm]);
 
-  const AcceptRgpd = () => {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <FormControlLabel
-          control={<Checkbox checked={isCheckedRgpd} onChange={() => setIsCheckedRgpd(!isCheckedRgpd)} />}
-          label={i18n.__('component.submitAnswerForm.acceptRgpd')}
-        />
-      </div>
-    );
-  };
-
   return (
     <div>
       {!user ? (
@@ -66,16 +54,14 @@ export default function SubmitAnswerForm() {
             onChange={(e) => setPublicName(e.target.value)}
             sx={{ width: '50%' }}
           />
-          <AcceptRgpd />
-          <Button disabled={!publicName || !isCheckedRgpd || !answersAreComplete} onClick={submitAnswerForm}>
+          <Button disabled={!publicName || !answersAreComplete} onClick={submitAnswerForm}>
             {i18n.__('component.submitAnswerForm.submitAnswers')}
           </Button>
         </div>
       ) : (
         <>
-          <AcceptRgpd />
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button onClick={submitAnswerForm} disabled={!isCheckedRgpd || !answersAreComplete}>
+            <Button onClick={submitAnswerForm} disabled={!answersAreComplete}>
               {hasAlreadyRespond(user, form)
                 ? i18n.__('component.submitAnswerForm.updateAnswers')
                 : i18n.__('component.submitAnswerForm.submitAnswers')}

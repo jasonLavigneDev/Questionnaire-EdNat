@@ -23,6 +23,7 @@ export const FormIntro = () => {
   };
   const dispatch = useDispatch();
   const isFormGroup = useSelector((state) => state.form.isForGroup);
+  const formId = useSelector((state) => state.form.formId);
 
   useEffect(() => {
     if (formFromBDD) {
@@ -51,7 +52,7 @@ export const FormIntro = () => {
 
   return (
     <>
-      {acceptRgpd ? (
+      {acceptRgpd || formId ? (
         <>
           <Breadcrumb />
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
