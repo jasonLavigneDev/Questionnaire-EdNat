@@ -27,7 +27,7 @@ export const formSlice = createSlice({
       state.isPublic = action.payload.isPublic;
       state.formId = action.payload.formId;
       state.formAnswers = action.payload.formAnswers;
-      state.isForGroup = action.payload.onlyGroup || false;
+      state.isForGroup = action.payload.groups.length !== 0;
       state.isActive = action.payload.isActive;
     },
     addTitle: (state, action) => {
