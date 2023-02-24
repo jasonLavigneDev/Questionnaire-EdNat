@@ -27,26 +27,7 @@ export const FormIntro = () => {
 
   useEffect(() => {
     if (formFromBDD) {
-      const { title, desc, components, groups, _id, isPublic, formAnswers } = formFromBDD;
-      if (formAnswers && formAnswers.length) {
-        formAnswers.forEach((answer) => {
-          delete answer.createdAt;
-        });
-      }
-      const onlyGroup = !!formFromBDD.groups.length;
-
-      const fieldForPopulateState = {
-        title,
-        desc,
-        components,
-        groups,
-        isPublic,
-        formId: _id,
-        formAnswers,
-        onlyGroup,
-      };
-
-      dispatch(fillForm(fieldForPopulateState));
+      dispatch(fillForm(formFromBDD));
     }
   }, []);
 
