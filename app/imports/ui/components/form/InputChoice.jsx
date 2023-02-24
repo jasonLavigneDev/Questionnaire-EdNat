@@ -3,7 +3,7 @@ import { FormControl, Select, InputLabel, MenuItem, OutlinedInput, Divider } fro
 import { ComponentBuilder } from '../ComponentBuilder';
 import { LIST_OF_INPUT_BUILDER } from '../listOfInputBuilder';
 import { useDispatch, useSelector } from 'react-redux';
-import { addQuestionType } from '../../redux/slices/questionSlice';
+import { addQuestionTypeAndResetChoices } from '../../redux/slices/questionSlice';
 
 export const InputChoice = () => {
   const question = useSelector((state) => state.question);
@@ -19,7 +19,7 @@ export const InputChoice = () => {
           value={inputType}
           input={<OutlinedInput label={i18n.__('component.inputChoice.questionType')} />}
           onChange={(event) => {
-            dispatch(addQuestionType({ type: event.target.value }));
+            dispatch(addQuestionTypeAndResetChoices({ type: event.target.value }));
           }}
         >
           {LIST_OF_INPUT_BUILDER.map((inputBuilder) => (
