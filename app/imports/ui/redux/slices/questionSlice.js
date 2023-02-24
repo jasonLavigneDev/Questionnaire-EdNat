@@ -22,8 +22,9 @@ export const questionSlice = createSlice({
     addQuestionText: (state, action) => {
       state.title = action.payload.title;
     },
-    addQuestionType: (state, action) => {
+    addQuestionTypeAndResetChoices: (state, action) => {
       state.type = action.payload.type;
+      state.choices = [];
     },
     addAnswerText: (state, action) => {
       state.answerText = action.payload.answerText;
@@ -54,7 +55,7 @@ export const {
   fillQuestionObject,
   resetQuestionObject,
   resetAnswerText,
-  addQuestionType,
+  addQuestionTypeAndResetChoices,
   toggleAnswerIsRequired,
   updateIndexAnswerOptions,
 } = questionSlice.actions;
