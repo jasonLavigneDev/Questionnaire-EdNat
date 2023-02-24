@@ -19,7 +19,7 @@ export const NumberInput = ({ title, questionId, answerRequired }) => {
         <FormLabel id="numberInput-title">{title}</FormLabel>
         <TextField
           type="number"
-          defaultValue={Number(inputAnswer?.answer)}
+          defaultValue={Number(inputAnswer?.answer) || 0}
           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
           onChange={(e) => validateAnswer(e)}
           error={answerRequired && !inputAnswer}
