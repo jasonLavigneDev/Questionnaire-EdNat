@@ -73,19 +73,11 @@ export const ComponentBuilder = () => {
       />
       {IsMultiAnswersComponent() && <ManageOptions setErrorMessage={setErrorMessage} />}
       {question.id === '' ? (
-        <Button
-          style={{ textAlign: 'center', width: '100%', marginTop: 1 }}
-          disabled={question.answerText !== ''}
-          onClick={() => submitComponent('create')}
-        >
+        <Button style={{ textAlign: 'center', width: '100%', marginTop: 1 }} onClick={() => submitComponent('create')}>
           {i18n.__('component.componentBuilder.submit')}
         </Button>
       ) : (
-        <Button
-          style={{ textAlign: 'center', width: '100%' }}
-          disabled={question.answerText !== ''}
-          onClick={() => submitComponent('update')}
-        >
+        <Button style={{ textAlign: 'center', width: '100%' }} onClick={() => submitComponent('update')}>
           {i18n.__('component.componentBuilder.update')}
         </Button>
       )}
