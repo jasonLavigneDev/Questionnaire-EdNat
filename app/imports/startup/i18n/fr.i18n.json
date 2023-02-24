@@ -222,8 +222,11 @@
       "form": {
         "group": "Formulaire de groupe",
         "private": "Formulaire privé",
-        "public": "Formulaire publique"
+        "public": "Formulaire public"
       }
+    },
+    "manageOptions": {
+      "duplicate": "Cette option existe déjà"
     }
   }
 }

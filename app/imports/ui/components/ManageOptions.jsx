@@ -1,6 +1,6 @@
-import { IconButton, Paper, TextField } from '@mui/material';
+import React, { useCallback, useState } from 'react';
+import { IconButton, Divider, Paper, TextField, Alert, Snackbar } from '@mui/material';
 import { i18n } from 'meteor/universe:i18n';
-import React, { useCallback, useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -18,6 +18,7 @@ import {
 export default function ManageOptions({ setErrorMessage }) {
   const dispatch = useDispatch();
   const question = useSelector((state) => state.question);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const addOption = (newOption) => {
     if (!newOption) {
@@ -26,7 +27,7 @@ export default function ManageOptions({ setErrorMessage }) {
     }
 
     if (isDuplicate(question.choices, newOption)) {
-      console.log('Vincent tu met ton toast LA !');
+      setOpenAlert(true);
       return;
     }
 
@@ -119,9 +120,20 @@ export default function ManageOptions({ setErrorMessage }) {
           <AddIcon fontSize="large" />
         </IconButton>
       </div>
+      <Snackbar
+        open={openAlert}
+        autoHideDuration={4000}
+        onClose={() => setOpenAlert(false)}
+        sx={{ position: 'relative', top: 0, marginLeft: '1.5vw' }}
+      >
+        <Alert onClose={() => setOpenAlert(false)} severity="warning" sx={{ width: '83%' }}>
+          {i18n.__('component.manageOptions.duplicate')}
+        </Alert>
+      </Snackbar>
       <div style={{ maxWidth: '45vw', marginTop: '2vh' }}>
         <DraggableRender />
       </div>
+
       <br />
     </>
   );

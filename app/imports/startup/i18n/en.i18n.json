@@ -224,6 +224,9 @@
         "private": "Private form",
         "public": "Public form"
       }
+    },
+    "manageOptions": {
+      "duplicate": "Option already exist"
     }
   }
 }
