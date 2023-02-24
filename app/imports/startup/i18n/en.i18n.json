@@ -118,6 +118,10 @@
       "answersByUser": "Display answers by user",
       "answersStats": "Display statistics",
       "deleteAnswers": "Delete all answers"
+    },
+    "redirectPage": {
+      "title": "Form answered successfully",
+      "subTitle": "Redirection in"
     }
   },
   "component": {

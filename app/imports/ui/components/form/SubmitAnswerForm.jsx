@@ -23,7 +23,7 @@ export default function SubmitAnswerForm() {
       userId: name,
       answers: answerForm.answers,
     });
-    navigate('/');
+    navigate('/success');
   };
 
   useEffect(() => {
