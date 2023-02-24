@@ -21,8 +21,8 @@ const ModalRgpd = ({ answerMode = false }) => {
   const [openModal, setOpenModal] = useState(true);
 
   const handleAccept = () => {
-    if (answerMode) setOpenModal(false);
-    else setAcceptRgpd(true);
+    setOpenModal(false);
+    !answerMode && setAcceptRgpd(true);
   };
 
   const handleReject = () => {
