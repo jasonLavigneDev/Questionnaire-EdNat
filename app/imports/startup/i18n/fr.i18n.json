@@ -118,6 +118,10 @@
       "answersByUser": "Voir les réponses par utilisateur",
       "answersStats": "Voir les statistiques",
       "deleteAnswers": "Supprimer les réponses"
+    },
+    "redirectPage": {
+      "title": "Questionnaire répondu avec succès",
+      "subTitle": "Redirection dans"
     }
   },
   "component": {

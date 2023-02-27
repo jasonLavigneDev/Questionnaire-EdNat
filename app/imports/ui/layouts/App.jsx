@@ -9,6 +9,7 @@ import { FormIntro, loader as loaderFormIntro } from '../pages/FormIntro';
 import { AnswerPage, loaderVisualizer } from '../pages/AnswerPage';
 import { FormPrevisualizer } from '../pages/FormPrevisualizer';
 import { ResultPage, loaderAnswerPage } from '../pages/ResultPage';
+import RedirectAfterSubmit from '../pages/RedirectAfterSubmit';
 import { FormProvider } from '../contexts/FormContext';
 import { AuthProvider } from '../contexts/AuthContext';
 
@@ -26,6 +27,7 @@ export const App = () => {
             loader={loaderVisualizer}
             errorElement={<ErrorPage />}
           />
+          <Route path="success" element={<RedirectAfterSubmit />} errorElement={<ErrorPage />} />
           <Route element={<AuthProvider />}>
             <Route path="/" element={<HomePage />} loader={loaderHomePage} errorElement={<ErrorPage />} />
             <Route path="logout" element={<Logout />} errorElement={<ErrorPage />} />
