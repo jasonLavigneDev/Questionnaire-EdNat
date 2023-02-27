@@ -27,8 +27,8 @@ export const ResultPage = () => {
     });
   });
 
-  formFromBDD.formAnswers?.forEach((userAnswer) => {
-    finalArray.forEach((questionObj) => {
+  formFromBDD.formAnswers?.forEach((userAnswer, index) => {
+    finalArray.map((questionObj) => {
       const questionId = questionObj.questionId;
       let response = userAnswer.answers
         .filter((answer) => answer.questionId === questionId)
@@ -36,7 +36,7 @@ export const ResultPage = () => {
 
       questionObj.responses.push({
         response: response[0],
-        userName: userAnswer.userId,
+        index: index,
         createdAt: userAnswer.createdAt.toLocaleDateString(),
       });
     });

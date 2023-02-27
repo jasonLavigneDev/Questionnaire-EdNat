@@ -12,15 +12,15 @@ export default function AnswerListDisplay({ finalArray }) {
       if (response.response instanceof Array) {
         response.response = response.response.join(' - ');
       }
-      const index = csvArray.findIndex((answer) => answer.user === response.userName);
+      const index = csvArray.findIndex((answer) => answer.index === response.index);
       if (index === -1) {
         if (response.response) {
-          let newObj = { user: response.userName };
+          let newObj = { index: response.index };
           newObj[key] = response.response;
           csvArray.push(newObj);
         }
       } else {
-        if (csvArray[index]['user'] === response.userName) {
+        if (csvArray[index]['index'] === response.index) {
           if (response.response) {
             csvArray[index][key] = response.response;
           }
@@ -29,8 +29,9 @@ export default function AnswerListDisplay({ finalArray }) {
     });
   });
 
-  csvArray.forEach((obj) => delete obj.user);
-  finalArray.forEach((resp) => delete resp.userName);
+  csvArray.forEach((obj) => delete obj.index);
+  finalArray.forEach((resp) => delete resp.index);
+  console.log(csvArray);
 
   return (
     <>

@@ -34,7 +34,7 @@ export const AnswerPage = () => {
 
       dispatch(fillForm(fieldForPopulateState));
       if (user && currentFormHasAnswers) {
-        let userAnswers = formFromBDD.formAnswers.find((answer) => answer.userId === user.username);
+        let userAnswers = formFromBDD.formAnswers.find((answer) => answer.userId === user._id);
         if (userAnswers) {
           dispatch(
             fillUserAnswersObject({
