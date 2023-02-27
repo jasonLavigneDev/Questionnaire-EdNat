@@ -19,7 +19,7 @@ export const toggleActiveForm = async (form) => {
 export const hasAlreadyRespond = (user, form) => {
   if (hasNotAnswers(form)) return false;
   const { formAnswers } = form;
-  return !!formAnswers.find((answer) => answer.userId === user.username);
+  return !!formAnswers.find((answer) => answer.userId === user._id);
 };
 
 export const copyUrlToClipBoard = (id) => {
