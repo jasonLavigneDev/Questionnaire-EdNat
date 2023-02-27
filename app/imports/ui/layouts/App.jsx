@@ -27,6 +27,7 @@ export const App = () => {
             loader={loaderVisualizer}
             errorElement={<ErrorPage />}
           />
+          <Route path="success" element={<RedirectAfterSubmit />} errorElement={<ErrorPage />} />
           <Route element={<AuthProvider />}>
             <Route path="/" element={<HomePage />} loader={loaderHomePage} errorElement={<ErrorPage />} />
             <Route path="logout" element={<Logout />} errorElement={<ErrorPage />} />
@@ -39,7 +40,6 @@ export const App = () => {
             />
             <Route path="builder/components/:id?" element={<FormBuilder />} errorElement={<ErrorPage />} />
             <Route path="builder/previsualizer" element={<FormPrevisualizer />} errorElement={<ErrorPage />} />
-            <Route path="success" element={<RedirectAfterSubmit />} errorElement={<ErrorPage />} />
           </Route>
         </Route>
       </>,
