@@ -54,6 +54,9 @@ export const formSlice = createSlice({
     addComponents: (state, action) => {
       state.components.push(action.payload);
     },
+    swapPositions: (state, action) => {
+      state.components = action.payload;
+    },
     updateComponent: (state, action) => {
       const index = state.components.findIndex((component) => component.id === action.payload.id);
       state.components[index] = action.payload;
@@ -71,6 +74,7 @@ export const {
   resetFormObject,
   addTitle,
   addComponents,
+  swapPositions,
   addGroups,
   removeGroup,
   removeComponents,

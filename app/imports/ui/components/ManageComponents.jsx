@@ -6,7 +6,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
-import { addComponents, removeComponents } from '../redux/slices/formSlice';
+import { addComponents, removeComponents, swapPositions } from '../redux/slices/formSlice';
 import { fillQuestionObject, resetQuestionObject } from '../redux/slices/questionSlice';
 import { MsgError } from './system/MsgError';
 
@@ -28,7 +28,7 @@ export default function ManageComponents({ currentComponent, index }) {
         componentsUpdated[inputPos],
         componentsUpdated[inputPos - 1],
       ];
-      dispatch(addComponents(componentsUpdated));
+      dispatch(swapPositions(componentsUpdated));
     } else {
       setErrorMessage(i18n.__('component.componentManager.errors.noQuestionBefore'));
     }
@@ -41,7 +41,7 @@ export default function ManageComponents({ currentComponent, index }) {
         componentsUpdated[inputPos],
         componentsUpdated[inputPos + 1],
       ];
-      dispatch(addComponents(componentsUpdated));
+      dispatch(swapPositions(componentsUpdated));
     } else {
       setErrorMessage(i18n.__('component.componentManager.errors.noQuestionAfter'));
     }
