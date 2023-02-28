@@ -38,7 +38,8 @@
         "formAnswers": {
           "answers": "Answers",
           "userId": "User ID",
-          "answer": "Answer"
+          "answer": "Answer",
+          "modifyAnswersToken": "Token allowing the modification of the answers"
         },
         "component": {
           "id": "Component ID",

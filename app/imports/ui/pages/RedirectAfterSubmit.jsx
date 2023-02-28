@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import i18n from 'meteor/universe:i18n';
+import { UserContext } from '../contexts/UserContext';
 
 const flexCenterStyle = {
   display: 'flex',
@@ -12,16 +13,21 @@ const flexCenterStyle = {
 
 const RedirectSubmitPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { user } = useContext(UserContext);
   const [count, setCount] = useState(5);
 
+  const urlForEdition = location.state.urlForEdition || '';
   useEffect(() => {
-    if (count > 0) {
-      const timer = count > 0 && setInterval(() => setCount(count - 1), 1000);
-      return () => {
-        clearInterval(timer);
-      };
-    } else {
-      navigate('/');
+    if (user) {
+      if (count > 0) {
+        const timer = count > 0 && setInterval(() => setCount(count - 1), 1000);
+        return () => {
+          clearInterval(timer);
+        };
+      } else {
+        navigate('/');
+      }
     }
   }, [count]);
 
@@ -31,6 +37,7 @@ const RedirectSubmitPage = () => {
         {i18n.__('page.redirectPage.title')}
         <CheckCircleIcon fontSize="large" sx={{ color: 'green', marginLeft: '1vw' }} />
       </h1>
+      {urlForEdition && <p>URL de redirection : {urlForEdition}</p>}
       <p>
         <i>
           {i18n.__('page.redirectPage.subTitle')} {count}

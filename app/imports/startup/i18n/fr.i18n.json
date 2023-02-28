@@ -38,7 +38,8 @@
         "formAnswers": {
           "answers": "Réponses",
           "userId": "ID utilisateur",
-          "answer": "Réponse"
+          "answer": "Réponse",
+          "modifyAnswersToken": "Token permettant la modification des réponses"
         },
         "component": {
           "id": "ID composant",

@@ -60,6 +60,12 @@ export const Answers = new SimpleSchema({
     },
   },
 
+  modifyAnswersToken: {
+    type: String,
+    optional: true,
+    label: getLabel('api.forms.labels.formAnswers.modifyAnswersToken'),
+  },
+
   answers: {
     type: Array,
     optional: true,

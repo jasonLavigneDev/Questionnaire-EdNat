@@ -1,12 +1,11 @@
 import { Meteor } from 'meteor/meteor';
+import { Random } from 'meteor/random';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/underscore';
 import { getLabel } from '../utils';
 
-import Forms, { Component } from './forms';
-import { useContext } from 'react';
-import { UserContext } from '../../ui/contexts/UserContext';
+import Forms, { Component, Answers } from './forms';
 
 function _createForm(title, desc, owner, isModel, isPublic, editableAnswers, groups, components) {
   Forms.insert({
@@ -108,26 +107,70 @@ export const deleteForm = new ValidatedMethod({
   },
 });
 
-Meteor.methods({
-  'forms.updateAnswers': async (formId, newAnswer) => {
-    const a = await Forms.findOneAsync({ _id: formId });
+export const upsertAnswers = new ValidatedMethod({
+  name: 'forms.upsertAnswers',
+  validate: new SimpleSchema({
+    formId: { type: String, label: getLabel('api.forms.labels.id') },
+    newAnswer: { type: Answers },
+    token: { type: String, optional: true, label: getLabel('api.forms.labels.formAnswers.modifyAnswersToken') },
+  }).validator(),
 
-    let newTab = [];
-    if (a) {
-      if (a.formAnswers) {
-        newTab = a.formAnswers;
-        const index = newTab.findIndex((answer) => answer.userId === newAnswer.userId);
-        if (index === -1) {
-          newTab.push(newAnswer);
-        } else {
-          newTab[index] = newAnswer;
-        }
+  async run({ formId, newAnswer, token }) {
+    const currentForm = await Forms.findOneAsync({ _id: formId });
+    if (!currentForm) {
+      throw new Meteor.Error('api.forms.upsertAnswers.notFound', i18n.__('api.forms.upsertAnswers.notExist'));
+    }
+    if (!currentForm.active) {
+      throw new Meteor.Error('api.forms.upsertAnswers.notActive', i18n.__('api.forms.upsertAnswers.notActive'));
+    }
+    if (newAnswer.userId !== null && newAnswer.userId !== this.userId) {
+      // if new answer userId exists, it must be the connected userId
+      throw new Meteor.Error('api.forms.upsertAnswers.wrongUser', i18n.__('api.forms.upsertAnswers.wrongUser'));
+    }
+    if (newAnswer.userId === null && !currentForm.isPublic) {
+      // new answer for private forms must have a userId
+      throw new Meteor.Error('api.forms.upsertAnswers.noUserIdFound', i18n.__('api.forms.upsertAnswers.noUserIdFound'));
+    }
+
+    let newTab = currentForm.formAnswers || [];
+    let modifyAnswersToken = '';
+    if (newAnswer.userId === null && !token) {
+      // no userId in answer and no token => first answer for this form
+      if (currentForm.editableAnswers) {
+        // form has editable answers => generate token
+        modifyAnswersToken = Random.secret();
+        newTab.push({ ...newAnswer, modifyAnswersToken });
       } else {
+        // no token needed
         newTab.push(newAnswer);
       }
-
-      await Forms.updateAsync({ _id: formId }, { $set: { formAnswers: newTab } });
+    } else if (newAnswer.userId === null && token) {
+      // no userId in answer but token given so this form already been answered => find the answer with that token
+      const index = newTab.findIndex((answer) => answer.modifyAnswersToken === token);
+      if (index === -1) {
+        // no answer with this token
+        throw new Meteor.Error(
+          'api.forms.upsertAnswers.tokenNotFound',
+          i18n.__('api.forms.upsertAnswers.tokenNotFound'),
+        );
+      } else {
+        // answer edited with token
+        newTab[index] = { ...newAnswer, modifyAnswersToken: newTab[index].modifyAnswersToken };
+      }
+    } else {
+      // all other cases
+      // TO BE REACTOR //
+      const index = newTab.findIndex((answer) => answer.userId === newAnswer.userId);
+      if (index === -1) {
+        newTab.push(newAnswer);
+      } else {
+        newTab[index] = newAnswer;
+      }
+      ///////////////////
     }
+
+    await Forms.updateAsync({ _id: formId }, { $set: { formAnswers: newTab } });
+    return modifyAnswersToken;
   },
 });
 
