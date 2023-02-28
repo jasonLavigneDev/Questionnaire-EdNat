@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
-import { toggleActiveForm, copyUrlToClipBoard, hasNotAnswers } from '../utils/utils';
+import { toggleActiveForm, copyUrlToClipBoard, hasNotAnswers, hasAlreadyRespond } from '../utils/utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -23,8 +23,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
   };
 
   const alreadyRespond = () => {
-    let userAnswers = currentForm.formAnswers?.find((answer) => answer.userId === user._id);
-    return !currentForm?.editableAnswers && userAnswers;
+    return !currentForm?.editableAnswers && hasAlreadyRespond(user, currentForm);
   };
 
   return (

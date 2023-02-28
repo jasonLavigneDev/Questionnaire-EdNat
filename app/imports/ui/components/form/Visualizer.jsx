@@ -13,15 +13,12 @@ export const Visualizer = ({ answerMode = false }) => {
   const { user } = useContext(UserContext);
   const form = useSelector((state) => state.form);
 
-  console.log(form);
   const ownerForm = useTracker(() => {
     if (form) {
       return Meteor.users.findOne({ _id: form.owner });
     }
     return null;
   });
-
-  console.log(ownerForm);
 
   if (!form.isActive && answerMode) return <p>{i18n.__('component.visualizer.formNotActive')}</p>;
   if (!user && !form.isPublic) return <p>{i18n.__('component.visualizer.connect')}</p>;
