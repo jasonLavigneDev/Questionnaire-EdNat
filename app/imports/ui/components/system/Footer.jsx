@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import i18n from 'meteor/universe:i18n';
 import { useNavigate } from 'react-router-dom';
 
 import { BottomNavigation, Button } from '@mui/material';
-import { FormContext } from '../../contexts/FormContext';
 import { useSelector } from 'react-redux';
 
 export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
@@ -14,12 +13,10 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
   };
 
   const navigate = useNavigate();
-
-  const { activeStep, acceptRgpd } = useContext(FormContext);
   const form = useSelector((state) => state.form);
+  const acceptRgpd = useSelector((state) => state.form.acceptRGPD);
 
-  const isDisable =
-    !form.title || form.components.length === 0 || (activeStep === 2 && acceptRgpd === false && form.formId == null);
+  const isDisable = !form.title || form.components.length === 0 || (acceptRgpd === false && form.formId == null);
   const isTitleMissing = !form.title;
 
   return (

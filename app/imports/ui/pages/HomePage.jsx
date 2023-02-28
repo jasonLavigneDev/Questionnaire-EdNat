@@ -5,14 +5,12 @@ import { Button } from '@mui/material';
 import { UserForm } from '../components/UserForm';
 import { UserContext } from '../contexts/UserContext';
 import { useDispatch } from 'react-redux';
-import { resetFormObject } from '../redux/slices/formSlice';
-import { FormContext } from '../contexts/FormContext';
+import { resetFormObject, toggleAcceptRGPD } from '../redux/slices/formSlice';
 import { resetUserAnswerObject } from '../redux/slices/answerFormSlice';
 import { resetQuestionObject } from '../redux/slices/questionSlice';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
-  const { setActiveStep, setAcceptRgpd } = useContext(FormContext);
 
   const [allUserForms, setAllUserForms] = useState();
   const dispatch = useDispatch();
@@ -28,8 +26,7 @@ export const HomePage = () => {
     dispatch(resetFormObject());
     dispatch(resetUserAnswerObject());
     dispatch(resetQuestionObject());
-    setActiveStep(0);
-    setAcceptRgpd(false);
+    dispatch(toggleAcceptRGPD({ acceptRGPD: false }));
     setAllUserForms(formFromBDD);
   }, []);
 

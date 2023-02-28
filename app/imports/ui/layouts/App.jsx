@@ -10,7 +10,6 @@ import { AnswerPage, loaderVisualizer } from '../pages/AnswerPage';
 import { FormPrevisualizer } from '../pages/FormPrevisualizer';
 import { ResultPage, loaderAnswerPage } from '../pages/ResultPage';
 import RedirectAfterSubmit from '../pages/RedirectAfterSubmit';
-import { FormProvider } from '../contexts/FormContext';
 import { AuthProvider } from '../contexts/AuthContext';
 
 import { MainLayout } from './MainLayout';
@@ -48,9 +47,7 @@ export const App = () => {
 
   return (
     <UserProvider>
-      <FormProvider>
-        <RouterProvider router={router} />
-      </FormProvider>
+      <RouterProvider router={router} />
     </UserProvider>
   );
 };
