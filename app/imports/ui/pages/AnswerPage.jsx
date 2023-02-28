@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import i18n from 'meteor/universe:i18n';
 import { useLoaderData } from 'react-router-dom';
@@ -11,6 +11,7 @@ export const AnswerPage = () => {
   const formFromBDD = useLoaderData();
   const dispatch = useDispatch();
   const { user } = useContext(UserContext);
+  const [alreadyRespond, setAlreadyRespond] = useState(false);
   const currentFormHasAnswers = !!formFromBDD.formAnswers;
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export const AnswerPage = () => {
       if (user && currentFormHasAnswers) {
         let userAnswers = formFromBDD.formAnswers.find((answer) => answer.userId === user._id);
         if (userAnswers) {
+          setAlreadyRespond(true);
           dispatch(
             fillUserAnswersObject({
               userId: userAnswers.userId,
@@ -52,7 +54,7 @@ export const AnswerPage = () => {
   }, []);
 
   if (!formFromBDD) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
-  if (!formFromBDD.editableAnswers) return <p>{i18n.__('page.answerPage.notEditable')}</p>;
+  if (!formFromBDD.editableAnswers && alreadyRespond) return <p>{i18n.__('page.answerPage.notEditable')}</p>;
 
   return <Visualizer answerMode={true} />;
 };
