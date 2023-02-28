@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import i18n from 'meteor/universe:i18n';
 import { Modal, Box, Typography, Button } from '@mui/material';
-import { FormContext } from '../../contexts/FormContext';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { toggleAcceptRGPD } from '../../redux/slices/formSlice';
 
 const style = {
   position: 'absolute',
@@ -17,12 +18,13 @@ const style = {
 
 const ModalRgpd = ({ answerMode = false }) => {
   const navigate = useNavigate();
-  const { setAcceptRgpd } = useContext(FormContext);
   const [openModal, setOpenModal] = useState(true);
+
+  const dispatch = useDispatch();
 
   const handleAccept = () => {
     setOpenModal(false);
-    !answerMode && setAcceptRgpd(true);
+    !answerMode && dispatch(toggleAcceptRGPD({ acceptRGPD: true }));
   };
 
   const handleReject = () => {

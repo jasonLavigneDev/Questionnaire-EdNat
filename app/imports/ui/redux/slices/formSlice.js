@@ -12,6 +12,7 @@ const initialState = {
   formAnswers: [],
   isActive: false,
   editableAnswers: false,
+  acceptRGPD: false,
 };
 
 export const formSlice = createSlice({
@@ -52,6 +53,9 @@ export const formSlice = createSlice({
         state.groups = [];
       }
     },
+    toggleAcceptRGPD: (state, action) => {
+      state.acceptRGPD = action.payload.acceptRGPD;
+    },
     addGroups: (state, action) => {
       state.groups.push(action.payload);
     },
@@ -89,6 +93,7 @@ export const {
   toggleIsForGroup,
   toggleIsPublic,
   toggleEditableAnswers,
+  toggleAcceptRGPD,
   updateComponent,
 } = formSlice.actions;
 

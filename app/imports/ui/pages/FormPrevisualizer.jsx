@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import i18n from 'meteor/universe:i18n';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
 import { MsgError } from '../components/system/MsgError';
-import { FormContext } from '../contexts/FormContext';
 import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +11,6 @@ import { resetFormObject } from '../redux/slices/formSlice';
 
 export const FormPrevisualizer = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const { setActiveStep, setAcceptRgpd } = useContext(FormContext);
   const navigate = useNavigate();
   const form = useSelector((state) => state.form);
   const isDisable = !form.title || form.components.length === 0;
@@ -35,8 +33,7 @@ export const FormPrevisualizer = () => {
       if (result) {
         navigate('/');
         dispatch(resetFormObject());
-        setActiveStep(0);
-        setAcceptRgpd(false);
+        dispatch(toggleAcceptRGPD({ acceptRGPD: false }));
       }
     } catch (error) {
       console.log('error dans sendForm', error);
@@ -66,10 +63,6 @@ export const FormPrevisualizer = () => {
       console.log('error dans updateForm', err);
     }
   };
-
-  useEffect(() => {
-    setActiveStep(2);
-  }, []);
 
   if (!form) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
 

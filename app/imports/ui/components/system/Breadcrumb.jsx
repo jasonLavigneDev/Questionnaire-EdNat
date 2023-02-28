@@ -15,9 +15,9 @@ export const Breadcrumb = () => {
   const navigateTo = (step) => {
     navigate(`/builder/${step}`);
   };
+  const url = window.location.href;
 
   useEffect(() => {
-    const url = window.location.href;
     if (url.includes('intro')) {
       setActiveStep(0);
     } else if (url.includes('components')) {
@@ -25,7 +25,7 @@ export const Breadcrumb = () => {
     } else if (url.includes('previsualizer')) {
       setActiveStep(2);
     }
-  }, []);
+  }, [url]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>

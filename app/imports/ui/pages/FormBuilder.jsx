@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import i18n from 'meteor/universe:i18n';
 import { useNavigate } from 'react-router-dom';
-import { FormContext } from '../contexts/FormContext';
 import { MsgError } from '../components/system/MsgError';
 import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
@@ -10,7 +9,6 @@ import { useSelector } from 'react-redux';
 
 export const FormBuilder = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const { setActiveStep } = useContext(FormContext);
   const form = useSelector((state) => state.form);
   const navigate = useNavigate();
   const isDisable = !form.title || form.components.length === 0;
@@ -23,10 +21,6 @@ export const FormBuilder = () => {
       navigate('/builder/previsualizer');
     }
   };
-
-  useEffect(() => {
-    setActiveStep(1);
-  }, []);
 
   return (
     <>
