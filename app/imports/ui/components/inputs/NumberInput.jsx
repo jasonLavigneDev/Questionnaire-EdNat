@@ -16,13 +16,14 @@ export const NumberInput = ({ title, questionId, answerRequired }) => {
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
       <FormControl required={answerRequired} sx={{ width: '80%' }}>
-        <FormLabel id="numberInput-title">{title}</FormLabel>
+        <FormLabel id="numberInput-title" error={answerRequired && !inputAnswer}>
+          {title}
+        </FormLabel>
         <TextField
           type="number"
           defaultValue={Number(inputAnswer?.answer) || 0}
           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
           onChange={(e) => validateAnswer(e)}
-          error={answerRequired && !inputAnswer}
         />
       </FormControl>
     </Paper>
