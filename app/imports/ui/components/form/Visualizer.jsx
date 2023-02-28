@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useTracker } from 'meteor/react-meteor-data';
 import i18n from 'meteor/universe:i18n';
 import { ComponentBuilder } from '../ComponentBuilder';
 import SubmitAnswerForm from './SubmitAnswerForm';
@@ -12,6 +13,16 @@ export const Visualizer = ({ answerMode = false }) => {
   const { user } = useContext(UserContext);
   const form = useSelector((state) => state.form);
 
+  console.log(form);
+  const ownerForm = useTracker(() => {
+    if (form) {
+      return Meteor.users.findOne({ _id: form.owner });
+    }
+    return null;
+  });
+
+  console.log(ownerForm);
+
   if (!form.isActive && answerMode) return <p>{i18n.__('component.visualizer.formNotActive')}</p>;
   if (!user && !form.isPublic) return <p>{i18n.__('component.visualizer.connect')}</p>;
 
@@ -20,6 +31,11 @@ export const Visualizer = ({ answerMode = false }) => {
       {answerMode && <ModalRgpd answerMode={answerMode} />}
       {<h3 style={{ textAlign: 'center' }}>{form.title}</h3>}
       {<h4 style={{ textAlign: 'center' }}>{form.desc}</h4>}
+      {ownerForm && (
+        <h4 style={{ textAlign: 'center' }}>
+          {i18n.__('component.visualizer.createdBy')} {ownerForm.firstName} {ownerForm.lastName} ({ownerForm.username})
+        </h4>
+      )}
       {form.components.map((currentComponent) => (
         <div
           key={currentComponent.id}

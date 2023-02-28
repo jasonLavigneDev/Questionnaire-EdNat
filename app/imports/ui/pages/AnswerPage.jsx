@@ -15,7 +15,7 @@ export const AnswerPage = () => {
 
   useEffect(() => {
     if (formFromBDD) {
-      const { title, desc, components, groups, isPublic, _id, formAnswers, active } = formFromBDD;
+      const { title, desc, components, owner, groups, isPublic, _id, formAnswers, active } = formFromBDD;
       if (formAnswers && formAnswers.length) {
         formAnswers.forEach((answer) => {
           delete answer.createdAt;
@@ -30,6 +30,7 @@ export const AnswerPage = () => {
         formId: _id,
         formAnswers,
         isActive: active,
+        owner,
       };
 
       dispatch(fillForm(fieldForPopulateState));

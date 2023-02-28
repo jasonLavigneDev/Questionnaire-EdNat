@@ -141,7 +141,8 @@
     },
     "visualizer": {
       "connect": "Veuillez vous connecter pour répondre a ce questionnaire",
-      "formNotActive": "Ce formulaire n'est pas actif."
+      "formNotActive": "Ce formulaire n'est pas actif.",
+      "createdBy": "Créé par"
     },
     "breadcrumb": {
       "intro": "Introduction",

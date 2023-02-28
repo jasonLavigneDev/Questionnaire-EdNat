@@ -6,6 +6,7 @@ const initialState = {
   components: [],
   groups: [],
   isPublic: false,
+  owner: '',
   isForGroup: false,
   formId: null,
   formAnswers: [],
@@ -29,6 +30,7 @@ export const formSlice = createSlice({
       state.formAnswers = action.payload.formAnswers;
       state.isForGroup = action.payload.groups.length !== 0;
       state.isActive = action.payload.isActive;
+      state.owner = action.payload.owner;
     },
     addTitle: (state, action) => {
       state.title = action.payload.title;
