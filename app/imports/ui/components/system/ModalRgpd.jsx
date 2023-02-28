@@ -53,8 +53,12 @@ const ModalRgpd = ({ answerMode = false }) => {
           </Typography>
         )}
         <div style={{ display: 'flex', marginTop: '2vh', justifyContent: 'space-between' }}>
-          <Button onClick={handleReject}>{i18n.__('component.modalRgpd.refuse')}</Button>
-          <Button onClick={handleAccept}>{i18n.__('component.modalRgpd.accept')}</Button>
+          <Button variant="contained" onClick={handleReject}>
+            {i18n.__('component.modalRgpd.refuse')}
+          </Button>
+          <Button variant="contained" onClick={handleAccept}>
+            {i18n.__('component.modalRgpd.accept')}
+          </Button>
         </div>
       </Box>
     </Modal>

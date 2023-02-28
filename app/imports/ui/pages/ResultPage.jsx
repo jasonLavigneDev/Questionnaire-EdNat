@@ -88,7 +88,9 @@ export const ResultPage = () => {
       {hasNotAnswers(formFromBDD) ? (
         <>
           <p>{i18n.__('page.resultPage.noAnswers')}</p>
-          <Button onClick={() => navigate('/')}>{i18n.__('page.resultPage.goBack')}</Button>
+          <Button variant="contained" onClick={() => navigate('/')}>
+            {i18n.__('page.resultPage.goBack')}
+          </Button>
         </>
       ) : (
         <>
@@ -104,7 +106,7 @@ export const ResultPage = () => {
                 </ToggleButton>
               </ToggleButtonGroup>
             </div>
-            <Button sx={{ marginTop: 2 }} onClick={() => navigate('/')}>
+            <Button variant="contained" sx={{ marginTop: 2 }} onClick={() => navigate('/')}>
               {i18n.__('page.resultPage.goBack')}
             </Button>
           </div>
