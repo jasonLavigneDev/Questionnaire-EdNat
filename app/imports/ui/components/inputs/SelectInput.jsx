@@ -16,8 +16,10 @@ export const SelectInput = ({ title, choices, questionId, answerRequired }) => {
 
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
-      <FormControl sx={{ width: '30vw' }} required={answerRequired} error={answerRequired && !inputAnswer}>
-        <FormLabel id="selectInput-title">{title}</FormLabel>
+      <FormControl sx={{ width: '30vw' }} required={answerRequired}>
+        <FormLabel id="selectInput-title" error={answerRequired && !inputAnswer}>
+          {title}
+        </FormLabel>
         <Select labelId="selectInput-title" label={title} value={inputAnswer?.answer ?? ''} onChange={validateAnswer}>
           {choices.map((choice) => (
             <MenuItem key={uuidv4()} value={choice}>

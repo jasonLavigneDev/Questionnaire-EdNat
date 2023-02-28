@@ -17,14 +17,15 @@ export const DateInput = ({ title, questionId, answerRequired }) => {
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
       <FormControl required={answerRequired}>
-        <FormLabel id="dateInput-title">{title}</FormLabel>
+        <FormLabel id="dateInput-title" error={answerRequired && !inputAnswer}>
+          {title}
+        </FormLabel>
         <TextField
           sx={{ width: '30vw' }}
           type="date"
           defaultValue={inputAnswer?.answer ?? ''}
           required={answerRequired}
           onBlur={(e) => validateAnswer(e)}
-          error={answerRequired && !inputAnswer}
         />
       </FormControl>
     </Paper>

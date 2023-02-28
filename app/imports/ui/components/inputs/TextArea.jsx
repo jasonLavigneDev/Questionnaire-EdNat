@@ -16,14 +16,10 @@ export const TextArea = ({ title, questionId, answerRequired }) => {
   return (
     <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
       <FormControl required={answerRequired} sx={{ width: '80%' }}>
-        <FormLabel id="textAreaInput-title">{title}</FormLabel>
-        <TextField
-          multiline
-          defaultValue={inputAnswer?.answer ?? ''}
-          rows={3}
-          onBlur={(e) => validateAnswer(e)}
-          error={answerRequired && !inputAnswer}
-        />
+        <FormLabel id="textAreaInput-title" error={answerRequired && !inputAnswer}>
+          {title}
+        </FormLabel>
+        <TextField multiline defaultValue={inputAnswer?.answer ?? ''} rows={3} onBlur={(e) => validateAnswer(e)} />
       </FormControl>
     </Paper>
   );
