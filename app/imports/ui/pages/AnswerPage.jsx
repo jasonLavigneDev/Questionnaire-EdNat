@@ -52,7 +52,7 @@ export const AnswerPage = () => {
   }, []);
 
   if (!formFromBDD) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
-  if (!formFromBDD.editableAnswers) return <p>{i18n.__('page.answerPage.NotEditable')}</p>;
+  if (!formFromBDD.editableAnswers) return <p>{i18n.__('page.answerPage.notEditable')}</p>;
 
   return <Visualizer answerMode={true} />;
 };

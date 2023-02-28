@@ -8,23 +8,24 @@ import Forms, { Component } from './forms';
 import { useContext } from 'react';
 import { UserContext } from '../../ui/contexts/UserContext';
 
-function _createForm(title, desc, owner, isModel, isPublic, groups, components) {
+function _createForm(title, desc, owner, isModel, isPublic, editableAnswers, groups, components) {
   Forms.insert({
     title,
     desc,
     owner,
     isModel,
     isPublic,
+    editableAnswers,
     groups,
     components,
   });
 }
 
-function _updateForm(id, title, desc, owner, isModel, isPublic, groups, components) {
+function _updateForm(id, title, desc, owner, isModel, isPublic, editableAnswers, groups, components) {
   Forms.update(
     { _id: id },
     {
-      $set: { title, desc, owner, isModel, isPublic, groups, components },
+      $set: { title, desc, owner, isModel, isPublic, editableAnswers, groups, components },
     },
   );
 }

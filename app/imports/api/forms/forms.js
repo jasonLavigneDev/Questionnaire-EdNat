@@ -148,6 +148,7 @@ Forms.publicFields = {
   isModel: 1,
   createdAt: 1,
   groups: 1,
+  editableAnswers: 1,
   components: 1,
 };
 

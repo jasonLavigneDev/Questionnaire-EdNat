@@ -21,7 +21,6 @@ export const FormPrevisualizer = () => {
   const sendFormToBDD = async () => {
     if (isDisable) return setErrorMessage(i18n.__('component.componentBuilder.errors.noTitleOrOptions'));
 
-    console.log(form);
     try {
       const result = await Meteor.callAsync('forms.createForm', {
         title: form.title,
