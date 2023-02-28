@@ -141,7 +141,8 @@
     },
     "visualizer": {
       "connect": "Please log in to answer this form",
-      "formNotActive": "This form is not active."
+      "formNotActive": "This form is not active.",
+      "createdBy": "Created by"
     },
     "breadcrumb": {
       "intro": "Introduction",
