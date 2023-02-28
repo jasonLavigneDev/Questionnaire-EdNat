@@ -18,7 +18,8 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
   const { activeStep, acceptRgpd } = useContext(FormContext);
   const form = useSelector((state) => state.form);
 
-  const isDisable = !form.title || form.components.length === 0 || (activeStep === 2 && acceptRgpd === false);
+  const isDisable =
+    !form.title || form.components.length === 0 || (activeStep === 2 && acceptRgpd === false && form.formId == null);
   const isTitleMissing = !form.title;
 
   return (

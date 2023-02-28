@@ -81,7 +81,7 @@ export const FormPrevisualizer = () => {
       <Footer
         nextStep={form.formId ? updateForm : sendFormToBDD}
         urlOfPrevStep="builder/components"
-        text={form._id ? i18n.__('page.formPrevisualizer.updateForm') : i18n.__('page.formPrevisualizer.saveForm')}
+        text={form.formId ? i18n.__('page.formPrevisualizer.updateForm') : i18n.__('page.formPrevisualizer.saveForm')}
       />
     </div>
   );
