@@ -29,7 +29,7 @@ export const AnswerPage = () => {
         components,
         groups,
         isPublic,
-        formId: _id,
+        _id,
         formAnswers,
         editableAnswers,
         isActive: active,

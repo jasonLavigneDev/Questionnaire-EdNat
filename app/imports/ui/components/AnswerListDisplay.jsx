@@ -31,7 +31,6 @@ export default function AnswerListDisplay({ finalArray }) {
 
   csvArray.forEach((obj) => delete obj.index);
   finalArray.forEach((resp) => delete resp.index);
-  console.log(csvArray);
 
   return (
     <>
