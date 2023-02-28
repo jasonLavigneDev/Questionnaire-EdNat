@@ -1,23 +1,29 @@
 import { Divider, IconButton } from '@mui/material';
 import { i18n } from 'meteor/universe:i18n';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
-import { toggleActiveForm, copyUrlToClipBoard, hasNotAnswers } from '../utils/utils';
+import { toggleActiveForm, copyUrlToClipBoard, hasNotAnswers, hasAlreadyRespond } from '../utils/utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import { UserContext } from '../contexts/UserContext';
 
 export const FormActionButton = ({ deleteForm, currentForm }) => {
   const navigate = useNavigate();
   const [active, setActive] = useState(currentForm.active);
+  const { user } = useContext(UserContext);
 
   const activeForm = () => {
     setActive(!active);
     toggleActiveForm(currentForm);
+  };
+
+  const alreadyRespond = () => {
+    return !currentForm?.editableAnswers && hasAlreadyRespond(user, currentForm);
   };
 
   return (
@@ -42,7 +48,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       <IconButton
         title={i18n.__('component.formActionButton.editAnswers')}
         sx={{ color: 'gold' }}
-        disabled={!active}
+        disabled={!active || alreadyRespond()}
         onClick={() => navigate(`/visualizer/${currentForm._id}`)}
       >
         <EditIcon />

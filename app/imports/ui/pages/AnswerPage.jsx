@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import i18n from 'meteor/universe:i18n';
 import { useLoaderData } from 'react-router-dom';
@@ -11,11 +11,13 @@ export const AnswerPage = () => {
   const formFromBDD = useLoaderData();
   const dispatch = useDispatch();
   const { user } = useContext(UserContext);
+  const [alreadyRespond, setAlreadyRespond] = useState(false);
   const currentFormHasAnswers = !!formFromBDD.formAnswers;
 
   useEffect(() => {
     if (formFromBDD) {
-      const { title, desc, components, owner, groups, isPublic, _id, formAnswers, active } = formFromBDD;
+      const { title, desc, components, owner, groups, editableAnswers, isPublic, _id, formAnswers, active } =
+        formFromBDD;
       if (formAnswers && formAnswers.length) {
         formAnswers.forEach((answer) => {
           delete answer.createdAt;
@@ -27,8 +29,9 @@ export const AnswerPage = () => {
         components,
         groups,
         isPublic,
-        formId: _id,
+        _id,
         formAnswers,
+        editableAnswers,
         isActive: active,
         owner,
       };
@@ -37,6 +40,7 @@ export const AnswerPage = () => {
       if (user && currentFormHasAnswers) {
         let userAnswers = formFromBDD.formAnswers.find((answer) => answer.userId === user._id);
         if (userAnswers) {
+          setAlreadyRespond(true);
           dispatch(
             fillUserAnswersObject({
               userId: userAnswers.userId,
@@ -50,6 +54,7 @@ export const AnswerPage = () => {
   }, []);
 
   if (!formFromBDD) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
+  if (!formFromBDD.editableAnswers && alreadyRespond) return <p>{i18n.__('page.answerPage.notEditable')}</p>;
 
   return <Visualizer answerMode={true} />;
 };

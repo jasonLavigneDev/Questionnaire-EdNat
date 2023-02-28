@@ -59,8 +59,6 @@ export default function StatsBar({ question }) {
     return cpt;
   };
 
-  console.log(question);
-
   return (
     <div
       style={{

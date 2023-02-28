@@ -11,6 +11,7 @@ const initialState = {
   formId: null,
   formAnswers: [],
   isActive: false,
+  editableAnswers: false,
 };
 
 export const formSlice = createSlice({
@@ -31,6 +32,7 @@ export const formSlice = createSlice({
       state.isForGroup = action.payload.groups.length !== 0;
       state.isActive = action.payload.isActive;
       state.owner = action.payload.owner;
+      state.editableAnswers = action.payload.editableAnswers;
     },
     addTitle: (state, action) => {
       state.title = action.payload.title;
@@ -40,6 +42,9 @@ export const formSlice = createSlice({
     },
     toggleIsPublic: (state, action) => {
       state.isPublic = !state.isPublic;
+    },
+    toggleEditableAnswers: (state, action) => {
+      state.editableAnswers = !state.editableAnswers;
     },
     toggleIsForGroup: (state, action) => {
       state.isForGroup = !state.isForGroup;
@@ -83,6 +88,7 @@ export const {
   addDesc,
   toggleIsForGroup,
   toggleIsPublic,
+  toggleEditableAnswers,
   updateComponent,
 } = formSlice.actions;
 

@@ -32,6 +32,7 @@
         "createdAt": "Créé le",
         "owner": "Propriétaire",
         "public": "Public",
+        "editableAnswers": "Réponses modifiables",
         "groups": "Groupes",
         "components": "Composants",
         "formAnswers": {
@@ -93,7 +94,8 @@
   },
   "page": {
     "answerPage": {
-      "formNotFound": "Le formulaire n'existe pas"
+      "formNotFound": "Le formulaire n'existe pas",
+      "notEditable": "Vous avez déjà répondu à ce questionnaire et les réponses ne sont pas modifiables."
     },
     "errorPage": {
       "title": "Erreur",
@@ -191,7 +193,8 @@
       "formDescHelp": "La description est facultative",
       "mandatoryTitle": "Le titre est obligatoire",
       "formPublic": "Formulaire public",
-      "formGroups": "Réservé aux groupes"
+      "formGroups": "Réservé aux groupes",
+      "editableAnswers": "Réponses modifiables"
     },
     "inputs": {
       "radioButton": "Bouton radio (choix unique)",

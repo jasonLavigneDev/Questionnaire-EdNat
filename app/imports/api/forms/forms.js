@@ -110,6 +110,11 @@ Forms.schema = new SimpleSchema(
       defaultValue: false,
       label: getLabel('api.forms.labels.active'),
     },
+    editableAnswers: {
+      type: Boolean,
+      defaultValue: false,
+      label: getLabel('api.forms.labels.editableAnswers'),
+    },
     groups: {
       type: Array,
       label: getLabel('api.forms.labels.groups'),
@@ -143,6 +148,7 @@ Forms.publicFields = {
   isModel: 1,
   createdAt: 1,
   groups: 1,
+  editableAnswers: 1,
   components: 1,
 };
 

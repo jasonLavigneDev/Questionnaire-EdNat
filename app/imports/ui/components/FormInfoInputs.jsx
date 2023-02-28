@@ -2,7 +2,7 @@ import { i18n } from 'meteor/universe:i18n';
 import { Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDesc, addTitle, toggleIsForGroup, toggleIsPublic } from '../redux/slices/formSlice';
+import { addDesc, addTitle, toggleIsForGroup, toggleEditableAnswers, toggleIsPublic } from '../redux/slices/formSlice';
 
 export default function FormInfoInputs() {
   const form = useSelector((state) => state.form);
@@ -27,6 +27,19 @@ export default function FormInfoInputs() {
         helperText={i18n.__('component.formInfoInputs.formDescHelp')}
         onChange={(e) => dispatch(addDesc({ desc: e.target.value }))}
       />
+      <FormGroup>
+        <FormControlLabel
+          disabled={form.isForGroup}
+          control={
+            <Checkbox
+              checked={form.editableAnswers}
+              onChange={(e) => dispatch(toggleEditableAnswers())}
+              name="editableAnswers"
+            />
+          }
+          label={i18n.__('component.formInfoInputs.editableAnswers')}
+        />
+      </FormGroup>
       <FormGroup>
         <FormControlLabel
           disabled={form.isForGroup}
