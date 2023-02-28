@@ -23,7 +23,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
   };
 
   const alreadyRespond = () => {
-    let userAnswers = currentForm.formAnswers.find((answer) => answer.userId === user._id);
+    let userAnswers = currentForm.formAnswers?.find((answer) => answer.userId === user._id);
     return !currentForm?.editableAnswers && userAnswers;
   };
 
