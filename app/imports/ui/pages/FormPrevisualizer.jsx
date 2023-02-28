@@ -57,7 +57,7 @@ export const FormPrevisualizer = () => {
 
       if (result) {
         navigate('/');
-        resetFormObject();
+        dispatch(resetFormObject());
       }
     } catch (err) {
       console.log('error dans updateForm', err);

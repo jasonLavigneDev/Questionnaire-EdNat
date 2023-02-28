@@ -4,16 +4,11 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { UserForm } from '../components/UserForm';
 import { UserContext } from '../contexts/UserContext';
-import { useDispatch } from 'react-redux';
-import { resetFormObject, toggleAcceptRGPD } from '../redux/slices/formSlice';
-import { resetUserAnswerObject } from '../redux/slices/answerFormSlice';
-import { resetQuestionObject } from '../redux/slices/questionSlice';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
 
   const [allUserForms, setAllUserForms] = useState();
-  const dispatch = useDispatch();
   const formFromBDD = useLoaderData();
   const navigate = useNavigate();
 
@@ -23,10 +18,6 @@ export const HomePage = () => {
   };
 
   useEffect(() => {
-    dispatch(resetFormObject());
-    dispatch(resetUserAnswerObject());
-    dispatch(resetQuestionObject());
-    dispatch(toggleAcceptRGPD({ acceptRGPD: false }));
     setAllUserForms(formFromBDD);
   }, []);
 

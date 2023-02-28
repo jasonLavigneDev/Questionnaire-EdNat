@@ -1,9 +1,11 @@
-import { Button, FormControlLabel, Checkbox, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import i18n from 'meteor/universe:i18n';
 import React, { useContext, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
+import { resetUserAnswerObject } from '../../redux/slices/answerFormSlice';
+import { resetFormObject } from '../../redux/slices/formSlice';
 import { hasAlreadyRespond } from '../../utils/utils';
 
 export default function SubmitAnswerForm() {
@@ -16,12 +18,17 @@ export default function SubmitAnswerForm() {
   const form = useSelector((state) => state.form);
   const formId = useSelector((state) => state.form.formId);
 
+  const dispatch = useDispatch();
+
   const submitAnswerForm = async () => {
     let id = user ? user._id : null;
     await Meteor.callAsync('forms.updateAnswers', formId, {
       userId: id,
       answers: answerForm.answers,
     });
+    dispatch(resetUserAnswerObject());
+    dispatch(resetFormObject());
+
     navigate('/success');
   };
 
