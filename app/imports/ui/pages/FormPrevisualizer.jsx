@@ -18,6 +18,7 @@ export const FormPrevisualizer = () => {
   const isDisable = !form.title || form.components.length === 0;
   const dispatch = useDispatch();
 
+  console.log(form);
   const sendFormToBDD = async () => {
     if (isDisable) return setErrorMessage(i18n.__('component.componentBuilder.errors.noTitleOrOptions'));
 
@@ -81,7 +82,7 @@ export const FormPrevisualizer = () => {
       <Footer
         nextStep={form.formId ? updateForm : sendFormToBDD}
         urlOfPrevStep="builder/components"
-        text={form._id ? i18n.__('page.formPrevisualizer.updateForm') : i18n.__('page.formPrevisualizer.saveForm')}
+        text={form.formId ? i18n.__('page.formPrevisualizer.updateForm') : i18n.__('page.formPrevisualizer.saveForm')}
       />
     </div>
   );
