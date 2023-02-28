@@ -15,11 +15,14 @@ const RedirectSubmitPage = () => {
   const [count, setCount] = useState(5);
 
   useEffect(() => {
-    setTimeout(() => {
+    if (count > 0) {
+      const timer = count > 0 && setInterval(() => setCount(count - 1), 1000);
+      return () => {
+        clearInterval(timer);
+      };
+    } else {
       navigate('/');
-    }, 5000);
-    const timer = count > 0 && setInterval(() => setCount(count - 1), 1000);
-    return () => clearInterval(timer);
+    }
   }, [count]);
 
   return (
