@@ -18,7 +18,6 @@ export const FormPrevisualizer = () => {
   const isDisable = !form.title || form.components.length === 0;
   const dispatch = useDispatch();
 
-  console.log(form);
   const sendFormToBDD = async () => {
     if (isDisable) return setErrorMessage(i18n.__('component.componentBuilder.errors.noTitleOrOptions'));
 
