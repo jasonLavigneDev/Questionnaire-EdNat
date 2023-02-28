@@ -42,7 +42,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       <IconButton
         title={i18n.__('component.formActionButton.editAnswers')}
         sx={{ color: 'gold' }}
-        disabled={!active}
+        disabled={!active || !currentForm.editableAnswers}
         onClick={() => navigate(`/visualizer/${currentForm._id}`)}
       >
         <EditIcon />

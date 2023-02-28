@@ -15,7 +15,8 @@ export const AnswerPage = () => {
 
   useEffect(() => {
     if (formFromBDD) {
-      const { title, desc, components, owner, groups, isPublic, _id, formAnswers, active } = formFromBDD;
+      const { title, desc, components, owner, groups, editableAnswers, isPublic, _id, formAnswers, active } =
+        formFromBDD;
       if (formAnswers && formAnswers.length) {
         formAnswers.forEach((answer) => {
           delete answer.createdAt;
@@ -29,6 +30,7 @@ export const AnswerPage = () => {
         isPublic,
         formId: _id,
         formAnswers,
+        editableAnswers,
         isActive: active,
         owner,
       };
@@ -50,6 +52,7 @@ export const AnswerPage = () => {
   }, []);
 
   if (!formFromBDD) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
+  if (!formFromBDD.editableAnswers) return <p>{i18n.__('page.answerPage.NotEditable')}</p>;
 
   return <Visualizer answerMode={true} />;
 };

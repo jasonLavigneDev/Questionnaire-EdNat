@@ -32,6 +32,7 @@
         "createdAt": "Created at",
         "owner": "Owner",
         "public": "Public",
+        "editableAnswers": "Editable answers",
         "groups": "Groups",
         "components": "Components",
         "formAnswers": {
@@ -93,7 +94,8 @@
   },
   "page": {
     "answerPage": {
-      "formNotFound": "Form does not exist"
+      "formNotFound": "Form does not exist",
+      "notEditable": "you have already answered this form, and the answers cannot be modified."
     },
     "errorPage": {
       "title": "Error",
@@ -191,7 +193,8 @@
       "formDescHelp": "Description is optional",
       "mandatoryTitle": "Title is mandatory",
       "formPublic": "Public form",
-      "formGroups": "Limited to groups"
+      "formGroups": "Limited to groups",
+      "editableAnswers": "Réponses modifiables"
     },
     "inputs": {
       "radioButton": "Radio button (single choice)",

@@ -36,17 +36,18 @@ export const createForm = new ValidatedMethod({
     desc: { type: String, optional: true, label: getLabel('api.forms.labels.desc') },
     isModel: { type: Boolean, label: getLabel('api.forms.labels.isModel') },
     isPublic: { type: Boolean, label: getLabel('api.forms.labels.public') },
+    editableAnswers: { type: Boolean, label: getLabel('api.forms.labels.editableAnswers') },
     groups: { type: Array, optional: true, label: getLabel('api.forms.labels.groups') },
     'groups.$': { type: String },
     components: { type: Array, label: getLabel('api.forms.labels.components') },
     'components.$': { type: Component },
   }).validator(),
 
-  async run({ title, desc, isModel, isPublic, groups, components }) {
+  async run({ title, desc, isModel, isPublic, editableAnswers, groups, components }) {
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.noUser', 'api.forms.createForm.notLoggedIn');
     }
-    _createForm(title, desc, this.userId, isModel, isPublic, groups, components);
+    _createForm(title, desc, this.userId, isModel, isPublic, editableAnswers, groups, components);
     const form = await Forms.findOneAsync({ title });
     return form._id;
   },
@@ -60,13 +61,14 @@ export const updateForm = new ValidatedMethod({
     desc: { type: String, label: getLabel('api.forms.labels.desc') },
     isModel: { type: Boolean, label: getLabel('api.forms.labels.isModel') },
     isPublic: { type: Boolean, label: getLabel('api.forms.labels.public') },
+    editableAnswers: { type: Boolean, label: getLabel('api.forms.labels.editableAnswers') },
     groups: { type: Array, optional: true, label: getLabel('api.forms.labels.groups') },
     'groups.$': { type: String },
     components: { type: Array, label: getLabel('api.forms.labels.components') },
     'components.$': { type: Component },
   }).validator(),
 
-  async run({ id, title, desc, isModel, isPublic, groups, components }) {
+  async run({ id, title, desc, isModel, isPublic, editableAnswers, groups, components }) {
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
     }
@@ -76,7 +78,7 @@ export const updateForm = new ValidatedMethod({
       throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
     }
 
-    _updateForm(id, title, desc, this.userId, isModel, isPublic, groups, components);
+    _updateForm(id, title, desc, this.userId, isModel, isPublic, editableAnswers, groups, components);
 
     return form._id;
   },
