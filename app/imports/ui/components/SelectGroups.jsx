@@ -49,7 +49,9 @@ export default function SelectGroups({ userGroups }) {
           ))}
         </Select>
       </FormControl>
-      <Button onClick={() => addGroupToForm()}>{i18n.__('component.selectGroups.addGroup')}</Button>
+      <Button variant="contained" onClick={() => addGroupToForm()}>
+        {i18n.__('component.selectGroups.addGroup')}
+      </Button>
     </div>
   );
 }

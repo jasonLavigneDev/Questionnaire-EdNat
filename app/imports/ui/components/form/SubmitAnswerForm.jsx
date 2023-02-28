@@ -44,14 +44,14 @@ export default function SubmitAnswerForm() {
     <div>
       {!user ? (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <Button disabled={!answersAreComplete} onClick={submitAnswerForm}>
+          <Button variant="contained" disabled={!answersAreComplete} onClick={submitAnswerForm}>
             {i18n.__('component.submitAnswerForm.submitAnswers')}
           </Button>
         </div>
       ) : (
         <>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button onClick={submitAnswerForm} disabled={!answersAreComplete}>
+            <Button variant="contained" onClick={submitAnswerForm} disabled={!answersAreComplete}>
               {hasAlreadyRespond(user, form)
                 ? i18n.__('component.submitAnswerForm.updateAnswers')
                 : i18n.__('component.submitAnswerForm.submitAnswers')}
