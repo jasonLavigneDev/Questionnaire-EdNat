@@ -11,15 +11,21 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import { UserContext } from '../contexts/UserContext';
+import ModalDeleteConfirmation from './modals/ModalDeleteConfirmation';
 
 export const FormActionButton = ({ deleteForm, currentForm }) => {
   const navigate = useNavigate();
   const [active, setActive] = useState(currentForm.active);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { user } = useContext(UserContext);
 
   const activeForm = () => {
     setActive(!active);
     toggleActiveForm(currentForm);
+  };
+
+  const handleDeleteForm = () => {
+    setOpenDeleteModal(true);
   };
 
   const alreadyRespond = () => {
@@ -70,10 +76,20 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       <IconButton
         title={i18n.__('component.formActionButton.deleteForm')}
         sx={{ color: 'salmon' }}
-        onClick={() => deleteForm(currentForm)}
+        onClick={() => handleDeleteForm()}
       >
         <DeleteIcon />
       </IconButton>
+      {openDeleteModal ? (
+        <ModalDeleteConfirmation
+          deleteForm={deleteForm}
+          form={currentForm}
+          open={openDeleteModal}
+          onClose={() => {
+            setOpenDeleteModal(false);
+          }}
+        />
+      ) : null}
     </div>
   );
 };

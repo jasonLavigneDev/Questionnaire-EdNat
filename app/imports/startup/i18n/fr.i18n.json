@@ -223,6 +223,12 @@
       "refuse": "Refuser",
       "accept": "Accepter"
     },
+    "modalDeleteConfirmation": {
+      "title": "Suppression de formulaire",
+      "desc": "Voulez-vous vraiment supprimer ce formulaire ? Cette action est irréversible.",
+      "cancel": "Annuler",
+      "confirm": "Confirmer"
+    },
     "userNotConnected": {
       "notLoggedIn": "Veuillez vous connecter à l'aide du bouton en haut à droite."
     },

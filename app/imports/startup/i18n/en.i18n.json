@@ -223,6 +223,12 @@
       "refuse": "Refuse",
       "accept": "Accept"
     },
+    "modalDeleteConfirmation": {
+      "title": "form deletion",
+      "desc": "Do you really want to delete this form ? This action is irreversible.",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    },
     "userNotConnected": {
       "notLoggedIn": "Please log in using upper right button."
     },
