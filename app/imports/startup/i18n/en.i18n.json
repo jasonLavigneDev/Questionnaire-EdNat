@@ -192,6 +192,8 @@
       "formDesc": "Enter form description",
       "formDescHelp": "Description is optional",
       "mandatoryTitle": "Title is mandatory",
+      "formType": "Choose form visibility :",
+      "formPrivate": "Logged form",
       "formPublic": "Public form",
       "formGroups": "Limited to groups",
       "editableAnswers": "Réponses modifiables"

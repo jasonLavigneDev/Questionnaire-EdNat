@@ -1,19 +1,27 @@
 import { i18n } from 'meteor/universe:i18n';
-import { Checkbox, FormControlLabel, FormGroup, TextField, Radio, RadioGroup, FormControl } from '@mui/material';
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControl,
+  Divider,
+  Typography,
+} from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDesc, addTitle, toggleIsForGroup, toggleEditableAnswers, toggleIsPublic } from '../redux/slices/formSlice';
+import { addDesc, addTitle, formType, toggleEditableAnswers } from '../redux/slices/formSlice';
 
 export default function FormInfoInputs() {
   const form = useSelector((state) => state.form);
   const [radioValue, setRadioValue] = useState('private');
   const dispatch = useDispatch();
-  const isFormGroup = useSelector((state) => state.form.isForGroup);
 
   const validateFormMode = (event) => {
     setRadioValue(event.target.name);
-    if (radioValue === 'public') dispatch(toggleIsPublic());
-    if (radioValue === 'group') dispatch(toggleIsForGroup());
+    dispatch(formType({ name: event.target.value }));
   };
 
   return (
@@ -36,7 +44,6 @@ export default function FormInfoInputs() {
       />
       <FormGroup>
         <FormControlLabel
-          disabled={form.isForGroup}
           control={
             <Checkbox
               checked={form.editableAnswers}
@@ -47,21 +54,25 @@ export default function FormInfoInputs() {
           label={i18n.__('component.formInfoInputs.editableAnswers')}
         />
       </FormGroup>
-      <FormControl>
-        <RadioGroup
-          name="radio-buttons-group"
-          value={radioValue}
-          onChange={(e) => validateFormMode(e)}
-          defaultValue="private"
-        >
-          <FormControlLabel control={<Radio />} value="private" name="private" label="private" />
-
+      <Divider variant="middle" />
+      <Typography sx={{ marginTop: '1vh' }} variant="body1">
+        {i18n.__('component.formInfoInputs.formType')}
+      </Typography>
+      <FormControl sx={{ marginLeft: '2vw' }}>
+        <RadioGroup value={radioValue} onChange={(e) => validateFormMode(e)} defaultValue="private">
           <FormControlLabel
             control={<Radio />}
             value="public"
             name="public"
             label={i18n.__('component.formInfoInputs.formPublic')}
           />
+          <FormControlLabel
+            control={<Radio />}
+            value="private"
+            name="private"
+            label={i18n.__('component.formInfoInputs.formPrivate')}
+          />
+
           <FormControlLabel
             control={<Radio />}
             value="group"
