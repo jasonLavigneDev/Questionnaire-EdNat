@@ -16,7 +16,16 @@ import { addDesc, addTitle, formType, toggleEditableAnswers } from '../redux/sli
 
 export default function FormInfoInputs() {
   const form = useSelector((state) => state.form);
-  const [radioValue, setRadioValue] = useState('private');
+
+  const getType = () => {
+    if (form) {
+      if (form.isPublic) return 'public';
+      else if (form.isForGroup) return 'group';
+    }
+    return 'private';
+  };
+
+  const [radioValue, setRadioValue] = useState(getType());
   const dispatch = useDispatch();
 
   const validateFormMode = (event) => {
