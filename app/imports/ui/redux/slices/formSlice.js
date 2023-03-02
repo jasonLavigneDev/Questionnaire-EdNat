@@ -41,17 +41,23 @@ export const formSlice = createSlice({
     addDesc: (state, action) => {
       state.desc = action.payload.desc;
     },
-    toggleIsPublic: (state, action) => {
-      state.isPublic = !state.isPublic;
-    },
     toggleEditableAnswers: (state, action) => {
       state.editableAnswers = !state.editableAnswers;
     },
-    toggleIsForGroup: (state, action) => {
-      state.isForGroup = !state.isForGroup;
-      if (state.isForGroup === false) {
-        state.groups = [];
+    formType: (state, action) => {
+      if (action.payload.name === 'private') {
+        state.isPublic = false;
+        state.isForGroup = false;
       }
+      if (action.payload.name === 'public') {
+        state.isPublic = true;
+        state.isForGroup = false;
+      }
+      if (action.payload.name === 'group') {
+        state.isForGroup = true;
+        state.isPublic = false;
+      }
+      if (state.isForGroup === false) state.groups = [];
     },
     toggleAcceptRGPD: (state, action) => {
       state.acceptRGPD = action.payload.acceptRGPD;
@@ -90,6 +96,7 @@ export const {
   removeGroup,
   removeComponents,
   addDesc,
+  formType,
   toggleIsForGroup,
   toggleIsPublic,
   toggleEditableAnswers,
