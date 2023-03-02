@@ -73,21 +73,17 @@ export const ComponentBuilder = () => {
       />
       {IsMultiAnswersComponent() && <ManageOptions setErrorMessage={setErrorMessage} />}
       {question.id === '' ? (
-        <Button
-          variant="contained"
-          style={{ textAlign: 'center', width: '100%', marginTop: 1 }}
-          onClick={() => submitComponent('create')}
-        >
-          {i18n.__('component.componentBuilder.submit')}
-        </Button>
+        <div style={{ textAlign: 'center', width: '100%', marginTop: 1 }}>
+          <Button variant="contained" onClick={() => submitComponent('create')} sx={{ margin: 1, width: '20%' }}>
+            {i18n.__('component.componentBuilder.submit')}
+          </Button>
+        </div>
       ) : (
-        <Button
-          variant="contained"
-          style={{ textAlign: 'center', width: '100%' }}
-          onClick={() => submitComponent('update')}
-        >
-          {i18n.__('component.componentBuilder.update')}
-        </Button>
+        <div style={{ textAlign: 'center', width: '100%', marginTop: 1 }}>
+          <Button variant="contained" sx={{ margin: 1, width: '20%' }} onClick={() => submitComponent('update')}>
+            {i18n.__('component.componentBuilder.update')}
+          </Button>
+        </div>
       )}
       {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
     </Paper>
