@@ -33,7 +33,6 @@ export const FormPrevisualizer = () => {
       if (result) {
         navigate('/');
         dispatch(resetFormObject());
-        dispatch(toggleAcceptRGPD({ acceptRGPD: false }));
       }
     } catch (error) {
       console.log('error dans sendForm', error);
