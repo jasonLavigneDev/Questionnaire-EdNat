@@ -19,7 +19,7 @@ export const TextArea = ({ title, questionId, answerRequired }) => {
         <FormLabel id="textAreaInput-title" error={answerRequired && !inputAnswer}>
           {title}
         </FormLabel>
-        <TextField multiline defaultValue={inputAnswer?.answer ?? ''} rows={3} onBlur={(e) => validateAnswer(e)} />
+        <TextField multiline defaultValue={inputAnswer?.answer ?? ''} rows={3} onChange={(e) => validateAnswer(e)} />
       </FormControl>
     </Paper>
   );
