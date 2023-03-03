@@ -18,6 +18,7 @@ export const AnswerPage = () => {
 
   useEffect(() => {
     let tokenGiven = urlSearchParams.get('token');
+    console.log(tokenGiven);
     if (formFromBDD) {
       const { title, desc, components, owner, groups, editableAnswers, isPublic, _id, formAnswers, active } =
         formFromBDD;

@@ -124,7 +124,8 @@
     },
     "redirectPage": {
       "title": "Questionnaire répondu avec succès",
-      "subTitle": "Redirection dans"
+      "subTitle": "Redirection dans",
+      "copyUrl": "Pour pouvoir modifier vos réponses pensez à enregistrer l'url ci-dessous :"
     }
   },
   "component": {
