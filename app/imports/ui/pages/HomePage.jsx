@@ -4,9 +4,13 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { UserForm } from '../components/UserForm';
 import { UserContext } from '../contexts/UserContext';
+import { useDispatch } from 'react-redux';
+import { resetFormObject } from '../redux/slices/formSlice';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
+
+  const dispatch = useDispatch();
 
   const [allUserForms, setAllUserForms] = useState();
   const formFromBDD = useLoaderData();
@@ -19,6 +23,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     setAllUserForms(formFromBDD);
+    dispatch(resetFormObject());
   }, []);
 
   if (!user) return <p>{i18n.__('page.homePage.login')}</p>;
