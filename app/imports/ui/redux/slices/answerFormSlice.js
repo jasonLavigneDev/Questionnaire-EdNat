@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   userId: '',
   formId: '',
+  modifyAnswersToken: '',
   answers: [],
 };
 
@@ -16,6 +17,7 @@ export const answerFormSlice = createSlice({
     fillUserAnswersObject: (state, action) => {
       state.userId = action.payload.userId;
       state.formId = action.payload.formId;
+      state.modifyAnswersToken = action.payload.modifyAnswersToken;
       state.answers = action.payload.answers;
     },
     addAnswers: (state, action) => {

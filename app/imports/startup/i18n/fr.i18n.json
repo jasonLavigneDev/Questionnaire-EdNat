@@ -38,7 +38,8 @@
         "formAnswers": {
           "answers": "Réponses",
           "userId": "ID utilisateur",
-          "answer": "Réponse"
+          "answer": "Réponse",
+          "modifyAnswersToken": "Token permettant la modification des réponses"
         },
         "component": {
           "id": "ID composant",
@@ -123,7 +124,8 @@
     },
     "redirectPage": {
       "title": "Questionnaire répondu avec succès",
-      "subTitle": "Redirection dans"
+      "subTitle": "Redirection dans",
+      "copyUrl": "Pour pouvoir modifier vos réponses pensez à enregistrer l'url ci-dessous :"
     }
   },
   "component": {

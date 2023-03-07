@@ -38,7 +38,8 @@
         "formAnswers": {
           "answers": "Answers",
           "userId": "User ID",
-          "answer": "Answer"
+          "answer": "Answer",
+          "modifyAnswersToken": "Token allowing the modification of the answers"
         },
         "component": {
           "id": "Component ID",
@@ -123,7 +124,8 @@
     },
     "redirectPage": {
       "title": "Form answered successfully",
-      "subTitle": "Redirection in"
+      "subTitle": "Redirection in",
+      "copyUrl": "To be able to modify your answers remember to save the url below :"
     }
   },
   "component": {

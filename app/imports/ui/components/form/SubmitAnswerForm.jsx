@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import i18n from 'meteor/universe:i18n';
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { resetUserAnswerObject } from '../../redux/slices/answerFormSlice';
 import { resetFormObject } from '../../redux/slices/formSlice';
@@ -17,19 +17,30 @@ export default function SubmitAnswerForm() {
   const navigate = useNavigate();
   const form = useSelector((state) => state.form);
   const formId = useSelector((state) => state.form.formId);
-
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const submitAnswerForm = async () => {
     let id = user ? user._id : null;
-    await Meteor.callAsync('forms.updateAnswers', formId, {
-      userId: id,
-      answers: answerForm.answers,
-    });
+    let urlForEdition = '';
+    try {
+      const generatedToken = await Meteor.callAsync('forms.upsertAnswers', {
+        formId,
+        newAnswer: { userId: id, answers: answerForm.answers },
+        token: answerForm.modifyAnswersToken,
+      });
+      if (generatedToken) {
+        urlForEdition = `${window.location.origin}${location.pathname}?token=${generatedToken}`;
+        console.log("url d'édition du formulaire : ", urlForEdition);
+      }
+    } catch (error) {
+      alert('Erreur : ' + error.reason);
+      console.log('error', error.reason);
+    }
     dispatch(resetUserAnswerObject());
     dispatch(resetFormObject());
 
-    navigate('/success');
+    navigate('/success', { state: { urlForEdition } });
   };
 
   useEffect(() => {

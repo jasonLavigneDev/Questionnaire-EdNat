@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import i18n from 'meteor/universe:i18n';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useSearchParams } from 'react-router-dom';
 import { Visualizer } from '../components/form/Visualizer';
 import { UserContext } from '../contexts/UserContext';
 import { fillForm } from '../redux/slices/formSlice';
@@ -14,7 +14,11 @@ export const AnswerPage = () => {
   const [alreadyRespond, setAlreadyRespond] = useState(false);
   const currentFormHasAnswers = !!formFromBDD.formAnswers;
 
+  let [urlSearchParams] = useSearchParams();
+
   useEffect(() => {
+    let tokenGiven = urlSearchParams.get('token');
+    console.log(tokenGiven);
     if (formFromBDD) {
       const { title, desc, components, owner, groups, editableAnswers, isPublic, _id, formAnswers, active } =
         formFromBDD;
@@ -37,14 +41,21 @@ export const AnswerPage = () => {
       };
 
       dispatch(fillForm(fieldForPopulateState));
-      if (user && currentFormHasAnswers) {
-        let userAnswers = formFromBDD.formAnswers.find((answer) => answer.userId === user._id);
-        if (userAnswers) {
+      if (currentFormHasAnswers && editableAnswers) {
+        let userAnswers = {};
+        if (user) {
+          userAnswers = formFromBDD.formAnswers.find((answer) => answer.userId === user._id) || {};
+        } else if (tokenGiven) {
+          userAnswers = formFromBDD.formAnswers.find((answer) => answer.modifyAnswersToken === tokenGiven) || {};
+        }
+        if (Object.entries(userAnswers).length !== 0) {
+          // user has already respond to this form => retrieve answers
           setAlreadyRespond(true);
           dispatch(
             fillUserAnswersObject({
               userId: userAnswers.userId,
               formId: formFromBDD._id,
+              modifyAnswersToken: userAnswers.modifyAnswersToken,
               answers: userAnswers.answers,
             }),
           );
