@@ -63,7 +63,7 @@ export const formSlice = createSlice({
       state.acceptRGPD = action.payload.acceptRGPD;
     },
     addGroups: (state, action) => {
-      state.groups.push(action.payload);
+      if (!state.groups.includes(action.payload)) state.groups.push(action.payload);
     },
     removeGroup: (state, action) => {
       state.groups = state.groups.filter((groupId) => groupId !== action.payload.id);
