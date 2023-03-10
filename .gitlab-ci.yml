@@ -1,0 +1,186 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+include:
+  - project: EOLE/infra/ci-tools
+    ref: stable
+    file: /templates/Rules.yaml
+  - project: EOLE/infra/ci-tools
+    ref: stable
+    file: /templates/Runners/apps.education-docker.yaml
+  - project: EOLE/infra/ci-tools
+    ref: stable
+    file: /templates/Git.yaml
+  - project: EOLE/infra/ci-tools
+    ref: stable
+    file: /templates/Semantic-release.yaml
+  - project: EOLE/infra/ci-tools
+    ref: stable
+    file: /templates/Docker.yaml
+
+variables:
+  # `ci-tools` default branch is `stable`
+  STABLE_BRANCH: master
+  IMAGE_NAME: questionnaire
+
+stages:
+  - initial-checks
+  - deps
+  - test
+  - build
+  - release
+
+# Common setup for all meteor based jobs
+.meteor:
+  rules:
+    - !reference [.rules-map, not-on-schedule]
+    - !reference [.rules-map, not-on-draft]
+    - !reference [.rules-map, not-on-tag]
+    - !reference [.rules-map, on-dev]
+    - !reference [.rules-map, not-on-semantic-release-commit]
+    - !reference [.rules-map, on-branch]
+  image: hub.eole.education/proxyhub/geoffreybooth/meteor-base:2.10.0
+  cache:
+    key:
+      files:
+        # Generate new cache when one of the file changes
+        - package.json
+        - package-lock.json
+    paths:
+      - node_modules/
+    # Only use the cache created by `cache-dependencies` job
+    policy: pull
+  variables:
+    METEOR_ALLOW_SUPERUSER: 'true'
+
+###############################################################################
+# `initial-checks` stage: `commitlint`
+###############################################################################
+# Execute `commitlint` before long `cache-dependencies` job
+commitlint:
+  stage: initial-checks
+  extends: .git:commitlint
+
+###############################################################################
+# `deps` stage: to download and cache dependencies
+###############################################################################
+#cache-dependencies:
+#  stage: deps
+#  extends: .meteor
+#  cache:
+#    # This job update dependencies
+#    policy: pull-push
+#  script:
+#    - meteor npm ci
+#
+###############################################################################
+# `test` stage: `meteor-lint`, `meteor-tests`
+###############################################################################
+# The test does not run on the builded container so do them before
+# building the container
+#meteor-lint:
+#  stage: test
+#  extends: .meteor
+#  script:
+#    - meteor npm install --only=dev
+#    - meteor npm run lint
+#
+#meteor-tests:
+#  stage: test
+#  extends: .meteor
+#  script:
+#    - meteor npm test
+#
+###############################################################################
+# `build` stage: `build-docker`
+###############################################################################
+# Build on release tag and every branches except for `$STABLE_BRANCH`
+# used only to create the release tag.
+#
+# The ordering is important:
+# 1. exclude schedules and drafts
+# 2. include release and prerelease tag which must match before `not-on-semantic-release-commit`
+# 3. we exclude `semantic-release` commits except for `dev`
+# 4. run on every branches
+build-docker:
+  extends: .docker:image:build
+  rules:
+    - !reference [.rules-map, not-on-schedule]
+    - !reference [.rules-map, not-on-draft]
+    - !reference [.rules-map, on-release-tag]
+    - !reference [.rules-map, on-testing-tag]
+    - !reference [.rules-map, on-dev]
+    - !reference [.rules-map, not-on-semantic-release-commit]
+    - !reference [.rules-map, on-branch]
+
+###############################################################################
+# `release` stage: `new release`, testing prerelease`, `merge-to-dev`, `tag *`
+###############################################################################
+# Avoid regression and update `version` of app/package*.json in `$DEV_BRANCH`
+merge-to-dev: { extends: '.git:merge-to', variables: { GIT_MERGE_TARGET: $DEV_BRANCH } }
+
+# Create the release versions on `$STABLE_BRANCH`
+new release: { extends: '.semantic-release:stable' }
+
+# Create the prereleases versions on `$TESTING_BRANCH`
+# update `.releaserc.js` variable `betaBranch`
+testing prerelease: { extends: '.semantic-release:testing' }
+
+## tag contribution branches with a more stable name than `git-${CI_COMMIT_SHORT_SHA}`
+tag contrib branch:
+  extends:
+    - .docker:image:tag
+    - .on-branches
+  variables:
+    # `feature/foo-bar_quux` → `feature-foo-bar-quux`
+    IMAGE_TAG: $CI_COMMIT_REF_SLUG
+
+## dev images
+tag dev:
+  extends: .docker:image:tag
+  rules:
+    - !reference [.rules-map, not-on-schedule]
+    - !reference [.rules-map, not-on-draft]
+    - !reference [.rules-map, on-dev]
+  variables:
+    IMAGE_TAG: dev
+
+## testing images
+tag testing prerelease:
+  extends:
+    - .docker:image:tag
+    - .on-testing-tag
+
+tag testing:
+  extends:
+    - .docker:image:tag
+    - .on-testing-tag
+  variables:
+    IMAGE_TAG: testing
+
+## stable images
+tag release:
+  extends: .docker:image:tag
+
+tag major:
+  extends: .docker:image:tag
+  before_script:
+    - export RELEASE=${CI_COMMIT_TAG#${RELEASE_TAG_PREFIX}}
+    - export IMAGE_TAG=${RELEASE%%.*}
+
+tag minor:
+  extends:
+    - .docker:image:tag
+  before_script:
+    - export RELEASE=${CI_COMMIT_TAG#${RELEASE_TAG_PREFIX}}
+    - export IMAGE_TAG=${RELEASE%.${RELEASE##*.}}
+
+tag stable:
+  extends: .docker:image:tag
+  variables:
+    IMAGE_TAG: stable
+
+tag latest:
+  extends: .docker:image:tag
+  variables:
+    IMAGE_TAG: latest
