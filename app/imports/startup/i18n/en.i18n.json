@@ -28,7 +28,7 @@
     "forms": {
       "labels": {
         "title": "Title",
-        "desc": "Description",
+        "description": "Description",
         "isModel": "Model",
         "createdAt": "Created at",
         "owner": "Owner",
@@ -101,7 +101,7 @@
     },
     "errorPage": {
       "title": "Error",
-      "desc": "An error occurred"
+      "description": "An error occurred"
     },
     "formIntro": {
       "goNext": "Go to next step"
@@ -230,7 +230,7 @@
     },
     "modalDeleteConfirmation": {
       "title": "form deletion",
-      "desc": "Do you really want to delete this form ? This action is irreversible.",
+      "description": "Do you really want to delete this form ? This action is irreversible.",
       "cancel": "Cancel",
       "confirm": "Confirm"
     },

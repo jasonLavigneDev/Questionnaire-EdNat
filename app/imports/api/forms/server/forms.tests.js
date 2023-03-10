@@ -32,7 +32,7 @@ describe('forms', function () {
     it('does create a form', async function () {
       const newform = {
         title: 'yo',
-        desc: faker.lorem.sentence(),
+        description: faker.lorem.sentence(),
         isModel: faker.datatype.boolean(),
         isPublic: faker.datatype.boolean(),
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
@@ -49,7 +49,7 @@ describe('forms', function () {
     it('does get user forms', async function () {
       const newform = {
         title: 'yo',
-        desc: faker.lorem.sentence(),
+        description: faker.lorem.sentence(),
         isModel: faker.datatype.boolean(),
         isPublic: faker.datatype.boolean(),
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
@@ -57,7 +57,7 @@ describe('forms', function () {
       await createForm._execute({ userId }, newform);
       const newform2 = {
         title: 'yo2',
-        desc: faker.lorem.sentence(),
+        description: faker.lorem.sentence(),
         isModel: faker.datatype.boolean(),
         isPublic: faker.datatype.boolean(),
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),

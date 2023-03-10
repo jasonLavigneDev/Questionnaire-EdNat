@@ -22,7 +22,7 @@ export const FormPrevisualizer = () => {
     try {
       const result = await Meteor.callAsync('forms.createForm', {
         title: form.title,
-        desc: form.desc,
+        description: form.description,
         isModel: false,
         editableAnswers: form.editableAnswers,
         groups: form.groups,
@@ -46,7 +46,7 @@ export const FormPrevisualizer = () => {
       const result = await Meteor.callAsync('forms.updateForm', {
         id: form.formId,
         title: form.title,
-        desc: form.desc,
+        description: form.description,
         isModel: false,
         editableAnswers: form.editableAnswers,
         groups: form.groups,

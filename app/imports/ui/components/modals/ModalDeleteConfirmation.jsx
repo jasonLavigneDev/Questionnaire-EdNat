@@ -34,7 +34,7 @@ const ModalDeleteConfirmation = ({ deleteForm, form, open, onClose }) => {
           {i18n.__('component.modalDeleteConfirmation.title')}
         </Typography>
 
-        <Typography sx={{ mt: 2 }}>{i18n.__('component.modalDeleteConfirmation.desc')}</Typography>
+        <Typography sx={{ mt: 2 }}>{i18n.__('component.modalDeleteConfirmation.description')}</Typography>
 
         <div style={{ display: 'flex', marginTop: '2vh', justifyContent: 'space-between' }}>
           <Button variant="contained" onClick={() => handleCancel()}>

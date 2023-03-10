@@ -28,7 +28,7 @@
     "forms": {
       "labels": {
         "title": "Titre",
-        "desc": "Description",
+        "description": "Description",
         "isModel": "Modèle",
         "createdAt": "Créé le",
         "owner": "Propriétaire",
@@ -101,7 +101,7 @@
     },
     "errorPage": {
       "title": "Erreur",
-      "desc": "Une erreur s'est produite"
+      "description": "Une erreur s'est produite"
     },
     "formIntro": {
       "goNext": "Passer à l'étape suivante"
@@ -230,7 +230,7 @@
     },
     "modalDeleteConfirmation": {
       "title": "Suppression de formulaire",
-      "desc": "Voulez-vous vraiment supprimer ce formulaire ? Cette action est irréversible.",
+      "description": "Voulez-vous vraiment supprimer ce formulaire ? Cette action est irréversible.",
       "cancel": "Annuler",
       "confirm": "Confirmer"
     },

@@ -7,10 +7,10 @@ import { getLabel } from '../utils';
 
 import Forms, { Component, Answers } from './forms';
 
-function _createForm(title, desc, owner, isModel, isPublic, editableAnswers, groups, components) {
+function _createForm(title, description, owner, isModel, isPublic, editableAnswers, groups, components) {
   Forms.insert({
     title,
-    desc,
+    description,
     owner,
     isModel,
     isPublic,
@@ -20,11 +20,11 @@ function _createForm(title, desc, owner, isModel, isPublic, editableAnswers, gro
   });
 }
 
-function _updateForm(id, title, desc, owner, isModel, isPublic, editableAnswers, groups, components) {
+function _updateForm(id, title, description, owner, isModel, isPublic, editableAnswers, groups, components) {
   Forms.update(
     { _id: id },
     {
-      $set: { title, desc, owner, isModel, isPublic, editableAnswers, groups, components },
+      $set: { title, description, owner, isModel, isPublic, editableAnswers, groups, components },
     },
   );
 }
@@ -33,7 +33,7 @@ export const createForm = new ValidatedMethod({
   name: 'forms.createForm',
   validate: new SimpleSchema({
     title: { type: String, label: getLabel('api.forms.labels.title') },
-    desc: { type: String, optional: true, label: getLabel('api.forms.labels.desc') },
+    description: { type: String, optional: true, label: getLabel('api.forms.labels.description') },
     isModel: { type: Boolean, label: getLabel('api.forms.labels.isModel') },
     isPublic: { type: Boolean, label: getLabel('api.forms.labels.public') },
     editableAnswers: { type: Boolean, label: getLabel('api.forms.labels.editableAnswers') },
@@ -43,11 +43,11 @@ export const createForm = new ValidatedMethod({
     'components.$': { type: Component },
   }).validator(),
 
-  async run({ title, desc, isModel, isPublic, editableAnswers, groups, components }) {
+  async run({ title, description, isModel, isPublic, editableAnswers, groups, components }) {
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.noUser', 'api.forms.createForm.notLoggedIn');
     }
-    _createForm(title, desc, this.userId, isModel, isPublic, editableAnswers, groups, components);
+    _createForm(title, description, this.userId, isModel, isPublic, editableAnswers, groups, components);
     const form = await Forms.findOneAsync({ title });
     return form._id;
   },
@@ -58,7 +58,7 @@ export const updateForm = new ValidatedMethod({
   validate: new SimpleSchema({
     id: { type: String, label: getLabel('api.forms.labels.id') },
     title: { type: String, label: getLabel('api.forms.labels.title') },
-    desc: { type: String, label: getLabel('api.forms.labels.desc') },
+    description: { type: String, label: getLabel('api.forms.labels.description') },
     isModel: { type: Boolean, label: getLabel('api.forms.labels.isModel') },
     isPublic: { type: Boolean, label: getLabel('api.forms.labels.public') },
     editableAnswers: { type: Boolean, label: getLabel('api.forms.labels.editableAnswers') },
@@ -68,7 +68,7 @@ export const updateForm = new ValidatedMethod({
     'components.$': { type: Component },
   }).validator(),
 
-  async run({ id, title, desc, isModel, isPublic, editableAnswers, groups, components }) {
+  async run({ id, title, description, isModel, isPublic, editableAnswers, groups, components }) {
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
     }
@@ -78,7 +78,7 @@ export const updateForm = new ValidatedMethod({
       throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
     }
 
-    _updateForm(id, title, desc, this.userId, isModel, isPublic, editableAnswers, groups, components);
+    _updateForm(id, title, description, this.userId, isModel, isPublic, editableAnswers, groups, components);
 
     return form._id;
   },
