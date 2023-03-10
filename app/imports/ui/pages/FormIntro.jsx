@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import i18n from 'meteor/universe:i18n';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Paper } from '@mui/material';
@@ -16,7 +16,6 @@ import { fillForm, addGroups, formType } from '../redux/slices/formSlice';
 export const FormIntro = () => {
   const acceptRgpd = useSelector((state) => state.form.acceptRGPD);
   const { formFromBDD, userGroups } = useLoaderData();
-  const [groups, setGroups] = useState(userGroups || []);
 
   let [urlSearchParams] = useSearchParams();
   let tokenGiven = urlSearchParams.get('groupId');
@@ -32,13 +31,12 @@ export const FormIntro = () => {
   const formGroups = useSelector((state) => state.form.groups);
 
   const checkGroup = (tokenGiven) => {
-    const group = groups.find((gr) => gr._id === tokenGiven);
+    const group = userGroups.find((gr) => gr._id === tokenGiven);
     if (group) {
       const alreadyInsert = !!formGroups.find((groupId) => groupId === group._id);
       if (!alreadyInsert) {
         dispatch(formType({ name: 'group' }));
         dispatch(addGroups(group._id));
-        setGroups(groups.filter((gr) => gr._id != group._id));
       }
     }
   };

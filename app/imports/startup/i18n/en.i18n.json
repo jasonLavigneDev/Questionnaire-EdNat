@@ -234,9 +234,6 @@
       "cancel": "Cancel",
       "confirm": "Confirm"
     },
-    "userNotConnected": {
-      "notLoggedIn": "Please log in using upper right button."
-    },
     "userForm": {
       "form": {
         "group": "Group form",
