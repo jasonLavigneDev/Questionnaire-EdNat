@@ -95,6 +95,10 @@
     "en": "Anglais"
   },
   "page": {
+    "authPage": {
+      "title": "Bienvenue sur Questionnaire. Veuillez vous connecter.",
+      "buttonText": "Se connecter"
+    },
     "answerPage": {
       "formNotFound": "Le formulaire n'existe pas",
       "notEditable": "Vous avez déjà répondu à ce questionnaire et les réponses ne sont pas modifiables."

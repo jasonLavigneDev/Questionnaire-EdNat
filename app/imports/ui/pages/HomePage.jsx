@@ -9,6 +9,9 @@ import { resetFormObject } from '../redux/slices/formSlice';
 
 export const HomePage = () => {
   const { user } = useContext(UserContext);
+  if (!user) {
+    navigate('/signin');
+  }
 
   const dispatch = useDispatch();
 

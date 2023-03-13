@@ -95,6 +95,10 @@
     "en": "English"
   },
   "page": {
+    "authPage": {
+      "title": "Welcome to Questionnaire. Please, log in.",
+      "buttonText": "Login"
+    },
     "answerPage": {
       "formNotFound": "Form does not exist",
       "notEditable": "you have already answered this form, and the answers cannot be modified."
