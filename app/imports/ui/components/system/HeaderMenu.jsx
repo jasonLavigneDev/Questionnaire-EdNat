@@ -45,7 +45,7 @@ export const HeaderMenu = () => {
         onClick={(event) => openMenu(event)}
       >
         <Typography variant="body1" sx={{ marginRight: '1vw' }}>
-          {user.username || 'Toto'}
+          {user.username || i18n.__('api.users.labels.noUsername')}
         </Typography>
         <div>
           {user.avatar ? (
