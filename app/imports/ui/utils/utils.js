@@ -23,6 +23,6 @@ export const hasAlreadyRespond = (user, form) => {
 };
 
 export const copyUrlToClipBoard = (id) => {
-  const url = `http://localhost:3060/visualizer/${id}`;
+  const url = `${Meteor.absoluteUrl()}visualizer/${id}`;
   return navigator.clipboard.writeText(url);
 };
