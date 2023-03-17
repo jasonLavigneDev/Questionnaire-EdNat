@@ -17,7 +17,8 @@
         "primaryEmail": "Adresse électronique principale",
         "language": "Langage Préféré",
         "logoutType": "Méthode De Déconnexion",
-        "avatar": "Avatar"
+        "avatar": "Avatar",
+        "noUsername": "Utilisateur"
       },
       "setLogoutType": {
         "notPermitted": "Non autorisé"

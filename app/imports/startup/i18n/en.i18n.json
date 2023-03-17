@@ -17,7 +17,8 @@
         "primaryEmail": "Primary Email address",
         "language": "Preferred Language",
         "logoutType": "Logout type",
-        "avatar": "Avatar"
+        "avatar": "Avatar",
+        "noUsername": "User"
       },
       "setLogoutType": {
         "notPermitted": "Not authorized"
