@@ -1,0 +1,24 @@
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+}
+
+.rotate {
+  animation: rotation 1s infinite linear;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.5, 0.05, 0.6, 0.2);
+  }
+  50% {
+    transform: rotate(-460deg);
+    animation-timing-function: cubic-bezier(0.2, 0.6, 0.3, 1);
+  }
+  100% {
+    transform: rotate(-720deg);
+  }
+}
