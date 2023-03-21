@@ -15,28 +15,26 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
 
   return (
     <div>
-      <BottomNavigation showLabels className="footer flex center ht-8vh">
-        <div className="flex jc-center">
-          {urlOfPrevStep ? (
-            <>
-              <Button variant="contained" className="mr-5" onClick={() => navigate(`/${urlOfPrevStep}`)}>
-                {i18n.__('component.footer.goBack')}
-              </Button>
-              <Button variant="contained" disabled={isDisable} onClick={() => nextStep()}>
-                {text}
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button variant="contained" className="mr-5" onClick={() => navigate(`/`)}>
-                {i18n.__('component.footer.cancel')}
-              </Button>
-              <Button variant="contained" disabled={isTitleMissing} onClick={() => nextStep()}>
-                {text}
-              </Button>
-            </>
-          )}
-        </div>
+      <BottomNavigation showLabels className="footer flex center ht-8vh wd-100pct">
+        {urlOfPrevStep ? (
+          <div className="flex">
+            <Button variant="contained" className="footer-button" onClick={() => navigate(`/${urlOfPrevStep}`)}>
+              {i18n.__('component.footer.goBack')}
+            </Button>
+            <Button variant="contained" disabled={isDisable} onClick={() => nextStep()}>
+              {text}
+            </Button>
+          </div>
+        ) : (
+          <div className="flex">
+            <Button className="footer-button" variant="contained" onClick={() => navigate(`/`)}>
+              {i18n.__('component.footer.cancel')}
+            </Button>
+            <Button variant="contained" disabled={isTitleMissing} onClick={() => nextStep()}>
+              {text}
+            </Button>
+          </div>
+        )}
       </BottomNavigation>
     </div>
   );

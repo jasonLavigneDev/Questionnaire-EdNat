@@ -15,7 +15,7 @@ export const DateInput = ({ title, questionId, answerRequired }) => {
   };
 
   return (
-    <Paper className="pad-2 wd-50">
+    <Paper className="pad-15 wd-50">
       <FormControl required={answerRequired}>
         <FormLabel id="dateInput-title" error={answerRequired && !inputAnswer}>
           {title}

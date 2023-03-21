@@ -38,14 +38,12 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
         title={
           active ? i18n.__('component.formActionButton.isActive') : i18n.__('component.formActionButton.isNotActive')
         }
-        className={active ? 'color-green' : 'color-salmon'}
         onClick={() => activeForm()}
       >
-        {active ? <VisibilityIcon /> : <VisibilityOffIcon />}
+        {active ? <VisibilityIcon className="color-green" /> : <VisibilityOffIcon className="color-salmon" />}
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.answer')}
-        className="color-black"
         disabled={hasNotAnswers(currentForm)}
         onClick={() => navigate(`/answers/${currentForm._id}`)}
       >
@@ -53,7 +51,6 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.editAnswers')}
-        className="color-black"
         disabled={!active || alreadyRespond()}
         onClick={() => navigate(`/visualizer/${currentForm._id}`)}
       >
@@ -67,18 +64,13 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.editForm')}
-        className="color-black"
         disabled={active || !hasNotAnswers(currentForm)}
         onClick={() => navigate(`/builder/intro/${currentForm._id}`)}
       >
         <DesignServicesIcon />
       </IconButton>
-      <IconButton
-        title={i18n.__('component.formActionButton.deleteForm')}
-        className="color-salmon"
-        onClick={() => handleDeleteForm()}
-      >
-        <DeleteIcon />
+      <IconButton title={i18n.__('component.formActionButton.deleteForm')} onClick={() => handleDeleteForm()}>
+        <DeleteIcon className="color-salmon" />
       </IconButton>
       {openDeleteModal ? (
         <ModalDeleteConfirmation

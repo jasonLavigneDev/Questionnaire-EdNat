@@ -72,7 +72,7 @@ export default function ManageOptions({ setErrorMessage }) {
               key={option.id}
               title="Déplacer cette option"
             >
-              <div className="flex ali-center">
+              <div className="flex center">
                 <DragIndicatorIcon sx={{ color: 'rgb(180, 180, 180)', marginLeft: -2 }} />
                 <p className="maxHt-1p2rem overflow-ellipsis ml-0p5">{option}</p>
               </div>
@@ -98,7 +98,7 @@ export default function ManageOptions({ setErrorMessage }) {
           variant="outlined"
           value={question.answerText}
           onChange={(e) => dispatch(addAnswerText({ answerText: e.target.value }))}
-          className="ml-6 wd-85pct"
+          className="ml-3 wd-87pct"
           onKeyDown={(event) => pressEnter(event)}
         />
         <IconButton onClick={() => addOption(question.answerText)}>
@@ -115,7 +115,7 @@ export default function ManageOptions({ setErrorMessage }) {
           {i18n.__('component.manageOptions.duplicate')}
         </Alert>
       </Snackbar>
-      <div className="maxWd-45 mt-2">
+      <div className="maxWd-45 ">
         <DraggableRender />
       </div>
 

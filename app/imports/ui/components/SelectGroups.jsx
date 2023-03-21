@@ -31,8 +31,8 @@ export default function SelectGroups({ userGroups }) {
   if (haveNotGroup) return <p>{i18n.__('component.selectGroups.noGroup')}</p>;
 
   return (
-    <div className="flex column wd-50pct mt-1">
-      <FormControl>
+    <div className="flex center column wd-50pct mt-1">
+      <FormControl className="flex wd-100pct">
         <InputLabel id="selectInput-Groups">{i18n.__('component.selectGroups.groupChoice')}</InputLabel>
         <Select
           labelId="selectInput-Groups"
@@ -49,7 +49,7 @@ export default function SelectGroups({ userGroups }) {
           ))}
         </Select>
       </FormControl>
-      <Button variant="contained" onClick={() => addGroupToForm()}>
+      <Button className="wd-18" variant="contained" onClick={() => addGroupToForm()}>
         {i18n.__('component.selectGroups.addGroup')}
       </Button>
     </div>

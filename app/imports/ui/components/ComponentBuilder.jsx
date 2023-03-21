@@ -54,7 +54,7 @@ export const ComponentBuilder = () => {
   };
 
   return (
-    <Paper>
+    <Paper className="flex column pad-10">
       <div className="flex ml-2p5">
         <FormControlLabel
           control={<Checkbox name="required" checked={question.answerRequired} />}
@@ -69,18 +69,20 @@ export const ComponentBuilder = () => {
         variant="outlined"
         value={question.title}
         onChange={(e) => dispatch(addQuestionText({ title: e.target.value }))}
-        className="wd-90pct ml-6 mb-2 mt-2"
+        className="wd-90pct ml-2 mb-2 mt-2"
       />
       {IsMultiAnswersComponent() && <ManageOptions setErrorMessage={setErrorMessage} />}
-      {question.id === '' ? (
-        <Button variant="contained" className="center wd-100pct mt-1" onClick={() => submitComponent('create')}>
-          {i18n.__('component.componentBuilder.submit')}
-        </Button>
-      ) : (
-        <Button variant="contained" className="center wd-100pct" onClick={() => submitComponent('update')}>
-          {i18n.__('component.componentBuilder.update')}
-        </Button>
-      )}
+      <div className="flex center mt-1">
+        {question.id === '' ? (
+          <Button variant="contained" className="wd-50pct" onClick={() => submitComponent('create')}>
+            {i18n.__('component.componentBuilder.submit')}
+          </Button>
+        ) : (
+          <Button variant="contained" className="center wd-100pct" onClick={() => submitComponent('update')}>
+            {i18n.__('component.componentBuilder.update')}
+          </Button>
+        )}
+      </div>
       {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
     </Paper>
   );

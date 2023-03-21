@@ -14,7 +14,7 @@ export const NumberInput = ({ title, questionId, answerRequired }) => {
   };
 
   return (
-    <Paper className="pad-2 wd-50">
+    <Paper className="pad-15 wd-50">
       <FormControl required={answerRequired} className="wd-80pct">
         <FormLabel id="numberInput-title" error={answerRequired && !inputAnswer}>
           {title}

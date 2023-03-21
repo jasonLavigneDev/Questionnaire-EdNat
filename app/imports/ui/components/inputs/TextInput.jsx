@@ -14,7 +14,7 @@ export const TextInput = ({ title, questionId, answerRequired }) => {
   };
 
   return (
-    <Paper className="wd-50 pad-2">
+    <Paper className="wd-50 pad-15">
       <FormControl required={answerRequired} error={answerRequired && !inputAnswer} className="wd-80pct">
         <FormLabel id="textInput-title">{title}</FormLabel>
         <TextField className="wd-60pct" defaultValue={inputAnswer?.answer ?? ''} onChange={(e) => validateAnswer(e)} />

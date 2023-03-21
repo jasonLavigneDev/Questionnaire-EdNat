@@ -2,10 +2,10 @@ body {
   font-family: sans-serif;
   --bg-paper-color: #f9f9fd;
   --app-title-color: #372f84;
-  --delete-button-color: 'salmon';
-  --valid-button-color: 'green';
-  --default-icon-color: 'black';
-  --error-icon-color: 'crimson';
+  --delete-button-color: #fa8072;
+  --valid-button-color: #3cb043;
+  --default-icon-color: #000;
+  --error-icon-color: #dc143c;
 }
 
 /* SPECIFIC CLASSES FOR MUI COMPONENTS
@@ -28,6 +28,10 @@ body {
   left: 37vw;
 }
 
+.footer-button {
+  margin-right: 3vw !important;
+}
+
 .h1-title-app {
   font-family: 'OdinRounded';
   color: var(--app-title-color);
@@ -41,15 +45,15 @@ body {
 }
 
 .sizeAvatar {
-  width : 3vw;
-  height : 5vh;
+  width: 3vw;
+  height: 5vh;
 }
 
 .modalDeleteConfirmation {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   background-color: var(--bg-paper-color);
   border-radius: 10px;
   width: 50vw;
@@ -129,6 +133,7 @@ div .flex {
   padding: 0 1vw;
 }
 
+/*TODO*/
 .padtb-2 {
   margin: 3vh 0;
 }
@@ -205,7 +210,7 @@ div .flex {
 }
 
 .ml-2p5 {
-  margin-left: 2, 5;
+  margin-left: 2.5vw;
 }
 
 .ml-3 {
@@ -230,6 +235,10 @@ div .flex {
 
 .mlr-1 {
   margin: 0 1vw;
+}
+
+.mtb-1 {
+  margin: 1vh 0;
 }
 
 ********************************
@@ -287,6 +296,10 @@ div .flex {
   width: 85%;
 }
 
+.wd-87pct {
+  width: 87%;
+}
+
 .wd-90pct {
   width: 90%;
 }
@@ -304,7 +317,7 @@ div .flex {
 
 
 .ht-30 {
-  height: 30px ;
+  height: 30px;
 }
 
 .ht-60 {
@@ -363,6 +376,10 @@ div .flex {
   justify-content: start;
 }
 
+.ji-start {
+  justify-items: start;
+}
+
 ********************************
 /* Align */
 
@@ -399,7 +416,7 @@ div .flex {
 }
 
 .border {
-  border: "1px solid black";
+  border: '1px solid black';
 }
 
 .opac-0p3 {
