@@ -42,7 +42,7 @@ const LanguageSwitcher = () => {
   const flag = <img className="wd-2 ht-5vh" alt="langue" src={`/images/i18n/${lang}.png`} />;
 
   return (
-    <div className="ht-5vh">
+    <div>
       <IconButton onClick={handleClick}>{flag}</IconButton>
 
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
