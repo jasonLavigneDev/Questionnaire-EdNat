@@ -52,8 +52,8 @@ body {
   transform: translate(-50%,-50%);
   background-color: var(--bg-paper-color);
   border-radius: 10px;
-  width: 400px;
-  padding: 8px;
+  width: 50vw;
+  padding: 2rem;
 }
 
 ********************************
