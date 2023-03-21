@@ -18,10 +18,10 @@ export const AnswerPage = () => {
 
   useEffect(() => {
     let tokenGiven = urlSearchParams.get('token');
-    console.log(tokenGiven);
     if (formFromBDD) {
       const { title, desc, components, owner, groups, editableAnswers, isPublic, _id, formAnswers, active } =
         formFromBDD;
+
       if (formAnswers && formAnswers.length) {
         formAnswers.forEach((answer) => {
           delete answer.createdAt;
@@ -41,14 +41,15 @@ export const AnswerPage = () => {
       };
 
       dispatch(fillForm(fieldForPopulateState));
-      if (currentFormHasAnswers && editableAnswers) {
-        let userAnswers = {};
+
+      if (currentFormHasAnswers) {
+        let userAnswers = null;
         if (user) {
-          userAnswers = formFromBDD.formAnswers.find((answer) => answer.userId === user._id) || {};
+          userAnswers = formFromBDD.formAnswers.find((answer) => answer.userId === user._id) || null;
         } else if (tokenGiven) {
-          userAnswers = formFromBDD.formAnswers.find((answer) => answer.modifyAnswersToken === tokenGiven) || {};
+          userAnswers = formFromBDD.formAnswers.find((answer) => answer.modifyAnswersToken === tokenGiven) || null;
         }
-        if (Object.entries(userAnswers).length !== 0) {
+        if (userAnswers) {
           // user has already respond to this form => retrieve answers
           setAlreadyRespond(true);
           dispatch(

@@ -30,8 +30,7 @@ export default function SubmitAnswerForm() {
         token: answerForm.modifyAnswersToken,
       });
       if (generatedToken) {
-        urlForEdition = `${Meteor.absoluteUrl()}${location.pathname}?token=${generatedToken}`;
-        console.log("url d'édition du formulaire : ", urlForEdition);
+        urlForEdition = new URL(`${location.pathname}?token=${generatedToken}`, Meteor.absoluteUrl()).href;
       }
     } catch (error) {
       alert('Erreur : ' + error.reason);
