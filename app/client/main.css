@@ -221,6 +221,10 @@ div .flex {
   margin-left: 4vw;
 }
 
+.ml-5 {
+  margin-left: 5vw;
+}
+
 .ml-6 {
   margin-left: 6vw;
 }
@@ -274,6 +278,10 @@ div .flex {
 
 .wd-60 {
   width: 60vw;
+}
+
+.wd-45pct {
+  width: 45%;
 }
 
 .wd-50pct {
@@ -346,6 +354,10 @@ div .flex {
 
 .maxHt-1p2rem {
   max-height: 1.2rem;
+}
+
+.maxHt-60 {
+  max-height: 60vh;
 }
 
 .maxHt-100 {
@@ -421,6 +433,10 @@ div .flex {
 
 .opac-0p3 {
   opacity: 0.3;
+}
+
+.overflow-auto {
+  overflow: auto;
 }
 
 .color-salmon {

@@ -37,7 +37,7 @@ export const InputBuilder = () => {
           <h3>{i18n.__('component.inputBuilder.inputType')}</h3>
           {<InputChoice />}
         </div>
-        <div className={class1}>
+        <div className="flex column ml-5 overflow-auto wd-45pct maxHt-60">
           <h3>{i18n.__('component.inputBuilder.inputOrder')}</h3>
           <div className={class2}>
             {form.components.map((currentComponent, index) => (

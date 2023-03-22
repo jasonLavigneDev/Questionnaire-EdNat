@@ -32,6 +32,71 @@ Voici les principales unités que l'on peut retrouver dans les classes :
 - pct (%)
 - rem
 
+## Lexique des classes
+
 ### Padding
 
 pad-**value**
+padt-**value**
+padr-**value**
+padb-**value**
+padl-**value**
+padlr-**value**
+padtb-**value**
+
+### Marge
+
+m-**value**
+mt-**value**
+mr-**value**
+mb-**value**
+ml-**value**
+mlr-**value**
+mtb-**value**
+
+### Width
+
+wd-**value**
+maxWd-**value**
+
+### Height
+
+ht-**value**
+maxHt-**value**
+
+### Justify Content / Items
+
+jc-**value**
+ji-**value**
+
+### Align / text align
+
+ali-**value**
+txtAli-**value**
+
+### Flex
+
+flex
+center
+column
+row
+flex-**value**
+
+### Position
+
+pos-**value**
+top-**value**
+
+### Color
+
+color-**value**
+color-**salmon**
+color-**green**
+color-**black**
+color-**red**
+
+### Autre
+
+border
+opac-**value**
+txtTrans-**value**
