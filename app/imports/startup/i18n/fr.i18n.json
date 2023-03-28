@@ -97,7 +97,8 @@
   "page": {
     "answerPage": {
       "formNotFound": "Le formulaire n'existe pas",
-      "notEditable": "Vous avez déjà répondu à ce questionnaire et les réponses ne sont pas modifiables."
+      "notEditable": "Vous avez déjà répondu à ce questionnaire et les réponses ne sont pas modifiables.",
+      "notInGroup": "Vous n'avez pas accès à ce questionnaire car vous n'êtes pas membre d'un des groupes auxquels celui-ci est réservé."
     },
     "errorPage": {
       "title": "Erreur",

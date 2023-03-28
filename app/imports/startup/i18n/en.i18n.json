@@ -97,7 +97,8 @@
   "page": {
     "answerPage": {
       "formNotFound": "Form does not exist",
-      "notEditable": "you have already answered this form, and the answers cannot be modified."
+      "notEditable": "you have already answered this form, and the answers cannot be modified.",
+      "notInGroup": "You have not access to this form because you're not member of any group of this form."
     },
     "errorPage": {
       "title": "Error",
