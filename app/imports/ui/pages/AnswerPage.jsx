@@ -10,7 +10,6 @@ import { fillUserAnswersObject } from '../redux/slices/answerFormSlice';
 export const AnswerPage = () => {
   const { formFromBDD, userGroups } = useLoaderData();
 
-  console.log(userGroups);
   const dispatch = useDispatch();
   const { user } = useContext(UserContext);
   const [alreadyRespond, setAlreadyRespond] = useState(false);
