@@ -8,7 +8,6 @@ import '/imports/api/users/methods';
 import '/imports/api/users/server/publications';
 import '/imports/api/groups/groups';
 import '/imports/api/groups/methods';
-import '/imports/api/appsettings/methods';
 import '/imports/api/appsettings/server/publications';
 
 const testMeteorSettingsUrl = (settingsUrl, withSlash = false) => {
