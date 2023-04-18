@@ -7,13 +7,13 @@ import SiteInMaintenance from '../components/SiteInMaintenance';
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [settings, setSettings] = useState();
-  const promiseSettings = useTracker(async () => {
-    return await Meteor.callAsync('appsettings.all');
-  });
-
-  promiseSettings.then((value) => {
-    setSettings(value);
+  const settings = useTracker(() => {
+    Meteor.subscribe('appsettings.maintenance');
+    const settingsData = AppSettings.findOne(
+      { _id: 'settings' },
+      { fields: { maintenance: 1, textMaintenance: 1 }, sort: { _id: 1 }, limit: 1 },
+    );
+    return settingsData;
   });
 
   if (settings) {
