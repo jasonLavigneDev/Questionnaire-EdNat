@@ -41,30 +41,13 @@ export const App = () => {
                 errorElement={<ErrorPage />}
               />
               <Route
-                path="visualizer/:id"
-                element={<AnswerPage />}
-                loader={loaderVisualizer}
+                path="builder/intro/:id?"
+                element={<FormIntro />}
+                loader={loaderFormIntro}
                 errorElement={<ErrorPage />}
               />
-              <Route path="success" element={<RedirectAfterSubmit />} errorElement={<ErrorPage />} />
-              <Route element={<AuthProvider />}>
-                <Route path="/" element={<HomePage />} loader={loaderHomePage} errorElement={<ErrorPage />} />
-                <Route path="logout" element={<Logout />} errorElement={<ErrorPage />} />
-                <Route
-                  path="answers/:id"
-                  element={<ResultPage />}
-                  loader={loaderAnswerPage}
-                  errorElement={<ErrorPage />}
-                />
-                <Route
-                  path="builder/intro/:id?"
-                  element={<FormIntro />}
-                  loader={loaderFormIntro}
-                  errorElement={<ErrorPage />}
-                />
-                <Route path="builder/components/:id?" element={<FormBuilder />} errorElement={<ErrorPage />} />
-                <Route path="builder/previsualizer" element={<FormPrevisualizer />} errorElement={<ErrorPage />} />
-              </Route>
+              <Route path="builder/components/:id?" element={<FormBuilder />} errorElement={<ErrorPage />} />
+              <Route path="builder/previsualizer" element={<FormPrevisualizer />} errorElement={<ErrorPage />} />
             </Route>
           </Route>
         </Route>
