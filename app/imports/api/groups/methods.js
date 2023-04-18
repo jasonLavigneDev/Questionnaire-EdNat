@@ -1,4 +1,5 @@
 import Groups from './groups';
+import { Roles } from 'meteor/alanning:roles';
 
 export const getStrucGroupName = (group) => {
   if (group.type !== 15) return group.name;
@@ -15,13 +16,14 @@ export const getUserGroups = new ValidatedMethod({
       const user = await Meteor.users.findOneAsync({ _id: this.userId });
 
       if (user) {
-        const res = await Groups.find({ _id: { $in: user.favGroups } }).mapAsync((x) => x);
-        return res;
+        const groupIdList = Roles.getScopesForUser(this.userId, ['member', 'animator', 'admin']);
+        const groups = await Groups.find({ _id: { $in: groupIdList } }).mapAsync((grp) => grp);
+        return groups;
       } else {
-        throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
+        return null;
       }
     } else {
-      throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
+      return null;
     }
   },
 });

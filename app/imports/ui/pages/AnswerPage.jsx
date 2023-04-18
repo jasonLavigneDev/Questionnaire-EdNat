@@ -8,7 +8,8 @@ import { fillForm } from '../redux/slices/formSlice';
 import { fillUserAnswersObject } from '../redux/slices/answerFormSlice';
 
 export const AnswerPage = () => {
-  const formFromBDD = useLoaderData();
+  const { formFromBDD, userGroups } = useLoaderData();
+
   const dispatch = useDispatch();
   const { user } = useContext(UserContext);
   const [alreadyRespond, setAlreadyRespond] = useState(false);
@@ -65,13 +66,22 @@ export const AnswerPage = () => {
     }
   }, []);
 
+  const userIsInGroup = () => {
+    if (user && userGroups) {
+      return userGroups.some((group) => formFromBDD.groups.includes(group._id));
+    }
+    return false;
+  };
+
   if (!formFromBDD) return <p>{i18n.__('page.answerPage.formNotFound')}</p>;
   if (!formFromBDD.editableAnswers && alreadyRespond) return <p>{i18n.__('page.answerPage.notEditable')}</p>;
+  if (formFromBDD.groups.length > 0 && !userIsInGroup()) return <p>{i18n.__('page.answerPage.notInGroup')}</p>;
 
   return <Visualizer answerMode={true} />;
 };
 
 export const loaderVisualizer = async ({ params }) => {
-  const userForm = await Meteor.callAsync('forms.getOne', params.id);
-  return userForm || null;
+  const formFromBDD = await Meteor.callAsync('forms.getOne', params.id);
+  const userGroups = (await Meteor.callAsync('groups.getUserGroups')) || null;
+  return { formFromBDD, userGroups } || null;
 };
