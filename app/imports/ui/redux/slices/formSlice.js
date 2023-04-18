@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   title: '',
-  desc: '',
+  description: '',
   components: [],
   groups: [],
   isPublic: false,
@@ -24,7 +24,7 @@ export const formSlice = createSlice({
     },
     fillForm: (state, action) => {
       state.title = action.payload.title;
-      state.desc = action.payload.desc;
+      state.description = action.payload.description;
       state.components = action.payload.components;
       state.groups = action.payload.groups;
       state.isPublic = action.payload.isPublic;
@@ -39,7 +39,7 @@ export const formSlice = createSlice({
       state.title = action.payload.title;
     },
     addDesc: (state, action) => {
-      state.desc = action.payload.desc;
+      state.description = action.payload.description;
     },
     toggleEditableAnswers: (state, action) => {
       state.editableAnswers = !state.editableAnswers;
@@ -63,7 +63,7 @@ export const formSlice = createSlice({
       state.acceptRGPD = action.payload.acceptRGPD;
     },
     addGroups: (state, action) => {
-      state.groups.push(action.payload);
+      if (!state.groups.includes(action.payload)) state.groups.push(action.payload);
     },
     removeGroup: (state, action) => {
       state.groups = state.groups.filter((groupId) => groupId !== action.payload.id);

@@ -27,7 +27,7 @@ export const Visualizer = ({ answerMode = false }) => {
     <div>
       {answerMode && <ModalRgpd answerMode={answerMode} />}
       {<h3 style={{ textAlign: 'center' }}>{form.title}</h3>}
-      {<h4 style={{ textAlign: 'center' }}>{form.desc}</h4>}
+      {<h4 style={{ textAlign: 'center' }}>{form.description}</h4>}
       {ownerForm && (
         <h4 style={{ textAlign: 'center' }}>
           {i18n.__('component.visualizer.createdBy')} {ownerForm.firstName} {ownerForm.lastName} ({ownerForm.username})

@@ -14,6 +14,7 @@ import { AuthProvider } from '../contexts/AuthContext';
 
 import { MainLayout } from './MainLayout';
 import { UserProvider } from '../contexts/UserContext';
+import { AuthPage } from '../pages/AuthPage';
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -26,6 +27,7 @@ export const App = () => {
             loader={loaderVisualizer}
             errorElement={<ErrorPage />}
           />
+          <Route path="signin" element={<AuthPage />} errorElement={<ErrorPage />} />
           <Route path="success" element={<RedirectAfterSubmit />} errorElement={<ErrorPage />} />
           <Route element={<AuthProvider />}>
             <Route path="/" element={<HomePage />} loader={loaderHomePage} errorElement={<ErrorPage />} />

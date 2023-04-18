@@ -28,7 +28,7 @@
     "forms": {
       "labels": {
         "title": "Title",
-        "desc": "Description",
+        "description": "Description",
         "isModel": "Model",
         "createdAt": "Created at",
         "owner": "Owner",
@@ -95,6 +95,10 @@
     "en": "English"
   },
   "page": {
+    "authPage": {
+      "title": "Welcome to Questionnaire. Please, log in.",
+      "buttonText": "Login"
+    },
     "answerPage": {
       "formNotFound": "Form does not exist",
       "notEditable": "you have already answered this form, and the answers cannot be modified.",
@@ -102,7 +106,7 @@
     },
     "errorPage": {
       "title": "Error",
-      "desc": "An error occurred"
+      "description": "An error occurred"
     },
     "formIntro": {
       "goNext": "Go to next step"
@@ -231,12 +235,9 @@
     },
     "modalDeleteConfirmation": {
       "title": "form deletion",
-      "desc": "Do you really want to delete this form ? This action is irreversible.",
+      "description": "Do you really want to delete this form ? This action is irreversible.",
       "cancel": "Cancel",
       "confirm": "Confirm"
-    },
-    "userNotConnected": {
-      "notLoggedIn": "Please log in using upper right button."
     },
     "userForm": {
       "form": {

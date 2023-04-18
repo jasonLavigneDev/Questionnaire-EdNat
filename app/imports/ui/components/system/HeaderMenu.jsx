@@ -31,9 +31,14 @@ export const HeaderMenu = () => {
     setOpen(!open);
   };
 
+  const login = () => {
+    navigate('/');
+    Meteor.loginWithKeycloak();
+  };
+
   if (!user)
     return (
-      <Button variant="outlined" onClick={() => Meteor.loginWithKeycloak()}>
+      <Button variant="outlined" onClick={login}>
         {i18n.__('component.headerMenu.login')}
       </Button>
     );

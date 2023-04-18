@@ -20,7 +20,7 @@ export const AnswerPage = () => {
   useEffect(() => {
     let tokenGiven = urlSearchParams.get('token');
     if (formFromBDD) {
-      const { title, desc, components, owner, groups, editableAnswers, isPublic, _id, formAnswers, active } =
+      const { title, description, components, owner, groups, editableAnswers, isPublic, _id, formAnswers, active } =
         formFromBDD;
 
       if (formAnswers && formAnswers.length) {
@@ -30,7 +30,7 @@ export const AnswerPage = () => {
       }
       const fieldForPopulateState = {
         title,
-        desc,
+        description,
         components,
         groups,
         isPublic,

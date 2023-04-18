@@ -1,8 +1,14 @@
 {
-  "public": {},
+  "public": {
+    "keycloakUrl": "",
+    "keycloakRealm": ""
+  },
   "keycloak": {
     "pubkey": "",
-    "client": "sso"
+    "client": "sso",
+    "adminEmails": [""],
+    "adminUser": "",
+    "adminPassword": ""
   },
   "private": {}
 }

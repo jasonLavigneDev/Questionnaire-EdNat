@@ -12,7 +12,7 @@ export const genFormComponent = () => ({
 
 Factory.define('form', Forms, {
   title: faker.lorem.words(),
-  desc: faker.lorem.sentence(),
+  description: faker.lorem.sentence(),
   isModel: faker.datatype.boolean(),
   isPublic: faker.datatype.boolean(),
   owner: faker.name.middleName(),

@@ -47,9 +47,9 @@ export default function FormInfoInputs() {
         id="formDescription"
         label={i18n.__('component.formInfoInputs.formDesc')}
         variant="outlined"
-        value={form.desc}
+        value={form.description}
         helperText={i18n.__('component.formInfoInputs.formDescHelp')}
-        onChange={(e) => dispatch(addDesc({ desc: e.target.value }))}
+        onChange={(e) => dispatch(addDesc({ description: e.target.value }))}
       />
       <FormGroup>
         <FormControlLabel

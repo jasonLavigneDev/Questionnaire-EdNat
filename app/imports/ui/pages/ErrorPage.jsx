@@ -8,7 +8,7 @@ export const ErrorPage = () => {
   return (
     <div id="error-page">
       <h1>{i18n.__('page.errorPage.title')}</h1>
-      <p>{i18n.__('page.errorPage.desc')}</p>
+      <p>{i18n.__('page.errorPage.description')}</p>
       <p>
         <i>{error.statusText || error.message}</i>
       </p>

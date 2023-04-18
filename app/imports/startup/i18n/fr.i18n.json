@@ -28,7 +28,7 @@
     "forms": {
       "labels": {
         "title": "Titre",
-        "desc": "Description",
+        "description": "Description",
         "isModel": "Modèle",
         "createdAt": "Créé le",
         "owner": "Propriétaire",
@@ -95,6 +95,10 @@
     "en": "Anglais"
   },
   "page": {
+    "authPage": {
+      "title": "Bienvenue sur Questionnaire. Veuillez vous connecter.",
+      "buttonText": "Se connecter"
+    },
     "answerPage": {
       "formNotFound": "Le formulaire n'existe pas",
       "notEditable": "Vous avez déjà répondu à ce questionnaire et les réponses ne sont pas modifiables.",
@@ -102,7 +106,7 @@
     },
     "errorPage": {
       "title": "Erreur",
-      "desc": "Une erreur s'est produite"
+      "description": "Une erreur s'est produite"
     },
     "formIntro": {
       "goNext": "Passer à l'étape suivante"
@@ -231,12 +235,9 @@
     },
     "modalDeleteConfirmation": {
       "title": "Suppression de formulaire",
-      "desc": "Voulez-vous vraiment supprimer ce formulaire ? Cette action est irréversible.",
+      "description": "Voulez-vous vraiment supprimer ce formulaire ? Cette action est irréversible.",
       "cancel": "Annuler",
       "confirm": "Confirmer"
-    },
-    "userNotConnected": {
-      "notLoggedIn": "Veuillez vous connecter à l'aide du bouton en haut à droite."
     },
     "userForm": {
       "form": {
