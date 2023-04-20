@@ -2,6 +2,7 @@ import React from 'react';
 import { i18n } from 'meteor/universe:i18n';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import { generateColor } from '../utils/utils';
 
 export default function StatsDisplay({ statArray }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -14,17 +15,10 @@ export default function StatsDisplay({ statArray }) {
     return cpt;
   };
 
-  function generateColor() {
-    const r = Math.random() * 200 + 50;
-    const g = Math.random() * 200 + 50;
-    const b = Math.random() * 200 + 50;
-
-    return `rgba(${r},${g},${b}, 1)`;
-  }
   const generateChartData = (question) => {
     const colors = [];
     for (let i = 0; i < question.stat.length; i++) {
-      const color = generateColor();
+      const color = generateColor((light = true));
       colors.push(color);
     }
     const chartData = {

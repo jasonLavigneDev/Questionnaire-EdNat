@@ -48,7 +48,7 @@ export default function ManageComponents({ currentComponent, index }) {
   };
 
   return (
-    <>
+    <div style={{ display: 'flex', height: '100%', alignItems: 'center' }}>
       <IconButton disabled={!hasComponentBefore(index)} onClick={() => swapPositionWithPreviousComponent(index)}>
         <ArrowUpwardIcon />
       </IconButton>
@@ -68,6 +68,6 @@ export default function ManageComponents({ currentComponent, index }) {
         <DeleteIcon />
       </IconButton>
       {errorMessage.length !== 0 && <MsgError message={errorMessage} setMessage={setErrorMessage} />}
-    </>
+    </div>
   );
 }

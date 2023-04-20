@@ -6,6 +6,9 @@ import { DateInput } from '../inputs/DateInput';
 import { NumberInput } from '../inputs/NumberInput';
 import { TextInput } from '../inputs/TextInput';
 import { TextArea } from '../inputs/TextArea';
+import { SectionStart } from '../inputs/SectionStart';
+import { SectionEnd } from '../inputs/SectionEnd';
+import { Separator } from '../inputs/Separator';
 
 export default function GenerateComponent({ currentComponent }) {
   const generateComponent = (component) => {
@@ -51,6 +54,12 @@ export default function GenerateComponent({ currentComponent }) {
         );
       case 'textArea':
         return <TextArea title={component.title} questionId={component.id} answerRequired={component.answerRequired} />;
+      case 'sectionStart':
+        return <SectionStart title={component.title} />;
+      case 'separator':
+        return <Separator />;
+      case 'sectionEnd':
+        return <SectionEnd />;
     }
   };
   return <div>{generateComponent(currentComponent)}</div>;

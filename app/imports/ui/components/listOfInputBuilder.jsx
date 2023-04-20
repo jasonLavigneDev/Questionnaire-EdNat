@@ -8,7 +8,29 @@ import ShortTextIcon from '@mui/icons-material/ShortText';
 import NotesIcon from '@mui/icons-material/Notes';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
+import AddCardIcon from '@mui/icons-material/AddCard';
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+
+import CreditCardOffIcon from '@mui/icons-material/CreditCardOff';
+import SubtitlesOffIcon from '@mui/icons-material/SubtitlesOff';
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
+
 export const LIST_OF_INPUT_BUILDER = [
+  {
+    id: 'sectionStart',
+    name: 'sectionStart',
+    icon: <AddCardIcon />,
+  },
+  {
+    id: 'separator',
+    name: 'separator',
+    icon: <HorizontalRuleIcon />,
+  },
+  {
+    id: 'sectionEnd',
+    name: 'sectionEnd',
+    icon: <CreditScoreIcon />,
+  },
   {
     id: 'radioButtonInput',
     name: 'radioButton',

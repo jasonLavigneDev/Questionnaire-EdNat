@@ -23,14 +23,6 @@ export const InputBuilder = () => {
     maxHeight: '60vh',
   };
 
-  const class3 = {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    height: '5vh',
-    marginTop: '1vh',
-  };
-
   return (
     <>
       <div style={{ display: 'flex', flexDirection: 'row', maxHeight: '100%', justifyContent: 'space-evenly' }}>
@@ -42,7 +34,21 @@ export const InputBuilder = () => {
           <h3>{i18n.__('component.inputBuilder.inputOrder')}</h3>
           <div className={class2}>
             {form.components.map((currentComponent, index) => (
-              <Paper sx={{ display: 'flex', marginBottom: 1, border: '1px black solid' }}>
+              <Paper
+                sx={{
+                  display: 'flex',
+                  marginBottom: 1,
+                  border: '1px black solid',
+                  backgroundColor:
+                    currentComponent.type === 'sectionStart'
+                      ? 'LightSkyBlue'
+                      : currentComponent.type === 'sectionEnd'
+                      ? 'SpringGreen'
+                      : currentComponent.type === 'separator'
+                      ? 'orange'
+                      : '',
+                }}
+              >
                 <div
                   style={{
                     display: 'flex',
@@ -83,7 +89,7 @@ export const InputBuilder = () => {
                   )}
                   <div></div>
                 </div>
-                <div className={class3}>
+                <div>
                   <ManageComponents currentComponent={currentComponent} index={index} />
                 </div>
               </Paper>
