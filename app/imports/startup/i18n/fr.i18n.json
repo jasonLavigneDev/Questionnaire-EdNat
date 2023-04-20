@@ -135,6 +135,9 @@
     }
   },
   "component": {
+    "SiteInMaintenance": {
+      "maintenanceInProgress": "Maintenance en cours"
+    },
     "inputBuilder": {
       "inputType": "Choisissez le type de question / réponse",
       "inputOrder": "Organisez vos questions",
