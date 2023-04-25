@@ -1,9 +1,10 @@
 import React from 'react';
-import { Paper, Tooltip, Typography } from '@mui/material';
+import { Paper, Tooltip, Typography, Divider } from '@mui/material';
 import i18n from 'meteor/universe:i18n';
+import { useSelector } from 'react-redux';
 import { InputChoice } from './InputChoice';
 import ManageComponents from '../ManageComponents';
-import { useSelector } from 'react-redux';
+import { LIST_OF_INPUT_BUILDER } from '../listOfInputBuilder';
 
 export const InputBuilder = () => {
   const form = useSelector((state) => state.form);
@@ -41,16 +42,25 @@ export const InputBuilder = () => {
           <h3>{i18n.__('component.inputBuilder.inputOrder')}</h3>
           <div className={class2}>
             {form.components.map((currentComponent, index) => (
-              <Paper sx={{ display: 'flex', width: '28vw', marginBottom: 1, border: '1px black solid' }}>
+              <Paper sx={{ display: 'flex', marginBottom: 1, border: '1px black solid' }}>
                 <div
                   style={{
                     display: 'flex',
-                    paddingLeft: '0.5vw',
                     width: '18vw',
+                    paddingLeft: '0.5vw',
                     alignItems: 'center',
                     height: '5vh',
                   }}
                 >
+                  {LIST_OF_INPUT_BUILDER.map(
+                    (inputBuilder) =>
+                      inputBuilder.id === currentComponent.type && (
+                        <div key={inputBuilder.id} style={{ display: 'flex', justifyContent: 'start' }}>
+                          {inputBuilder.icon}
+                          <Divider orientation="vertical" flexItem sx={{ margin: '0 1vw' }} />
+                        </div>
+                      ),
+                  )}
                   <p
                     style={{
                       maxHeight: '1.2rem',
