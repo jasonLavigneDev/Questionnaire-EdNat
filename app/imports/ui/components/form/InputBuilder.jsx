@@ -56,7 +56,9 @@ export const InputBuilder = () => {
                     (inputBuilder) =>
                       inputBuilder.id === currentComponent.type && (
                         <div key={inputBuilder.id} style={{ display: 'flex', justifyContent: 'start' }}>
-                          {inputBuilder.icon}
+                          <Tooltip title={i18n.__(`component.inputs.${inputBuilder.name}`)}>
+                            {inputBuilder.icon}
+                          </Tooltip>
                           <Divider orientation="vertical" flexItem sx={{ margin: '0 1vw' }} />
                         </div>
                       ),
