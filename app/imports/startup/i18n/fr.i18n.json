@@ -216,7 +216,10 @@
       "number": "Nombre",
       "text": "Texte court",
       "textArea": "Texte long",
-      "date": "Date"
+      "date": "Date",
+      "sectionStart": "Début de section",
+      "sectionEnd": "Fin de section",
+      "separator": "Séparateur horizontal"
     },
     "componentManager": {
       "errors": {

@@ -1,3 +1,5 @@
+import { radioClasses } from '@mui/material';
+
 export const isDuplicate = (allOpts, newOption) => {
   return allOpts.includes(newOption);
 };
@@ -25,4 +27,21 @@ export const hasAlreadyRespond = (user, form) => {
 export const copyUrlToClipBoard = (id) => {
   const url = `${Meteor.absoluteUrl()}visualizer/${id}`;
   return navigator.clipboard.writeText(url);
+};
+
+export const generateColor = (light = false, dark = false) => {
+  let r = Math.random() * 255;
+  let g = Math.random() * 255;
+  let b = Math.random() * 255;
+  if (dark) {
+    r = Math.random() * 200;
+    g = Math.random() * 200;
+    b = Math.random() * 200;
+  } else if (light) {
+    r = Math.random() * 200 + 50;
+    g = Math.random() * 200 + 50;
+    b = Math.random() * 200 + 50;
+  }
+
+  return `rgba(${r},${g},${b}, 1)`;
 };

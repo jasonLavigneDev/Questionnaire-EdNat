@@ -1,6 +1,7 @@
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import { generateColor } from '../utils/utils';
 
 export default function StatsPie({ question }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -13,18 +14,10 @@ export default function StatsPie({ question }) {
     return cpt;
   };
 
-  function generateColor() {
-    const r = Math.random() * 200 + 50;
-    const g = Math.random() * 200 + 50;
-    const b = Math.random() * 200 + 50;
-
-    return `rgba(${r},${g},${b}, 1)`;
-  }
-
   const generateChartData = (stat) => {
     const colors = [];
     for (let i = 0; i < stat.length; i++) {
-      const color = generateColor();
+      const color = generateColor((light = true));
       colors.push(color);
     }
 

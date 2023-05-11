@@ -22,9 +22,24 @@ export const InputChoice = () => {
             dispatch(addQuestionTypeAndResetChoices({ type: event.target.value }));
           }}
         >
-          {LIST_OF_INPUT_BUILDER.map((inputBuilder) => (
+          {LIST_OF_INPUT_BUILDER.slice(0, 3).map((inputBuilder) => (
             <MenuItem key={inputBuilder.id} value={inputBuilder.id}>
               <div style={{ display: 'flex', justifyContent: 'start' }}>
+                {inputBuilder.icon}
+                <Divider orientation="vertical" flexItem sx={{ margin: '0 1vw' }} />
+                {i18n.__(`component.inputs.${inputBuilder.name}`)}
+              </div>
+            </MenuItem>
+          ))}
+          <Divider variant="middle" />
+          {LIST_OF_INPUT_BUILDER.slice(3).map((inputBuilder) => (
+            <MenuItem key={inputBuilder.id} value={inputBuilder.id}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'start',
+                }}
+              >
                 {inputBuilder.icon}
                 <Divider orientation="vertical" flexItem sx={{ margin: '0 1vw' }} />
                 {i18n.__(`component.inputs.${inputBuilder.name}`)}

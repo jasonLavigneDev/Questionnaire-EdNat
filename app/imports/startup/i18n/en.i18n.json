@@ -216,7 +216,10 @@
       "number": "Number",
       "text": "Short text",
       "textArea": "Long text",
-      "date": "Date"
+      "date": "Date",
+      "sectionStart": "Section start",
+      "sectionEnd": "Section end",
+      "separator": "Horizontal divider"
     },
     "componentManager": {
       "errors": {
