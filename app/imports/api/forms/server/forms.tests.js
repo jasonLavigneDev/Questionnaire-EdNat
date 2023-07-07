@@ -35,6 +35,7 @@ describe('forms', function () {
         description: faker.lorem.sentence(),
         isModel: faker.datatype.boolean(),
         isPublic: faker.datatype.boolean(),
+        editableAnswers: faker.datatype.boolean(),
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
       };
       await createForm._execute({ userId }, newform);
@@ -52,6 +53,7 @@ describe('forms', function () {
         description: faker.lorem.sentence(),
         isModel: faker.datatype.boolean(),
         isPublic: faker.datatype.boolean(),
+        editableAnswers: faker.datatype.boolean(),
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
       };
       await createForm._execute({ userId }, newform);
@@ -60,6 +62,7 @@ describe('forms', function () {
         description: faker.lorem.sentence(),
         isModel: faker.datatype.boolean(),
         isPublic: faker.datatype.boolean(),
+        editableAnswers: faker.datatype.boolean(),
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
       };
       await createForm._execute({ userId: faker.name.middleName() }, newform2);

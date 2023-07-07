@@ -8,6 +8,7 @@ export const genFormComponent = () => ({
   type: faker.helpers.arrayElement(['radio', 'select', 'checkbox', 'date', 'number', 'text', 'textarea']),
   title: faker.lorem.words(),
   choices: faker.random.words().split(' '),
+  answerRequired: faker.datatype.boolean(),
 });
 
 Factory.define('form', Forms, {
@@ -15,6 +16,7 @@ Factory.define('form', Forms, {
   description: faker.lorem.sentence(),
   isModel: faker.datatype.boolean(),
   isPublic: faker.datatype.boolean(),
+  editableAnswers: faker.datatype.boolean(),
   owner: faker.name.middleName(),
   components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
 });
