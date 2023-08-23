@@ -10,6 +10,7 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
     display: 'flex',
     alignItems: 'center',
     height: '8vh',
+    backgroundColor: 'transparent',
   };
 
   const navigate = useNavigate();
