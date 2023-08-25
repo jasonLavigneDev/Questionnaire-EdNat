@@ -2,6 +2,8 @@ import { Divider, IconButton } from '@mui/material';
 import { i18n } from 'meteor/universe:i18n';
 import React, { useContext, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import { toggleActiveForm, copyUrlToClipBoard, hasNotAnswers, hasAlreadyRespond } from '../utils/utils';
@@ -10,12 +12,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import Slide from '@mui/material/Slide';
 import { UserContext } from '../contexts/UserContext';
 import ModalDeleteConfirmation from './modals/ModalDeleteConfirmation';
 
 export const FormActionButton = ({ deleteForm, currentForm }) => {
   const navigate = useNavigate();
   const [active, setActive] = useState(currentForm.active);
+  const [open, setOpen] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { user } = useContext(UserContext);
 
@@ -32,8 +36,27 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
     return !currentForm?.editableAnswers && hasAlreadyRespond(user, currentForm);
   };
 
+  const handleCopyClipboard = (currentForm) => {
+    copyUrlToClipBoard(currentForm._id);
+    setOpen(true);
+  };
+
   return (
     <div style={{ flexDirection: 'column', flex: 1 }}>
+      {open && (
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={() => setOpen(false)}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          TransitionComponent={Slide}
+          sx={{ marginTop: '5vh' }}
+        >
+          <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '100%' }}>
+            {i18n.__('component.formActionButton.copyUrlSuccess')}
+          </Alert>
+        </Snackbar>
+      )}
       <IconButton
         title={
           active ? i18n.__('component.formActionButton.isActive') : i18n.__('component.formActionButton.isNotActive')
@@ -61,7 +84,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.copyUrl')}
-        onClick={() => copyUrlToClipBoard(currentForm._id)}
+        onClick={(currentForm) => handleCopyClipboard(currentForm)}
       >
         <ContentCopyIcon />
       </IconButton>

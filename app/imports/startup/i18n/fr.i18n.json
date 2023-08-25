@@ -195,6 +195,7 @@
       "editForm": "Modifier le formulaire",
       "deleteForm": "Supprimer le formulaire",
       "copyUrl": "Copier l'URL du formulaire",
+      "copyUrlSuccess": "L'url a été copié avec succès",
       "isActive": "Ce formulaire est actif.",
       "isNotActive": "Ce formulaire n'est pas actif."
     },
