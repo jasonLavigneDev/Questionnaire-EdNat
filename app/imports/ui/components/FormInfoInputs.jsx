@@ -16,6 +16,8 @@ import { addDesc, addTitle, formType, toggleEditableAnswers } from '../redux/sli
 
 export default function FormInfoInputs() {
   const form = useSelector((state) => state.form);
+  const isTitleInValid = !form.title || form.title.length > 96;
+  const isDescriptionInValid = form.description.length > 0 && form.description.length > 256;
 
   const getType = () => {
     if (form) {
@@ -42,6 +44,7 @@ export default function FormInfoInputs() {
         value={form.title}
         helperText={i18n.__('component.formInfoInputs.mandatoryTitle')}
         onChange={(e) => dispatch(addTitle({ title: e.target.value }))}
+        error={isTitleInValid}
       />
       <TextField
         id="formDescription"
@@ -50,6 +53,7 @@ export default function FormInfoInputs() {
         value={form.description}
         helperText={i18n.__('component.formInfoInputs.formDescHelp')}
         onChange={(e) => dispatch(addDesc({ description: e.target.value }))}
+        error={isDescriptionInValid}
       />
       <FormGroup>
         <FormControlLabel
