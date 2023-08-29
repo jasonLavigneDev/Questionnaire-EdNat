@@ -196,6 +196,7 @@
       "deleteForm": "Delete form",
       "copyUrl": "Copy form URL",
       "isActive": "This form is active.",
+      "copyUrlSuccess": "Copy form url successfully",
       "isNotActive": "This form is not active."
     },
     "formInfoInputs": {
