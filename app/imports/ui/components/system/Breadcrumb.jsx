@@ -10,6 +10,9 @@ export const Breadcrumb = () => {
 
   const form = useSelector((state) => state.form);
 
+  const isTitleInValid = !form.title || form.title.length > 96;
+  const isDescriptionInValid = form.description.length > 0 && form.description.length > 256;
+
   const navigate = useNavigate();
 
   const navigateTo = (step) => {
@@ -32,17 +35,29 @@ export const Breadcrumb = () => {
       <div style={{ marginBottom: '6vh', width: '60vw' }}>
         <Stepper alternativeLabel activeStep={activeStep}>
           <Step key="intro" completed={activeStep === 1 || activeStep === 2}>
-            <StepButton color="inherit" onClick={() => navigateTo('intro')}>
+            <StepButton
+              disabled={isTitleInValid || isDescriptionInValid}
+              color="inherit"
+              onClick={() => navigateTo('intro')}
+            >
               {i18n.__('component.breadcrumb.intro')}
             </StepButton>
           </Step>
           <Step key="components" completed={activeStep === 2} disabled={!form.title}>
-            <StepButton color="inherit" onClick={() => navigateTo('components')}>
+            <StepButton
+              disabled={isTitleInValid || isDescriptionInValid}
+              color="inherit"
+              onClick={() => navigateTo('components')}
+            >
               {i18n.__('component.breadcrumb.components')}
             </StepButton>
           </Step>
           <Step key="previsualizer" disabled={form.components.length === 0}>
-            <StepButton color="inherit" onClick={() => navigateTo('previsualizer')}>
+            <StepButton
+              disabled={isTitleInValid || isDescriptionInValid}
+              color="inherit"
+              onClick={() => navigateTo('previsualizer')}
+            >
               {i18n.__('component.breadcrumb.previsualization')}
             </StepButton>
           </Step>

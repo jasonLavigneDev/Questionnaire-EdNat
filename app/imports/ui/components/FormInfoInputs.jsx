@@ -16,6 +16,8 @@ import { addDesc, addTitle, formType, toggleEditableAnswers } from '../redux/sli
 
 export default function FormInfoInputs() {
   const form = useSelector((state) => state.form);
+  const isTitleInValid = !form.title || form.title.length > 96;
+  const isDescriptionInValid = form.description.length > 0 && form.description.length > 256;
 
   const getType = () => {
     if (form) {
@@ -40,16 +42,27 @@ export default function FormInfoInputs() {
         label={i18n.__('component.formInfoInputs.formTitle')}
         variant="outlined"
         value={form.title}
-        helperText={i18n.__('component.formInfoInputs.mandatoryTitle')}
+        helperText={
+          form.title.length > 96
+            ? i18n.__('component.formInfoInputs.titleTooLong')
+            : i18n.__('component.formInfoInputs.mandatoryTitle')
+        }
         onChange={(e) => dispatch(addTitle({ title: e.target.value }))}
+        error={isTitleInValid}
       />
       <TextField
         id="formDescription"
         label={i18n.__('component.formInfoInputs.formDesc')}
         variant="outlined"
         value={form.description}
-        helperText={i18n.__('component.formInfoInputs.formDescHelp')}
+        helperText={
+          isDescriptionInValid
+            ? i18n.__('component.formInfoInputs.formDescTooLong')
+            : i18n.__('component.formInfoInputs.formDescHelp')
+        }
         onChange={(e) => dispatch(addDesc({ description: e.target.value }))}
+        error={isDescriptionInValid}
+        sx={{ marginTop: '1vh' }}
       />
       <FormGroup>
         <FormControlLabel

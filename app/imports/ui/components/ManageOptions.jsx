@@ -76,14 +76,19 @@ export default function ManageOptions({ setErrorMessage }) {
               key={option.id}
               title="Déplacer cette option"
             >
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  overflow: 'hidden',
+                }}
+              >
                 <DragIndicatorIcon sx={{ color: 'rgb(180, 180, 180)', marginLeft: -2 }} />
                 <p
                   style={{
                     maxHeight: '1.2rem',
                     whiteSpace: 'nowrap',
                     textOverflow: 'ellipsis',
-                    overflowY: 'hidden',
                     overflow: 'hidden',
                     marginLeft: '0.5vw',
                   }}
