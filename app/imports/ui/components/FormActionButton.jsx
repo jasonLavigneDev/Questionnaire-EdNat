@@ -36,8 +36,8 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
     return !currentForm?.editableAnswers && hasAlreadyRespond(user, currentForm);
   };
 
-  const handleCopyClipboard = (currentForm) => {
-    copyUrlToClipBoard(currentForm._id);
+  const handleCopyClipboard = (id) => {
+    copyUrlToClipBoard(id);
     setOpen(true);
   };
 
@@ -84,7 +84,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.copyUrl')}
-        onClick={(currentForm) => handleCopyClipboard(currentForm)}
+        onClick={() => handleCopyClipboard(currentForm._id)}
       >
         <ContentCopyIcon />
       </IconButton>

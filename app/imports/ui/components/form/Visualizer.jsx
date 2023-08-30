@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import i18n from 'meteor/universe:i18n';
+import { Paper } from '@mui/material';
 import { ComponentBuilder } from '../ComponentBuilder';
 import SubmitAnswerForm from './SubmitAnswerForm';
 import GenerateComponent from './GenerateComponent';
 import { UserContext } from '../../contexts/UserContext';
 import { useSelector } from 'react-redux';
 import ModalRgpd from '../system/ModalRgpd';
-import { Paper } from '@mui/material';
+import { FormNoAvailable } from './FormNoAvailable';
 
 import { generateColor } from '../../utils/utils';
 
@@ -23,8 +24,8 @@ export const Visualizer = ({ answerMode = false }) => {
     return null;
   });
 
-  if (!form.isActive && answerMode) return <p>{i18n.__('component.visualizer.formNotActive')}</p>;
-  if (!user && !form.isPublic) return <p>{i18n.__('component.visualizer.connect')}</p>;
+  if (!form.isActive && answerMode) return <FormNoAvailable message={i18n.__('component.visualizer.formNotActive')} />;
+  if (!user && !form.isPublic) return <FormNoAvailable message={i18n.__('component.visualizer.connect')} />;
 
   const genComponent = (currentComponent) => (
     <div
