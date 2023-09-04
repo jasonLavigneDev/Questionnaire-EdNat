@@ -32,7 +32,7 @@ export const HeaderMenu = () => {
   };
 
   const login = () => {
-    navigate('/');
+    navigate(-1);
     Meteor.loginWithKeycloak();
   };
 
