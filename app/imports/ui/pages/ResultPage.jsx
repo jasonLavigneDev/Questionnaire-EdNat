@@ -18,13 +18,19 @@ export const ResultPage = () => {
 
   const navigate = useNavigate();
 
+  const IsValidComponentToAnalyze = (type) => {
+    return type != 'sectionStart' && type != 'sectionEnd' && type != 'separator';
+  };
+
   formFromBDD.components.forEach((component) => {
-    finalArray.push({
-      questionTitle: component.title,
-      questionId: component.id,
-      questionType: component.type,
-      responses: [],
-    });
+    if (IsValidComponentToAnalyze(component.type)) {
+      finalArray.push({
+        questionTitle: component.title,
+        questionId: component.id,
+        questionType: component.type,
+        responses: [],
+      });
+    }
   });
 
   formFromBDD.formAnswers?.forEach((userAnswer, index) => {
@@ -71,6 +77,8 @@ export const ResultPage = () => {
       questionChoices: choices,
     });
   });
+
+  console.log(finalArray);
 
   const deleteAllAnswers = async () => {
     formFromBDD.formAnswers = [];
