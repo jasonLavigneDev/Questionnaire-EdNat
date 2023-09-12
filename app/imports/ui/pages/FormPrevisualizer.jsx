@@ -8,6 +8,7 @@ import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetFormObject } from '../redux/slices/formSlice';
+import { checkIntegrityOfForm } from '../utils/utils';
 
 export const FormPrevisualizer = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -19,47 +20,55 @@ export const FormPrevisualizer = () => {
   const sendFormToBDD = async () => {
     if (isDisable) return setErrorMessage(i18n.__('component.componentBuilder.errors.noTitleOrOptions'));
 
-    try {
-      const result = await Meteor.callAsync('forms.createForm', {
-        title: form.title,
-        description: form.description,
-        isModel: false,
-        editableAnswers: form.editableAnswers,
-        groups: form.groups,
-        isPublic: form.isPublic,
-        components: form.components,
-      });
+    if (checkIntegrityOfForm(form)) {
+      try {
+        const result = await Meteor.callAsync('forms.createForm', {
+          title: form.title,
+          description: form.description,
+          isModel: false,
+          editableAnswers: form.editableAnswers,
+          groups: form.groups,
+          isPublic: form.isPublic,
+          components: form.components,
+        });
 
-      if (result) {
-        navigate('/');
-        dispatch(resetFormObject());
+        if (result) {
+          navigate('/');
+          dispatch(resetFormObject());
+        }
+      } catch (error) {
+        console.log('error dans sendForm', error);
       }
-    } catch (error) {
-      console.log('error dans sendForm', error);
+    } else {
+      return setErrorMessage(i18n.__('component.componentBuilder.errors.invalidForm'));
     }
   };
 
   const updateForm = async () => {
     if (isDisable) return setErrorMessage(i18n.__('component.componentBuilder.errors.noTitleOrOptions'));
 
-    try {
-      const result = await Meteor.callAsync('forms.updateForm', {
-        id: form.formId,
-        title: form.title,
-        description: form.description,
-        isModel: false,
-        editableAnswers: form.editableAnswers,
-        groups: form.groups,
-        isPublic: form.isPublic,
-        components: form.components,
-      });
+    if (checkIntegrityOfForm(form)) {
+      try {
+        const result = await Meteor.callAsync('forms.updateForm', {
+          id: form.formId,
+          title: form.title,
+          description: form.description,
+          isModel: false,
+          editableAnswers: form.editableAnswers,
+          groups: form.groups,
+          isPublic: form.isPublic,
+          components: form.components,
+        });
 
-      if (result) {
-        navigate('/');
-        dispatch(resetFormObject());
+        if (result) {
+          navigate('/');
+          dispatch(resetFormObject());
+        }
+      } catch (err) {
+        console.log('error dans updateForm', err);
       }
-    } catch (err) {
-      console.log('error dans updateForm', err);
+    } else {
+      return setErrorMessage(i18n.__('component.componentBuilder.errors.invalidForm'));
     }
   };
 

@@ -45,3 +45,17 @@ export const generateColor = (light = false, dark = false) => {
 
   return `rgba(${r},${g},${b}, 1)`;
 };
+
+export const checkIntegrityOfForm = (form) => {
+  if (!form.components || form.components.length == 0) return false;
+
+  let isValid = false;
+
+  form.components.map((component) => {
+    console.log(component);
+    if (component.type !== 'sectionStart' && component.type !== 'sectionEnd' && component.type !== 'separator') {
+      isValid = true;
+    }
+  });
+  return isValid;
+};
