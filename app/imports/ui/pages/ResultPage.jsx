@@ -19,7 +19,7 @@ export const ResultPage = () => {
   const navigate = useNavigate();
 
   const IsValidComponentToAnalyze = (type) => {
-    return type != 'sectionStart' && type != 'sectionEnd' && type != 'separator';
+    return type !== 'sectionStart' && type !== 'sectionEnd' && type !== 'separator';
   };
 
   formFromBDD.components.forEach((component) => {
