@@ -78,8 +78,6 @@ export const ResultPage = () => {
     });
   });
 
-  console.log(finalArray);
-
   const deleteAllAnswers = async () => {
     formFromBDD.formAnswers = [];
     await Meteor.callAsync('forms.clearAnswers', formFromBDD._id);
