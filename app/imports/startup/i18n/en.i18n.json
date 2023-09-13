@@ -222,7 +222,8 @@
       "date": "Date",
       "sectionStart": "Section start",
       "sectionEnd": "Section end",
-      "separator": "Horizontal divider"
+      "separator": "Horizontal divider",
+      "layout": "Layout"
     },
     "componentManager": {
       "errors": {
