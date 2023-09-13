@@ -1,7 +1,8 @@
 {
   "public": {
     "keycloakUrl": "",
-    "keycloakRealm": ""
+    "keycloakRealm": "",
+    "laboiteHost": ""
   },
   "keycloak": {
     "pubkey": "",
@@ -10,5 +11,7 @@
     "adminUser": "",
     "adminPassword": ""
   },
-  "private": {}
+  "private": {
+    "laboiteApiKey": ""
+  }
 }

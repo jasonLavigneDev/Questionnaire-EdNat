@@ -196,6 +196,17 @@ Meteor.methods({
       if (form.owner == this.userId) {
         form.active = active;
         await Forms.updateAsync({ _id: formId }, { $set: { active: form.active } });
+        if (Meteor.isServer && form.groups.length && form.active && !Meteor.isTest) {
+          // eslint-disable-next-line global-require
+          const sendnotif = require('../notifications/server/notifSender').default;
+
+          sendnotif({
+            groups: form.groups,
+            title: 'Nouveau questionnaire',
+            content: `Le questionnaire ${form.title} a été créé pour votre groupe`,
+            formId: form._id,
+          });
+        }
       } else {
         throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
       }
