@@ -17,21 +17,6 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 
 export const LIST_OF_INPUT_BUILDER = [
   {
-    id: 'sectionStart',
-    name: 'sectionStart',
-    icon: <AddCardIcon />,
-  },
-  {
-    id: 'separator',
-    name: 'separator',
-    icon: <HorizontalRuleIcon />,
-  },
-  {
-    id: 'sectionEnd',
-    name: 'sectionEnd',
-    icon: <CreditScoreIcon />,
-  },
-  {
     id: 'radioButtonInput',
     name: 'radioButton',
     icon: <RadioButtonCheckedIcon />,
@@ -65,5 +50,20 @@ export const LIST_OF_INPUT_BUILDER = [
     id: 'dateInput',
     name: 'date',
     icon: <CalendarMonthIcon />,
+  },
+  {
+    id: 'sectionStart',
+    name: 'sectionStart',
+    icon: <AddCardIcon />,
+  },
+  {
+    id: 'separator',
+    name: 'separator',
+    icon: <HorizontalRuleIcon />,
+  },
+  {
+    id: 'sectionEnd',
+    name: 'sectionEnd',
+    icon: <CreditScoreIcon />,
   },
 ];
