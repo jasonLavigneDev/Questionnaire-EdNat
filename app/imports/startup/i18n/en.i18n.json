@@ -182,7 +182,8 @@
         "noTitle": "Title is missing",
         "noOptions": "Options are missing",
         "notFound": "Component does not exist",
-        "noTitleOrOptions": "Form does not include title or options"
+        "noTitleOrOptions": "Form does not include title or options",
+        "invalidForm": "Form is invalid. Be sure to have at least one question."
       },
       "questionTitle": "Enter this question's title",
       "inputChoice": "Enter an answer choice",
