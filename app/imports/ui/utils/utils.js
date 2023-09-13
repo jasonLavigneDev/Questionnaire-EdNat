@@ -47,15 +47,14 @@ export const generateColor = (light = false, dark = false) => {
 };
 
 export const checkIntegrityOfForm = (form) => {
-  if (!form.components || form.components.length == 0) return false;
+  if (form.components.length === 0) return false;
 
   let isValid = false;
 
-  form.components.map((component) => {
-    console.log(component);
-    if (component.type !== 'sectionStart' && component.type !== 'sectionEnd' && component.type !== 'separator') {
-      isValid = true;
-    }
-  });
+  isValid = form.components.some(
+    (component) =>
+      component.type !== 'sectionStart' && component.type !== 'sectionStart' && component.type !== 'separator',
+  );
+
   return isValid;
 };
