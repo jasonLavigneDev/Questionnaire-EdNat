@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import i18n from 'meteor/universe:i18n';
 import { Button } from '@mui/material';
 import { UserContext } from '../contexts/UserContext';
@@ -7,9 +7,12 @@ import { useNavigate } from 'react-router-dom';
 export const AuthPage = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  if (user) {
-    navigate('/');
-  }
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user]);
 
   const login = () => {
     navigate('/');
