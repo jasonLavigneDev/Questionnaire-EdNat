@@ -18,6 +18,9 @@ export const AnswerPage = () => {
   let [urlSearchParams] = useSearchParams();
 
   useEffect(() => {
+    // force authentication if autologin is specified in query parameters
+    if (urlSearchParams.has('autologin') && user === null) Meteor.loginWithKeycloak();
+
     let tokenGiven = urlSearchParams.get('token');
     if (formFromBDD) {
       const { title, description, components, owner, groups, editableAnswers, isPublic, _id, formAnswers, active } =

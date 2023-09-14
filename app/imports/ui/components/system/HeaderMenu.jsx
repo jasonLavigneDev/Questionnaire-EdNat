@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import i18n from 'meteor/universe:i18n';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { identicon } from 'minidenticons'; // Don't delete this import it's for default avatar
 import { Button, Typography, Menu, MenuItem, Avatar, Divider } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -20,6 +20,7 @@ export const HeaderMenu = () => {
   const { version } = PackageJSON;
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const openMenu = (event) => {
     setAnchor(event.currentTarget);
@@ -32,7 +33,8 @@ export const HeaderMenu = () => {
   };
 
   const login = () => {
-    navigate(-1);
+    // redirect to home if on signin page, optherwise stay on current page
+    if (location.pathname === '/signin') navigate('/');
     Meteor.loginWithKeycloak();
   };
 
