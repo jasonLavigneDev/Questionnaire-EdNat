@@ -11,14 +11,11 @@ import {
   Typography,
 } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import dayjs, { Dayjs } from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDesc, addTitle, updateExpirationDate, formType, toggleEditableAnswers } from '../redux/slices/formSlice';
-import { MsgError } from './system/MsgError';
 import { DatePicker } from '@mui/x-date-pickers';
 
 export default function FormInfoInputs() {
@@ -78,9 +75,13 @@ export default function FormInfoInputs() {
         sx={{ marginTop: '1vh' }}
       />
       <LocalizationProvider dateAdapter={AdapterDayjs} defaultValue={dayjs(form.expirationDate)}>
-        <DemoItem label={i18n.__('component.formInfoInputs.expirationDateCalendar')}>
-          <DatePicker onChange={(value) => changeExpirationDate(value)} />
-        </DemoItem>
+        <DatePicker
+          sx={{ marginTop: '1vh' }}
+          label={i18n.__('component.formInfoInputs.expirationDateCalendar')}
+          defaultValue={dayjs()}
+          format="DD/MM/YYYY"
+          onChange={(value) => changeExpirationDate(value)}
+        />
       </LocalizationProvider>
       <FormGroup>
         <FormControlLabel
