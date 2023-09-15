@@ -21,7 +21,7 @@ def get_database():
 def purgeData():
     start = time.time()
     print("=====Starting deletion of expired data=====")
-    today = datetime.today() + timedelta(days=4)
+    today = datetime.today()
     result = db['forms'].update_many({"$and": [{"formAnswers": {"$exists": True}}, {
         "expirationDate": {"$lte": today}}]}, {"$set": {"formAnswers": []}})
     print("Match count:", result.matched_count)
