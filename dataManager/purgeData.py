@@ -2,6 +2,7 @@ import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from datetime import datetime, date, timedelta
+import time
 
 
 load_dotenv()
@@ -18,16 +19,17 @@ def get_database():
 
 
 def purgeData():
+    start = time.time()
     print("=====Starting deletion of expired data=====")
-    today = datetime.today()
-    data = db['forms'].find({"formAnswers": {"$exists": True}})
-    for form in data:
-        date = form["expirationDate"]
-        if(today > date):
-            print("Remove answers of form: ", form['title'])
-            db['forms'].update_one({"_id": form["_id"]}, {
-                "$set": {"formAnswers": []}})
-    print("====Ending deletion of expired data====")
+    today = datetime.today() + timedelta(days=4)
+    result = db['forms'].update_many({"$and": [{"formAnswers": {"$exists": True}}, {
+        "expirationDate": {"$lte": today}}]}, {"$set": {"formAnswers": []}})
+    print("Match count:", result.matched_count)
+    print("Modified count:", result.modified_count)
+    end = time.time()
+    elapsed = end - start
+    print("====Ending deletion of expired data ({time} ms.)====".format(
+        time=round(elapsed, 4)))
 
 
 db = get_database()

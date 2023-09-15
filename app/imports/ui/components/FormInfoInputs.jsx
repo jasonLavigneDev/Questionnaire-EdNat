@@ -46,8 +46,6 @@ export default function FormInfoInputs() {
     dispatch(updateExpirationDate({ expirationDate: date }));
   };
 
-  console.log(form);
-
   return (
     <>
       <TextField
