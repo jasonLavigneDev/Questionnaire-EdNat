@@ -141,6 +141,12 @@ Forms.schema = new SimpleSchema(
       label: getLabel('api.forms.labels.formAnswers.answers'),
       optional: true,
     },
+
+    expirationDate: {
+      type: Date,
+      label: getLabel('api.forms.labels.expirationDate'),
+      optional: false,
+    },
     'formAnswers.$': { type: Answers },
   },
   { clean: { removeEmptyStrings: false } },

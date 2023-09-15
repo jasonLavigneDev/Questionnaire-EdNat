@@ -36,6 +36,7 @@
         "editableAnswers": "Editable answers",
         "groups": "Groups",
         "components": "Components",
+        "expirationDate": "Expiration date for answers",
         "formAnswers": {
           "answers": "Answers",
           "userId": "User ID",
@@ -185,6 +186,7 @@
         "noOptions": "Options are missing",
         "notFound": "Component does not exist",
         "noTitleOrOptions": "Form does not include title or options",
+        "expirationDateInvalid": "Expiration date is invalid.",
         "invalidForm": "Form is invalid. Be sure to have at least one question."
       },
       "questionTitle": "Enter this question's title",
@@ -213,7 +215,8 @@
       "formPrivate": "Logged form",
       "formPublic": "Public form",
       "formGroups": "Limited to groups",
-      "editableAnswers": "Réponses modifiables"
+      "editableAnswers": "Réponses modifiables",
+      "expirationDateCalendar": "Expiration date for answers"
     },
     "inputs": {
       "radioButton": "Radio button (single choice)",

@@ -10,9 +10,15 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs, { Dayjs } from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDesc, addTitle, formType, toggleEditableAnswers } from '../redux/slices/formSlice';
+import { addDesc, addTitle, updateExpirationDate, formType, toggleEditableAnswers } from '../redux/slices/formSlice';
+import { MsgError } from './system/MsgError';
 
 export default function FormInfoInputs() {
   const form = useSelector((state) => state.form);
@@ -34,6 +40,13 @@ export default function FormInfoInputs() {
     setRadioValue(event.target.name);
     dispatch(formType({ name: event.target.value }));
   };
+
+  const changeExpirationDate = (value) => {
+    const date = value['$d'];
+    dispatch(updateExpirationDate({ expirationDate: date }));
+  };
+
+  console.log(form);
 
   return (
     <>
@@ -64,6 +77,11 @@ export default function FormInfoInputs() {
         error={isDescriptionInValid}
         sx={{ marginTop: '1vh' }}
       />
+      <LocalizationProvider dateAdapter={AdapterDayjs} defaultValue={dayjs(form.expirationDate)}>
+        <DemoItem label={i18n.__('component.formInfoInputs.expirationDateCalendar')}>
+          <DateCalendar onChange={(value) => changeExpirationDate(value)} />
+        </DemoItem>
+      </LocalizationProvider>
       <FormGroup>
         <FormControlLabel
           control={

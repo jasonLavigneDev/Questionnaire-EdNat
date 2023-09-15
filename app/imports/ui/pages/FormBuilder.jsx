@@ -8,15 +8,19 @@ import { InputBuilder } from '../components/form/InputBuilder';
 import { useSelector } from 'react-redux';
 
 export const FormBuilder = () => {
+  const today = new Date();
   const [errorMessage, setErrorMessage] = useState('');
   const form = useSelector((state) => state.form);
   const navigate = useNavigate();
   const isDisable = !form.title || form.components.length === 0;
+  const wrongExpirationDate = today > form.expirationDate;
   const haveErrorMessages = !!errorMessage.length;
 
   const navigateToNextStep = () => {
     if (isDisable) {
       setErrorMessage(i18n.__('component.componentBuilder.errors.noTitleOrOptions'));
+    } else if (wrongExpirationDate) {
+      setErrorMessage(i18n.__('component.componentBuilder.errors.expirationDateInvalid'));
     } else {
       navigate('/builder/previsualizer');
     }

@@ -13,6 +13,7 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
     backgroundColor: 'transparent',
   };
 
+  const today = new Date();
   const navigate = useNavigate();
   const form = useSelector((state) => state.form);
   const acceptRgpd = useSelector((state) => state.form.acceptRGPD);
@@ -20,6 +21,7 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
   const isDisable = !form.title || form.components.length === 0 || (acceptRgpd === false && form.formId == null);
   const isTitleInValid = !form.title || form.title.length > 96;
   const isDescriptionInValid = form.description.length > 0 && form.description.length > 256;
+  const wrongExpirationDate = today > form.expirationDate;
 
   return (
     <div style={{ position: 'fixed', bottom: 0, left: '37vw' }}>
@@ -39,7 +41,11 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
               <Button variant="contained" sx={{ marginRight: '5vw' }} onClick={() => navigate(`/`)}>
                 {i18n.__('component.footer.cancel')}
               </Button>
-              <Button variant="contained" disabled={isTitleInValid || isDescriptionInValid} onClick={() => nextStep()}>
+              <Button
+                variant="contained"
+                disabled={isTitleInValid || isDescriptionInValid || wrongExpirationDate}
+                onClick={() => nextStep()}
+              >
                 {text}
               </Button>
             </>
