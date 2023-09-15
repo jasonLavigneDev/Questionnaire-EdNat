@@ -19,6 +19,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDesc, addTitle, updateExpirationDate, formType, toggleEditableAnswers } from '../redux/slices/formSlice';
 import { MsgError } from './system/MsgError';
+import { DatePicker } from '@mui/x-date-pickers';
 
 export default function FormInfoInputs() {
   const form = useSelector((state) => state.form);
@@ -43,6 +44,7 @@ export default function FormInfoInputs() {
 
   const changeExpirationDate = (value) => {
     const date = value['$d'];
+    console.log(date);
     dispatch(updateExpirationDate({ expirationDate: date }));
   };
 
@@ -77,7 +79,7 @@ export default function FormInfoInputs() {
       />
       <LocalizationProvider dateAdapter={AdapterDayjs} defaultValue={dayjs(form.expirationDate)}>
         <DemoItem label={i18n.__('component.formInfoInputs.expirationDateCalendar')}>
-          <DateCalendar onChange={(value) => changeExpirationDate(value)} />
+          <DatePicker onChange={(value) => changeExpirationDate(value)} />
         </DemoItem>
       </LocalizationProvider>
       <FormGroup>
