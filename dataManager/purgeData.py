@@ -19,7 +19,7 @@ def get_database():
 
 def purgeData():
     print("=====Starting deletion of expired data=====")
-    today = datetime.today() + timedelta(days=2)
+    today = datetime.today()
     data = db['forms'].find({"formAnswers": {"$exists": True}})
     for form in data:
         date = form["expirationDate"]
