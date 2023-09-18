@@ -73,7 +73,7 @@ export default function ManageOptions({ setErrorMessage }) {
                   backgroundColor: 'rgb(180, 180, 180)',
                 },
               }}
-              key={option.id}
+              key={option._id}
               title="Déplacer cette option"
             >
               <div

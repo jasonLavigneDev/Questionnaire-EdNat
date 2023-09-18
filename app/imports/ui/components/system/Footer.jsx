@@ -25,7 +25,7 @@ export const Footer = ({ nextStep, urlOfPrevStep, text }) => {
 
   return (
     <div style={{ position: 'fixed', bottom: 0, left: '37vw' }}>
-      <BottomNavigation sx={bottomBarStyle} showLabels>
+      <BottomNavigation sx={bottomBarStyle}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           {urlOfPrevStep ? (
             <>

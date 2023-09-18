@@ -54,8 +54,8 @@ export const ComponentBuilder = () => {
   };
 
   return (
-    <Paper>
-      <div key={'test'} style={{ display: 'flex', marginLeft: '2.5vw' }}>
+    <Paper sx={{ height: '50vh', overflow: 'auto', overflowX: 'unset' }}>
+      <div style={{ display: 'flex', marginLeft: '2.5vw' }}>
         <FormControlLabel
           control={<Checkbox name="required" checked={question.answerRequired} />}
           label="réponse obligatoire"
