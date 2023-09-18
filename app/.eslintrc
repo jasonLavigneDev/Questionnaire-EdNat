@@ -7,7 +7,7 @@
     "es6": true,
     "node": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module",
@@ -15,16 +15,15 @@
       "jsx": true
     }
   },
-  "plugins": ["react"],
+  "plugins": ["react", "prettier"],
   "rules": {
     "import/prefer-default-export": "off",
-    "no-restricted-imports": ["error", "@mui/material", "@mui/icons-material", "@material-ui/lab"],
+    "no-restricted-imports": ["error", "@mui/icons-material", "@material-ui/lab"],
     "no-underscore-dangle": "off",
     "react/no-danger": "off",
     "react/jsx-props-no-spreading": "off",
     "react/forbid-prop-types": "off",
     "no-nested-ternary": "off",
-    "prettier/prettier": "error",
     "max-len": [
       "error",
       {
