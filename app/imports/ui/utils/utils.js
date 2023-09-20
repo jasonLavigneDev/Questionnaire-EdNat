@@ -1,5 +1,3 @@
-import { radioClasses } from '@mui/material';
-
 export const isDuplicate = (allOpts, newOption) => {
   return allOpts.includes(newOption);
 };

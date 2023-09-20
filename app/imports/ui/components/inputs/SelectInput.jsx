@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { FormControl, InputLabel, Select, MenuItem, Paper, FormLabel } from '@mui/material';
+import { FormControl, Select, MenuItem, Paper, FormLabel } from '@mui/material';
 import { addAnswers } from '../../redux/slices/answerFormSlice';
 import { useDispatch, useSelector } from 'react-redux';
 

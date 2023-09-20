@@ -48,10 +48,10 @@ export const ResultPage = () => {
     });
   });
 
-  const CanHaveStat = (type) => {
-    if (type !== 'textInput' && type !== 'textArea') return true;
-    return false;
-  };
+  // const CanHaveStat = (type) => {
+  //   if (type !== 'textInput' && type !== 'textArea') return true;
+  //   return false;
+  // };
 
   finalArray.map((question) => {
     const stat = [];
@@ -78,16 +78,12 @@ export const ResultPage = () => {
     });
   });
 
-  const deleteAllAnswers = async () => {
-    formFromBDD.formAnswers = [];
-    await Meteor.callAsync('forms.clearAnswers', formFromBDD._id);
-    navigate('/');
-  };
-
-  const hasNotAnswers = () => {
-    if (!formFromBDD.formAnswers || formFromBDD.formAnswers.length === 0) return true;
-    return false;
-  };
+  // FIXME: IL FAUT SUREMENT SUPPRIMER CE BLOC
+  // const deleteAllAnswers = async () => {
+  //   formFromBDD.formAnswers = [];
+  //   await Meteor.callAsync('forms.clearAnswers', formFromBDD._id);
+  //   navigate('/');
+  // };
 
   return (
     <>

@@ -1,10 +1,10 @@
 import React, { createContext } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = () => {
   const user = useTracker(() => {
     return Meteor.user();
   });

@@ -1,4 +1,4 @@
-import { Divider, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { i18n } from 'meteor/universe:i18n';
 import React, { useContext, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';

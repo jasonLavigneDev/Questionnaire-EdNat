@@ -30,8 +30,9 @@ export default function StatsBar({ question }) {
   let values = Object.values(choicesStats);
 
   const colors = [];
+  const light = true;
   for (let i = 0; i < keys.length; i++) {
-    const color = generateColor((light = true));
+    const color = generateColor(light);
     colors.push(color);
   }
 
@@ -63,7 +64,7 @@ export default function StatsBar({ question }) {
     >
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         {keys.map((key) => (
-          <p>
+          <p key={key}>
             {key}: {((choicesStats[key] / getAllCountStat(question.stat)) * 100).toFixed(2)}%
           </p>
         ))}

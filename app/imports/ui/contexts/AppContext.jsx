@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Outlet } from 'react-router-dom';
 import AppSettings from '../../api/appsettings/appsettings';
@@ -6,7 +6,7 @@ import SiteInMaintenance from '../components/SiteInMaintenance';
 
 export const AppContext = createContext();
 
-export const AppProvider = ({ children }) => {
+export const AppProvider = () => {
   const settings = useTracker(() => {
     Meteor.subscribe('appsettings.maintenance');
     const settingsData = AppSettings.findOne(

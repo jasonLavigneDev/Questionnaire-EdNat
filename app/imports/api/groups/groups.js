@@ -1,6 +1,5 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
-import { Tracker } from 'meteor/tracker';
 import { getLabel } from '../utils';
 
 const Groups = new Mongo.Collection('groups');

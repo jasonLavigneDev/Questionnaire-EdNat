@@ -2,7 +2,6 @@ import React from 'react';
 import i18n from 'meteor/universe:i18n';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 

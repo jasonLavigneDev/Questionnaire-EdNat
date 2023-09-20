@@ -1,5 +1,4 @@
 import React from 'react';
-import { i18n } from 'meteor/universe:i18n';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -11,8 +10,6 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 
-import CreditCardOffIcon from '@mui/icons-material/CreditCardOff';
-import SubtitlesOffIcon from '@mui/icons-material/SubtitlesOff';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 
 export const LIST_OF_INPUT_BUILDER = [

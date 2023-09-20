@@ -45,11 +45,11 @@ export default function AnswerListDisplay({ finalArray }) {
         </CSVLink>
       </div>
       {finalArray.map((question) => (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
+        <div key={question._id} style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
           <Paper sx={{ display: 'flex', flexDirection: 'column', width: '50%', padding: 5 }}>
             <h2>{question.questionTitle}</h2>
             {question.responses.map((response, index) => (
-              <ul>
+              <ul key={index}>
                 <li>
                   <b>
                     Réponse #{index + 1} ({i18n.__('component.answerListDisplay.answerAt')}: {response.createdAt})

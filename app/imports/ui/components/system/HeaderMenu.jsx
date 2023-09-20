@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import i18n from 'meteor/universe:i18n';
 import { useNavigate, useLocation } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import { identicon } from 'minidenticons'; // Don't delete this import it's for default avatar
 import { Button, Typography, Menu, MenuItem, Avatar, Divider } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
