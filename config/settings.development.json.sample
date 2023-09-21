@@ -2,7 +2,11 @@
   "public": {
     "keycloakUrl": "",
     "keycloakRealm": "",
-    "laboiteHost": ""
+    "laboiteHost": "",
+    "matomo": {
+      "siteIdQuestionnaire": 1,
+      "urlBase": ""
+    }
   },
   "keycloak": {
     "pubkey": "",

@@ -1,12 +1,14 @@
 import React from 'react';
 import i18n from 'meteor/universe:i18n';
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { MatomoProvider } from '@datapunt/matomo-tracker-react';
 import '../locales';
 import { Meteor } from 'meteor/meteor';
 import { App } from '../../ui/layouts/App';
 import { getLang } from '../../api/utils';
 import store from '../../ui/redux/store';
-import { Provider } from 'react-redux';
+import instance from '../../ui/utils/matomo';
 
 /** Startup the application by rendering the router. */
 Meteor.startup(() => {
@@ -19,7 +21,9 @@ Meteor.startup(() => {
   root.render(
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <MatomoProvider value={instance}>
+          <App />
+        </MatomoProvider>
       </Provider>
     </React.StrictMode>,
   );

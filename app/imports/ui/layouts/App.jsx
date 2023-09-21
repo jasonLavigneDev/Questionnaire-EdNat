@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import { useMatomo } from '@datapunt/matomo-tracker-react';
 
 import { ErrorPage } from '../pages/ErrorPage';
 import { Logout } from '../pages/Logout';
@@ -18,6 +19,13 @@ import { AuthPage } from '../pages/AuthPage';
 import { AppProvider } from '../contexts/AppContext';
 
 export const App = () => {
+  const { trackPageView, enableLinkTracking } = useMatomo();
+  enableLinkTracking();
+
+  useEffect(() => {
+    trackPageView();
+  }, []);
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
