@@ -40,14 +40,16 @@ stages:
     - !reference [.rules-map, not-on-semantic-release-commit]
     - !reference [.rules-map, on-branch]
   image: hub.eole.education/proxyhub/geoffreybooth/meteor-base:2.13
+  before_script:
+    - cd app
   cache:
     key:
       files:
         # Generate new cache when one of the file changes
-        - package.json
-        - package-lock.json
+        - app/package.json
+        - app/package-lock.json
     paths:
-      - node_modules/
+      - app/node_modules/
     # Only use the cache created by `cache-dependencies` job
     policy: pull
   variables:
@@ -64,33 +66,33 @@ commitlint:
 ###############################################################################
 # `deps` stage: to download and cache dependencies
 ###############################################################################
-#cache-dependencies:
-#  stage: deps
-#  extends: .meteor
-#  cache:
-#    # This job update dependencies
-#    policy: pull-push
-#  script:
-#    - meteor npm ci
-#
+cache-dependencies:
+ stage: deps
+ extends: .meteor
+ cache:
+   # This job update dependencies
+   policy: pull-push
+ script:
+   - meteor npm install
+
 ###############################################################################
 # `test` stage: `meteor-lint`, `meteor-tests`
 ###############################################################################
 # The test does not run on the builded container so do them before
 # building the container
-#meteor-lint:
-#  stage: test
-#  extends: .meteor
-#  script:
-#    - meteor npm install --only=dev
-#    - meteor npm run lint
-#
-#meteor-tests:
-#  stage: test
-#  extends: .meteor
-#  script:
-#    - meteor npm test
-#
+meteor-lint:
+ stage: test
+ extends: .meteor
+ script:
+   - meteor npm install --only=dev
+   - meteor npm run lint
+
+meteor-tests:
+ stage: test
+ extends: .meteor
+ script:
+   - meteor npm test
+
 ###############################################################################
 # `build` stage: `build-docker`
 ###############################################################################
