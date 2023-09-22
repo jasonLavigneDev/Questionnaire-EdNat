@@ -78,7 +78,7 @@ export default function FormInfoInputs() {
         <DatePicker
           sx={{ marginTop: '1vh' }}
           label={i18n.__('component.formInfoInputs.expirationDateCalendar')}
-          defaultValue={dayjs()}
+          defaultValue={dayjs(form.expirationDate)}
           format="DD/MM/YYYY"
           onChange={(value) => changeExpirationDate(value)}
         />
