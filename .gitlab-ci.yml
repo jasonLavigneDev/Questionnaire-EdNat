@@ -20,7 +20,7 @@ include:
 
 variables:
   # `ci-tools` default branch is `stable`
-  STABLE_BRANCH: master
+  STABLE_BRANCH: main
   IMAGE_NAME: questionnaire
 
 stages:
