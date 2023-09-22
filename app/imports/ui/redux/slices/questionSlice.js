@@ -13,7 +13,7 @@ export const questionSlice = createSlice({
   name: 'question',
   initialState,
   reducers: {
-    resetQuestionObject: (state, action) => {
+    resetQuestionObject: () => {
       return initialState;
     },
     fillQuestionObject: (state, action) => {
@@ -29,7 +29,7 @@ export const questionSlice = createSlice({
     addAnswerText: (state, action) => {
       state.answerText = action.payload.answerText;
     },
-    resetAnswerText: (state, action) => {
+    resetAnswerText: (state) => {
       state.answerText = '';
     },
     addAnswerOptions: (state, action) => {
@@ -41,7 +41,7 @@ export const questionSlice = createSlice({
     removeOption: (state, action) => {
       state.choices = state.choices.filter((o) => o !== action.payload.option);
     },
-    toggleAnswerIsRequired: (state, action) => {
+    toggleAnswerIsRequired: (state) => {
       state.answerRequired = !state.answerRequired;
     },
   },

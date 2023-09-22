@@ -11,7 +11,7 @@ export const answerFormSlice = createSlice({
   name: 'answerForm',
   initialState,
   reducers: {
-    resetUserAnswerObject: (state, action) => {
+    resetUserAnswerObject: () => {
       return initialState;
     },
     fillUserAnswersObject: (state, action) => {

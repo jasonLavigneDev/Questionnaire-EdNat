@@ -20,7 +20,7 @@ export const DisplayGroups = ({ userGroups }) => {
   return (
     <div>
       {formGroups.map((id) => (
-        <div style={{ display: 'flex' }}>
+        <div key={id} style={{ display: 'flex' }}>
           <p>{getGroupName(id)}</p>
           <IconButton sx={{ color: 'salmon' }} onClick={() => dispatch(removeGroup({ id }))}>
             <DeleteIcon />

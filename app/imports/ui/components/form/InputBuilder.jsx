@@ -35,6 +35,7 @@ export const InputBuilder = () => {
           <div className={class2}>
             {form.components.map((currentComponent, index) => (
               <Paper
+                key={index}
                 sx={{
                   display: 'flex',
                   marginBottom: 1,

@@ -6,7 +6,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
-import { addComponents, removeComponents, swapPositions } from '../redux/slices/formSlice';
+import { removeComponents, swapPositions } from '../redux/slices/formSlice';
 import { fillQuestionObject, resetQuestionObject } from '../redux/slices/questionSlice';
 import { MsgError } from './system/MsgError';
 

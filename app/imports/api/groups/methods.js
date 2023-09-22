@@ -1,5 +1,6 @@
 import Groups from './groups';
 import { Roles } from 'meteor/alanning:roles';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
 export const getStrucGroupName = (group) => {
   if (group.type !== 15) return group.name;

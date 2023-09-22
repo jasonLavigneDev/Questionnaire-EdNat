@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Paper, Container } from '@mui/material';
+import { Typography } from '@mui/material';
 
 export const SectionStart = ({ title }) => {
   return (

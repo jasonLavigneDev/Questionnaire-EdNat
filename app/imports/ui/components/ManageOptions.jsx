@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { IconButton, Divider, Paper, TextField, Alert, Snackbar } from '@mui/material';
+import { IconButton, Paper, TextField, Alert, Snackbar } from '@mui/material';
 import { i18n } from 'meteor/universe:i18n';
 import AddIcon from '@mui/icons-material/Add';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   addAnswerOptions,
   addAnswerText,
-  removeOption,
   resetAnswerText,
   updateIndexAnswerOptions,
 } from '../redux/slices/questionSlice';
@@ -45,13 +44,14 @@ export default function ManageOptions({ setErrorMessage }) {
     event.target.focus();
   };
 
-  getChangedPos = (currentPos, newPos) => {
-    const optionsUpdated = [...question.choices];
-    optionsUpdated.splice(newPos, 0, optionsUpdated.splice(currentPos, 1)[0]);
-    dispatch(updateIndexAnswerOptions(optionsUpdated));
-  };
+  // FIXME: IL FAUT SUREMENT SUPPRIMER CE BLOC
+  // const getChangedPos = (currentPos, newPos) => {
+  //   const optionsUpdated = [...question.choices];
+  //   optionsUpdated.splice(newPos, 0, optionsUpdated.splice(currentPos, 1)[0]);
+  //   dispatch(updateIndexAnswerOptions(optionsUpdated));
+  // };
 
-  removeOption = (choiceIndex) => {
+  const removeOption = (choiceIndex) => {
     const optionsUpdated = [...question.choices];
     optionsUpdated.splice(choiceIndex, 1);
     dispatch(updateIndexAnswerOptions(optionsUpdated));

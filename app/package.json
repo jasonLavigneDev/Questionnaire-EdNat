@@ -10,7 +10,8 @@
     "test": "meteor test --once --exclude-archs 'web.browser.legacy, web.cordova' --driver-package meteortesting:mocha --allow-superuser",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer",
-    "lint": "eslint . --ext js,jsx"
+    "lint": "eslint . --ext js,jsx",
+    "pretty": "prettier --write \"./**/*.{js,jsx}\""
   },
   "dependencies": {
     "@babel/core": "^7.22.17",
@@ -20,11 +21,17 @@
     "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.8",
     "@reduxjs/toolkit": "^1.9.5",
-    "axios": "^1.5.0",
-    "chai": "^4.3.8",
-    "chart.js": "^4.4.0",
+    "airbnb": "0.0.2",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.3.7",
+    "chart.js": "^4.3.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-react-redux": "^4.0.0",
     "meteor-node-stubs": "^1.2.1",
     "minidenticons": "^2.0.2",
+    "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -44,9 +51,13 @@
     }
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0"
-  },
-  "overrides": {
-    "semver": "^7.5.2"
+    "@faker-js/faker": "^7.6.0",
+    "eslint-plugin-i18n": "^2.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx": "^0.1.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-meteor": "^7.3.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2"
   }
 }

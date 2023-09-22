@@ -1,4 +1,5 @@
 import React from 'react';
+import i18n from 'meteor/universe:i18n';
 import { FormControl, Select, InputLabel, MenuItem, OutlinedInput, Divider } from '@mui/material';
 import { ComponentBuilder } from '../ComponentBuilder';
 import { LIST_OF_INPUT_BUILDER } from '../listOfInputBuilder';

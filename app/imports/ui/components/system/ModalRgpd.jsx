@@ -71,9 +71,9 @@ const ModalRgpd = ({ answerMode = false }) => {
             <b>
               Le délégué à la protection des données de votre académie{' '}
               <a
-                href=" https://www.education.gouv.fr/les-enjeux-de-la-protection-des-donnees-au-sein-de-l-education-7451"
+                href="https://www.education.gouv.fr/les-enjeux-de-la-protection-des-donnees-au-sein-de-l-education-7451"
                 target="_blank"
-                rel="noopener norefferer"
+                rel="noopener noreferrer"
               >
                 https://www.education.gouv.fr
               </a>{' '}
@@ -82,7 +82,7 @@ const ModalRgpd = ({ answerMode = false }) => {
             Si vous estimez, après nous avoir contactés, que vos droits « Informatique et Libertés » ne sont pas
             respectés, vous pouvez adresser une réclamation à la CNIL.
             <br />
-            NB: En cas de refus il vous sera impossible d'accéder au questionnaire.
+            NB: En cas de refus il vous sera impossible d`&apos;`accéder au questionnaire.
           </Typography>
         ) : (
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -92,10 +92,10 @@ const ModalRgpd = ({ answerMode = false }) => {
             De ce fait, vous devenez <b>responsable des données collectées</b> et vous engagez à{' '}
             <b>respecter les règles</b> concernant les droits des répondants. <br />
             Vous vous engagez donc à : <br />
-            - n'utiliser ces données que dans le cadre de l'application (consultation et analyse)
-            <br />- supprimer ces données au bout de <b>30 jours</b> suivant la fin d'activité du formulaire
+            - n`&apos;`utiliser ces données que dans le cadre de l`&apos;`application (consultation et analyse)
+            <br />- supprimer ces données au bout de <b>30 jours</b> suivant la fin d`&apos;`activité du formulaire
             <br />- accéder aux demandes des utilisateurs concernant{' '}
-            <b>la rectification, l'effacement ou la limitation du traitement de ces données</b>
+            <b>la rectification, l`&apos;`effacement ou la limitation du traitement de ces données</b>
             <br />- ne demander que des informations nécessaires <b>non personnelles</b>. Certains sujets sont
             préjudiciables et donc à proscrire (religion, orientation sexuelle, convictions politique ... ) <br />
             <br />

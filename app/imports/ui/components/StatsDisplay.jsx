@@ -17,8 +17,9 @@ export default function StatsDisplay({ statArray }) {
 
   const generateChartData = (question) => {
     const colors = [];
+    const light = true;
     for (let i = 0; i < question.stat.length; i++) {
-      const color = generateColor((light = true));
+      const color = generateColor(light);
       colors.push(color);
     }
     const chartData = {
@@ -58,7 +59,7 @@ export default function StatsDisplay({ statArray }) {
           >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {question.stat.map((stat) => (
-                <p>
+                <p key={stat.answer._id}>
                   {stat.answer}: {(stat.count / getAllCountStat(question.stat)) * 100}%
                 </p>
               ))}

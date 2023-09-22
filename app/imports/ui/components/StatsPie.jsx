@@ -16,8 +16,9 @@ export default function StatsPie({ question }) {
 
   const generateChartData = (stat) => {
     const colors = [];
+    const light = true;
     for (let i = 0; i < stat.length; i++) {
-      const color = generateColor((light = true));
+      const color = generateColor(light);
       colors.push(color);
     }
 
@@ -66,7 +67,7 @@ export default function StatsPie({ question }) {
     >
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         {question.stat.map((oneStat) => (
-          <p>
+          <p key={oneStat.answer._id}>
             {displayAnswer(oneStat.answer)}: {((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%
           </p>
         ))}

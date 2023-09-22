@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import { Tracker } from 'meteor/tracker';
 import { getLabel } from '../utils/functions';
 
 Meteor.users.schema = new SimpleSchema({

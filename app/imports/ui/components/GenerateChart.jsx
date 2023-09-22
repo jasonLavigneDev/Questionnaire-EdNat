@@ -11,7 +11,6 @@ export default function GenerateChart({ statArray }) {
       case 'numberInput':
       case 'textInput':
       case 'textArea':
-      case 'textInput':
       case 'dateInput':
         return <StatsPie question={question} />;
       case 'checkboxInput':
@@ -24,7 +23,7 @@ export default function GenerateChart({ statArray }) {
   return (
     <>
       {statArray.map((question) => (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
+        <div key={question._id} style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
           <Paper sx={{ display: 'flex', flexDirection: 'column', width: '50%', padding: 5 }}>
             <h2>{question.questionTitle}</h2>
             <div>{generateChart(question)}</div>

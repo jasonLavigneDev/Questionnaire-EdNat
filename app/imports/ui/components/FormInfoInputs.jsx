@@ -69,7 +69,7 @@ export default function FormInfoInputs() {
           control={
             <Checkbox
               checked={form.editableAnswers}
-              onChange={(e) => dispatch(toggleEditableAnswers())}
+              onChange={() => dispatch(toggleEditableAnswers())}
               name="editableAnswers"
             />
           }

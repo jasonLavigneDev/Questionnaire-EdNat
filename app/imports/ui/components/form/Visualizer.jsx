@@ -43,6 +43,7 @@ export const Visualizer = ({ answerMode = false }) => {
   );
 
   const genCategory = (category) => {
+    const light = true;
     // category est un tableau qui contient soit des composants à générer (object) soit des catégories déjà générées (array)
     return (
       <Paper
@@ -50,7 +51,7 @@ export const Visualizer = ({ answerMode = false }) => {
           paddingRight: '15px',
           paddingLeft: '15px',
           // backgroundColor: 'lightsteelblue',
-          backgroundColor: generateColor((light = true)),
+          backgroundColor: generateColor(light),
         }}
       >
         {category.map((currentComponent) =>
@@ -126,7 +127,7 @@ export const Visualizer = ({ answerMode = false }) => {
       // Après parcours des composants, il reste une catégorie commencée mais non générée (absence de fin)
       // On l'ajoute pour un meilleur rendu
       console.log("Catégorie résiduelle (sans fin) => ajout d'une fin");
-      endSection = {
+      const endSection = {
         id: 'temp',
         title: 'Fin ajoutée coté client',
         type: 'sectionEnd',

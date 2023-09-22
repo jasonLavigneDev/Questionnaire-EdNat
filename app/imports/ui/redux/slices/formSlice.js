@@ -19,7 +19,7 @@ export const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    resetFormObject: (state, action) => {
+    resetFormObject: () => {
       return initialState;
     },
     fillForm: (state, action) => {
@@ -41,7 +41,7 @@ export const formSlice = createSlice({
     addDesc: (state, action) => {
       state.description = action.payload.description;
     },
-    toggleEditableAnswers: (state, action) => {
+    toggleEditableAnswers: (state) => {
       state.editableAnswers = !state.editableAnswers;
     },
     formType: (state, action) => {

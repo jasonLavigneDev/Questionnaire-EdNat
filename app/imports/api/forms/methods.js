@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import SimpleSchema from 'simpl-schema';
-import { _ } from 'meteor/underscore';
+import i18n from 'meteor/universe:i18n';
 import { getLabel } from '../utils';
 
 import Forms, { Component, Answers } from './forms';
