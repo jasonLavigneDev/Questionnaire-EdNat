@@ -5,11 +5,11 @@ ENV DATA_FOLDER /dataSuppressor
 RUN apk --no-cache add py3-pip git
 
 # Copy app scripts
-COPY ./dataManager/requirements.txt $EOLEGET_FOLDER/
-COPY ./dataManager/purgeData.py  $EOLEGET_FOLDER/
-COPY ./dataManager/.env  $EOLEGET_FOLDER/
+COPY ./dataManager/requirements.txt $DATA_FOLDER/
+COPY ./dataManager/purgeData.py  $DATA_FOLDER/
+COPY ./dataManager/.env  $DATA_FOLDER/
 
-RUN pip3 install -r $EOLEGET_FOLDER/requirements.txt
+RUN pip3 install -r $DATA_FOLDER/requirements.txt
 
 # Copy cron scripts in root folder and update permissions
 COPY ./cron.sh /cron.sh
