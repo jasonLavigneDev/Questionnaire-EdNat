@@ -131,7 +131,8 @@
     "redirectPage": {
       "title": "Form answered successfully",
       "subTitle": "Redirection in",
-      "copyUrl": "To be able to modify your answers remember to save the url below :"
+      "copyUrl": "To be able to modify your answers remember to save the url below :",
+      "copyButton": "Copy URL"
     }
   },
   "component": {
