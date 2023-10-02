@@ -38,6 +38,7 @@ const RedirectSubmitPage = () => {
         {i18n.__('page.redirectPage.title')}
         <CheckCircleIcon fontSize="large" sx={{ color: 'green', marginLeft: '1vw' }} />
       </h1>
+      <i>{i18n.__('page.redirectPage.instruction')}</i>
       {urlForEdition && (
         <>
           <p>{i18n.__('page.redirectPage.copyUrl')}</p>
