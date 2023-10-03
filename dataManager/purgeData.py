@@ -10,7 +10,6 @@ load_dotenv()
 
 MONGO_URI = os.getenv("MONGO_URI")
 MONGO_DATABASE = os.getenv("MONGO_DATABASE")
-DAYS_BEFORE_EXPIRATION = os.getenv("DAYS_BEFORE_EXPIRATION")
 
 
 def get_database():
