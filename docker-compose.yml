@@ -12,7 +12,7 @@ services:
       MONGO_URL: mongodb://mongo.domain/labase
       PORT: 3000
       METEOR_SETTINGS: ${METEOR_SETTINGS}
-    cron:
-      build:
-        context: .
-        dockerfile: Dockerfile.cron
+  cron:
+    build:
+      context: .
+      dockerfile: Dockerfile.cron
