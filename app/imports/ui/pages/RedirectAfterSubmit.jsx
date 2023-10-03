@@ -42,7 +42,7 @@ const RedirectSubmitPage = () => {
         <>
           <p>{i18n.__('page.redirectPage.copyUrl')}</p>
           <Button variant="contained" onClick={() => navigator.clipboard.writeText(urlForEdition)}>
-            Copier l`&apos;`URL
+            {i18n.__('page.redirectPage.copyButton')}
           </Button>
         </>
       )}{' '}
