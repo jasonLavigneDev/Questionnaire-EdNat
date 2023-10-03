@@ -130,6 +130,7 @@
     },
     "redirectPage": {
       "title": "Form answered successfully",
+      "instruction": "you can close this page",
       "subTitle": "Redirection in",
       "copyUrl": "To be able to modify your answers remember to save the url below :",
       "copyButton": "Copy URL"
