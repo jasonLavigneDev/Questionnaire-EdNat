@@ -41,7 +41,6 @@ export default function FormInfoInputs() {
 
   const changeExpirationDate = (value) => {
     const date = value['$d'];
-    console.log(date);
     dispatch(updateExpirationDate({ expirationDate: date }));
   };
 
