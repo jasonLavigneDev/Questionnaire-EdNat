@@ -86,7 +86,7 @@ const ModalRgpd = ({ answerMode = false }) => {
           </Typography>
         ) : (
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Vous vous apprêtez à créer un formulaire ou des données saisies par des utilisateurs sont recueillies et
+            Vous vous apprêtez à créer un formulaire où des données saisies par des utilisateurs sont recueillies et
             stockées.
             <br />
             De ce fait, vous devenez <b>responsable des données collectées</b> et vous engagez à{' '}
