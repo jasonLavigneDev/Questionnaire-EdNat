@@ -62,7 +62,7 @@ const ModalRgpd = ({ answerMode = false }) => {
             Vous pouvez également vous opposer au traitement de vos données.
             <br />
             Vous pouvez également exercer votre droit à la portabilité de vos données. Consultez le site de la{' '}
-            <a href="https://cnil.fr" target="_blank" rel="noopener norefferer">
+            <a href="https://cnil.fr" target="_blank" rel="noopener noreferrer">
               CNIL
             </a>{' '}
             pour plus d’informations sur vos droits.
@@ -101,7 +101,7 @@ const ModalRgpd = ({ answerMode = false }) => {
             <br />
             Pour toutes informations complémentaires concernant le <b>droit des utilisateurs</b>, vous pouvez vous
             référer au site de la{' '}
-            <a href="https://cnil.fr" target="_blank" rel="noopener norefferer">
+            <a href="https://cnil.fr" target="_blank" rel="noopener noreferrer">
               CNIL
             </a>
             .
