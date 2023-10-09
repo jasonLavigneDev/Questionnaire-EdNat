@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useTracker } from 'meteor/react-meteor-data';
 import i18n from 'meteor/universe:i18n';
 import { Modal, Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -20,14 +19,7 @@ const style = {
 const ModalRgpd = ({ answerMode = false }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(true);
-  const owner = useSelector((state) => state.form.owner);
-
-  const ownerForm = useTracker(() => {
-    if (owner) {
-      return Meteor.users.findOne({ _id: owner });
-    }
-    return null;
-  });
+  const { firstName, lastName } = useSelector((state) => state.form);
 
   const dispatch = useDispatch();
 
@@ -46,13 +38,13 @@ const ModalRgpd = ({ answerMode = false }) => {
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Acceptation RGPD
         </Typography>
-        {ownerForm && answerMode ? (
+        {answerMode ? (
           <Typography sx={{ mt: 2 }}>
             Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par
-            <b> {ownerForm.firstName + ' ' + ownerForm.lastName}</b> pour <b>consultation et analyse</b>.
+            <b> {firstName + ' ' + lastName}</b> pour <b>consultation et analyse</b>.
             <br /> La base légale du traitement est <b>le consentement</b>.
             <br /> Les données collectées seront communiquées aux seuls destinataires suivants :
-            <b> {ownerForm.firstName + ' ' + ownerForm.lastName}</b>.
+            <b> {firstName + ' ' + lastName}</b>.
             <br />
             Les données sont conservées pendant <b>30 jours</b>.
             <br />

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { useTracker } from 'meteor/react-meteor-data';
 import i18n from 'meteor/universe:i18n';
 import { Paper } from '@mui/material';
 import { ComponentBuilder } from '../ComponentBuilder';
@@ -16,13 +15,6 @@ export const Visualizer = ({ answerMode = false }) => {
   const [componentToEdit] = useState({});
   const { user } = useContext(UserContext);
   const form = useSelector((state) => state.form);
-
-  const ownerForm = useTracker(() => {
-    if (form) {
-      return Meteor.users.findOne({ _id: form.owner });
-    }
-    return null;
-  });
 
   if (!form.isActive && answerMode) return <FormNoAvailable message={i18n.__('component.visualizer.formNotActive')} />;
   if (!user && !form.isPublic) return <FormNoAvailable message={i18n.__('component.visualizer.connect')} />;
@@ -66,23 +58,18 @@ export const Visualizer = ({ answerMode = false }) => {
     let currentCategory = []; // Catégorie en cours de construction
     let subcategoryEndIndex = -1; // Index du composant de fin d'une sous catégorie
 
-    console.log('componentsToGenerate.length path ', componentsToGenerate.length, path);
-
     // componentsToGenerate.forEach((currentComponent, currentIndex) => {
     for (let currentIndex = 0; currentIndex < componentsToGenerate.length; currentIndex++) {
       const currentComponent = componentsToGenerate[currentIndex];
       // Le composant a déjà pu être traité dans une sous catégorie
       if (currentIndex > subcategoryEndIndex) {
-        console.log(`Path (${path}) : Entré avec le numéro ${currentIndex} ${currentComponent.title}`);
         if (currentComponent.type === 'sectionStart') {
           // Début de catégorie
           if (currentCategory.length) {
             // Catégorie déjà en cours donc début d'une sous-catégorie (appel récursif)
-            console.log(`Path (${path}) : Avant récur currentIndex ${currentIndex}`);
             const resultQuestionnaire = genQuestionnaire(componentsToGenerate.slice(currentIndex), path + 1);
             currentCategory.push(resultQuestionnaire.questionnaire); // Appel récursif avec un tableau de composants de la sous catégorie
             subcategoryEndIndex = currentIndex + resultQuestionnaire.subcategoryEndIndex; // Récupère l'index de l'avant dernier composant de type fin de section
-            console.log(`Path (${path}) : Fin récur subcategoryEndIndex ${subcategoryEndIndex}`);
           } else {
             // Commencement d'une nouvelle catégorie
             currentCategory.push(currentComponent);
@@ -95,17 +82,14 @@ export const Visualizer = ({ answerMode = false }) => {
             questionnaire.push(genCategory(currentCategory));
             if (path === 0) {
               // Catégorie simple donc pas besoin de sortir de la boucle for
-              console.log('Fin de Catégorie simple ', currentIndex);
               subcategoryEndIndex = currentIndex;
               currentCategory = [];
             } else {
               // Sous catégorie donc on sort par un return
-              console.log('Fin de sous catégorie ', currentIndex);
               return { questionnaire, subcategoryEndIndex: currentIndex };
             }
           } else {
             // Fin solitaire sans début correspondant => on l'ignore
-            console.log("Fin solitaire sans début correspondant => on l'ignore");
             // questionnaire.push(genComponent(currentComponent));
           }
         } else if (currentCategory.length) {
@@ -118,15 +102,12 @@ export const Visualizer = ({ answerMode = false }) => {
       }
       if (currentIndex > subcategoryEndIndex) {
         // Permet de ne pas traiter 2 fois un même composant
-        console.log('Traitement index', currentIndex);
         subcategoryEndIndex = currentIndex;
       }
-      console.log(`Path (${path}) : Sortie avec le numéro ${currentIndex} ${currentComponent.title}`);
     }
     if (currentCategory.length) {
       // Après parcours des composants, il reste une catégorie commencée mais non générée (absence de fin)
       // On l'ajoute pour un meilleur rendu
-      console.log("Catégorie résiduelle (sans fin) => ajout d'une fin");
       const endSection = {
         id: 'temp',
         title: 'Fin ajoutée coté client',
@@ -143,9 +124,9 @@ export const Visualizer = ({ answerMode = false }) => {
       {answerMode && <ModalRgpd answerMode={answerMode} />}
       {<h3 style={{ textAlign: 'center' }}>{form.title}</h3>}
       {<h4 style={{ textAlign: 'center' }}>{form.description}</h4>}
-      {ownerForm && (
+      {form.firstName && (
         <h4 style={{ textAlign: 'center' }}>
-          {i18n.__('component.visualizer.createdBy')} {ownerForm.firstName} {ownerForm.lastName} ({ownerForm.username})
+          {i18n.__('component.visualizer.createdBy')} {form.firstName} {form.lastName}
         </h4>
       )}
       <div style={{ width: '59vw', margin: 'auto' }}>{genQuestionnaire(form.components).questionnaire}</div>

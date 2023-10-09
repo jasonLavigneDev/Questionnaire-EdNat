@@ -13,6 +13,8 @@ const initialState = {
   isActive: false,
   editableAnswers: false,
   acceptRGPD: false,
+  firstName: '',
+  lastName: '',
 };
 
 export const formSlice = createSlice({
@@ -34,6 +36,8 @@ export const formSlice = createSlice({
       state.isActive = action.payload.isActive;
       state.owner = action.payload.owner;
       state.editableAnswers = action.payload.editableAnswers;
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
     },
     addTitle: (state, action) => {
       state.title = action.payload.title;
