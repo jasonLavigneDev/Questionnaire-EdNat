@@ -43,7 +43,7 @@ describe('forms', function () {
       assert.typeOf(form, 'object');
     });
     it('does get a form', async function () {
-      const newformId = Factory.create('form')._id;
+      const newformId = Factory.create('form', { owner: userId })._id;
       const form = await Meteor.callAsync('forms.getOne', newformId);
       assert.typeOf(form, 'object');
     });
