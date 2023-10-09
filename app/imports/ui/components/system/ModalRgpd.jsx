@@ -62,8 +62,8 @@ const ModalRgpd = ({ answerMode = false }) => {
             Vous pouvez également vous opposer au traitement de vos données.
             <br />
             Vous pouvez également exercer votre droit à la portabilité de vos données. Consultez le site de la{' '}
-            <a href="www.cnil.fr" target="_blank" rel="noopener norefferer">
-              cnil.fr
+            <a href="https://cnil.fr" target="_blank" rel="noopener noreferrer">
+              CNIL
             </a>{' '}
             pour plus d’informations sur vos droits.
             <br /> Pour exercer ces droits ou pour toute question sur le traitement de vos données dans ce dispositif,
@@ -82,28 +82,28 @@ const ModalRgpd = ({ answerMode = false }) => {
             Si vous estimez, après nous avoir contactés, que vos droits « Informatique et Libertés » ne sont pas
             respectés, vous pouvez adresser une réclamation à la CNIL.
             <br />
-            NB: En cas de refus il vous sera impossible d`&apos;`accéder au questionnaire.
+            NB : En cas de refus il vous sera impossible d&apos;accéder au questionnaire.
           </Typography>
         ) : (
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Vous vous apprêtez à créer un formulaire ou des données saisies par des utilisateurs sont recueillies et
+            Vous vous apprêtez à créer un formulaire où des données saisies par des utilisateurs sont recueillies et
             stockées.
             <br />
             De ce fait, vous devenez <b>responsable des données collectées</b> et vous engagez à{' '}
             <b>respecter les règles</b> concernant les droits des répondants. <br />
             Vous vous engagez donc à : <br />
-            - n`&apos;`utiliser ces données que dans le cadre de l`&apos;`application (consultation et analyse)
-            <br />- supprimer ces données au bout de <b>30 jours</b> suivant la fin d`&apos;`activité du formulaire
+            - n&apos;utiliser ces données que dans le cadre de l&apos;application (consultation et analyse)
+            <br />- supprimer ces données au bout de <b>30 jours</b> suivant la fin d&apos;activité du formulaire
             <br />- accéder aux demandes des utilisateurs concernant{' '}
-            <b>la rectification, l`&apos;`effacement ou la limitation du traitement de ces données</b>
+            <b>la rectification, l&apos;effacement ou la limitation du traitement de ces données</b>
             <br />- ne demander que des informations nécessaires <b>non personnelles</b>. Certains sujets sont
-            préjudiciables et donc à proscrire (religion, orientation sexuelle, convictions politique ... ) <br />
+            préjudiciables et donc à proscrire (religion, orientation sexuelle, convictions politiques...) <br />
             <br />
             Pour toutes informations complémentaires concernant le <b>droit des utilisateurs</b>, vous pouvez vous
             référer au site de la{' '}
-            <a href="www.cnil.fr" target="_blank" rel="noopener norefferer">
-              cnil
-            </a>{' '}
+            <a href="https://cnil.fr" target="_blank" rel="noopener noreferrer">
+              CNIL
+            </a>
             .
           </Typography>
         )}
