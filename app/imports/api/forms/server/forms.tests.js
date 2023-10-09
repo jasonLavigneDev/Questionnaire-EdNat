@@ -10,6 +10,9 @@ import './factories';
 import { genFormComponent } from './factories';
 import { createForm, getUserForms } from '../methods';
 
+const today = new Date();
+const expirationDateTest = new Date(today.setDate(today.getDate() + 60));
+
 describe('forms', function () {
   describe('mutators', function () {
     it('builds correctly from factory', function () {
@@ -36,6 +39,7 @@ describe('forms', function () {
         isModel: faker.datatype.boolean(),
         isPublic: faker.datatype.boolean(),
         editableAnswers: faker.datatype.boolean(),
+        expirationDate: expirationDateTest,
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
       };
       await createForm._execute({ userId }, newform);
@@ -54,6 +58,7 @@ describe('forms', function () {
         isModel: faker.datatype.boolean(),
         isPublic: faker.datatype.boolean(),
         editableAnswers: faker.datatype.boolean(),
+        expirationDate: expirationDateTest,
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
       };
       await createForm._execute({ userId }, newform);
@@ -63,6 +68,7 @@ describe('forms', function () {
         isModel: faker.datatype.boolean(),
         isPublic: faker.datatype.boolean(),
         editableAnswers: faker.datatype.boolean(),
+        expirationDate: expirationDateTest,
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
       };
       await createForm._execute({ userId: faker.name.middleName() }, newform2);

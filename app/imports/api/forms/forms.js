@@ -4,6 +4,8 @@ import { getLabel } from '../utils';
 
 const Forms = new Mongo.Collection('forms');
 
+const today = new Date();
+
 // Deny all client-side updates since we will be using methods to manage this collection
 Forms.deny({
   insert() {
@@ -146,6 +148,7 @@ Forms.schema = new SimpleSchema(
       type: Date,
       label: getLabel('api.forms.labels.expirationDate'),
       optional: false,
+      defaultValue: new Date(today.setDate(today.getDate() + 60)),
     },
     'formAnswers.$': { type: Answers },
   },

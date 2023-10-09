@@ -3,6 +3,9 @@ import { Factory } from 'meteor/dburles:factory';
 
 import Forms from '../forms';
 
+const today = new Date();
+const expirationDateTest = new Date(today.setDate(today.getDate() + 60));
+
 export const genFormComponent = () => ({
   id: faker.datatype.uuid(),
   type: faker.helpers.arrayElement(['radio', 'select', 'checkbox', 'date', 'number', 'text', 'textarea']),
@@ -18,5 +21,6 @@ Factory.define('form', Forms, {
   isPublic: faker.datatype.boolean(),
   editableAnswers: faker.datatype.boolean(),
   owner: faker.name.middleName(),
+  expirationDate: expirationDateTest,
   components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
 });
