@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const DEFAULT_EXPIRATION_DATE = 60;
+const today = new Date();
+
 const initialState = {
   title: '',
   description: '',
@@ -15,6 +18,7 @@ const initialState = {
   acceptRGPD: false,
   firstName: '',
   lastName: '',
+  expirationDate: new Date(today.setDate(today.getDate() + DEFAULT_EXPIRATION_DATE)),
 };
 
 export const formSlice = createSlice({
@@ -38,6 +42,7 @@ export const formSlice = createSlice({
       state.editableAnswers = action.payload.editableAnswers;
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
+      state.expirationDate = action.payload.expirationDate;
     },
     addTitle: (state, action) => {
       state.title = action.payload.title;
@@ -87,6 +92,9 @@ export const formSlice = createSlice({
         (currentComponent) => currentComponent.id !== action.payload.componentId,
       );
     },
+    updateExpirationDate: (state, action) => {
+      state.expirationDate = action.payload.expirationDate;
+    },
   },
 });
 
@@ -106,6 +114,7 @@ export const {
   toggleEditableAnswers,
   toggleAcceptRGPD,
   updateComponent,
+  updateExpirationDate,
 } = formSlice.actions;
 
 export default formSlice.reducer;

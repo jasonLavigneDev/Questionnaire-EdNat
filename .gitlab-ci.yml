@@ -21,7 +21,6 @@ include:
 variables:
   # `ci-tools` default branch is `stable`
   STABLE_BRANCH: main
-  IMAGE_NAME: questionnaire
 
 stages:
   - initial-checks
@@ -54,6 +53,11 @@ stages:
     policy: pull
   variables:
     METEOR_ALLOW_SUPERUSER: "true"
+
+.docker-matrix:
+  parallel:
+    matrix:
+      - IMAGE_NAME: [questionnaire, questionnaire-cron]
 
 ###############################################################################
 # `initial-checks` stage: `commitlint`
@@ -105,7 +109,9 @@ meteor-tests:
 # 3. we exclude `semantic-release` commits except for `dev`
 # 4. run on every branches
 build-docker:
-  extends: .docker:image:build
+  extends:
+    - .docker:image:build
+    - .docker-matrix
   rules:
     - !reference [.rules-map, not-on-schedule]
     - !reference [.rules-map, not-on-draft]
@@ -133,6 +139,7 @@ testing prerelease: { extends: ".semantic-release:testing" }
 tag contrib branch:
   extends:
     - .docker:image:tag
+    - .docker-matrix
     - .on-branches
   variables:
     # `feature/foo-bar_quux` → `feature-foo-bar-quux`
@@ -140,7 +147,9 @@ tag contrib branch:
 
 ## dev images
 tag dev:
-  extends: .docker:image:tag
+  extends:
+    - .docker:image:tag
+    - .docker-matrix
   rules:
     - !reference [.rules-map, not-on-schedule]
     - !reference [.rules-map, not-on-draft]
@@ -152,21 +161,27 @@ tag dev:
 tag testing prerelease:
   extends:
     - .docker:image:tag
+    - .docker-matrix
     - .on-testing-tag
 
 tag testing:
   extends:
     - .docker:image:tag
+    - .docker-matrix
     - .on-testing-tag
   variables:
     IMAGE_TAG: testing
 
 ## stable images
 tag release:
-  extends: .docker:image:tag
+  extends: 
+    - .docker:image:tag
+    - .docker-matrix
 
 tag major:
-  extends: .docker:image:tag
+  extends:
+    - .docker:image:tag
+    - .docker-matrix
   before_script:
     - export RELEASE=${CI_COMMIT_TAG#${RELEASE_TAG_PREFIX}}
     - export IMAGE_TAG=${RELEASE%%.*}
@@ -174,16 +189,21 @@ tag major:
 tag minor:
   extends:
     - .docker:image:tag
+    - .docker-matrix
   before_script:
     - export RELEASE=${CI_COMMIT_TAG#${RELEASE_TAG_PREFIX}}
     - export IMAGE_TAG=${RELEASE%.${RELEASE##*.}}
 
 tag stable:
-  extends: .docker:image:tag
+  extends:
+    - .docker:image:tag
+    - .docker-matrix
   variables:
     IMAGE_TAG: stable
 
 tag latest:
-  extends: .docker:image:tag
+  extends:
+    - .docker:image:tag
+    - .docker-matrix
   variables:
     IMAGE_TAG: latest

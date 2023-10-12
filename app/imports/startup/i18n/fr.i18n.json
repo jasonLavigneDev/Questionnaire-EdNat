@@ -36,6 +36,7 @@
         "editableAnswers": "Réponses modifiables",
         "groups": "Groupes",
         "components": "Composants",
+        "expirationDate": "Date d'expiration des réponses",
         "formAnswers": {
           "answers": "Réponses",
           "userId": "ID utilisateur",
@@ -185,6 +186,7 @@
         "noOptions": "Options manquantes",
         "notFound": "Le composant n'existe pas",
         "noTitleOrOptions": "Le formulaire ne contient pas de titre ou de questions",
+        "expirationDateInvalid": "La date d'expiration est invalide.",
         "invalidForm": "Le formulaire n'est pas valide. Assurez-vous de posséder au moins une question."
       },
       "questionTitle": "Entrez le titre de la question",
@@ -213,7 +215,8 @@
       "formPrivate": "Formulaire authentifié",
       "formPublic": "Formulaire public",
       "formGroups": "Réservé aux groupes",
-      "editableAnswers": "Réponses modifiables"
+      "editableAnswers": "Réponses modifiables",
+      "expirationDateCalendar": "Date d'expiration des réponses"
     },
     "inputs": {
       "radioButton": "Bouton radio (choix unique)",

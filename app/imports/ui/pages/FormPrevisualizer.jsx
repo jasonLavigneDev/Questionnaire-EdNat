@@ -30,6 +30,7 @@ export const FormPrevisualizer = () => {
           groups: form.groups,
           isPublic: form.isPublic,
           components: form.components,
+          expirationDate: form.expirationDate,
         });
 
         if (result) {
@@ -58,6 +59,7 @@ export const FormPrevisualizer = () => {
           groups: form.groups,
           isPublic: form.isPublic,
           components: form.components,
+          expirationDate: form.expirationDate,
         });
 
         if (result) {
