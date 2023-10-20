@@ -13,13 +13,17 @@ import {
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDesc, addTitle, updateExpirationDate, formType, toggleEditableAnswers } from '../redux/slices/formSlice';
 import { DatePicker } from '@mui/x-date-pickers';
+import 'dayjs/locale/fr';
+import { frFR } from '@mui/x-date-pickers/locales';
+import { UserContext } from '../contexts/UserContext';
 
 export default function FormInfoInputs() {
   const form = useSelector((state) => state.form);
+  const { user } = useContext(UserContext);
   const isTitleInValid = !form.title || form.title.length > 96;
   const isDescriptionInValid = form.description.length > 0 && form.description.length > 256;
 
@@ -73,7 +77,12 @@ export default function FormInfoInputs() {
         error={isDescriptionInValid}
         sx={{ marginTop: '1vh' }}
       />
-      <LocalizationProvider dateAdapter={AdapterDayjs} defaultValue={dayjs(form.expirationDate)}>
+      <LocalizationProvider
+        dateAdapter={AdapterDayjs}
+        defaultValue={dayjs(form.expirationDate)}
+        localeText={frFR.components.MuiLocalizationProvider.defaultProps.localeText}
+        adapterLocale={user.language === 'fr' ? 'fr' : 'en'}
+      >
         <DatePicker
           sx={{ marginTop: '1vh' }}
           label={i18n.__('component.formInfoInputs.expirationDateCalendar')}
