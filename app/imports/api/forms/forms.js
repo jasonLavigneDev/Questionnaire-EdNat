@@ -143,6 +143,7 @@ Forms.schema = new SimpleSchema(
       label: getLabel('api.forms.labels.formAnswers.answers'),
       optional: true,
     },
+    'formAnswers.$': { type: Answers },
 
     expirationDate: {
       type: Date,
@@ -150,7 +151,13 @@ Forms.schema = new SimpleSchema(
       optional: false,
       defaultValue: new Date(today.setDate(today.getDate() + 60)),
     },
-    'formAnswers.$': { type: Answers },
+
+    dataDeletionDate: {
+      type: Date,
+      label: getLabel('api.forms.labels.dataDeletionDate'),
+      optional: false,
+      defaultValue: new Date(today.setDate(today.getDate() + 90)),
+    },
   },
   { clean: { removeEmptyStrings: false } },
 );

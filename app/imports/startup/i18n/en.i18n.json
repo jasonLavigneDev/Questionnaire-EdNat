@@ -36,7 +36,8 @@
         "editableAnswers": "Editable answers",
         "groups": "Groups",
         "components": "Components",
-        "expirationDate": "Expiration date for answers",
+        "expirationDate": "Expiration date of form",
+        "dataExpirationDate": "Expiration date of form's answers",
         "formAnswers": {
           "answers": "Answers",
           "userId": "User ID",
@@ -216,7 +217,8 @@
       "formPublic": "Public form",
       "formGroups": "Limited to groups",
       "editableAnswers": "Réponses modifiables",
-      "expirationDateCalendar": "Expiration date for answers"
+      "expirationDateCalendar": "Expiration date of form",
+      "expirationDateInfo": "The data will be deleted 30 days after the expiry date of the form."
     },
     "inputs": {
       "radioButton": "Radio button (single choice)",

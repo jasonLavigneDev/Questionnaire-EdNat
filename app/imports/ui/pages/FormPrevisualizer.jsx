@@ -31,6 +31,7 @@ export const FormPrevisualizer = () => {
           isPublic: form.isPublic,
           components: form.components,
           expirationDate: form.expirationDate,
+          dataDeletionDate: form.dataDeletionDate,
         });
 
         if (result) {
@@ -60,6 +61,7 @@ export const FormPrevisualizer = () => {
           isPublic: form.isPublic,
           components: form.components,
           expirationDate: form.expirationDate,
+          dataDeletionDate: form.dataDeletionDate,
         });
 
         if (result) {

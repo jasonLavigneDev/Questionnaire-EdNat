@@ -17,6 +17,7 @@ function _createForm(
   groups,
   components,
   expirationDate,
+  dataDeletionDate,
 ) {
   Forms.insert({
     title,
@@ -28,6 +29,7 @@ function _createForm(
     groups,
     components,
     expirationDate,
+    dataDeletionDate,
   });
 }
 
@@ -42,11 +44,23 @@ function _updateForm(
   groups,
   components,
   expirationDate,
+  dataDeletionDate,
 ) {
   Forms.update(
     { _id: id },
     {
-      $set: { title, description, owner, isModel, isPublic, editableAnswers, groups, components, expirationDate },
+      $set: {
+        title,
+        description,
+        owner,
+        isModel,
+        isPublic,
+        editableAnswers,
+        groups,
+        components,
+        expirationDate,
+        dataDeletionDate,
+      },
     },
   );
 }
@@ -64,9 +78,20 @@ export const createForm = new ValidatedMethod({
     components: { type: Array, label: getLabel('api.forms.labels.components') },
     'components.$': { type: Component },
     expirationDate: { type: Date },
+    dataDeletionDate: { type: Date },
   }).validator(),
 
-  async run({ title, description, isModel, isPublic, editableAnswers, groups, components, expirationDate }) {
+  async run({
+    title,
+    description,
+    isModel,
+    isPublic,
+    editableAnswers,
+    groups,
+    components,
+    expirationDate,
+    dataDeletionDate,
+  }) {
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.noUser', 'api.forms.createForm.notLoggedIn');
     }
@@ -80,6 +105,7 @@ export const createForm = new ValidatedMethod({
       groups,
       components,
       expirationDate,
+      dataDeletionDate,
     );
     const form = await Forms.findOneAsync({ title });
     return form._id;
@@ -100,9 +126,21 @@ export const updateForm = new ValidatedMethod({
     components: { type: Array, label: getLabel('api.forms.labels.components') },
     'components.$': { type: Component },
     expirationDate: { type: Date },
+    dataDeletionDate: { type: Date },
   }).validator(),
 
-  async run({ id, title, description, isModel, isPublic, editableAnswers, groups, components, expirationDate }) {
+  async run({
+    id,
+    title,
+    description,
+    isModel,
+    isPublic,
+    editableAnswers,
+    groups,
+    components,
+    expirationDate,
+    dataDeletionDate,
+  }) {
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
     }
@@ -123,6 +161,7 @@ export const updateForm = new ValidatedMethod({
       groups,
       components,
       expirationDate,
+      dataDeletionDate,
     );
 
     return form._id;

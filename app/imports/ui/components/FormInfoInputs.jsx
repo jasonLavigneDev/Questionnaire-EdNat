@@ -81,6 +81,7 @@ export default function FormInfoInputs() {
           format="DD/MM/YYYY"
           onChange={(value) => changeExpirationDate(value)}
         />
+        <p>{i18n.__('component.formInfoInputs.expirationDateInfo')}</p>
       </LocalizationProvider>
       <FormGroup>
         <FormControlLabel

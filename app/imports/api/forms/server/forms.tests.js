@@ -12,6 +12,7 @@ import { createForm, getUserForms } from '../methods';
 
 const today = new Date();
 const expirationDateTest = new Date(today.setDate(today.getDate() + 60));
+const dataExpirationDate = new Date(today.setDate(today.getDate() + 60));
 
 describe('forms', function () {
   describe('mutators', function () {
@@ -40,6 +41,7 @@ describe('forms', function () {
         isPublic: faker.datatype.boolean(),
         editableAnswers: faker.datatype.boolean(),
         expirationDate: expirationDateTest,
+        dataDeletionDate: dataExpirationDate,
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
       };
       await createForm._execute({ userId }, newform);
@@ -59,6 +61,7 @@ describe('forms', function () {
         isPublic: faker.datatype.boolean(),
         editableAnswers: faker.datatype.boolean(),
         expirationDate: expirationDateTest,
+        dataDeletionDate: dataExpirationDate,
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
       };
       await createForm._execute({ userId }, newform);
@@ -69,6 +72,7 @@ describe('forms', function () {
         isPublic: faker.datatype.boolean(),
         editableAnswers: faker.datatype.boolean(),
         expirationDate: expirationDateTest,
+        dataDeletionDate: dataExpirationDate,
         components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
       };
       await createForm._execute({ userId: faker.name.middleName() }, newform2);
