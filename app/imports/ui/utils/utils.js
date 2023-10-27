@@ -22,6 +22,10 @@ export const hasAlreadyRespond = (user, form) => {
   return !!formAnswers.find((answer) => answer.userId === user._id);
 };
 
+export const expirationDateIsPassed = (form) => {
+  return form.expirationDate < new Date();
+};
+
 export const copyUrlToClipBoard = (id) => {
   const url = `${Meteor.absoluteUrl()}visualizer/${id}`;
   return navigator.clipboard.writeText(url);

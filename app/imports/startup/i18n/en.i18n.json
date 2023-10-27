@@ -261,7 +261,8 @@
       "form": {
         "group": "Group form",
         "private": "Private form",
-        "public": "Public form"
+        "public": "Public form",
+        "expired": "Expired. Data will be deleted: "
       }
     },
     "manageOptions": {

@@ -260,7 +260,8 @@
       "form": {
         "group": "Formulaire de groupe",
         "private": "Formulaire privé",
-        "public": "Formulaire public"
+        "public": "Formulaire public",
+        "expired": "Expiré. Les données seront supprimées le: "
       }
     },
     "manageOptions": {
