@@ -84,7 +84,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       <IconButton
         title={i18n.__('component.formActionButton.editAnswers')}
         sx={{ color: 'gold' }}
-        disabled={!active || alreadyRespond()}
+        disabled={!active || alreadyRespond() || expirationDateIsPassed(currentForm)}
         onClick={() => navigate(`/visualizer/${currentForm._id}`)}
       >
         <EditIcon />

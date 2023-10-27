@@ -159,7 +159,8 @@
     "visualizer": {
       "connect": "Please log in to answer this form",
       "formNotActive": "This form is not active.",
-      "createdBy": "Created by"
+      "createdBy": "Created by",
+      "expired": "This form has expired."
     },
     "breadcrumb": {
       "intro": "Introduction",

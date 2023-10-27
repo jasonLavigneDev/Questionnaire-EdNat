@@ -158,7 +158,8 @@
     "visualizer": {
       "connect": "Veuillez vous connecter pour répondre a ce questionnaire",
       "formNotActive": "Ce formulaire n'est pas actif.",
-      "createdBy": "Créé par"
+      "createdBy": "Créé par",
+      "expired": "Ce formulaire a expiré."
     },
     "breadcrumb": {
       "intro": "Introduction",
