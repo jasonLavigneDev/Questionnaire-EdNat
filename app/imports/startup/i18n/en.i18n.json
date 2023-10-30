@@ -249,7 +249,8 @@
     },
     "modalRgpd": {
       "refuse": "Refuse",
-      "accept": "Accept"
+      "accept": "Accept",
+      "continue": "Continue"
     },
     "modalDeleteConfirmation": {
       "title": "form deletion",

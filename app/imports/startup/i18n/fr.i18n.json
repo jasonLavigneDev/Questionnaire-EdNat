@@ -249,7 +249,8 @@
     },
     "modalRgpd": {
       "refuse": "Refuser",
-      "accept": "Accepter"
+      "accept": "Accepter",
+      "continue": "Poursuivre"
     },
     "modalDeleteConfirmation": {
       "title": "Suppression de formulaire",

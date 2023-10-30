@@ -49,7 +49,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       });
 
       if (result) {
-        navigate(`/builder/intro/${result}`);
+        navigate(`/builder/intro/${result}?duplicate=true`);
       }
     } catch (err) {
       console.log('error dans updateForm', err);
