@@ -80,7 +80,7 @@ const ModalRgpd = ({ answerMode = false, rappel = false }) => {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Vous vous apprêtez à créer un formulaire depuis un formulaire existant, où des données saisies par des
             utilisateurs sont recueillies et stockées. Ce nouveau formulaire{' '}
-            <b>ne contient pas les données du formulaire initiale</b>.
+            <b>ne contient pas les données du formulaire initial</b>.
             <br />
             Au même titre que précédemment, vous devenez <b>responsable des données collectées</b>
             et vous engagez à <b>respecter les règles</b> concernant les droits des répondants. <br />
