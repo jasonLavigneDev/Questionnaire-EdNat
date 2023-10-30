@@ -201,6 +201,8 @@
       "deleteForm": "Supprimer le formulaire",
       "copyUrl": "Copier l'URL du formulaire",
       "copyUrlSuccess": "L'url a été copiée avec succès",
+      "copyForm": "Dupliquer le formulaire",
+      "copyFormSuccess": "Formulaire duppliqué avec succès",
       "isActive": "Ce formulaire est actif.",
       "isNotActive": "Ce formulaire n'est pas actif."
     },

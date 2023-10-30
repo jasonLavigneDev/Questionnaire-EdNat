@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { toggleActiveForm, copyUrlToClipBoard, hasNotAnswers, hasAlreadyRespond } from '../utils/utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import LinkIcon from '@mui/icons-material/Link';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -39,6 +40,20 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
   const handleCopyClipboard = (id) => {
     copyUrlToClipBoard(id);
     setOpen(true);
+  };
+
+  const handleCopyForm = async () => {
+    try {
+      const result = await Meteor.callAsync('forms.duplicateForm', {
+        _id: currentForm._id,
+      });
+
+      if (result) {
+        navigate(`/builder/intro/${result}`);
+      }
+    } catch (err) {
+      console.log('error dans updateForm', err);
+    }
   };
 
   return (
@@ -86,7 +101,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
         title={i18n.__('component.formActionButton.copyUrl')}
         onClick={() => handleCopyClipboard(currentForm._id)}
       >
-        <ContentCopyIcon />
+        <LinkIcon />
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.editForm')}
@@ -95,6 +110,9 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
         onClick={() => navigate(`/builder/intro/${currentForm._id}`)}
       >
         <DesignServicesIcon />
+      </IconButton>
+      <IconButton title={i18n.__('component.formActionButton.copyForm')} onClick={() => handleCopyForm()}>
+        <ContentCopyIcon />
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.deleteForm')}

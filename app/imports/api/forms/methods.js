@@ -152,6 +152,48 @@ export const deleteForm = new ValidatedMethod({
   },
 });
 
+export const duplicateForm = new ValidatedMethod({
+  name: 'forms.duplicateForm',
+  validate: new SimpleSchema({
+    _id: { type: String, label: getLabel('api.forms.labels.id') },
+  }).validator(),
+
+  async run({ _id }) {
+    if (!this.userId) {
+      throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
+    }
+
+    const form = await Forms.findOneAsync({ _id });
+    if (!form) {
+      throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
+    }
+    if (form.owner !== this.userId) {
+      throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
+    }
+
+    const today = new Date();
+
+    const newForm = form;
+    newForm.title = form.title + ' - Copie';
+    newForm.expirationDate = new Date(today.setDate(today.getDate() + 60));
+
+    _createForm(
+      newForm.title,
+      newForm.description,
+      this.userId,
+      newForm.isModel,
+      newForm.isPublic,
+      newForm.editableAnswers,
+      newForm.groups,
+      newForm.components,
+      newForm.expirationDate,
+    );
+
+    const duplicatedForm = await Forms.findOneAsync({ title: newForm.title });
+    return duplicatedForm._id;
+  },
+});
+
 export const upsertAnswers = new ValidatedMethod({
   name: 'forms.upsertAnswers',
   validate: new SimpleSchema({
