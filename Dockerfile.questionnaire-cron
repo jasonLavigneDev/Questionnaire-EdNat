@@ -9,14 +9,3 @@ COPY ./dataManager/requirements.txt $DATA_FOLDER/
 COPY ./dataManager/purgeData.py  $DATA_FOLDER/
 
 RUN pip3 install -r $DATA_FOLDER/requirements.txt
-
-# Copy cron scripts in the daily cron folder and update permissions
-COPY ./cron.sh /etc/periodic/daily/cron.sh
-RUN chmod 755 /etc/periodic/daily/cron.sh
-
-# Copy cron scripts in root folder and update permissions
-COPY ./cron_entry.sh /cron_entry.sh
-RUN chmod 755 /cron_entry.sh
-
-# run crond as main process of container
-CMD ["/cron_entry.sh"]
