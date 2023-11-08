@@ -14,7 +14,7 @@ export const InputBuilderComponentsMap = () => {
 
   const [localFormComponents, setLocalFormComponents] = useState(form.components);
   const [draggable, setDraggable] = useState(false);
-
+  console.log('draggable', draggable);
   useEffect(() => {
     dispatch(swapPositions(localFormComponents));
   }, [localFormComponents]);
@@ -32,8 +32,14 @@ export const InputBuilderComponentsMap = () => {
       }}
       style={{ height: '56vh', overflow: 'auto', overflowX: 'unset' }}
     >
-      {localFormComponents.map((currentComponent, index) => (
-        <Reorder.Item as="div" key={currentComponent.id} value={currentComponent} style={{ cursor: 'grab' }}>
+      {localFormComponents.map((currentComponent) => (
+        <Reorder.Item
+          as="div"
+          drag={(draggable, 'y')}
+          key={currentComponent.id}
+          value={currentComponent}
+          style={{ cursor: 'grab' }}
+        >
           <Paper sx={getPaperStyle(currentComponent)}>
             <InputBuilderMap currentComponent={currentComponent} />
             <ManageComponent currentComponent={currentComponent} setDraggable={setDraggable} />
