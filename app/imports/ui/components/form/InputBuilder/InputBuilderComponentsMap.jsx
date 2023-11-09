@@ -14,7 +14,6 @@ export const InputBuilderComponentsMap = () => {
 
   const [localFormComponents, setLocalFormComponents] = useState(form.components);
   const [draggable, setDraggable] = useState(false);
-  console.log('draggable', draggable);
   useEffect(() => {
     dispatch(swapPositions(localFormComponents));
   }, [localFormComponents]);
