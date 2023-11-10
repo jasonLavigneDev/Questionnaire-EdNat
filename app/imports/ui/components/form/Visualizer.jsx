@@ -148,8 +148,14 @@ export const Visualizer = ({ answerMode = false }) => {
           {i18n.__('component.visualizer.createdBy')} {form.firstName} {form.lastName}
         </h4>
       )}
-      <div style={{ width: '59vw', margin: 'auto' }}>{genQuestionnaire(form.components).questionnaire}</div>
-      {pages > 1 ? <Pagination count={pages} page={page} onChange={handlePage} /> : null}
+      <div style={{ width: '59vw', margin: 'auto' }}>
+        {genQuestionnaire(form.components).questionnaire}
+        {pages > 1 ? (
+          <div style={{ display: 'flex', placeContent: 'center' }}>
+            <Pagination count={pages} page={page} onChange={handlePage} />
+          </div>
+        ) : null}
+      </div>
       {answerMode && <SubmitAnswerForm />}
     </div>
   );
