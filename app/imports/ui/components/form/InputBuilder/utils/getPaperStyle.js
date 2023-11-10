@@ -16,6 +16,8 @@ export const getPaperStyle = (currentComponent) => {
         ? 'SpringGreen'
         : currentComponent.type === 'separator'
         ? 'orange'
+        : currentComponent.type === 'pageBreak'
+        ? 'orchid'
         : '',
   };
 };
