@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { MsgError } from '../components/system/MsgError';
 import { Breadcrumb } from '../components/system/Breadcrumb';
 import { Footer } from '../components/system/Footer';
-import { InputBuilder } from '../components/form/InputBuilder';
+
 import { useSelector } from 'react-redux';
+import { InputBuilder } from '../components/form/InputBuilder/InputBuilder';
 
 export const FormBuilder = () => {
   const today = new Date();
