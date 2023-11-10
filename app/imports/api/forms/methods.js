@@ -386,7 +386,7 @@ export const getOneFormFromuser = new ValidatedMethod({
 
 Meteor.methods({
   'forms.getAll': async () => {
-    const res = await Forms.find().mapAsync((x) => x);
+    const res = await Forms.find().mapAsync((form) => form);
     return res;
   },
 });
@@ -397,7 +397,7 @@ export const getUserForms = new ValidatedMethod({
 
   async run() {
     if (this.userId) {
-      const res = await Forms.find({ owner: this.userId }).mapAsync((x) => x);
+      const res = await Forms.find({ owner: this.userId }).mapAsync((form) => form);
       return res;
     } else {
       throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));

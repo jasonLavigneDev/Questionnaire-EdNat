@@ -19,7 +19,7 @@ export const Visualizer = ({ answerMode = false }) => {
   const form = useSelector((state) => state.form);
 
   useEffect(() => {
-    setPages(form.components.filter((x) => x.type == 'pageBreak').length + 1);
+    setPages(form.components.filter((component) => component.type == 'pageBreak').length + 1);
   }, [form]);
 
   if (!form.isActive && answerMode) return <FormNoAvailable message={i18n.__('component.visualizer.formNotActive')} />;
