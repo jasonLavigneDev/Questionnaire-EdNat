@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const ComponentBuilder = () => {
   const [errorMessage, setErrorMessage] = useState('');
+  const form = useSelector((state) => state.form);
   const question = useSelector((state) => state.question);
   const dispatch = useDispatch();
 
@@ -17,8 +18,24 @@ export const ComponentBuilder = () => {
     return question.type === 'checkboxInput' || question.type === 'selectInput' || question.type === 'radioButtonInput';
   };
 
+  const IsLayoutComponent = () => {
+    return (
+      question.type === 'pageBreak' ||
+      question.type === 'separator' ||
+      question.type === 'sectionEnd' ||
+      question.type === 'sectionStart'
+    );
+  };
+
+  const setTitleOfComponent = () => {
+    const index = form.components.filter((component) => component.type === question.type).length + 1;
+    if (IsLayoutComponent() && question.type !== 'sectionStart')
+      return `${i18n.__(`component.inputs.${question.type}`)} ${index}`;
+    return question.title;
+  };
+
   const submitComponent = (action) => {
-    if (!question.title) {
+    if (!question.title && (!IsLayoutComponent() || question.type == 'sectionStart')) {
       setErrorMessage(i18n.__('component.componentBuilder.errors.noTitle'));
       return;
     }
@@ -31,7 +48,7 @@ export const ComponentBuilder = () => {
     if (action === 'create') {
       const newComponent = {
         id: uuidv4(),
-        title: question.title,
+        title: setTitleOfComponent(),
         type: question.type,
         choices: question.choices,
         answerRequired: question.answerRequired,
@@ -42,7 +59,7 @@ export const ComponentBuilder = () => {
     } else if (action === 'update') {
       const componentUpdated = {
         id: question.id,
-        title: question.title,
+        title: setTitleOfComponent(),
         type: question.type,
         choices: question.choices,
         answerRequired: question.answerRequired,
@@ -55,22 +72,36 @@ export const ComponentBuilder = () => {
 
   return (
     <Paper sx={{ height: '50vh', overflow: 'auto', overflowX: 'unset' }}>
-      <div style={{ display: 'flex', marginLeft: '2.5vw' }}>
-        <FormControlLabel
-          control={<Checkbox name="required" checked={question.answerRequired} />}
-          label="réponse obligatoire"
-          onChange={() => dispatch(toggleAnswerIsRequired())}
+      {!IsLayoutComponent() ? (
+        <div>
+          <div style={{ display: 'flex', marginLeft: '2.5vw' }}>
+            <FormControlLabel
+              control={<Checkbox name="required" checked={question.answerRequired} />}
+              label={i18n.__('component.componentBuilder.obligatoryAnswer')}
+              onChange={() => dispatch(toggleAnswerIsRequired())}
+            />
+          </div>
+
+          <Divider variant="middle" />
+          <TextField
+            id="questionText"
+            label={i18n.__('component.componentBuilder.questionTitle')}
+            variant="outlined"
+            value={question.title}
+            onChange={(e) => dispatch(addQuestionText({ title: e.target.value }))}
+            sx={{ width: '90%', marginLeft: 6, marginBottom: 2, marginTop: 2 }}
+          />
+        </div>
+      ) : question.type === 'sectionStart' ? (
+        <TextField
+          id="questionText"
+          label={i18n.__('component.componentBuilder.sectionTitle')}
+          variant="outlined"
+          value={question.title}
+          onChange={(e) => dispatch(addQuestionText({ title: e.target.value }))}
+          sx={{ width: '90%', marginLeft: 6, marginBottom: 2, marginTop: 2 }}
         />
-      </div>
-      <Divider variant="middle" />
-      <TextField
-        id="questionText"
-        label={i18n.__('component.componentBuilder.questionTitle')}
-        variant="outlined"
-        value={question.title}
-        onChange={(e) => dispatch(addQuestionText({ title: e.target.value }))}
-        sx={{ width: '90%', marginLeft: 6, marginBottom: 2, marginTop: 2 }}
-      />
+      ) : null}
       {IsMultiAnswersComponent() && <ManageOptions setErrorMessage={setErrorMessage} />}
       {question.id === '' ? (
         <div style={{ textAlign: 'center', width: '100%', marginTop: 1 }}>
