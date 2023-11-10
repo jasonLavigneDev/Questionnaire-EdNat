@@ -236,6 +236,7 @@
       "sectionStart": "Section start",
       "sectionEnd": "Section end",
       "separator": "Horizontal divider",
+      "pageBreak": "Page break",
       "layout": "Layout"
     },
     "componentManager": {
