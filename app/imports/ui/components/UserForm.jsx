@@ -10,7 +10,6 @@ import { FormActionButton } from './FormActionButton';
 import { expirationDateIsPassed } from '../utils/utils';
 
 export const UserForm = ({ userForm, deleteForm }) => {
-  console.log(userForm);
   return (
     <Paper
       key={userForm._id}
