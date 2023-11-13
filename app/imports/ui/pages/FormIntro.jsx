@@ -60,7 +60,7 @@ export const FormIntro = () => {
     <>
       {acceptRgpd || formId ? (
         <>
-          {fromDuplication && <ModalRgpd rappel />}
+          {fromDuplication && <ModalRgpd reminder />}
           <Breadcrumb />
           {open && (
             <Snackbar

@@ -16,7 +16,7 @@ const style = {
   p: 4,
 };
 
-const ModalRgpd = ({ answerMode = false, rappel = false }) => {
+const ModalRgpd = ({ answerMode = false, reminder = false }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(true);
   const { firstName, lastName } = useSelector((state) => state.form);
@@ -36,7 +36,7 @@ const ModalRgpd = ({ answerMode = false, rappel = false }) => {
     <Modal open={openModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          {rappel ? 'Rappel RGPD' : 'Acceptation RGPD'}
+          {reminder ? 'Rappel RGPD' : 'Acceptation RGPD'}
         </Typography>
         {answerMode ? (
           <Typography sx={{ mt: 2 }}>
@@ -76,7 +76,7 @@ const ModalRgpd = ({ answerMode = false, rappel = false }) => {
             <br />
             NB : En cas de refus il vous sera impossible d&apos;accéder au questionnaire.
           </Typography>
-        ) : rappel ? (
+        ) : reminder ? (
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Vous vous apprêtez à créer un formulaire depuis un formulaire existant, où des données saisies par des
             utilisateurs sont recueillies et stockées. Ce nouveau formulaire{' '}
@@ -123,7 +123,7 @@ const ModalRgpd = ({ answerMode = false, rappel = false }) => {
           </Typography>
         )}
         <div style={{ display: 'flex', marginTop: '2vh', justifyContent: 'space-between' }}>
-          {rappel ? (
+          {reminder ? (
             <Button variant="contained" onClick={handleAccept}>
               {i18n.__('component.modalRgpd.continue')}
             </Button>
