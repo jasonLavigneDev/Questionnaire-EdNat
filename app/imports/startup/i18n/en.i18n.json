@@ -190,7 +190,9 @@
         "invalidForm": "Form is invalid. Be sure to have at least one question."
       },
       "questionTitle": "Enter this question's title",
+      "sectionTitle": "Enter this section's title",
       "inputChoice": "Enter an answer choice",
+      "obligatoryAnswer": "Obligatory answer",
       "submit": "Submit",
       "update": "Update"
     },
