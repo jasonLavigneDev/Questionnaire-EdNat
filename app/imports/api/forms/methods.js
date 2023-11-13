@@ -304,6 +304,8 @@ Meteor.methods({
   'forms.getOne': async (id) => {
     const form = await Forms.findOneAsync({ _id: id });
     const owner = form ? await Meteor.users.findOneAsync({ _id: form.owner }) : { firstName: '', lastName: '' };
+
+    console.log(form);
     return { form, owner: { firstName: owner.firstName, lastName: owner.lastName } };
   },
 });

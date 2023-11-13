@@ -173,6 +173,7 @@ Forms.publicFields = {
   editableAnswers: 1,
   components: 1,
   dataDeletionDate: 1,
+  expirationDate: 1,
 };
 
 Forms.attachSchema(Forms.schema);
