@@ -36,7 +36,7 @@ const ModalRgpd = ({ answerMode = false, reminder = false }) => {
     <Modal open={openModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          {reminder ? 'Rappel RGPD' : 'Acceptation RGPD'}
+          {reminder ? i18n.__('component.rgpd.reminder') : i18n.__('component.rgpd.acceptation')}
         </Typography>
         {answerMode ? (
           <Typography sx={{ mt: 2 }}>

@@ -267,6 +267,10 @@
     },
     "manageOptions": {
       "duplicate": "Cette option existe déjà"
+    },
+    "rgpd":{
+      "acceptation": "Acceptation RGPD",
+      "reminder": "Rappel RGPD"
     }
   }
 }
