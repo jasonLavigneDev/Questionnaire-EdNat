@@ -175,6 +175,7 @@ export const duplicateForm = new ValidatedMethod({
 
     const newForm = form;
     newForm.title = form.title + ' - Copie';
+    newForm.description = form.description || '';
     newForm.expirationDate = new Date(today.setDate(today.getDate() + 60));
 
     _createForm(
