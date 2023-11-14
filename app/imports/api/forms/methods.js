@@ -70,7 +70,7 @@ export const createForm = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.noUser', 'api.forms.createForm.notLoggedIn');
     }
-    _createForm(
+    const newId = _createForm(
       title,
       description,
       this.userId,
@@ -81,7 +81,10 @@ export const createForm = new ValidatedMethod({
       components,
       expirationDate,
     );
-    const form = await Forms.findOneAsync({ title });
+    const form = await Forms.findOneAsync({ _id: newId });
+    if (!form) {
+      throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
+    }
     return form._id;
   },
 });
@@ -191,7 +194,7 @@ export const duplicateForm = new ValidatedMethod({
     );
 
     const duplicatedForm = await Forms.findOneAsync({ _id: newId });
-    if (duplicateForm === null) {
+    if (!duplicateForm) {
       throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
     }
     return duplicatedForm._id;
