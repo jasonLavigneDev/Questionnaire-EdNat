@@ -47,8 +47,12 @@ const LanguageSwitcher = () => {
 
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         {allLanguages.map((lan) => (
-          <MenuItem key={lan} onClick={() => switchLanguage(lan)}>
-            {i18n.__(`i18n.${lan}`)}
+          <MenuItem
+            key={lan}
+            onClick={() => switchLanguage(lan)}
+            sx={{ display: 'inline-block', padding: '10px 20px' }}
+          >
+            <img style={{ height: 40 }} alt="langue" src={`/images/i18n/${lan}.png`} />
           </MenuItem>
         ))}
       </Menu>
