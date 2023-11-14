@@ -82,8 +82,8 @@ const ModalRgpd = ({ answerMode = false, reminder = false }) => {
             utilisateurs sont recueillies et stockées. Ce nouveau formulaire{' '}
             <b>ne contient pas les données du formulaire initial</b>.
             <br />
-            Au même titre que précédemment, vous devenez <b>responsable des données collectées</b>
-            et vous engagez à <b>respecter les règles</b> concernant les droits des répondants. <br />
+            Au même titre que précédemment, vous devenez <b>responsable des données collectées</b> et vous engagez à{' '}
+            <b>respecter les règles</b> concernant les droits des répondants. <br />
             Vous vous engagez donc à : <br />
             - n&apos;utiliser ces données que dans le cadre de l&apos;application (consultation et analyse)
             <br />- supprimer ces données au bout de <b>30 jours</b> suivant la fin d&apos;activité du formulaire
