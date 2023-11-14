@@ -18,7 +18,7 @@ function _createForm(
   components,
   expirationDate,
 ) {
-  Forms.insert({
+  return Forms.insert({
     title,
     description,
     owner,
@@ -178,7 +178,7 @@ export const duplicateForm = new ValidatedMethod({
     newForm.description = form.description || '';
     newForm.expirationDate = new Date(today.setDate(today.getDate() + 60));
 
-    _createForm(
+    const newId = _createForm(
       newForm.title,
       newForm.description,
       this.userId,
@@ -190,7 +190,10 @@ export const duplicateForm = new ValidatedMethod({
       newForm.expirationDate,
     );
 
-    const duplicatedForm = await Forms.findOneAsync({ title: newForm.title });
+    const duplicatedForm = await Forms.findOneAsync({ _id: newId });
+    if (duplicateForm === null) {
+      throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
+    }
     return duplicatedForm._id;
   },
 });
