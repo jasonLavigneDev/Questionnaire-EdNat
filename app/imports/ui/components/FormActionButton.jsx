@@ -6,7 +6,13 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
-import { toggleActiveForm, copyUrlToClipBoard, hasNotAnswers, hasAlreadyRespond } from '../utils/utils';
+import {
+  toggleActiveForm,
+  copyUrlToClipBoard,
+  hasNotAnswers,
+  expirationDateIsPassed,
+  hasAlreadyRespond,
+} from '../utils/utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -61,6 +67,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
         title={
           active ? i18n.__('component.formActionButton.isActive') : i18n.__('component.formActionButton.isNotActive')
         }
+        disabled={expirationDateIsPassed(currentForm)}
         sx={active ? { color: 'lightGreen' } : { color: 'salmon' }}
         onClick={() => activeForm()}
       >
@@ -77,7 +84,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       <IconButton
         title={i18n.__('component.formActionButton.editAnswers')}
         sx={{ color: 'gold' }}
-        disabled={!active || alreadyRespond()}
+        disabled={!active || alreadyRespond() || expirationDateIsPassed(currentForm)}
         onClick={() => navigate(`/visualizer/${currentForm._id}`)}
       >
         <EditIcon />

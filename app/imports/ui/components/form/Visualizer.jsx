@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import ModalRgpd from '../system/ModalRgpd';
 import { FormNoAvailable } from './FormNoAvailable';
 
-import { generateColor } from '../../utils/utils';
+import { expirationDateIsPassed, generateColor } from '../../utils/utils';
 
 export const Visualizer = ({ answerMode = false }) => {
   const [componentToEdit] = useState({});
@@ -18,6 +18,8 @@ export const Visualizer = ({ answerMode = false }) => {
 
   if (!form.isActive && answerMode) return <FormNoAvailable message={i18n.__('component.visualizer.formNotActive')} />;
   if (!user && !form.isPublic) return <FormNoAvailable message={i18n.__('component.visualizer.connect')} />;
+  if (answerMode && expirationDateIsPassed(form))
+    return <FormNoAvailable message={i18n.__('component.visualizer.expired')} />;
 
   const genComponent = (currentComponent) => (
     <div

@@ -36,7 +36,7 @@
         "editableAnswers": "Réponses modifiables",
         "groups": "Groupes",
         "components": "Composants",
-        "expirationDate": "Date d'expiration des réponses",
+        "expirationDate": "Date d'expiration du formulaire",
         "formAnswers": {
           "answers": "Réponses",
           "userId": "ID utilisateur",
@@ -158,7 +158,8 @@
     "visualizer": {
       "connect": "Veuillez vous connecter pour répondre a ce questionnaire",
       "formNotActive": "Ce formulaire n'est pas actif.",
-      "createdBy": "Créé par"
+      "createdBy": "Créé par",
+      "expired": "Ce formulaire a expiré."
     },
     "breadcrumb": {
       "intro": "Introduction",
@@ -218,7 +219,8 @@
       "formPublic": "Formulaire public",
       "formGroups": "Réservé aux groupes",
       "editableAnswers": "Réponses modifiables",
-      "expirationDateCalendar": "Date d'expiration des réponses"
+      "expirationDateCalendar": "Date d'expiration du formulaire",
+      "expirationDateInfo": "La suppression des données surviendra 30 jours après la date d'expiration du formulaire."
     },
     "inputs": {
       "radioButton": "Bouton radio (choix unique)",
@@ -261,7 +263,8 @@
       "form": {
         "group": "Formulaire de groupe",
         "private": "Formulaire privé",
-        "public": "Formulaire public"
+        "public": "Formulaire public",
+        "expired": "Expiré. Les données seront supprimées le: "
       }
     },
     "manageOptions": {

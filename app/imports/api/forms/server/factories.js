@@ -5,6 +5,7 @@ import Forms from '../forms';
 
 const today = new Date();
 const expirationDateTest = new Date(today.setDate(today.getDate() + 60));
+const dataExpirationDateTest = new Date(today.setDate(today.getDate() + 90));
 
 export const genFormComponent = () => ({
   id: faker.datatype.uuid(),
@@ -22,5 +23,6 @@ Factory.define('form', Forms, {
   editableAnswers: faker.datatype.boolean(),
   owner: faker.name.middleName(),
   expirationDate: expirationDateTest,
+  dataExpirationDate: dataExpirationDateTest,
   components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
 });
