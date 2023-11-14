@@ -85,7 +85,7 @@ export default function ManageOptions({ setErrorMessage }) {
           {i18n.__('component.manageOptions.duplicate')}
         </Alert>
       </Snackbar>
-      <div style={{ maxWidth: '45vw', marginTop: '2vh' }}>
+      <div style={{ marginLeft: -10, maxWidth: '45vw', marginTop: '2vh' }}>
         <Reorder.Group
           as="div"
           values={localQuestionChoices}
@@ -94,7 +94,13 @@ export default function ManageOptions({ setErrorMessage }) {
           }}
         >
           {localQuestionChoices.map((option, index) => (
-            <Reorder.Item as="div" drag={(draggable, 'y')} key={option} value={option} style={{ cursor: 'grab' }}>
+            <Reorder.Item
+              as="div"
+              drag={(draggable, 'y')}
+              key={option}
+              value={option}
+              style={{ cursor: 'grab', backgroundColor: 'white' }}
+            >
               <Paper
                 sx={{
                   display: 'flex',
@@ -102,8 +108,10 @@ export default function ManageOptions({ setErrorMessage }) {
                   marginTop: '1vh',
                   justifyContent: 'space-between',
                   padding: '0 1vw',
+                  border: '1px solid rgba(0,0,0,0.2)',
                   '&:hover': {
                     boxShadow: '5px 5px 10px rgba(0,0,0,0.3)',
+                    backgroundColor: 'rgba(21,101,192,0.1)',
                   },
                 }}
                 title="Déplacer cette option"
