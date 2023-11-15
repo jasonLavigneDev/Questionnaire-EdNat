@@ -204,6 +204,8 @@
       "deleteForm": "Supprimer le formulaire",
       "copyUrl": "Copier l'URL du formulaire",
       "copyUrlSuccess": "L'url a été copiée avec succès",
+      "copyForm": "Dupliquer le formulaire",
+      "copyFormSuccess": "Formulaire duppliqué avec succès",
       "isActive": "Ce formulaire est actif.",
       "isNotActive": "Ce formulaire n'est pas actif."
     },
@@ -251,7 +253,8 @@
     },
     "modalRgpd": {
       "refuse": "Refuser",
-      "accept": "Accepter"
+      "accept": "Accepter",
+      "continue": "Poursuivre"
     },
     "modalDeleteConfirmation": {
       "title": "Suppression de formulaire",
@@ -269,6 +272,10 @@
     },
     "manageOptions": {
       "duplicate": "Cette option existe déjà"
+    },
+    "rgpd":{
+      "acceptation": "Acceptation RGPD",
+      "reminder": "Rappel RGPD"
     }
   }
 }

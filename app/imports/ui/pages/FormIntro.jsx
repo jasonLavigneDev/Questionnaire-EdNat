@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import i18n from 'meteor/universe:i18n';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Paper } from '@mui/material';
+import { Alert, Paper, Snackbar } from '@mui/material';
 import { useLoaderData } from 'react-router-dom';
 
 import { Breadcrumb } from '../components/system/Breadcrumb';
@@ -10,15 +10,18 @@ import { DisplayGroups } from '../components/DisplayGroups';
 import SelectGroups from '../components/SelectGroups';
 import FormInfoInputs from '../components/FormInfoInputs';
 import ModalRgpd from '../components/system/ModalRgpd';
+import Slide from '@mui/material/Slide';
 import { useDispatch, useSelector } from 'react-redux';
 import { fillForm, addGroups, formType } from '../redux/slices/formSlice';
 
 export const FormIntro = () => {
   const acceptRgpd = useSelector((state) => state.form.acceptRGPD);
   const { formFromBDD, userGroups } = useLoaderData();
+  const [open, setOpen] = useState(false);
 
   let [urlSearchParams] = useSearchParams();
   let tokenGiven = urlSearchParams.get('groupId');
+  let fromDuplication = urlSearchParams.get('duplicate');
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -48,13 +51,31 @@ export const FormIntro = () => {
     if (tokenGiven) {
       checkGroup(tokenGiven);
     }
+    if (fromDuplication) {
+      setOpen(true);
+    }
   }, []);
 
   return (
     <>
       {acceptRgpd || formId ? (
         <>
+          {fromDuplication && <ModalRgpd reminder />}
           <Breadcrumb />
+          {open && (
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
+              onClose={() => setOpen(false)}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+              TransitionComponent={Slide}
+              sx={{ marginTop: '5vh' }}
+            >
+              <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '100%' }}>
+                {i18n.__('component.formActionButton.copyFormSuccess')}
+              </Alert>
+            </Snackbar>
+          )}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Paper style={{ display: 'flex', flexDirection: 'column', padding: 20, width: '80%' }}>
               <FormInfoInputs />

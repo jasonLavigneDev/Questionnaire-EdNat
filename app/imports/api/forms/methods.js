@@ -19,7 +19,7 @@ function _createForm(
   expirationDate,
   dataDeletionDate,
 ) {
-  Forms.insert({
+  return Forms.insert({
     title,
     description,
     owner,
@@ -95,7 +95,7 @@ export const createForm = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.noUser', 'api.forms.createForm.notLoggedIn');
     }
-    _createForm(
+    const newId = _createForm(
       title,
       description,
       this.userId,
@@ -107,7 +107,10 @@ export const createForm = new ValidatedMethod({
       expirationDate,
       dataDeletionDate,
     );
-    const form = await Forms.findOneAsync({ title });
+    const form = await Forms.findOneAsync({ _id: newId });
+    if (!form) {
+      throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
+    }
     return form._id;
   },
 });
@@ -188,6 +191,52 @@ export const deleteForm = new ValidatedMethod({
     }
 
     await Forms.removeAsync({ _id: id });
+  },
+});
+
+export const duplicateForm = new ValidatedMethod({
+  name: 'forms.duplicateForm',
+  validate: new SimpleSchema({
+    _id: { type: String, label: getLabel('api.forms.labels.id') },
+  }).validator(),
+
+  async run({ _id }) {
+    if (!this.userId) {
+      throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
+    }
+
+    const form = await Forms.findOneAsync({ _id });
+    if (!form) {
+      throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
+    }
+    if (form.owner !== this.userId) {
+      throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
+    }
+
+    const today = new Date();
+
+    const newForm = form;
+    newForm.title = form.title + ' - Copie';
+    newForm.description = form.description || '';
+    newForm.expirationDate = new Date(today.setDate(today.getDate() + 60));
+
+    const newId = _createForm(
+      newForm.title,
+      newForm.description,
+      this.userId,
+      newForm.isModel,
+      newForm.isPublic,
+      newForm.editableAnswers,
+      newForm.groups,
+      newForm.components,
+      newForm.expirationDate,
+    );
+
+    const duplicatedForm = await Forms.findOneAsync({ _id: newId });
+    if (!duplicateForm) {
+      throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
+    }
+    return duplicatedForm._id;
   },
 });
 
