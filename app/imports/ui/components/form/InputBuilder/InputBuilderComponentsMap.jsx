@@ -37,7 +37,7 @@ export const InputBuilderComponentsMap = () => {
           drag={(draggable, 'y')}
           key={currentComponent.id}
           value={currentComponent}
-          style={{ cursor: 'grab' }}
+          style={{ cursor: 'grab', backgroundColor: 'white' }}
         >
           <Paper sx={getPaperStyle(currentComponent)}>
             <InputBuilderMap currentComponent={currentComponent} />
