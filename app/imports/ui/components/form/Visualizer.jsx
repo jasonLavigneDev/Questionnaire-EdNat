@@ -15,11 +15,32 @@ export const Visualizer = ({ answerMode = false }) => {
   const [componentToEdit] = useState({});
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
+  const [componentsByPage, setComponentsByPage] = useState([]);
   const { user } = useContext(UserContext);
   const form = useSelector((state) => state.form);
 
+  const preCalculateComponentsByPage = (components) => {
+    let compoforpage = [];
+    components.map((component, index) => {
+      if (component.type === 'pageBreak' || index === components.length - 1) {
+        if (index === components.length - 1 && component.type !== 'pageBreak') {
+          compoforpage.push(component);
+        }
+
+        const copy = componentsByPage;
+        copy.push(compoforpage);
+
+        setComponentsByPage(copy);
+        compoforpage = [];
+      } else {
+        compoforpage.push(component);
+      }
+    });
+  };
+
   useEffect(() => {
     setPages(form.components.filter((component) => component.type == 'pageBreak').length + 1);
+    preCalculateComponentsByPage(form.components);
   }, [form]);
 
   if (!form.isActive && answerMode) return <FormNoAvailable message={i18n.__('component.visualizer.formNotActive')} />;
@@ -69,54 +90,46 @@ export const Visualizer = ({ answerMode = false }) => {
     let questionnaire = []; // Rendu final du questionnaire
     let currentCategory = []; // Catégorie en cours de construction
     let subcategoryEndIndex = -1; // Index du composant de fin d'une sous catégorie
-    let pageIndex = 0;
-
     // componentsToGenerate.forEach((currentComponent, currentIndex) => {
     for (let currentIndex = 0; currentIndex < componentsToGenerate.length; currentIndex++) {
       const currentComponent = componentsToGenerate[currentIndex];
       // Le composant a déjà pu être traité dans une sous catégorie
       if (currentIndex > subcategoryEndIndex) {
-        if (currentComponent.type === 'pageBreak') {
-          pageIndex++;
-          if (pageIndex == page) break;
-        }
-        if (pageIndex == page - 1) {
-          if (currentComponent.type === 'sectionStart') {
-            // Début de catégorie
-            if (currentCategory.length) {
-              // Catégorie déjà en cours donc début d'une sous-catégorie (appel récursif)
-              const resultQuestionnaire = genQuestionnaire(componentsToGenerate.slice(currentIndex), path + 1);
-              currentCategory.push(resultQuestionnaire.questionnaire); // Appel récursif avec un tableau de composants de la sous catégorie
-              subcategoryEndIndex = currentIndex + resultQuestionnaire.subcategoryEndIndex; // Récupère l'index de l'avant dernier composant de type fin de section
-            } else {
-              // Commencement d'une nouvelle catégorie
-              currentCategory.push(currentComponent);
-            }
-          } else if (currentComponent.type === 'sectionEnd') {
-            // Fin de catégorie
-            if (currentCategory.length) {
-              // Fin venant cloturer une catégorie en cours
-              currentCategory.push(currentComponent);
-              questionnaire.push(genCategory(currentCategory));
-              if (path === 0) {
-                // Catégorie simple donc pas besoin de sortir de la boucle for
-                subcategoryEndIndex = currentIndex;
-                currentCategory = [];
-              } else {
-                // Sous catégorie donc on sort par un return
-                return { questionnaire, subcategoryEndIndex: currentIndex };
-              }
-            } else {
-              // Fin solitaire sans début correspondant => on l'ignore
-              // questionnaire.push(genComponent(currentComponent));
-            }
-          } else if (currentCategory.length) {
-            // Composant normal avec catégorie en cours
-            currentCategory.push(currentComponent);
+        if (currentComponent.type === 'sectionStart') {
+          // Début de catégorie
+          if (currentCategory.length) {
+            // Catégorie déjà en cours donc début d'une sous-catégorie (appel récursif)
+            const resultQuestionnaire = genQuestionnaire(componentsToGenerate.slice(currentIndex), path + 1);
+            currentCategory.push(resultQuestionnaire.questionnaire); // Appel récursif avec un tableau de composants de la sous catégorie
+            subcategoryEndIndex = currentIndex + resultQuestionnaire.subcategoryEndIndex; // Récupère l'index de l'avant dernier composant de type fin de section
           } else {
-            // Composant normal hors catégorie
-            questionnaire.push(genComponent(currentComponent));
+            // Commencement d'une nouvelle catégorie
+            currentCategory.push(currentComponent);
           }
+        } else if (currentComponent.type === 'sectionEnd') {
+          // Fin de catégorie
+          if (currentCategory.length) {
+            // Fin venant cloturer une catégorie en cours
+            currentCategory.push(currentComponent);
+            questionnaire.push(genCategory(currentCategory));
+            if (path === 0) {
+              // Catégorie simple donc pas besoin de sortir de la boucle for
+              subcategoryEndIndex = currentIndex;
+              currentCategory = [];
+            } else {
+              // Sous catégorie donc on sort par un return
+              return { questionnaire, subcategoryEndIndex: currentIndex };
+            }
+          } else {
+            // Fin solitaire sans début correspondant => on l'ignore
+            // questionnaire.push(genComponent(currentComponent));
+          }
+        } else if (currentCategory.length) {
+          // Composant normal avec catégorie en cours
+          currentCategory.push(currentComponent);
+        } else {
+          // Composant normal hors catégorie
+          questionnaire.push(genComponent(currentComponent));
         }
       }
       if (currentIndex > subcategoryEndIndex) {
@@ -149,7 +162,9 @@ export const Visualizer = ({ answerMode = false }) => {
         </h4>
       )}
       <div style={{ width: '59vw', margin: 'auto' }}>
-        {genQuestionnaire(form.components).questionnaire}
+        {componentsByPage && componentsByPage[page - 1]
+          ? genQuestionnaire(componentsByPage[page - 1]).questionnaire
+          : null}
         {pages > 1 ? (
           <div style={{ display: 'flex', placeContent: 'center' }}>
             <Pagination count={pages} page={page} onChange={handlePage} />
