@@ -15,6 +15,7 @@ export const Visualizer = ({ answerMode = false }) => {
   const [componentToEdit] = useState({});
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
+  const [loader, setLoader] = useState(true);
   const [componentsByPage, setComponentsByPage] = useState([]);
   const { user } = useContext(UserContext);
   const form = useSelector((state) => state.form);
@@ -36,12 +37,13 @@ export const Visualizer = ({ answerMode = false }) => {
         compoforpage.push(component);
       }
     });
+    setLoader(false);
   };
 
   useEffect(() => {
-    setPages(form.components.filter((component) => component.type == 'pageBreak').length + 1);
-    preCalculateComponentsByPage(form.components);
-  }, [form]);
+    setPages(form.components.filter((component) => component.type === 'pageBreak').length + 1);
+    if (componentsByPage.length === 0) preCalculateComponentsByPage(form.components);
+  }, []);
 
   if (!form.isActive && answerMode) return <FormNoAvailable message={i18n.__('component.visualizer.formNotActive')} />;
   if (!user && !form.isPublic) return <FormNoAvailable message={i18n.__('component.visualizer.connect')} />;
@@ -162,7 +164,7 @@ export const Visualizer = ({ answerMode = false }) => {
         </h4>
       )}
       <div style={{ width: '59vw', margin: 'auto' }}>
-        {componentsByPage && componentsByPage[page - 1]
+        {!loader && componentsByPage && componentsByPage[page - 1]?.length > 0
           ? genQuestionnaire(componentsByPage[page - 1]).questionnaire
           : null}
         {pages > 1 ? (
