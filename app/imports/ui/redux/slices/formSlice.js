@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const DEFAULT_EXPIRATION_DATE = Meteor.settings.public.defaultFormExpirationDelay;
 const DEFAULT_DELETION_DATE = Meteor.settings.public.dataDeletionDelay;
-const today = new Date();
+
+const initialDateForExpiration = new Date();
+const initialDateForDeletion = new Date();
 
 const initialState = {
   title: '',
@@ -19,8 +21,14 @@ const initialState = {
   acceptRGPD: false,
   firstName: '',
   lastName: '',
-  expirationDate: new Date(today.setDate(today.getDate() + DEFAULT_EXPIRATION_DATE)),
-  dataDeletionDate: new Date(today.setDate(today.getDate() + DEFAULT_EXPIRATION_DATE + DEFAULT_DELETION_DATE)),
+  expirationDate: new Date(
+    initialDateForExpiration.setDate(initialDateForExpiration.getDate() + DEFAULT_EXPIRATION_DATE),
+  ),
+  dataDeletionDate: new Date(
+    initialDateForDeletion.setDate(
+      initialDateForDeletion.getDate() + (DEFAULT_EXPIRATION_DATE + DEFAULT_DELETION_DATE),
+    ),
+  ),
 };
 
 export const formSlice = createSlice({
