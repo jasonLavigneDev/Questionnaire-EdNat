@@ -218,7 +218,19 @@ export const duplicateForm = new ValidatedMethod({
     const newForm = form;
     newForm.title = form.title + ' - Copie';
     newForm.description = form.description || '';
-    newForm.expirationDate = new Date(today.setDate(today.getDate() + 60));
+
+    newForm.expirationDate = Meteor.isTest
+      ? 60
+      : new Date(today.setDate(today.getDate() + Meteor.settings.public.defaultFormExpirationDelay));
+
+    newForm.dataDeletionDate = Meteor.isTest
+      ? new Date(today.setDate(today.getDate() + 90))
+      : new Date(
+          today.setDate(
+            today.getDate() +
+              (Meteor.settings.public.defaultFormExpirationDelay + Meteor.settings.public.dataDeletionDelay),
+          ),
+        );
 
     const newId = _createForm(
       newForm.title,
@@ -230,6 +242,7 @@ export const duplicateForm = new ValidatedMethod({
       newForm.groups,
       newForm.components,
       newForm.expirationDate,
+      newForm.dataDeletionDate,
     );
 
     const duplicatedForm = await Forms.findOneAsync({ _id: newId });

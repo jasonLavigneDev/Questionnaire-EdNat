@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const DEFAULT_EXPIRATION_DATE = 60;
-const DEFAULT_DELETION_DATE = 30;
+const DEFAULT_EXPIRATION_DATE = Meteor.settings.public.defaultFormExpirationDelay;
+const DEFAULT_DELETION_DATE = Meteor.settings.public.dataDeletionDelay;
 const today = new Date();
 
 const initialState = {

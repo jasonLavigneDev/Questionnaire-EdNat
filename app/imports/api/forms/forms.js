@@ -149,14 +149,19 @@ Forms.schema = new SimpleSchema(
       type: Date,
       label: getLabel('api.forms.labels.expirationDate'),
       optional: false,
-      defaultValue: new Date(today.setDate(today.getDate() + 60)),
+      defaultValue: new Date(today.setDate(today.getDate() + Meteor.settings.public.defaultFormExpirationDelay)),
     },
 
     dataDeletionDate: {
       type: Date,
       label: getLabel('api.forms.labels.dataDeletionDate'),
       optional: false,
-      defaultValue: new Date(today.setDate(today.getDate() + 90)),
+      defaultValue: new Date(
+        today.setDate(
+          today.getDate() +
+            (Meteor.settings.public.defaultFormExpirationDelay + Meteor.settings.public.dataDeletionDelay),
+        ),
+      ),
     },
   },
   { clean: { removeEmptyStrings: false } },
