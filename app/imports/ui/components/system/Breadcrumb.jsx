@@ -15,6 +15,7 @@ export const Breadcrumb = () => {
 
   const today = new Date();
   const isExpirationDateInValid = today > form.expirationDate;
+  const isFormComponentsInvalid = !form.components || form.components?.length === 0;
 
   const navigate = useNavigate();
 
@@ -57,7 +58,7 @@ export const Breadcrumb = () => {
           </Step>
           <Step key="previsualizer" disabled={form.components.length === 0}>
             <StepButton
-              disabled={isTitleInValid || isDescriptionInValid || isExpirationDateInValid}
+              disabled={isTitleInValid || isDescriptionInValid || isExpirationDateInValid || isFormComponentsInvalid}
               color="inherit"
               onClick={() => navigateTo('previsualizer')}
             >
