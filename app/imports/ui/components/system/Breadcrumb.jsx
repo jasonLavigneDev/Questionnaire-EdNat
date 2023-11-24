@@ -13,6 +13,9 @@ export const Breadcrumb = () => {
   const isTitleInValid = !form.title || form.title.length > 96;
   const isDescriptionInValid = form.description.length > 0 && form.description.length > 256;
 
+  const today = new Date();
+  const isExpirationDateInValid = today > form.expirationDate;
+
   const navigate = useNavigate();
 
   const navigateTo = (step) => {
@@ -36,7 +39,7 @@ export const Breadcrumb = () => {
         <Stepper alternativeLabel activeStep={activeStep}>
           <Step key="intro" completed={activeStep === 1 || activeStep === 2}>
             <StepButton
-              disabled={isTitleInValid || isDescriptionInValid}
+              disabled={isTitleInValid || isDescriptionInValid || isExpirationDateInValid}
               color="inherit"
               onClick={() => navigateTo('intro')}
             >
@@ -45,7 +48,7 @@ export const Breadcrumb = () => {
           </Step>
           <Step key="components" completed={activeStep === 2} disabled={!form.title}>
             <StepButton
-              disabled={isTitleInValid || isDescriptionInValid}
+              disabled={isTitleInValid || isDescriptionInValid || isExpirationDateInValid}
               color="inherit"
               onClick={() => navigateTo('components')}
             >
@@ -54,7 +57,7 @@ export const Breadcrumb = () => {
           </Step>
           <Step key="previsualizer" disabled={form.components.length === 0}>
             <StepButton
-              disabled={isTitleInValid || isDescriptionInValid}
+              disabled={isTitleInValid || isDescriptionInValid || isExpirationDateInValid}
               color="inherit"
               onClick={() => navigateTo('previsualizer')}
             >
