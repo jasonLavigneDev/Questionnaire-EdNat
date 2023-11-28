@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const DEFAULT_EXPIRATION_DATE = Meteor.settings.public.defaultFormExpirationDelay;
-const DEFAULT_DELETION_DATE = Meteor.settings.public.dataDeletionDelay;
+const DEFAULT_EXPIRATION_DATE = Meteor.settings.public.defaultFormExpirationDelay || 60;
+const DEFAULT_DELETION_DATE = Meteor.settings.public.dataDeletionDelay || 30;
 
 const initialDateForExpiration = new Date();
 const initialDateForDeletion = new Date();

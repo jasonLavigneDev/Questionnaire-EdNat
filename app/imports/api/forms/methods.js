@@ -219,18 +219,11 @@ export const duplicateForm = new ValidatedMethod({
     newForm.title = form.title + ' - Copie';
     newForm.description = form.description || '';
 
-    newForm.expirationDate = Meteor.isTest
-      ? 60
-      : new Date(today.setDate(today.getDate() + Meteor.settings.public.defaultFormExpirationDelay));
+    const expirationDelay = Meteor.settings.public.defaultFormExpirationDelay || 60;
+    const deletionDelay = Meteor.settings.public.dataDeletionDelay || 30;
 
-    newForm.dataDeletionDate = Meteor.isTest
-      ? new Date(today.setDate(today.getDate() + 90))
-      : new Date(
-          today.setDate(
-            today.getDate() +
-              (Meteor.settings.public.defaultFormExpirationDelay + Meteor.settings.public.dataDeletionDelay),
-          ),
-        );
+    newForm.expirationDate = new Date(today.setDate(today.getDate() + expirationDelay));
+    newForm.dataDeletionDate = new Date(today.setDate(today.getDate() + (expirationDelay + deletionDelay)));
 
     const newId = _createForm(
       newForm.title,
