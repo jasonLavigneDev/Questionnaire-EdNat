@@ -223,7 +223,7 @@
       "formGroups": "Limited to groups",
       "editableAnswers": "Réponses modifiables",
       "expirationDateCalendar": "Expiration date of form",
-      "expirationDateInfo": "The data will be deleted 30 days after the expiry date of the form."
+      "expirationDateInfo": "The data will be deleted {$days} days after the expiry date of the form."
     },
     "inputs": {
       "radioButton": "Radio button (single choice)",

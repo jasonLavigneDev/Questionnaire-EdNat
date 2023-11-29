@@ -222,7 +222,7 @@
       "formGroups": "Réservé aux groupes",
       "editableAnswers": "Réponses modifiables",
       "expirationDateCalendar": "Date d'expiration du formulaire",
-      "expirationDateInfo": "La suppression des données surviendra 30 jours après la date d'expiration du formulaire."
+      "expirationDateInfo": "La suppression des données surviendra {$days} jours après la date d'expiration du formulaire."
     },
     "inputs": {
       "radioButton": "Bouton radio (choix unique)",
