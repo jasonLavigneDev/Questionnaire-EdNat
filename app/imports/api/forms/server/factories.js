@@ -23,6 +23,6 @@ Factory.define('form', Forms, {
   editableAnswers: faker.datatype.boolean(),
   owner: faker.name.middleName(),
   expirationDate: expirationDateTest,
-  dataExpirationDate: dataExpirationDateTest,
+  dataDeletionDate: dataExpirationDateTest,
   components: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, () => genFormComponent()),
 });

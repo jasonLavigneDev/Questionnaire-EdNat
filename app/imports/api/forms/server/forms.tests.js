@@ -12,7 +12,7 @@ import { createForm, deleteForm, duplicateForm, getUserForms } from '../methods'
 
 const today = new Date();
 const expirationDateTest = new Date(today.setDate(today.getDate() + 60));
-const dataExpirationDate = new Date(today.setDate(today.getDate() + 60));
+const dataExpirationDate = new Date(today.setDate(today.getDate() + 90));
 
 describe('forms', function () {
   describe('mutators', function () {
