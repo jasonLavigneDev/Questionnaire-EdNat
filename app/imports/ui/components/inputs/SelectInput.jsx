@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { FormControl, Select, MenuItem, Paper, FormLabel } from '@mui/material';
 import { addAnswers } from '../../redux/slices/answerFormSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { styles } from './InputsStyles.jsx';
 
 export const SelectInput = ({ title, choices, questionId, answerRequired }) => {
   const inputAnswer = useSelector((state) =>
@@ -15,9 +16,9 @@ export const SelectInput = ({ title, choices, questionId, answerRequired }) => {
   };
 
   return (
-    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
+    <Paper sx={styles.paperSize}>
       <FormControl sx={{ width: '30vw' }} required={answerRequired}>
-        <FormLabel id="selectInput-title" error={answerRequired && !inputAnswer}>
+        <FormLabel sx={styles.labelColor} id="selectInput-title" error={answerRequired && !inputAnswer}>
           {title}
         </FormLabel>
         <Select labelId="selectInput-title" label={title} value={inputAnswer?.answer ?? ''} onChange={validateAnswer}>
