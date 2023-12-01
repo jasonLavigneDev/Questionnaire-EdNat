@@ -2,6 +2,7 @@ import React from 'react';
 import { FormLabel, Paper, TextField, FormControl } from '@mui/material';
 import { addAnswers } from '../../redux/slices/answerFormSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { styles } from './InputsStyles.jsx';
 
 export const TextInput = ({ title, questionId, answerRequired }) => {
   const dispatch = useDispatch();
@@ -14,9 +15,11 @@ export const TextInput = ({ title, questionId, answerRequired }) => {
   };
 
   return (
-    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
+    <Paper sx={styles.paperSize}>
       <FormControl required={answerRequired} error={answerRequired && !inputAnswer} sx={{ width: '80%' }}>
-        <FormLabel id="textInput-title">{title}</FormLabel>
+        <FormLabel sx={styles.labelColor} id="textInput-title">
+          {title}
+        </FormLabel>
         <TextField sx={{ width: '60%' }} defaultValue={inputAnswer?.answer ?? ''} onChange={(e) => validateAnswer(e)} />
       </FormControl>
     </Paper>

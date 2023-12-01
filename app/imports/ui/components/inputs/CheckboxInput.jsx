@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel, Paper } from '@mui/material';
 import { addAnswers } from '../../redux/slices/answerFormSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { styles } from './InputsStyles.jsx';
 
 export const CheckBoxInput = ({ title, choices, questionId, answerRequired }) => {
   const [answers, setAnswers] = useState([]);
@@ -47,9 +48,9 @@ export const CheckBoxInput = ({ title, choices, questionId, answerRequired }) =>
   }, []);
 
   return (
-    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
+    <Paper sx={styles.paperSize}>
       <FormControl required={answerRequired} error={answerRequired && !inputAnswer} onChange={() => validateAnswer()}>
-        <FormLabel>{title}</FormLabel>
+        <FormLabel sx={styles.labelColor}>{title}</FormLabel>
         <FormGroup>
           {choices.map((choice) => (
             <div key={uuidv4()}>
