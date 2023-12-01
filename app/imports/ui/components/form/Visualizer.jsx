@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import i18n from 'meteor/universe:i18n';
-import { Paper } from '@mui/material';
+import { Pagination, Paper } from '@mui/material';
 import { ComponentBuilder } from '../ComponentBuilder';
 import SubmitAnswerForm from './SubmitAnswerForm';
 import GenerateComponent from './GenerateComponent';
@@ -13,13 +13,46 @@ import { expirationDateIsPassed, generateColor } from '../../utils/utils';
 
 export const Visualizer = ({ answerMode = false }) => {
   const [componentToEdit] = useState({});
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(1);
+  const [loader, setLoader] = useState(true);
+  const [componentsByPage, setComponentsByPage] = useState([]);
   const { user } = useContext(UserContext);
   const form = useSelector((state) => state.form);
+
+  const preCalculateComponentsByPage = (components) => {
+    let compoforpage = [];
+    components.map((component, index) => {
+      if (component.type === 'pageBreak' || index === components.length - 1) {
+        if (index === components.length - 1 && component.type !== 'pageBreak') {
+          compoforpage.push(component);
+        }
+
+        const copy = componentsByPage;
+        copy.push(compoforpage);
+
+        setComponentsByPage(copy);
+        compoforpage = [];
+      } else {
+        compoforpage.push(component);
+      }
+    });
+    setLoader(false);
+  };
+
+  useEffect(() => {
+    setPages(form.components.filter((component) => component.type === 'pageBreak').length + 1);
+    if (componentsByPage.length === 0) preCalculateComponentsByPage(form.components);
+  }, []);
 
   if (!form.isActive && answerMode) return <FormNoAvailable message={i18n.__('component.visualizer.formNotActive')} />;
   if (!user && !form.isPublic) return <FormNoAvailable message={i18n.__('component.visualizer.connect')} />;
   if (answerMode && expirationDateIsPassed(form))
     return <FormNoAvailable message={i18n.__('component.visualizer.expired')} />;
+
+  const handlePage = (event, value) => {
+    setPage(value);
+  };
 
   const genComponent = (currentComponent) => (
     <div
@@ -59,7 +92,6 @@ export const Visualizer = ({ answerMode = false }) => {
     let questionnaire = []; // Rendu final du questionnaire
     let currentCategory = []; // Catégorie en cours de construction
     let subcategoryEndIndex = -1; // Index du composant de fin d'une sous catégorie
-
     // componentsToGenerate.forEach((currentComponent, currentIndex) => {
     for (let currentIndex = 0; currentIndex < componentsToGenerate.length; currentIndex++) {
       const currentComponent = componentsToGenerate[currentIndex];
@@ -131,7 +163,16 @@ export const Visualizer = ({ answerMode = false }) => {
           {i18n.__('component.visualizer.createdBy')} {form.firstName} {form.lastName}
         </h4>
       )}
-      <div style={{ width: '59vw', margin: 'auto' }}>{genQuestionnaire(form.components).questionnaire}</div>
+      <div style={{ width: '59vw', margin: 'auto' }}>
+        {!loader && componentsByPage && componentsByPage[page - 1]?.length > 0
+          ? genQuestionnaire(componentsByPage[page - 1]).questionnaire
+          : null}
+        {pages > 1 ? (
+          <div style={{ display: 'flex', placeContent: 'center' }}>
+            <Pagination count={pages} page={page} onChange={handlePage} />
+          </div>
+        ) : null}
+      </div>
       {answerMode && <SubmitAnswerForm />}
     </div>
   );

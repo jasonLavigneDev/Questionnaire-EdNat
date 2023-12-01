@@ -235,6 +235,7 @@
       "sectionStart": "Début de section",
       "sectionEnd": "Fin de section",
       "separator": "Séparateur horizontal",
+      "pageBreak": "Saut de page",
       "layout": "Mise en page"
     },
     "componentManager": {
