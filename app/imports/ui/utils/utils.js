@@ -63,3 +63,12 @@ export const checkIntegrityOfForm = (form) => {
 
   return isValid;
 };
+
+export const IsLayoutComponent = (component) => {
+  return (
+    component.type === 'pageBreak' ||
+    component.type === 'separator' ||
+    component.type === 'sectionEnd' ||
+    component.type === 'sectionStart'
+  );
+};
