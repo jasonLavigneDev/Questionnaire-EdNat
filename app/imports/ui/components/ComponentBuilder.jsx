@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addComponents, updateComponent } from '../redux/slices/formSlice';
 import { addQuestionText, resetQuestionObject, toggleAnswerIsRequired } from '../redux/slices/questionSlice';
 import { v4 as uuidv4 } from 'uuid';
+import { IsLayoutComponent } from '../utils/utils';
 
 export const ComponentBuilder = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,24 +19,15 @@ export const ComponentBuilder = () => {
     return question.type === 'checkboxInput' || question.type === 'selectInput' || question.type === 'radioButtonInput';
   };
 
-  const IsLayoutComponent = () => {
-    return (
-      question.type === 'pageBreak' ||
-      question.type === 'separator' ||
-      question.type === 'sectionEnd' ||
-      question.type === 'sectionStart'
-    );
-  };
-
   const setTitleOfComponent = () => {
     const index = form.components.filter((component) => component.type === question.type).length + 1;
-    if (IsLayoutComponent() && question.type !== 'sectionStart')
+    if (IsLayoutComponent(question) && question.type !== 'sectionStart')
       return `${i18n.__(`component.inputs.${question.type}`)} ${index}`;
     return question.title;
   };
 
   const submitComponent = (action) => {
-    if (!question.title && (!IsLayoutComponent() || question.type == 'sectionStart')) {
+    if (!question.title && (!IsLayoutComponent(question) || question.type == 'sectionStart')) {
       setErrorMessage(i18n.__('component.componentBuilder.errors.noTitle'));
       return;
     }
@@ -72,7 +64,7 @@ export const ComponentBuilder = () => {
 
   return (
     <Paper sx={{ height: '50vh', overflow: 'auto', overflowX: 'unset' }}>
-      {!IsLayoutComponent() ? (
+      {!IsLayoutComponent(question) ? (
         <div>
           <div style={{ display: 'flex', marginLeft: '2.5vw' }}>
             <FormControlLabel
