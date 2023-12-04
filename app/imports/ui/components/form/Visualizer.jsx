@@ -52,6 +52,7 @@ export const Visualizer = ({ answerMode = false }) => {
 
   const handlePage = (event, value) => {
     setPage(value);
+    window.scrollTo(0, 0);
   };
 
   const genComponent = (currentComponent) => (
