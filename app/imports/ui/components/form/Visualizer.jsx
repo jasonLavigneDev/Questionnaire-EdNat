@@ -43,7 +43,7 @@ export const Visualizer = ({ answerMode = false }) => {
   useEffect(() => {
     setPages(form.components.filter((component) => component.type === 'pageBreak').length + 1);
     if (componentsByPage.length === 0) preCalculateComponentsByPage(form.components);
-  }, []);
+  }, [form]);
 
   if (!form.isActive && answerMode) return <FormNoAvailable message={i18n.__('component.visualizer.formNotActive')} />;
   if (!user && !form.isPublic) return <FormNoAvailable message={i18n.__('component.visualizer.connect')} />;
@@ -52,6 +52,7 @@ export const Visualizer = ({ answerMode = false }) => {
 
   const handlePage = (event, value) => {
     setPage(value);
+    window.scrollTo(0, 0);
   };
 
   const genComponent = (currentComponent) => (
