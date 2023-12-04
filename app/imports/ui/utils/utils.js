@@ -55,7 +55,10 @@ export const checkIntegrityOfForm = (form) => {
 
   isValid = form.components.some(
     (component) =>
-      component.type !== 'sectionStart' && component.type !== 'sectionEnd' && component.type !== 'separator',
+      component.type !== 'sectionStart' &&
+      component.type !== 'sectionEnd' &&
+      component.type !== 'separator' &&
+      component.type !== 'pageBreak',
   );
 
   return isValid;
