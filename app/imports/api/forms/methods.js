@@ -295,6 +295,8 @@ export const upsertAnswers = new ValidatedMethod({
       } else {
         // answer edited with token
         newTab[index] = { ...newAnswer, modifyAnswersToken: newTab[index].modifyAnswersToken };
+        // display modify url again cf. https://gitlab.mim-libre.fr/alphabet/questionnaire/-/issues/226
+        modifyAnswersToken = newTab[index].modifyAnswersToken;
       }
     } else {
       // all other cases
