@@ -108,7 +108,11 @@ export const ResultPage = () => {
               {i18n.__('page.resultPage.goBack')}
             </Button>
           </div>
-          {statMode ? <GenerateChart statArray={statArray} /> : <AnswerListDisplay finalArray={finalArray} />}
+          {statMode ? (
+            <GenerateChart statArray={statArray} />
+          ) : (
+            <AnswerListDisplay title={formFromBDD.title} finalArray={finalArray} />
+          )}
         </>
       )}
     </>
