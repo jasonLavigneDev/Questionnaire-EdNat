@@ -6,9 +6,16 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
-import { toggleActiveForm, copyUrlToClipBoard, hasNotAnswers, hasAlreadyRespond } from '../utils/utils';
+import {
+  toggleActiveForm,
+  copyUrlToClipBoard,
+  hasNotAnswers,
+  expirationDateIsPassed,
+  hasAlreadyRespond,
+} from '../utils/utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import LinkIcon from '@mui/icons-material/Link';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -41,6 +48,20 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
     setOpen(true);
   };
 
+  const handleCopyForm = async () => {
+    try {
+      const result = await Meteor.callAsync('forms.duplicateForm', {
+        _id: currentForm._id,
+      });
+
+      if (result) {
+        navigate(`/builder/intro/${result}?duplicate=true`);
+      }
+    } catch (err) {
+      console.log('error dans updateForm', err);
+    }
+  };
+
   return (
     <div style={{ flexDirection: 'column', flex: 1 }}>
       {open && (
@@ -61,6 +82,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
         title={
           active ? i18n.__('component.formActionButton.isActive') : i18n.__('component.formActionButton.isNotActive')
         }
+        disabled={expirationDateIsPassed(currentForm)}
         sx={active ? { color: 'lightGreen' } : { color: 'salmon' }}
         onClick={() => activeForm()}
       >
@@ -77,7 +99,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       <IconButton
         title={i18n.__('component.formActionButton.editAnswers')}
         sx={{ color: 'gold' }}
-        disabled={!active || alreadyRespond()}
+        disabled={!active || alreadyRespond() || expirationDateIsPassed(currentForm)}
         onClick={() => navigate(`/visualizer/${currentForm._id}`)}
       >
         <EditIcon />
@@ -86,7 +108,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
         title={i18n.__('component.formActionButton.copyUrl')}
         onClick={() => handleCopyClipboard(currentForm._id)}
       >
-        <ContentCopyIcon />
+        <LinkIcon />
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.editForm')}
@@ -95,6 +117,9 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
         onClick={() => navigate(`/builder/intro/${currentForm._id}`)}
       >
         <DesignServicesIcon />
+      </IconButton>
+      <IconButton title={i18n.__('component.formActionButton.copyForm')} onClick={() => handleCopyForm()}>
+        <ContentCopyIcon />
       </IconButton>
       <IconButton
         title={i18n.__('component.formActionButton.deleteForm')}

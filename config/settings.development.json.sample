@@ -3,6 +3,8 @@
     "keycloakUrl": "",
     "keycloakRealm": "",
     "laboiteHost": "",
+    "defaultFormExpirationDelay": 60,
+    "dataDeletionDelay": 30,
     "matomo": {
       "siteIdQuestionnaire": 1,
       "urlBase": ""

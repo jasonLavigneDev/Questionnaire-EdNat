@@ -22,6 +22,10 @@ export const hasAlreadyRespond = (user, form) => {
   return !!formAnswers.find((answer) => answer.userId === user._id);
 };
 
+export const expirationDateIsPassed = (form) => {
+  return form.expirationDate < new Date();
+};
+
 export const copyUrlToClipBoard = (id) => {
   const url = `${Meteor.absoluteUrl()}visualizer/${id}`;
   return navigator.clipboard.writeText(url);
@@ -51,8 +55,20 @@ export const checkIntegrityOfForm = (form) => {
 
   isValid = form.components.some(
     (component) =>
-      component.type !== 'sectionStart' && component.type !== 'sectionEnd' && component.type !== 'separator',
+      component.type !== 'sectionStart' &&
+      component.type !== 'sectionEnd' &&
+      component.type !== 'separator' &&
+      component.type !== 'pageBreak',
   );
 
   return isValid;
+};
+
+export const IsLayoutComponent = (component) => {
+  return (
+    component.type === 'pageBreak' ||
+    component.type === 'separator' ||
+    component.type === 'sectionEnd' ||
+    component.type === 'sectionStart'
+  );
 };

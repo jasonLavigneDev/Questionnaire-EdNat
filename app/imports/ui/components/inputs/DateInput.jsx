@@ -3,6 +3,7 @@ import { FormLabel, TextField, Paper, FormControl } from '@mui/material';
 
 import { addAnswers } from '../../redux/slices/answerFormSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { styles } from './InputsStyles.jsx';
 
 export const DateInput = ({ title, questionId, answerRequired }) => {
   const dispatch = useDispatch();
@@ -15,9 +16,9 @@ export const DateInput = ({ title, questionId, answerRequired }) => {
   };
 
   return (
-    <Paper sx={{ padding: '2vh 2vw', width: '50vw' }}>
+    <Paper sx={styles.paperSize}>
       <FormControl required={answerRequired}>
-        <FormLabel id="dateInput-title" error={answerRequired && !inputAnswer}>
+        <FormLabel sx={styles.labelColor} id="dateInput-title" error={answerRequired && !inputAnswer}>
           {title}
         </FormLabel>
         <TextField

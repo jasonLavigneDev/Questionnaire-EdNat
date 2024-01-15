@@ -16,7 +16,7 @@ const style = {
   p: 4,
 };
 
-const ModalRgpd = ({ answerMode = false }) => {
+const ModalRgpd = ({ answerMode = false, reminder = false }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(true);
   const { firstName, lastName } = useSelector((state) => state.form);
@@ -36,7 +36,7 @@ const ModalRgpd = ({ answerMode = false }) => {
     <Modal open={openModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Acceptation RGPD
+          {reminder ? i18n.__('component.rgpd.reminder') : i18n.__('component.rgpd.acceptation')}
         </Typography>
         {answerMode ? (
           <Typography sx={{ mt: 2 }}>
@@ -46,7 +46,7 @@ const ModalRgpd = ({ answerMode = false }) => {
             <br /> Les données collectées seront communiquées aux seuls destinataires suivants :
             <b> {firstName + ' ' + lastName}</b>.
             <br />
-            Les données sont conservées pendant <b>30 jours</b>.
+            Les données sont conservées pendant <b>{Meteor.settings.public.dataDeletionDelay || 30} jours</b>.
             <br />
             Vous pouvez accéder aux données vous concernant, les rectifier, demander leur effacement ou exercer votre
             droit à la limitation du traitement de vos données.
@@ -76,6 +76,30 @@ const ModalRgpd = ({ answerMode = false }) => {
             <br />
             NB : En cas de refus il vous sera impossible d&apos;accéder au questionnaire.
           </Typography>
+        ) : reminder ? (
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Vous vous apprêtez à créer un formulaire depuis un formulaire existant, où des données saisies par des
+            utilisateurs sont recueillies et stockées. Ce nouveau formulaire{' '}
+            <b>ne contient pas les données du formulaire initial</b>.
+            <br />
+            Au même titre que précédemment, vous devenez <b>responsable des données collectées </b>
+            et vous engagez à <b>respecter les règles</b> concernant les droits des répondants. <br />
+            Vous vous engagez donc à : <br />
+            - n&apos;utiliser ces données que dans le cadre de l&apos;application (consultation et analyse)
+            <br />- supprimer ces données au bout de <b>{Meteor.settings.public.dataDeletionDelay || 30} jours</b>{' '}
+            suivant la fin d&apos;activité du formulaire
+            <br />- accéder aux demandes des utilisateurs concernant{' '}
+            <b>la rectification, l&apos;effacement ou la limitation du traitement de ces données</b>
+            <br />- ne demander que des informations nécessaires <b>non personnelles</b>. Certains sujets sont
+            préjudiciables et donc à proscrire (religion, orientation sexuelle, convictions politiques...) <br />
+            <br />
+            Pour toutes informations complémentaires concernant le <b>droit des utilisateurs</b>, vous pouvez vous
+            référer au site de la{' '}
+            <a href="https://cnil.fr" target="_blank" rel="noopener noreferrer">
+              CNIL
+            </a>
+            .
+          </Typography>
         ) : (
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Vous vous apprêtez à créer un formulaire où des données saisies par des utilisateurs sont recueillies et
@@ -85,7 +109,8 @@ const ModalRgpd = ({ answerMode = false }) => {
             <b>respecter les règles</b> concernant les droits des répondants. <br />
             Vous vous engagez donc à : <br />
             - n&apos;utiliser ces données que dans le cadre de l&apos;application (consultation et analyse)
-            <br />- supprimer ces données au bout de <b>30 jours</b> suivant la fin d&apos;activité du formulaire
+            <br />- supprimer ces données au bout de <b>{Meteor.settings.public.dataDeletionDelay || 30} jours</b>{' '}
+            suivant la fin d&apos;activité du formulaire
             <br />- accéder aux demandes des utilisateurs concernant{' '}
             <b>la rectification, l&apos;effacement ou la limitation du traitement de ces données</b>
             <br />- ne demander que des informations nécessaires <b>non personnelles</b>. Certains sujets sont
@@ -100,12 +125,20 @@ const ModalRgpd = ({ answerMode = false }) => {
           </Typography>
         )}
         <div style={{ display: 'flex', marginTop: '2vh', justifyContent: 'space-between' }}>
-          <Button variant="contained" onClick={handleReject}>
-            {i18n.__('component.modalRgpd.refuse')}
-          </Button>
-          <Button variant="contained" onClick={handleAccept}>
-            {i18n.__('component.modalRgpd.accept')}
-          </Button>
+          {reminder ? (
+            <Button variant="contained" onClick={handleAccept}>
+              {i18n.__('component.modalRgpd.continue')}
+            </Button>
+          ) : (
+            <>
+              <Button variant="contained" onClick={handleReject}>
+                {i18n.__('component.modalRgpd.refuse')}
+              </Button>
+              <Button variant="contained" onClick={handleAccept}>
+                {i18n.__('component.modalRgpd.accept')}
+              </Button>
+            </>
+          )}
         </div>
       </Box>
     </Modal>

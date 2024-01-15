@@ -90,6 +90,11 @@ export default function FormInfoInputs() {
           format="DD/MM/YYYY"
           onChange={(value) => changeExpirationDate(value)}
         />
+        <p>
+          {i18n.__('component.formInfoInputs.expirationDateInfo', {
+            days: Meteor.settings.public.dataDeletionDelay || 30,
+          })}
+        </p>
       </LocalizationProvider>
       <FormGroup>
         <FormControlLabel

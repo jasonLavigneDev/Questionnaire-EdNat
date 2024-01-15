@@ -17,8 +17,9 @@ function _createForm(
   groups,
   components,
   expirationDate,
+  dataDeletionDate,
 ) {
-  Forms.insert({
+  return Forms.insert({
     title,
     description,
     owner,
@@ -28,6 +29,7 @@ function _createForm(
     groups,
     components,
     expirationDate,
+    dataDeletionDate,
   });
 }
 
@@ -42,11 +44,23 @@ function _updateForm(
   groups,
   components,
   expirationDate,
+  dataDeletionDate,
 ) {
   Forms.update(
     { _id: id },
     {
-      $set: { title, description, owner, isModel, isPublic, editableAnswers, groups, components, expirationDate },
+      $set: {
+        title,
+        description,
+        owner,
+        isModel,
+        isPublic,
+        editableAnswers,
+        groups,
+        components,
+        expirationDate,
+        dataDeletionDate,
+      },
     },
   );
 }
@@ -64,13 +78,24 @@ export const createForm = new ValidatedMethod({
     components: { type: Array, label: getLabel('api.forms.labels.components') },
     'components.$': { type: Component },
     expirationDate: { type: Date },
+    dataDeletionDate: { type: Date },
   }).validator(),
 
-  async run({ title, description, isModel, isPublic, editableAnswers, groups, components, expirationDate }) {
+  async run({
+    title,
+    description,
+    isModel,
+    isPublic,
+    editableAnswers,
+    groups,
+    components,
+    expirationDate,
+    dataDeletionDate,
+  }) {
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.noUser', 'api.forms.createForm.notLoggedIn');
     }
-    _createForm(
+    const newId = _createForm(
       title,
       description,
       this.userId,
@@ -80,8 +105,12 @@ export const createForm = new ValidatedMethod({
       groups,
       components,
       expirationDate,
+      dataDeletionDate,
     );
-    const form = await Forms.findOneAsync({ title });
+    const form = await Forms.findOneAsync({ _id: newId });
+    if (!form) {
+      throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
+    }
     return form._id;
   },
 });
@@ -100,9 +129,21 @@ export const updateForm = new ValidatedMethod({
     components: { type: Array, label: getLabel('api.forms.labels.components') },
     'components.$': { type: Component },
     expirationDate: { type: Date },
+    dataDeletionDate: { type: Date },
   }).validator(),
 
-  async run({ id, title, description, isModel, isPublic, editableAnswers, groups, components, expirationDate }) {
+  async run({
+    id,
+    title,
+    description,
+    isModel,
+    isPublic,
+    editableAnswers,
+    groups,
+    components,
+    expirationDate,
+    dataDeletionDate,
+  }) {
     if (!this.userId) {
       throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
     }
@@ -123,6 +164,7 @@ export const updateForm = new ValidatedMethod({
       groups,
       components,
       expirationDate,
+      dataDeletionDate,
     );
 
     return form._id;
@@ -149,6 +191,58 @@ export const deleteForm = new ValidatedMethod({
     }
 
     await Forms.removeAsync({ _id: id });
+  },
+});
+
+export const duplicateForm = new ValidatedMethod({
+  name: 'forms.duplicateForm',
+  validate: new SimpleSchema({
+    _id: { type: String, label: getLabel('api.forms.labels.id') },
+  }).validator(),
+
+  async run({ _id }) {
+    if (!this.userId) {
+      throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));
+    }
+
+    const form = await Forms.findOneAsync({ _id });
+    if (!form) {
+      throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
+    }
+    if (form.owner !== this.userId) {
+      throw new Meteor.Error('api.forms.deleteForm.permissionDenied', i18n.__('api.forms.deleteForm.notOwner'));
+    }
+
+    const today = new Date();
+
+    const newForm = form;
+    newForm.title = form.title + ' - Copie';
+    newForm.description = form.description || '';
+
+    const expirationDelay = Meteor.settings.public.defaultFormExpirationDelay || 60;
+    const deletionDelay = Meteor.settings.public.dataDeletionDelay || 30;
+
+    newForm.expirationDate = new Date(today.setDate(today.getDate() + expirationDelay));
+    newForm.dataDeletionDate = new Date(today.setDate(today.getDate() + (expirationDelay + deletionDelay)));
+
+    const newId = _createForm(
+      newForm.title,
+      newForm.description,
+      this.userId,
+      newForm.isModel,
+      newForm.isPublic,
+      newForm.editableAnswers,
+      newForm.groups,
+      newForm.components,
+      newForm.expirationDate,
+      newForm.dataDeletionDate,
+    );
+
+    const duplicatedForm = await Forms.findOneAsync({ _id: newId });
+    if (!duplicateForm) {
+      throw new Meteor.Error('api.forms.deleteForm.notFound', i18n.__('api.forms.deleteForm.notExist'));
+    }
+    return duplicatedForm._id;
   },
 });
 
@@ -201,6 +295,8 @@ export const upsertAnswers = new ValidatedMethod({
       } else {
         // answer edited with token
         newTab[index] = { ...newAnswer, modifyAnswersToken: newTab[index].modifyAnswersToken };
+        // display modify url again cf. https://gitlab.mim-libre.fr/alphabet/questionnaire/-/issues/226
+        modifyAnswersToken = newTab[index].modifyAnswersToken;
       }
     } else {
       // all other cases
@@ -292,7 +388,7 @@ export const getOneFormFromuser = new ValidatedMethod({
 
 Meteor.methods({
   'forms.getAll': async () => {
-    const res = await Forms.find().mapAsync((x) => x);
+    const res = await Forms.find().mapAsync((form) => form);
     return res;
   },
 });
@@ -303,7 +399,7 @@ export const getUserForms = new ValidatedMethod({
 
   async run() {
     if (this.userId) {
-      const res = await Forms.find({ owner: this.userId }).mapAsync((x) => x);
+      const res = await Forms.find({ owner: this.userId }).mapAsync((form) => form);
       return res;
     } else {
       throw new Meteor.Error('api.forms.createForm.noUser', i18n.__('api.forms.createForm.notLoggedIn'));

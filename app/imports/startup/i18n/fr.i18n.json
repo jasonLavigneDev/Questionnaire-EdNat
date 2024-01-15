@@ -36,7 +36,7 @@
         "editableAnswers": "Réponses modifiables",
         "groups": "Groupes",
         "components": "Composants",
-        "expirationDate": "Date d'expiration des réponses",
+        "expirationDate": "Date d'expiration du formulaire",
         "formAnswers": {
           "answers": "Réponses",
           "userId": "ID utilisateur",
@@ -158,7 +158,8 @@
     "visualizer": {
       "connect": "Veuillez vous connecter pour répondre a ce questionnaire",
       "formNotActive": "Ce formulaire n'est pas actif.",
-      "createdBy": "Créé par"
+      "createdBy": "Créé par",
+      "expired": "Ce formulaire a expiré."
     },
     "breadcrumb": {
       "intro": "Introduction",
@@ -190,7 +191,9 @@
         "invalidForm": "Le formulaire n'est pas valide. Assurez-vous de posséder au moins une question."
       },
       "questionTitle": "Entrez le titre de la question",
+      "sectionTitle": "Entrez le titre de la section",
       "inputChoice": "Entrez un choix de réponse",
+      "obligatoryAnswer": "Réponse obligatoire",
       "submit": "Valider",
       "update": "Mettre à jour"
     },
@@ -201,6 +204,8 @@
       "deleteForm": "Supprimer le formulaire",
       "copyUrl": "Copier l'URL du formulaire",
       "copyUrlSuccess": "L'url a été copiée avec succès",
+      "copyForm": "Dupliquer le formulaire",
+      "copyFormSuccess": "Formulaire duppliqué avec succès",
       "isActive": "Ce formulaire est actif.",
       "isNotActive": "Ce formulaire n'est pas actif."
     },
@@ -216,7 +221,8 @@
       "formPublic": "Formulaire public",
       "formGroups": "Réservé aux groupes",
       "editableAnswers": "Réponses modifiables",
-      "expirationDateCalendar": "Date d'expiration des réponses"
+      "expirationDateCalendar": "Date d'expiration du formulaire",
+      "expirationDateInfo": "La suppression des données surviendra {$days} jours après la date d'expiration du formulaire."
     },
     "inputs": {
       "radioButton": "Bouton radio (choix unique)",
@@ -229,6 +235,7 @@
       "sectionStart": "Début de section",
       "sectionEnd": "Fin de section",
       "separator": "Séparateur horizontal",
+      "pageBreak": "Saut de page",
       "layout": "Mise en page"
     },
     "componentManager": {
@@ -247,7 +254,8 @@
     },
     "modalRgpd": {
       "refuse": "Refuser",
-      "accept": "Accepter"
+      "accept": "Accepter",
+      "continue": "Poursuivre"
     },
     "modalDeleteConfirmation": {
       "title": "Suppression de formulaire",
@@ -259,11 +267,16 @@
       "form": {
         "group": "Formulaire de groupe",
         "private": "Formulaire privé",
-        "public": "Formulaire public"
+        "public": "Formulaire public",
+        "expired": "Expiré. Les données seront supprimées le: "
       }
     },
     "manageOptions": {
       "duplicate": "Cette option existe déjà"
+    },
+    "rgpd":{
+      "acceptation": "Acceptation RGPD",
+      "reminder": "Rappel RGPD"
     }
   }
 }

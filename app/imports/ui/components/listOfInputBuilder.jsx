@@ -1,6 +1,7 @@
 import React from 'react';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import InsertPageBreakIcon from '@mui/icons-material/InsertPageBreak';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import MoneyIcon from '@mui/icons-material/Money';
 import ShortTextIcon from '@mui/icons-material/ShortText';
@@ -62,5 +63,10 @@ export const LIST_OF_INPUT_BUILDER = [
     id: 'sectionEnd',
     name: 'sectionEnd',
     icon: <CreditScoreIcon />,
+  },
+  {
+    id: 'pageBreak',
+    name: 'pageBreak',
+    icon: <InsertPageBreakIcon />,
   },
 ];

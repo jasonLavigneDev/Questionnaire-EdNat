@@ -5,6 +5,8 @@ import { getLabel } from '../utils';
 const Forms = new Mongo.Collection('forms');
 
 const today = new Date();
+const expirationDelay = Meteor.settings.public.defaultFormExpirationDelay || 60;
+const deletionDelay = Meteor.settings.public.dataDeletionDelay || 30;
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Forms.deny({
@@ -143,14 +145,21 @@ Forms.schema = new SimpleSchema(
       label: getLabel('api.forms.labels.formAnswers.answers'),
       optional: true,
     },
+    'formAnswers.$': { type: Answers },
 
     expirationDate: {
       type: Date,
       label: getLabel('api.forms.labels.expirationDate'),
       optional: false,
-      defaultValue: new Date(today.setDate(today.getDate() + 60)),
+      defaultValue: new Date(today.setDate(today.getDate() + expirationDelay)),
     },
-    'formAnswers.$': { type: Answers },
+
+    dataDeletionDate: {
+      type: Date,
+      label: getLabel('api.forms.labels.dataDeletionDate'),
+      optional: false,
+      defaultValue: new Date(today.setDate(today.getDate() + (expirationDelay + deletionDelay))),
+    },
   },
   { clean: { removeEmptyStrings: false } },
 );
@@ -165,6 +174,8 @@ Forms.publicFields = {
   groups: 1,
   editableAnswers: 1,
   components: 1,
+  dataDeletionDate: 1,
+  expirationDate: 1,
 };
 
 Forms.attachSchema(Forms.schema);
