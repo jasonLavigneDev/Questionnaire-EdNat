@@ -66,11 +66,10 @@ export default function StatsPie({ question }) {
       }}
     >
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {question.stat.map((oneStat) => (
-          <p key={oneStat.answer._id}>
-            {displayAnswer(oneStat.answer)}: {((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%
-          </p>
-        ))}
+        {question.stat.map(
+          (oneStat) =>
+            `${displayAnswer(oneStat.answer)}: ${((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%`,
+        )}
       </div>
       <Pie data={generateChartData(question.stat)} />
     </div>
