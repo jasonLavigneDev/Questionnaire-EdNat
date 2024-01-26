@@ -7,7 +7,8 @@ export default function AnswerListDisplay({ finalArray }) {
   const csvArray = [];
 
   finalArray.map((question, index) => {
-    let key = index + ' - ' + question.questionTitle;
+    let qIndex = index + 1;
+    let key = qIndex + ' - ' + question.questionTitle;
     question.responses.map((response) => {
       if (response.response instanceof Array) {
         response.response = response.response.join(' - ');
