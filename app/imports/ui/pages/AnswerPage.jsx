@@ -23,8 +23,20 @@ export const AnswerPage = () => {
 
     let tokenGiven = urlSearchParams.get('token');
     if (formFromBDD.form) {
-      const { title, description, components, owner, groups, editableAnswers, isPublic, _id, formAnswers, active } =
-        formFromBDD.form;
+      const {
+        title,
+        description,
+        expirationDate,
+        dataDeletionDate,
+        components,
+        owner,
+        groups,
+        editableAnswers,
+        isPublic,
+        _id,
+        formAnswers,
+        active,
+      } = formFromBDD.form;
       const { firstName, lastName } = formFromBDD.owner;
       if (formAnswers && formAnswers.length) {
         formAnswers.forEach((answer) => {
@@ -44,6 +56,8 @@ export const AnswerPage = () => {
         owner,
         firstName,
         lastName,
+        expirationDate,
+        dataDeletionDate,
       };
 
       dispatch(fillForm(fieldForPopulateState));

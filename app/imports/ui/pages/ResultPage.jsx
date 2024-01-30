@@ -8,7 +8,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 
 import AnswerListDisplay from '../components/AnswerListDisplay';
 import GenerateChart from '../components/GenerateChart';
-import { hasNotAnswers } from '../utils/utils';
+import { IsLayoutComponent, hasNotAnswers } from '../utils/utils';
 
 export const ResultPage = () => {
   const formFromBDD = useLoaderData();
@@ -18,12 +18,8 @@ export const ResultPage = () => {
 
   const navigate = useNavigate();
 
-  const IsValidComponentToAnalyze = (type) => {
-    return type !== 'sectionStart' && type !== 'sectionEnd' && type !== 'separator';
-  };
-
   formFromBDD.components.forEach((component) => {
-    if (IsValidComponentToAnalyze(component.type)) {
+    if (!IsLayoutComponent(component)) {
       finalArray.push({
         questionTitle: component.title,
         questionId: component.id,

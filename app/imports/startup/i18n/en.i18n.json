@@ -36,7 +36,8 @@
         "editableAnswers": "Editable answers",
         "groups": "Groups",
         "components": "Components",
-        "expirationDate": "Expiration date for answers",
+        "expirationDate": "Expiration date of form",
+        "dataExpirationDate": "Expiration date of form's answers",
         "formAnswers": {
           "answers": "Answers",
           "userId": "User ID",
@@ -158,7 +159,8 @@
     "visualizer": {
       "connect": "Please log in to answer this form",
       "formNotActive": "This form is not active.",
-      "createdBy": "Created by"
+      "createdBy": "Created by",
+      "expired": "This form has expired."
     },
     "breadcrumb": {
       "intro": "Introduction",
@@ -190,7 +192,9 @@
         "invalidForm": "Form is invalid. Be sure to have at least one question."
       },
       "questionTitle": "Enter this question's title",
+      "sectionTitle": "Enter this section's title",
       "inputChoice": "Enter an answer choice",
+      "obligatoryAnswer": "Obligatory answer",
       "submit": "Submit",
       "update": "Update"
     },
@@ -200,6 +204,8 @@
       "editForm": "Edit form",
       "deleteForm": "Delete form",
       "copyUrl": "Copy form URL",
+      "copyForm": "Duplicate form",
+      "copyFormSuccess": "Form duplicated successfully",
       "isActive": "This form is active.",
       "copyUrlSuccess": "Copy form url successfully",
       "isNotActive": "This form is not active."
@@ -216,7 +222,8 @@
       "formPublic": "Public form",
       "formGroups": "Limited to groups",
       "editableAnswers": "Réponses modifiables",
-      "expirationDateCalendar": "Expiration date for answers"
+      "expirationDateCalendar": "Expiration date of form",
+      "expirationDateInfo": "The data will be deleted {$days} days after the expiry date of the form."
     },
     "inputs": {
       "radioButton": "Radio button (single choice)",
@@ -229,6 +236,7 @@
       "sectionStart": "Section start",
       "sectionEnd": "Section end",
       "separator": "Horizontal divider",
+      "pageBreak": "Page break",
       "layout": "Layout"
     },
     "componentManager": {
@@ -247,7 +255,8 @@
     },
     "modalRgpd": {
       "refuse": "Refuse",
-      "accept": "Accept"
+      "accept": "Accept",
+      "continue": "Continue"
     },
     "modalDeleteConfirmation": {
       "title": "form deletion",
@@ -259,11 +268,16 @@
       "form": {
         "group": "Group form",
         "private": "Private form",
-        "public": "Public form"
+        "public": "Public form",
+        "expired": "Expired. Data will be deleted: "
       }
     },
     "manageOptions": {
       "duplicate": "Option already exist"
+    },
+    "rgpd":{
+      "acceptation": "Acceptation RGPD",
+      "reminder": "Rappel RGPD"
     }
   }
 }
