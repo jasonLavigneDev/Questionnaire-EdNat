@@ -1,5 +1,69 @@
 # Changelog
 
+## [1.1.0](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/compare/release/1.0.0...release/1.1.0) (2024-01-30)
+
+
+### Features
+
+* **builder:** remove useless option on layout component ([7e32c35](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/7e32c356d2072a64c698b8d4cd4beff8164a1f52))
+* **component:** add page breaker component ([3dc379d](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/3dc379db8b63efa445f00f594f93bf19531dbee3))
+* **dnd:** add dnd to inputbuilder ([c37bbe0](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/c37bbe0d50f819659399e74d67598ae8200b7fab))
+* **dnd:** update style for draggable div ([49d05d7](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/49d05d72d008c8c030ffc882715dfa9a523b437a))
+* **expiration:** block active button for expired form ([73a82ba](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/73a82ba9931efb5e350d2f052c855ccd263dbd36))
+* **expiration:** block answer page for expired form ([2bdf513](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/2bdf5137fbbb88f234d48ae52bd99c3248fce8b2))
+* **expiration:** separation of expiration and deletion ([7e388e7](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/7e388e7886305f4ee07ff279c8b3f7d4fe8b3568))
+* **form:** add duplicate form feature ([543e594](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/543e59408ecef906de1d2889ecea981353549a00))
+* **meteor:** update meteor and packages to 2.13.3 ([d99e350](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/d99e35054307c6cac7b642b4421c758e7f4566f6))
+* **npm:** update outdated libs to wanted version ([78a9320](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/78a9320359c1244bc79d90d0b291700d1c5e5e02))
+* **pagebreak:** add color for pagebreak in input map ([7175607](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/717560705b98586acba9e0d43119f846ba9f965a))
+* **pagebreak:** add page break to form generation ([a3965f9](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/a3965f9cdb449d1e168a61cacc7a6d4747dbf4b2))
+* **purge:** change field check for data deletion ([4e8a7e4](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/4e8a7e4dc3f064c8848818f00038f2e595a23416))
+* **question:** highlight question in final form ([a058d5e](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/a058d5e9c3c41ac28777413b91f747b0dbe66c37))
+* **redirect:** add toast when copying url ([32388eb](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/32388eba0f4717b9b406adb12648b597089de083))
+* **redirect:** always display modify link in redirect page ([49ca49e](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/49ca49ed95e52ae9d608b6dd883e34ceb85e948f))
+* **rgpd:** edit modal for duplicate form ([2d6a750](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/2d6a7504c200ea1e4800490dd58190b0bab088b4))
+* **settings:** add default expiration and deletion delay to settings ([92eb03d](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/92eb03d7d97898771484b0db440ab0542f8ae3de))
+* **settings:** rename new variables ([67460d9](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/67460d96dc66c28e6f34efb8e796251dc455c879))
+* **stylee:** change style of language switcher ([c02a8a4](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/c02a8a497d902da2f473276faff5875a2b624e11))
+* **style:** hide instruction if user exist ([0c89c66](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/0c89c666dd003b82027dded68e94e5af726ee974))
+
+
+### Bug Fixes
+
+* **breadcrumb:** add condition for invalid expiration date ([b129fa4](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/b129fa4f800601a30b87696602370b550cd3157f))
+* **breadcrumb:** block if components are invalid ([f1f0f8f](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/f1f0f8f94ac87c270230b471376d6ef372848741))
+* **check:** add pagebreaker to components to check ([8973d60](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/8973d6055d4c72f078b3017d7ab5c1eb1f48374d))
+* **check:** fix and refactor check layout components function ([524aafc](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/524aafcda3b19cad196f0cc4446d8658640560fe))
+* **date:** edit default value for expiration and deletion ([80869e1](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/80869e1e138250d10bee3160efe728e2f78a505b))
+* **display:** add loader to prevent calculation error ([ed408cf](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/ed408cf0266e7d49653f917d66dfb2e20ee0e2d2))
+* **dnd:** fix meteor lint and bug DnD ([80fa2cc](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/80fa2ccf2d63ca1724232d98738a3560fd3eb087))
+* **duplicating:** description by default at duplication ([b328082](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/b328082b5e32485fbb119d9456b34005c3ed3844))
+* **duplication:** check new form with id instead of title ([d597250](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/d5972500a1444425205b566f1253ff9eab0c77a3))
+* **duplication:** check new form with id instead of title ([ea4a13a](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/ea4a13ab03208d583a27f33e980f03be5df284a5))
+* **form:** data save and load on expiration date ([cdd76df](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/cdd76df91abe960a9d560572ccd0bc6f8b010896))
+* **global:** change variable name for more comprehension ([3131d98](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/3131d986906b3279d3b670b6f488a0493e30b3bc))
+* **global:** remove console log ([ea5854d](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/ea5854de0259b96e8f1b0f9ce0a1e7bde6f5eef4))
+* **i18n:** add missing keys ([aaf1744](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/aaf17441592c9a0fec8ef8460eff881bc502f42c))
+* **i18n:** remove hardcoded deletion delay ([e68ea3a](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/e68ea3ab63c99aa6519e85f6a375e79e8c9ad91b))
+* **initialstate:** calculation of expiration and deletion date ([b5a6812](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/b5a681254a274f3b545ebe2c5a8521ee973cd21e))
+* **lint:** adjust space on rgpd modal ([315c491](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/315c491ebecc80e33d1971bc11ce000f02663cd8))
+* **modal:** text correction ([dc93845](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/dc938459c0d9db3d200a70b7d0f505bfd32cf540))
+* **pie:** remove useless key ([83e1016](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/83e1016ca3133c42768a24519ecaaf06c39f4d4d))
+* **rgpd:** add missing space ([7cdef60](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/7cdef6036f147ac7cd4429a76dd3542837549e35))
+* **rgpd:** define expiration delay with setting ([7263f70](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/7263f70dc9a76878fcbb7f6bb86128803f26d242))
+* **style:** center pagination ([82dc826](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/82dc826637fdf3e723178695fe692f5af3e80a3f))
+* **tests:** add missing field in fake data ([d088797](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/d0887971c2569069dca0f783ba399f9b0a7eb37c))
+* **variable:** rename variable ([dc0d502](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/dc0d502ca5e68eff59f340b46d8eff818729c91e))
+* **visualizer:** auto scroll to top when changing page ([ed892e5](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/ed892e536797aa5e0a5b57dd7b41ab3afe9e4ec0))
+* **visualizer:** display form at answer mode ([03645f6](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/03645f69bbfcacaf290dd94e0675a37a4251a1d3))
+* **visualizer:** display of visualizer with pagination ([05ae927](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/05ae927965ddedff25bfdd346dcaf2fedd325ee4))
+
+
+### Code Refactoring
+
+* **dnd:** clean code ([62d14be](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/62d14bee8130b58dcee6c8f0426ee98674c35e66))
+* **dnd:** replace old dnd by new dnd ([7c24282](https://gitlab.mim-libre.fr/alphabet/questionnaire/-/commit/7c24282eacef997ab4657c8207577021d19805b5))
+
 ## 1.0.0 (2023-11-07)
 
 
