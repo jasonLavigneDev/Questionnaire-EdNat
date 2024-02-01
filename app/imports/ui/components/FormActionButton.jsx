@@ -107,6 +107,7 @@ export const FormActionButton = ({ deleteForm, currentForm }) => {
       <IconButton
         title={i18n.__('component.formActionButton.copyUrl')}
         onClick={() => handleCopyClipboard(currentForm._id)}
+        disabled={!active || expirationDateIsPassed(currentForm)}
       >
         <LinkIcon />
       </IconButton>
