@@ -6,8 +6,9 @@ import { Button, Paper } from '@mui/material';
 export default function AnswerListDisplay({ title, finalArray }) {
   const csvArray = [];
 
-  finalArray.map((question) => {
-    let key = question.questionTitle;
+  finalArray.map((question, index) => {
+    let qIndex = index + 1;
+    let key = qIndex + ' - ' + question.questionTitle;
     question.responses.map((response) => {
       if (response.response instanceof Array) {
         response.response = response.response.join(' - ');
