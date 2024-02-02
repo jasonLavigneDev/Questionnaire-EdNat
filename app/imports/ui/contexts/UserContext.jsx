@@ -12,11 +12,13 @@ export const UserProvider = ({ children }) => {
   const user = useTracker(() => {
     return Meteor.user();
   });
+
   const isAuthenticated = !!user;
 
   useEffect(() => {
     if (user && !isLoading) {
-      i18n.setLocale(user.language);
+      // set default language to fr if user doesn't have set language before
+      i18n.setLocale(user.language || 'fr');
       document.documentElement.setAttribute('lang', user.language);
     }
   }, [user]);
