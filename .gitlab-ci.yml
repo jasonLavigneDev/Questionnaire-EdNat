@@ -38,7 +38,7 @@ stages:
     - !reference [.rules-map, on-dev]
     - !reference [.rules-map, not-on-semantic-release-commit]
     - !reference [.rules-map, on-branch]
-  image: hub.eole.education/proxyhub/geoffreybooth/meteor-base:2.13.3
+  image: hub.eole.education/proxyhub/geoffreybooth/meteor-base:2.14
   before_script:
     - cd app
   cache:
@@ -71,13 +71,13 @@ commitlint:
 # `deps` stage: to download and cache dependencies
 ###############################################################################
 cache-dependencies:
- stage: deps
- extends: .meteor
- cache:
-   # This job update dependencies
-   policy: pull-push
- script:
-   - meteor npm install
+  stage: deps
+  extends: .meteor
+  cache:
+    # This job update dependencies
+    policy: pull-push
+  script:
+    - meteor npm install
 
 ###############################################################################
 # `test` stage: `meteor-lint`, `meteor-tests`
@@ -85,17 +85,17 @@ cache-dependencies:
 # The test does not run on the builded container so do them before
 # building the container
 meteor-lint:
- stage: test
- extends: .meteor
- script:
-   - meteor npm install --only=dev
-   - meteor npm run lint
+  stage: test
+  extends: .meteor
+  script:
+    - meteor npm install --only=dev
+    - meteor npm run lint
 
 meteor-tests:
- stage: test
- extends: .meteor
- script:
-   - meteor npm test
+  stage: test
+  extends: .meteor
+  script:
+    - meteor npm test
 
 ###############################################################################
 # `build` stage: `build-docker`
@@ -174,7 +174,7 @@ tag testing:
 
 ## stable images
 tag release:
-  extends: 
+  extends:
     - .docker:image:tag
     - .docker-matrix
 
