@@ -49,13 +49,14 @@ export default function AnswerListDisplay({ title, finalArray }) {
         <div key={question._id} style={{ display: 'flex', justifyContent: 'center', padding: 5 }}>
           <Paper sx={{ display: 'flex', flexDirection: 'column', width: '50%', padding: 5 }}>
             <h2>{question.questionTitle}</h2>
+            {console.log(question)}
             {question.responses.map((response, index) => (
               <ul key={index}>
                 <li>
                   <b>
                     Réponse #{index + 1} ({i18n.__('component.answerListDisplay.answerAt')}: {response.createdAt})
                   </b>
-                  : {response.response}
+                  : {response.response || i18n.__('component.answerListDisplay.emptyAnswer')}
                 </li>
               </ul>
             ))}

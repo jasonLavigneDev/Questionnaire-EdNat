@@ -1,4 +1,5 @@
 import React from 'react';
+import i18n from 'meteor/universe:i18n';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { generateColor } from '../utils/utils';
@@ -23,7 +24,9 @@ export default function StatsPie({ question }) {
     }
 
     const chartData = {
-      labels: stat.map((oneStat) => oneStat.answer),
+      labels: stat.map((oneStat) =>
+        oneStat.answer === undefined ? i18n.__('component.answerListDisplay.emptyAnswer') : oneStat.answer,
+      ),
       datasets: [
         {
           label: 'Nombre de réponses: ',
@@ -45,14 +48,20 @@ export default function StatsPie({ question }) {
     return chartData;
   };
 
+  // Permet de générer les graph en bar
   const choicesStats = {};
 
   question.questionChoices.forEach((key) => (choicesStats[key] = 0));
   question.stat.forEach((element) => {
-    choicesStats[element.answer]++;
+    element.answer === undefined
+      ? choicesStats[i18n.__('component.answerListDisplay.emptyAnswer')]++
+      : choicesStats[element.answer]++;
   });
+  // ********************************
 
   const displayAnswer = (answer) => {
+    console.log(answer);
+    if (answer === undefined) return i18n.__('component.answerListDisplay.emptyAnswer');
     if (answer instanceof Array) return answer.join(' - ');
     return answer;
   };
@@ -66,12 +75,15 @@ export default function StatsPie({ question }) {
       }}
     >
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {question.stat.map(
-          (oneStat) =>
-            `${displayAnswer(oneStat.answer)}: ${((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%`,
-        )}
+        {question.stat.map((oneStat) => (
+          <div key={oneStat.answer}>
+            {displayAnswer(oneStat.answer)}: {((oneStat.count / getAllCountStat(question.stat)) * 100).toFixed(2)}%,
+          </div>
+        ))}
       </div>
-      <Pie data={generateChartData(question.stat)} />
+      <div>
+        <Pie data={generateChartData(question.stat)} />
+      </div>
     </div>
   );
 }

@@ -180,7 +180,8 @@
     },
     "answerListDisplay": {
       "answerAt": "Answered at ",
-      "download": "Download statistics"
+      "download": "Download statistics",
+      "emptyAnswer": "No answer"
     },
     "componentBuilder": {
       "errors": {
@@ -275,7 +276,7 @@
     "manageOptions": {
       "duplicate": "Option already exist"
     },
-    "rgpd":{
+    "rgpd": {
       "acceptation": "Acceptation RGPD",
       "reminder": "Rappel RGPD"
     }

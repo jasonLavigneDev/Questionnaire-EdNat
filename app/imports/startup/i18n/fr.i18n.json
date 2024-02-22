@@ -179,7 +179,8 @@
     },
     "answerListDisplay": {
       "answerAt": "Répondu le",
-      "download": "Télécharger les statistiques"
+      "download": "Télécharger les statistiques",
+      "emptyAnswer": "Pas de réponse"
     },
     "componentBuilder": {
       "errors": {
@@ -274,7 +275,7 @@
     "manageOptions": {
       "duplicate": "Cette option existe déjà"
     },
-    "rgpd":{
+    "rgpd": {
       "acceptation": "Acceptation RGPD",
       "reminder": "Rappel RGPD"
     }
