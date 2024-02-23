@@ -9,7 +9,12 @@ const store = configureStore({
     answerForm: answerFormReducer,
     form: formReducer,
     question: questionReducer,
+    serializableCheck: false,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;
